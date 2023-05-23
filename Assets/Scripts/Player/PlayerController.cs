@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private bool Grounded;
     private Rigidbody2D rb;
     private Vector2 movement;
+    private BoxPushPull hand;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        hand = GetComponentInChildren<BoxPushPull>();
     }
 
     // Update is called once per frame
@@ -39,7 +41,11 @@ public class PlayerController : MonoBehaviour
     }
     public void Interact(InputAction.CallbackContext context)
     {
-        Debug.Log("pressed interact button");
+        //TODO: make it so that it starts following the player from the moment he interacts with it
+        if(hand.currentBox!=null && hand.IsUnlocked)
+        {
+            hand.currentBox.GetComponent<Rigidbody2D>().velocity = rb.velocity;
+        }
     }
 
     public void Pause(InputAction.CallbackContext context)

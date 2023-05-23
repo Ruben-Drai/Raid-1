@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Box_script : MonoBehaviour
+public class BigBox : MonoBehaviour
 {
     public float lockMass = 100000;
     public float unlockMass = 10;
@@ -21,13 +21,12 @@ public class Box_script : MonoBehaviour
     {
         if(collision.gameObject.tag == "Hand")
         {
-           if(collision.gameObject.GetComponent<Capacity_2>().IsUnlock)
+           if(collision.gameObject.GetComponent<BoxPushPull>().IsUnlocked)
             {
                 gameObject.GetComponent<Rigidbody2D>().mass = unlockMass;
             }
             else
                 gameObject.GetComponent<Rigidbody2D>().mass = lockMass;
-            Debug.Log("collIsEnter");
         }
        
     }

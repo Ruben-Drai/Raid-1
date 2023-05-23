@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lever_script : MonoBehaviour
+public class Lever : MonoBehaviour
 {
     public bool isCollideHand= false;
     public bool leverIsActive = false;
@@ -29,7 +29,7 @@ public class Lever_script : MonoBehaviour
     {
         if (collision.gameObject.tag == "Hand")
         {
-            if (collision.gameObject.GetComponent<Capacity_2>().IsUnlock)
+            if (collision.gameObject.GetComponent<BoxPushPull>().IsUnlocked)
             {
                 isCollideHand = true;
             }
