@@ -16,6 +16,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         public GamepadIcons xbox;
         public GamepadIcons ps4;
 
+        
         protected void OnEnable()
         {
             // Hook into all updateBindingUIEvents on all RebindActionUI components in our hierarchy.
@@ -41,8 +42,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             var textComponent = component.bindingText;
 
             // Grab Image component.
-            var imageGO = textComponent.transform.parent.Find("ActionBindingIcon");
-            var imageComponent = imageGO.GetComponent<Image>();
+            var imageComponent = textComponent.transform.parent.GetComponent<Image>();
 
             if (icon != null)
             {

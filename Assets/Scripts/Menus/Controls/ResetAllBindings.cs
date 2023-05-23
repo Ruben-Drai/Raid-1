@@ -5,7 +5,11 @@ using UnityEngine.InputSystem;
 
 public class ResetAllBindings : MonoBehaviour
 {
-    [SerializeField] private InputActionAsset inputActions;
+    private InputActionAsset inputActions;
+    private void Start()
+    {
+        inputActions = PlayerController.instance.GetComponent<PlayerInput>().actions;
+    }
     public void ResetBindings()
     {
         

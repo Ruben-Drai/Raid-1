@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine;
 
 ////TODO: localization support
 
@@ -17,6 +18,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         /// <summary>
         /// Reference to the action that is to be rebound.
         /// </summary>
+        
         public InputActionReference actionReference
         {
             get => m_Action;
@@ -249,7 +251,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 if (binding.effectivePath == newBinding.path)
                 {
                     // Swap the two actions.
-                    action.actionMap.FindAction(binding.action).ApplyBindingOverride(0, newBinding.overridePath);
+                    action.actionMap.FindAction(binding.action).ApplyBindingOverride(FindFirstObjectByType<PlayerInput>().currentControlScheme == "K&M" ? 0 : 1, newBinding.overridePath);
                     action.RemoveBindingOverride(bindingIndex);
                     return true;
                 }
@@ -292,10 +294,13 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             // Configure the rebind.
             m_RebindOperation = action.PerformInteractiveRebinding(bindingIndex)
                 .WithControlsExcluding("<Pointer>/position")
-                .WithCancelingThrough("<Keyboard>/escape")
+                .WithControlsExcluding("<Gamepad>/leftstick")
+                .WithControlsExcluding("<Gamepad>/rightstick")
+                .WithCancelingThrough(PlayerController.instance.GetComponent<PlayerInput>().currentControlScheme=="K&M"?"<Keyboard>/escape": "<GamePad>/start")
                 .OnCancel(
                     operation =>
                     {
+                        action.Enable();
                         m_RebindStopEvent?.Invoke(this, operation);
                         m_BindingText.gameObject.SetActive(true);
                         m_BindingText.transform.parent.gameObject.SetActive(true);
@@ -387,6 +392,9 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         {
             m_RebindOperation?.Dispose();
             m_RebindOperation = null;
+            m_BindingText.gameObject.SetActive(true);
+            m_BindingText.transform.parent.gameObject.SetActive(true);
+            m_RebindText.enabled = false;
 
             s_RebindActionUIs.Remove(this);
             if (s_RebindActionUIs.Count == 0)
@@ -476,6 +484,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         {
             UpdateActionLabel();
             UpdateBindingDisplay();
+            
         }
 
 #endif
@@ -483,6 +492,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         {
             UpdateActionLabel();
             UpdateBindingDisplay();
+           
         }
         private void UpdateActionLabel()
         {
