@@ -19,11 +19,16 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadSceneAsync("DevRoom");
+        SaveNLoad.instance.StartCoroutine(SaveNLoad.instance.ResetRoutine());
+
     }
 
     public void ContinueGame()
     {
+        //TODO: Check for save, if no save, don't make button available to click.
         SceneManager.LoadSceneAsync("DevRoom");
+        SaveNLoad.instance.StartCoroutine(SaveNLoad.instance.LoadRoutine());
+
     }
 
     public void QuitGame()

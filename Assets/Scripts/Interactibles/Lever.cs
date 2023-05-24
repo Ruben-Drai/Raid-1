@@ -14,10 +14,10 @@ public class Lever : Interactible
         {
             if (DoorClosed == true)
             {
-                Destroy(transform.GetChild(0).gameObject);
+                transform.GetChild(0).gameObject.SetActive(false);
                 DoorClosed = false;
+                IsActivated = true;
             }
-
 
             //TODO: play lever push anim
         }

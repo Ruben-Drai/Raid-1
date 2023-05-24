@@ -13,6 +13,7 @@ public class Button : Interactible
             transform.localScale /= 2;
             Destroy(transform.GetChild(0).gameObject);
             DoorClosed = false;
+            IsActivated = true;
         }
     }
 

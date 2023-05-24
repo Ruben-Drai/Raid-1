@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
     public void Pause(InputAction.CallbackContext context)
     {
-        PauseMenu.SetActive(Time.timeScale==1?true:false);
+        PauseMenu.SetActive(Time.timeScale==1);
         Time.timeScale = Time.timeScale == 1 ? 0 : 1;
     }
     public void Fire(InputAction.CallbackContext context)
