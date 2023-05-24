@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,15 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     [SerializeField] private GameObject PauseMenu;
-    [SerializeField]private float JumpForce = 10f,
+    [SerializeField] private float JumpForce = 10f,
                                   MovementSpeed = 10f;
     private bool Grounded;
     private Rigidbody2D rb;
     private Vector2 movement;
-    private BoxPushPull hand;
+
+    [NonSerialized] public PlayerInput Controller;
+    [NonSerialized] public bool IsPushingBox = false;
+    public Dictionary<string, bool> UnlockedUpgrades;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -23,7 +27,14 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        hand = GetComponentInChildren<BoxPushPull>();
+        UnlockedUpgrades = new Dictionary<string, bool>()
+        {
+            {"Leg",false},
+            {"Arm",false},
+            {"ArmGun", false},
+            {"DoubleJump",false}
+        };
+        Controller = GetComponent<PlayerInput>();  
     }
 
     // Update is called once per frame
@@ -33,7 +44,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext context)
     {
-        if (Grounded)
+        if (Grounded && !IsPushingBox)
         {
             rb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
             Grounded = false;
@@ -42,9 +53,9 @@ public class PlayerController : MonoBehaviour
     public void Interact(InputAction.CallbackContext context)
     {
         //TODO: make it so that it starts following the player from the moment he interacts with it
-        if(hand.currentBox!=null && hand.IsUnlocked)
+        if(Interactible.CurrentInteractibleObject != null)
         {
-            hand.currentBox.GetComponent<Rigidbody2D>().velocity = rb.velocity;
+            Interactible.CurrentInteractibleObject.Interact();
         }
     }
 
@@ -64,6 +75,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        rb.velocity = new(movement.x*MovementSpeed*(Grounded?1:0.5f),rb.velocity.y);
+        if(rb!=null)
+            rb.velocity = new(movement.x*MovementSpeed*(Grounded?1:0.5f)*(IsPushingBox?0.5f:1),rb.velocity.y);
     }
 }

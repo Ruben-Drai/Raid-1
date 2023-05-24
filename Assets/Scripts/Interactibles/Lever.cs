@@ -1,47 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
-public class Lever : MonoBehaviour
+public class Lever : Interactible
 {
-    public bool isCollideHand= false;
-    public bool leverIsActive = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private bool DoorClosed = true;
 
-    // Update is called once per frame
-    void Update()
+    public override void Interact()
     {
-        if(Input.GetKeyDown(KeyCode.E) && isCollideHand) 
+        if (CurrentInteractibleObject == this) // use lever part.2
         {
-            leverIsActive = !leverIsActive;
-            if(leverIsActive )
-                gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-            else
-                gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            if (DoorClosed == true)
+            {
+                Destroy(transform.GetChild(0).gameObject);
+                DoorClosed = false;
+            }
+
+
+            //TODO: play lever push anim
         }
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Hand")
+    {   
+        if (collision.gameObject.CompareTag("Hand")) // use lever part.1
         {
-            if (collision.gameObject.GetComponent<BoxPushPull>().IsUnlocked)
+            if (PlayerController.instance.UnlockedUpgrades["Arm"] && DoorClosed && CurrentInteractibleObject == null)
             {
-                isCollideHand = true;
+                CurrentInteractibleObject = this;
+
             }
         }
-
     }
-
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Hand")) // use lever part.1
+        {
+            if (PlayerController.instance.UnlockedUpgrades["Arm"] && DoorClosed && CurrentInteractibleObject==null)
+            {
+                CurrentInteractibleObject = this;
+            }
+        }
+    }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Hand")
+        
+        if (collision.gameObject.CompareTag("Hand")) // use lever part.1
         {
-             isCollideHand = false;
+            if (CurrentInteractibleObject == this) CurrentInteractibleObject = null;
         }
     }
 }
