@@ -19,6 +19,7 @@ public class PauseMenu : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(FindFirstObjectByType<Button>().gameObject);
         }
+        
     }
     public void ShowMenu()
     {
@@ -58,6 +59,10 @@ public class PauseMenu : MonoBehaviour
     
     public void Back()
     {
+        if (PlayerController.instance.Controller.currentControlScheme != "Gamepad")
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
         DisableMenus();
         menuStack.RemoveAt(menuStack.Count - 1);
         if (menuStack.Count > 0)

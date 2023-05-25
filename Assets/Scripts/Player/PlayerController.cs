@@ -12,9 +12,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float JumpForce = 10f,
                                   MovementSpeed = 10f;
     private bool Grounded;
-    private Rigidbody2D rb;
     private Vector2 movement;
+    private Interactible AvailableInteraction;
 
+    [NonSerialized] public Rigidbody2D rb;
     [NonSerialized] public PlayerInput Controller;
     [NonSerialized] public bool IsPushingBox = false;
     public Dictionary<string, bool> UnlockedUpgrades;
@@ -44,7 +45,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext context)
     {
-        if (Grounded && !IsPushingBox)
+        if (Grounded && !IsPushingBox && context.performed)
         {
             rb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
             Grounded = false;
@@ -52,10 +53,15 @@ public class PlayerController : MonoBehaviour
     }
     public void Interact(InputAction.CallbackContext context)
     {
-        //TODO: make it so that it starts following the player from the moment he interacts with it
-        if(Interactible.CurrentInteractibleObject != null)
+        if(context.performed && AvailableInteraction != null)
         {
-            Interactible.CurrentInteractibleObject.Interact();
+            AvailableInteraction.Interact();
+        }
+        if(AvailableInteraction != null 
+            && AvailableInteraction.gameObject.GetComponent<BigBox>() != null 
+            && context.canceled)
+        {
+            AvailableInteraction.Interact();
         }
     }
 
@@ -67,12 +73,32 @@ public class PlayerController : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext context)
     {
-        Debug.Log("pressed fire button");
+        
     }
 
     public void SetGrounded(bool state)
     {
         Grounded = state;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Interactible") && AvailableInteraction == null)
+        {
+            AvailableInteraction = collision.gameObject.GetComponent<Interactible>();  
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(AvailableInteraction!= null 
+            && collision.gameObject.CompareTag("Interactible") 
+            && AvailableInteraction.gameObject == collision.gameObject
+            && Vector2.Distance(transform.position,collision.gameObject.transform.position)>0.5f)
+        { 
+
+            AvailableInteraction = null;
+        }
     }
     private void FixedUpdate()
     {

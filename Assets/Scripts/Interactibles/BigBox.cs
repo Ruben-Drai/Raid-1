@@ -19,54 +19,23 @@ public class BigBox : Interactible
     // Update is called once per frame
     void Update()
     {
-        if(rb.mass == unlockedMass)
+        if(IsBeingLifted)
         {
-            rb.velocity = PlayerController.instance.GetComponent<Rigidbody2D>().velocity;
+            rb.velocity = PlayerController.instance.rb.velocity;
         }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.CompareTag("Hand"))
-        {
-            if (PlayerController.instance.UnlockedUpgrades["Arm"] && CurrentInteractibleObject == null)
-            {
-                CurrentInteractibleObject = this;
-            }
-        }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Hand"))
-        {
-            if (PlayerController.instance.UnlockedUpgrades["Arm"] && CurrentInteractibleObject == null)
-            {
-                CurrentInteractibleObject = this;
-            }
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Hand"))
-        {
-            rb.mass = lockedMass;
-            if (CurrentInteractibleObject == this)
-                CurrentInteractibleObject = null;
-        }
+        
+        
     }
 
     public override void Interact()
     {
-        if (!IsBeingLifted)
+        if (PlayerController.instance.UnlockedUpgrades["Arm"])
         {
-            rb.mass = unlockedMass;
-            PlayerController.instance.IsPushingBox = true;
-            IsBeingLifted = true;
+            IsBeingLifted = !IsBeingLifted;
+            rb.mass = IsBeingLifted?unlockedMass:lockedMass;
+            PlayerController.instance.IsPushingBox = !PlayerController.instance.IsPushingBox;
+
         }
-        else
-        {
-            rb.mass = lockedMass;
-            IsBeingLifted = false;
-            PlayerController.instance.IsPushingBox = false;
-        }
+
     }
 }

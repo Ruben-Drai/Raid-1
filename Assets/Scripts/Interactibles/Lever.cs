@@ -10,45 +10,13 @@ public class Lever : Interactible
 
     public override void Interact()
     {
-        if (CurrentInteractibleObject == this) // use lever part.2
+        if (PlayerController.instance.UnlockedUpgrades["Arm"] && DoorClosed == true) // use lever part.2
         {
-            if (DoorClosed == true)
-            {
-                transform.GetChild(0).gameObject.SetActive(false);
-                DoorClosed = false;
-                IsActivated = true;
-            }
-
+            transform.GetChild(0).gameObject.SetActive(false);
+            DoorClosed = false;
+            IsActivated = true;
             //TODO: play lever push anim
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {   
-        if (collision.gameObject.CompareTag("Hand")) // use lever part.1
-        {
-            if (PlayerController.instance.UnlockedUpgrades["Arm"] && DoorClosed && CurrentInteractibleObject == null)
-            {
-                CurrentInteractibleObject = this;
 
-            }
-        }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Hand")) // use lever part.1
-        {
-            if (PlayerController.instance.UnlockedUpgrades["Arm"] && DoorClosed && CurrentInteractibleObject==null)
-            {
-                CurrentInteractibleObject = this;
-            }
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        
-        if (collision.gameObject.CompareTag("Hand")) // use lever part.1
-        {
-            if (CurrentInteractibleObject == this) CurrentInteractibleObject = null;
-        }
-    }
 }
