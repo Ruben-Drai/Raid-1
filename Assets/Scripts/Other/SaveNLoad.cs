@@ -21,10 +21,6 @@ public class SaveNLoad : MonoBehaviour
     {
         Interactibles = GameObject.Find("Interactibles");
     }
-    private void OnApplicationQuit()
-    {
-        Save();
-    }
 
 
     public void Save()
@@ -89,6 +85,7 @@ public class SaveNLoad : MonoBehaviour
             PlayerPrefs.GetFloat("PlayerPosY"), 
             PlayerPrefs.GetFloat("PlayerPosZ"));
 
+        
         foreach (var v in PlayerController.instance.UnlockedUpgrades)
         {
             PlayerController.instance.UnlockedUpgrades[v.Key] = PlayerPrefs.GetInt(v.Key)==1;

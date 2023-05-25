@@ -39,8 +39,7 @@ public class MainMenu : MonoBehaviour
 
     public void GoToSettings()
     {
-        Debug.Log("Settings button clicked");
-        //SceneManager.LoadScene("settingscene");
+        SceneManager.LoadSceneAsync("Settings");
     }
 
     /* Set the first button to be selected when a gamepad is used */

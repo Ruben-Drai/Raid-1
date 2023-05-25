@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "4c8f207d-d169-4ab5-b9c1-c90a4339bbbc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -56,7 +65,7 @@
                     "name": "",
                     "id": "bd03896f-f4ff-4ea3-b529-34e2e2ed7505",
                     "path": "<Keyboard>/space",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "K&M",
                     "action": "Jump",
@@ -67,7 +76,7 @@
                     "name": "",
                     "id": "7f485819-1328-45de-ac92-0c074ecb7562",
                     "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "GamePad",
                     "action": "Jump",
@@ -122,7 +131,7 @@
                     "name": "",
                     "id": "422ad9f6-f215-4b15-9b34-1dad4c49ef77",
                     "path": "<Keyboard>/escape",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "K&M",
                     "action": "Pause",
@@ -133,7 +142,7 @@
                     "name": "",
                     "id": "16792cb6-1d87-41d3-a14b-774f184f85e8",
                     "path": "<Gamepad>/start",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "GamePad",
                     "action": "Pause",
@@ -238,6 +247,28 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "f3e8ffe8-d999-40ea-b9c9-5e15a36a2e77",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "K&M",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d5f307b4-edde-4554-8fc1-b1162e6f317d",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

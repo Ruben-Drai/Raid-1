@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
 
-    [SerializeField] private GameObject PauseMenu;
+    [SerializeField] private PauseMenu pauseMenu;
     [SerializeField] private float JumpForce = 10f,
                                   MovementSpeed = 10f;
     private bool Grounded;
@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [NonSerialized] public PlayerInput Controller;
     [NonSerialized] public bool IsPushingBox = false;
     public Dictionary<string, bool> UnlockedUpgrades;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -36,7 +37,6 @@ public class PlayerController : MonoBehaviour
         };
         Controller = GetComponent<PlayerInput>();  
     }
-
     // Update is called once per frame
     public void Move(InputAction.CallbackContext context)
     {
@@ -61,9 +61,10 @@ public class PlayerController : MonoBehaviour
 
     public void Pause(InputAction.CallbackContext context)
     {
-        PauseMenu.SetActive(Time.timeScale==1);
-        Time.timeScale = Time.timeScale == 1 ? 0 : 1;
+        if(context.performed)
+            pauseMenu.Escape();
     }
+
     public void Fire(InputAction.CallbackContext context)
     {
         Debug.Log("pressed fire button");
@@ -78,4 +79,6 @@ public class PlayerController : MonoBehaviour
         if(rb!=null)
             rb.velocity = new(movement.x*MovementSpeed*(Grounded?1:0.5f)*(IsPushingBox?0.5f:1),rb.velocity.y);
     }
+
+    
 }
