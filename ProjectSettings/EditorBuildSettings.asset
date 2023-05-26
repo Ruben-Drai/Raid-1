@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Game/DevRoom.unity
     guid: 13054844807f6df44af651436bc11f67
   - enabled: 1
-    path: Assets/Scenes/Menus/Controls.unity
-    guid: ace13668f9bb8fa4cbf244ecb72042d1
-  - enabled: 1
     path: Assets/Scenes/Menus/MainMenu.unity
     guid: 88be0e791ea904a4fbfcaa47d8858905
   m_configObjects:

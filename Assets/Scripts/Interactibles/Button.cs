@@ -1,19 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Button : Interactible
 {
     private bool DoorClosed = true;
 
+    private void Update()
+    {
+        if (IsActivated)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+            DoorClosed = false;
+        }
+    }
     public override void Interact()
     {
         if (PlayerController.instance.UnlockedUpgrades["ArmGun"] && DoorClosed)
         {
-            transform.localScale /= 2;
-            Destroy(transform.GetChild(0).gameObject);
-            DoorClosed = false;
             IsActivated = true;
+            transform.localScale /= 2;
         }
     }
 

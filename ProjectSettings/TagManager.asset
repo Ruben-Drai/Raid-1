@@ -5,9 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Walkable
-  - Box
   - PlayerFist
-  - Interactible
   layers:
   - Default
   - TransparentFX
