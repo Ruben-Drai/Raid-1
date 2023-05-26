@@ -52,15 +52,19 @@ public class PlayerController : MonoBehaviour
     }
     public void Interact(InputAction.CallbackContext context)
     {
-        //TODO: make it so that it starts following the player from the moment he interacts with it
-        if(AvailableInteraction != null && context.performed)
+        if (Grounded)
         {
-            AvailableInteraction.Interact();
+            //TODO: make it so that it starts following the player from the moment he interacts with it
+            if (AvailableInteraction != null && context.performed)
+            {
+                AvailableInteraction.Interact();
+            }
+            if (AvailableInteraction != null && context.canceled && AvailableInteraction.GetComponent<BigBox>() != null)
+            {
+                AvailableInteraction.Interact();
+            }
         }
-        if(AvailableInteraction != null && context.canceled && AvailableInteraction.GetComponent<BigBox>() !=null)
-        {
-            AvailableInteraction.Interact();
-        }
+        
     }
 
     public void Pause(InputAction.CallbackContext context)
@@ -71,7 +75,6 @@ public class PlayerController : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext context)
     {
-        Debug.Log("pressed fire button");
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
