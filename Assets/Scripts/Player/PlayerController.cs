@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,7 +13,13 @@ public class PlayerController : MonoBehaviour
     private bool Grounded;
     private Rigidbody2D rb;
     private Vector2 movement;
+<<<<<<< Updated upstream
 
+=======
+    
+    [NonSerialized] public Interactible AvailableInteraction;
+    [NonSerialized] public Rigidbody2D rb;
+>>>>>>> Stashed changes
     [NonSerialized] public PlayerInput Controller;
     [NonSerialized] public bool IsPushingBox = false;
     public Dictionary<string, bool> UnlockedUpgrades;

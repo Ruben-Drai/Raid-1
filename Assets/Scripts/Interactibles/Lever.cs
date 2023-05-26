@@ -1,17 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
-
 public class Lever : Interactible
 {
     private bool DoorClosed = true;
 
+    private void Update()
+    {
+        if (IsActivated)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+            DoorClosed = false;
+        }
+    }
     public override void Interact()
     {
         if (CurrentInteractibleObject == this) // use lever part.2
         {
+<<<<<<< Updated upstream
             if (DoorClosed == true)
             {
                 transform.GetChild(0).gameObject.SetActive(false);
@@ -19,6 +22,9 @@ public class Lever : Interactible
                 IsActivated = true;
             }
 
+=======
+            IsActivated = true;
+>>>>>>> Stashed changes
             //TODO: play lever push anim
         }
     }

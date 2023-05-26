@@ -53,6 +53,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void MainMenu()
     {
+        SaveNLoad.instance.StartCoroutine(SaveNLoad.instance.SaveRoutine());
         SceneManager.LoadSceneAsync("MainMenu");
     }
     

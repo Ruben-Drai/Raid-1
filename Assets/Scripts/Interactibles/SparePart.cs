@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class SparePart : Interactible
 {
+<<<<<<< Updated upstream
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Hand"))
@@ -30,11 +28,21 @@ public class SparePart : Interactible
         {
             if (CurrentInteractibleObject == this) CurrentInteractibleObject = null;
         }
+=======
+    private void Update()
+    {
+        if(IsActivated) gameObject.SetActive(false);
+>>>>>>> Stashed changes
     }
     public override void Interact()
     {
         PlayerController.instance.UnlockedUpgrades[name] = true;
+<<<<<<< Updated upstream
         CurrentInteractibleObject = null;
         Destroy(gameObject);
+=======
+        IsActivated = true;
+        PlayerController.instance.AvailableInteraction = null;
+>>>>>>> Stashed changes
     }
 }

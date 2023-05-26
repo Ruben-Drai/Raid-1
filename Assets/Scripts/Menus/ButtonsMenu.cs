@@ -17,8 +17,9 @@ public class ButtonsMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     void Start()
     {
         GetComponent<Image>().sprite = spriteNotSelected;
-        if (name == "Continue Button" && PlayerPrefs.HasKey("PlayerPosX"))
-            GetComponent<UnityEngine.UI.Button>().interactable = false;
+        if (name == "Continue Button")
+            GetComponent<UnityEngine.UI.Button>().interactable = PlayerPrefs.HasKey("PlayerPosX");
+        
     }
 
     // Update is called once per frame
