@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     public void Interact(InputAction.CallbackContext context)
     {
         //TODO: make it so that it starts following the player from the moment he interacts with it
-        if(context.performed && AvailableInteraction!=null)
+        if(AvailableInteraction != null && context.performed)
         {
             AvailableInteraction.Interact();
         }
