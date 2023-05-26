@@ -1,8 +1,7 @@
 using UnityEngine;
 public class BigBox : Interactible
 {
-    [SerializeField]
-    private float lockedMass = 100000, unlockedMass = 10;
+
     private Rigidbody2D rb;
     private bool IsBeingLifted = false;
 
@@ -11,7 +10,7 @@ public class BigBox : Interactible
         if (PlayerController.instance.UnlockedUpgrades["Arm"])
         {
             IsBeingLifted = !IsBeingLifted;
-            rb.mass = IsBeingLifted? unlockedMass: lockedMass;
+            rb.constraints = IsBeingLifted ? RigidbodyConstraints2D.None:RigidbodyConstraints2D.FreezePositionX;
             PlayerController.instance.IsPushingBox = !PlayerController.instance.IsPushingBox;
         }
     }
@@ -26,6 +25,12 @@ public class BigBox : Interactible
         if (IsBeingLifted)
         {
             rb.velocity = PlayerController.instance.GetComponent<Rigidbody2D>().velocity;
+            if (PlayerController.instance.AvailableInteraction == null)
+            {
+                rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+                IsBeingLifted = false;
+                PlayerController.instance.IsPushingBox = false;
+            }
         } 
     }
 }

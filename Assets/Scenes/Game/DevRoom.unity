@@ -249,7 +249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 38371743}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Interactibles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 158999603}
   - component: {fileID: 158999604}
   - component: {fileID: 158999605}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -700,7 +700,7 @@ GameObject:
   - component: {fileID: 222330606}
   - component: {fileID: 222330608}
   - component: {fileID: 222330607}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1608,7 +1608,7 @@ GameObject:
   - component: {fileID: 746527116}
   - component: {fileID: 746527118}
   - component: {fileID: 746527117}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1832,8 +1832,8 @@ GameObject:
   - component: {fileID: 814099247}
   - component: {fileID: 814099246}
   - component: {fileID: 814099245}
-  m_Layer: 0
-  m_Name: Dynamic Sprite
+  m_Layer: 7
+  m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1867,8 +1867,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsActivated: 0
-  lockedMass: 100000
-  unlockedMass: 10
 --- !u!61 &814099246
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1915,7 +1913,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!212 &814099248
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2516,7 +2514,7 @@ GameObject:
   - component: {fileID: 1274927909}
   - component: {fileID: 1274927908}
   - component: {fileID: 1274927910}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3499,7 +3497,7 @@ GameObject:
   - component: {fileID: 1525099644}
   - component: {fileID: 1525099643}
   - component: {fileID: 1525099645}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4663,7 +4661,7 @@ GameObject:
   - component: {fileID: 2050623930}
   - component: {fileID: 2050623929}
   - component: {fileID: 2050623931}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: lever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
