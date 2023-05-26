@@ -44,9 +44,9 @@ public class PlayerController : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext context)
     {
-        if (Grounded && !IsPushingBox)
+        if (Grounded && !IsPushingBox && context.performed)
         {
-            rb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+            rb.velocity = new Vector2(rb.velocity.x, JumpForce);
             Grounded = false;
         }
     }
@@ -83,7 +83,8 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.GetComponent<Interactible>() != null 
-            && AvailableInteraction == collision.GetComponent<Interactible>())
+            && AvailableInteraction == collision.GetComponent<Interactible>()
+            && Vector2.Distance(transform.position, collision.transform.position)>0.5f)
         {
             AvailableInteraction = null;
         }
