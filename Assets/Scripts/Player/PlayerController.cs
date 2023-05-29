@@ -8,15 +8,20 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     [SerializeField] private PauseMenu pauseMenu;
-    [SerializeField] private float JumpForce = 10f,
-                                  MovementSpeed = 10f;
-    private bool Grounded;
-    private Vector2 movement;
+    [SerializeField] private float JumpForce = 10f, MovementSpeed = 10f;
     
+    private bool _canJump = false;
+    private Vector2 movement;
+
     [NonSerialized] public Interactible AvailableInteraction;
     [NonSerialized] public Rigidbody2D rb;
     [NonSerialized] public PlayerInput Controller;
+    [NonSerialized] public Vector2 SlopeAdjustment;
     [NonSerialized] public bool IsPushingBox = false;
+    [NonSerialized] public bool IsMoving= false;
+    [NonSerialized] public bool IsInJump= true;
+
+    public bool CanJump { get { return _canJump; } set { if (!IsInJump) _canJump = value; } }
     public Dictionary<string, bool> UnlockedUpgrades;
 
     // Start is called before the first frame update
@@ -41,18 +46,23 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         movement = context.ReadValue<Vector2>();
+        IsMoving = true;
     }
     public void Jump(InputAction.CallbackContext context)
     {
-        if (Grounded && !IsPushingBox && context.performed)
+        if (_canJump && !IsPushingBox && context.performed)
         {
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
-            Grounded = false;
+            IsMoving = true;
+            IsInJump = true;
+            //just in case player spams button, since groundcheck is only done once every 0.1s
+            _canJump = false;
         }
     }
     public void Interact(InputAction.CallbackContext context)
     {
-        if (Grounded)
+        //if the player is on the ground currently
+        if (_canJump)
         {
             //TODO: make it so that it starts following the player from the moment he interacts with it
             if (AvailableInteraction != null && context.performed)
@@ -92,14 +102,16 @@ public class PlayerController : MonoBehaviour
             AvailableInteraction = null;
         }
     }
-    public void SetGrounded(bool state)
-    {
-        Grounded = state;
-    }
     private void FixedUpdate()
     {
-        if(rb!=null)
-            rb.velocity = new(movement.x*MovementSpeed*(Grounded?1:0.5f)*(IsPushingBox?0.5f:1),rb.velocity.y);
+        if (movement.x == 0 && Mathf.Abs(rb.velocity.y) < 0.001) IsMoving = false;
+
+        float pushingBoxSlow = IsPushingBox ? 0.5f : 1;
+        float airSpeedSlow = _canJump ? 1 : 0.5f;
+        float speed = pushingBoxSlow * airSpeedSlow * MovementSpeed;
+        if (rb!=null) //Don't even ask about the formula, I destroyed my brain doing this
+            rb.velocity = new(movement.x * speed * -SlopeAdjustment.x,
+                 !IsInJump && _canJump && IsMoving? movement.x * -SlopeAdjustment.y * speed: rb.velocity.y);
     }
 
     
