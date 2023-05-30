@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private bool _canJump = true;
     private float TimeFromLastJump = 0f;
     private Vector2 movement;
+    private GroundCheck feet;
 
     [NonSerialized] public Interactible AvailableInteraction;
     [NonSerialized] public Rigidbody2D rb;
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
+        feet = GetComponentInChildren<GroundCheck>();
         rb = GetComponent<Rigidbody2D>();
         UnlockedUpgrades = new Dictionary<string, bool>()
         {
@@ -71,7 +73,7 @@ public class PlayerController : MonoBehaviour
     public void Interact(InputAction.CallbackContext context)
     {
         //if the player is on the ground currently
-        if (!IsInJump)
+        if (!IsInJump && feet.groundState != GroundState.Interactibles)
         {
             //TODO: make it so that it starts following the player from the moment he interacts with it
             if (AvailableInteraction != null && context.performed)
