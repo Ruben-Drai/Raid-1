@@ -700,6 +700,7 @@ GameObject:
   - component: {fileID: 222330606}
   - component: {fileID: 222330608}
   - component: {fileID: 222330607}
+  - component: {fileID: 222330609}
   m_Layer: 7
   m_Name: button
   m_TagString: Untagged
@@ -788,6 +789,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &222330609
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222330605}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &300600637
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,7 +1313,7 @@ PrefabInstance:
       objectReference: {fileID: 373809099}
     - target: {fileID: 1607095311481806078, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.3229675
+      value: -2.3229678
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311481806078, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4123,6 +4150,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3612737804791221178, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 732637458}
+    - target: {fileID: 3720769476593123522, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819440, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: pauseMenu
       value: 
