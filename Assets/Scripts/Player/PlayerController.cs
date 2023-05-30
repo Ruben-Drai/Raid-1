@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private float TimeFromLastJump = 0f;
     private Vector2 movement;
     private GroundCheck feet;
+    private ArmController arm;
 
     [NonSerialized] public Interactible AvailableInteraction;
     [NonSerialized] public Rigidbody2D rb;
@@ -35,13 +37,14 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
+        arm = GetComponentInChildren<ArmController>();
         feet = GetComponentInChildren<GroundCheck>();
         rb = GetComponent<Rigidbody2D>();
         UnlockedUpgrades = new Dictionary<string, bool>()
         {
             {"Leg",false},
-            {"Arm",true},
-            {"ArmGun", false},
+            {"Arm",false},
+            {"ArmGun", true},
             {"DoubleJump",false}
         };
         Controller = GetComponent<PlayerInput>();
@@ -55,9 +58,14 @@ public class PlayerController : MonoBehaviour
         movement = context.ReadValue<Vector2>();
         IsMoving = true;
     }
+    //gamepad and mobile only
+    public void Aim(InputAction.CallbackContext context)
+    {
+        arm.SetDirection(context.ReadValue<Vector2>());
+    }
     public void Jump(InputAction.CallbackContext context)
     {
-        if (TimeFromLastJump > JumpCooldown && _canJump && !IsPushingBox && context.performed)
+        if (TimeFromLastJump > JumpCooldown && _canJump && !IsPushingBox && context.performed && !arm.LimitMovement)
         {
             TimeFromLastJump = 0f;
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
@@ -96,6 +104,16 @@ public class PlayerController : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext context)
     {
+        if (rb.velocity.y == 0)
+        {
+            if (UnlockedUpgrades["ArmGun"])
+            {
+                if(context.performed)
+                    arm.ActivateArm();
+                else if(context.canceled)
+                    arm.ShootFist();
+            }
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -120,9 +138,10 @@ public class PlayerController : MonoBehaviour
 
         float pushingBoxSlow = IsPushingBox ? 0.5f : 1;
         float airSpeedSlow = _canJump && CanDoubleJump ? 1 : 0.5f;
+        float Immobilize = arm.LimitMovement ? 0 : 1;
         float speed = pushingBoxSlow * airSpeedSlow * MovementSpeed;
         if (rb != null) //Don't even ask about the formula, I destroyed my brain doing this
-            rb.velocity = new(movement.x * speed * -SlopeAdjustment.x,
+            rb.velocity = new(movement.x * speed * -SlopeAdjustment.x * Immobilize,
                  !IsInJump && _canJump && IsMoving ? movement.x * -SlopeAdjustment.y * speed : rb.velocity.y);
 
     }
