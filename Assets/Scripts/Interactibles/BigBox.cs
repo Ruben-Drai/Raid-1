@@ -9,20 +9,17 @@ public class BigBox : Interactible
     {
         if (PlayerController.instance.UnlockedUpgrades["Arm"])
         {
-            IsBeingLifted = !IsBeingLifted;
-
-            if (IsBeingLifted)
-            {
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-
-            }
-            else
-            {
-                rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-
-            }
-            PlayerController.instance.IsPushingBox = !PlayerController.instance.IsPushingBox;
+            IsBeingLifted = true;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            PlayerController.instance.IsPushingBox = true;
         }
+    }
+    public void StopInteraction()
+    {
+        IsBeingLifted = false;
+        rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        PlayerController.instance.IsPushingBox = false;
+
     }
     // Start is called before the first frame update
     void Start()
@@ -34,7 +31,7 @@ public class BigBox : Interactible
     {
         if (IsBeingLifted)
         {
-            rb.velocity = PlayerController.instance.rb.velocity;
+            rb.velocity = new(PlayerController.instance.rb.velocity.x,rb.velocity.y);
             if (PlayerController.instance.AvailableInteraction == null)
             {
                 rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;

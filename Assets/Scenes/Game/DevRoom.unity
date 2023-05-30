@@ -249,7 +249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 38371743}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Interactibles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 158999603}
   - component: {fileID: 158999604}
   - component: {fileID: 158999605}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,7 +555,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -596,7 +596,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 467959991}
+  - {fileID: 467959990}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -700,7 +700,7 @@ GameObject:
   - component: {fileID: 222330606}
   - component: {fileID: 222330608}
   - component: {fileID: 222330607}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1154,40 +1154,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 7233670744056604433, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7233670744337568784, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7233670744405093667, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7233670744702433275, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7233670744748513319, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
---- !u!114 &467959990 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7233670744603056384, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-  m_PrefabInstance: {fileID: 467959989}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caa8bf3ee2cec894f8f4e52e3336ea13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!224 &467959991 stripped
+--- !u!224 &467959990 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7233670744603056385, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
   m_PrefabInstance: {fileID: 467959989}
@@ -1628,7 +1597,7 @@ GameObject:
   - component: {fileID: 746527116}
   - component: {fileID: 746527118}
   - component: {fileID: 746527117}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1852,7 +1821,7 @@ GameObject:
   - component: {fileID: 814099247}
   - component: {fileID: 814099246}
   - component: {fileID: 814099245}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1896,7 +1865,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 814099243}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 180c3f45092e1b942a81b40d1a474278, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1929,7 +1898,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 180c3f45092e1b942a81b40d1a474278, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -2307,7 +2276,7 @@ GameObject:
   - component: {fileID: 1122693850}
   m_Layer: 8
   m_Name: little wall
-  m_TagString: Walkable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2534,7 +2503,7 @@ GameObject:
   - component: {fileID: 1274927909}
   - component: {fileID: 1274927908}
   - component: {fileID: 1274927910}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2882,9 +2851,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350074064}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.000000029802322, y: 0, z: -0.000000007450581}
-  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2933,7 +2902,7 @@ GameObject:
   - component: {fileID: 1376775390}
   m_Layer: 8
   m_Name: roof
-  m_TagString: Walkable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3517,7 +3486,7 @@ GameObject:
   - component: {fileID: 1525099644}
   - component: {fileID: 1525099643}
   - component: {fileID: 1525099645}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3754,7 +3723,7 @@ GameObject:
   - component: {fileID: 1595158505}
   m_Layer: 8
   m_Name: Layer_0001_8 (1)
-  m_TagString: Walkable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4146,7 +4115,7 @@ PrefabInstance:
     - target: {fileID: 6287506163292819440, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: pauseMenu
       value: 
-      objectReference: {fileID: 467959990}
+      objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_DefaultControlScheme
       value: GamePad
@@ -4319,7 +4288,7 @@ GameObject:
   - component: {fileID: 1846014446}
   m_Layer: 8
   m_Name: Layer_0001_8
-  m_TagString: Walkable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4681,7 +4650,7 @@ GameObject:
   - component: {fileID: 2050623930}
   - component: {fileID: 2050623929}
   - component: {fileID: 2050623931}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: lever
   m_TagString: Untagged
   m_Icon: {fileID: 0}

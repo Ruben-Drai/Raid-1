@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PauseMenu pauseMenu;
     [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f;
 
-    private bool _canJump = false;
+    private bool _canJump = true;
     private float TimeFromLastJump = 0f;
     private Vector2 movement;
 
@@ -38,9 +38,9 @@ public class PlayerController : MonoBehaviour
         UnlockedUpgrades = new Dictionary<string, bool>()
         {
             {"Leg",false},
-            {"Arm",false},
+            {"Arm",true},
             {"ArmGun", false},
-            {"DoubleJump",true}
+            {"DoubleJump",false}
         };
         Controller = GetComponent<PlayerInput>();
     }
@@ -71,20 +71,19 @@ public class PlayerController : MonoBehaviour
     public void Interact(InputAction.CallbackContext context)
     {
         //if the player is on the ground currently
-        if (_canJump)
+        if (!IsInJump)
         {
             //TODO: make it so that it starts following the player from the moment he interacts with it
             if (AvailableInteraction != null && context.performed)
             {
                 AvailableInteraction.Interact();
             }
-            //if the interactible is a box, call interact when key is released
+            //if the interactible is a box, call interact when key is released, problem when key is released and box is redetected
             if (AvailableInteraction != null && context.canceled && AvailableInteraction.GetComponent<BigBox>() != null)
             {
-                AvailableInteraction.Interact();
+                AvailableInteraction.GetComponent<BigBox>().StopInteraction();
             }
         }
-
     }
 
     public void Pause(InputAction.CallbackContext context)

@@ -47,7 +47,7 @@ public class GroundCheck : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision != null) //just realizing that IsInJump would be better off being called IsInAir
+        if (!collision.isTrigger) //just realizing that IsInJump would be better off being called IsInAir
         {
             controller.IsInJump = false;
             controller.CanDoubleJump = true;
