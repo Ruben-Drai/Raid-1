@@ -137,7 +137,7 @@ PrefabInstance:
     - target: {fileID: 6287506163292819440, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: pauseMenu
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 503086546}
     - target: {fileID: 6287506163292819443, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -686,6 +686,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7233670744603056385, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
   m_PrefabInstance: {fileID: 503086544}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &503086546 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7233670744603056384, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+  m_PrefabInstance: {fileID: 503086544}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa8bf3ee2cec894f8f4e52e3336ea13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &672176527
 PrefabInstance:
   m_ObjectHideFlags: 0
