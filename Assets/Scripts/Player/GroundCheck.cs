@@ -21,10 +21,8 @@ public class GroundCheck : MonoBehaviour
         bool InteractibleIsTrigger = false;
         foreach (var v in Enum.GetNames(typeof(GroundState)))
         {
-            //for ease of debugging
             var Hit = Physics2D.Raycast(transform.position, Vector2.down, 2.5f * (controller.transform.localScale.x / 3), LayerMask.GetMask(v));
-            Debug.DrawRay(Hit.point, Vector2.Perpendicular(Hit.normal).normalized, Color.blue);
-            Debug.DrawRay(Hit.point, Hit.normal, Color.green);
+
             if (Hit == true)
             {
                 controller.SlopeAdjustment = Vector2.Perpendicular(Hit.normal).normalized;
@@ -36,7 +34,6 @@ public class GroundCheck : MonoBehaviour
         //Can the player Jump ? only set if the player isn't already in a jump so that it doesn't redetect the ground at the beginning of a jump
         controller.CanJump = groundState == GroundState.Interactibles && InteractibleIsTrigger ? false : groundState != GroundState.Air;
 
-
         if (groundState == GroundState.Slope && !controller.IsInJump)
         {
             rb.isKinematic = !controller.IsMoving;
@@ -45,7 +42,7 @@ public class GroundCheck : MonoBehaviour
         else rb.isKinematic = false;
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (!collision.isTrigger) //just realizing that IsInJump would be better off being called IsInAir
         {
