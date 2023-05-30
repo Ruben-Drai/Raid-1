@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -29,17 +27,17 @@ public class SaveNLoad : MonoBehaviour
 
         for (int i = 0; i < Interactibles.transform.childCount; i++)
         {
-            PlayerPrefs.SetInt("Child"+i, Interactibles.transform.GetChild(i).GetComponent<Interactible>().IsActivated?1:0);
-            if(Interactibles.transform.GetChild(i).GetComponent<BigBox>() != null)
+            PlayerPrefs.SetInt("Child" + i, Interactibles.transform.GetChild(i).GetComponent<Interactible>().IsActivated ? 1 : 0);
+            if (Interactibles.transform.GetChild(i).GetComponent<BigBox>() != null)
             {
                 PlayerPrefs.SetFloat("ChildPosX" + i, Interactibles.transform.GetChild(i).transform.position.x);
                 PlayerPrefs.SetFloat("ChildPosY" + i, Interactibles.transform.GetChild(i).transform.position.y);
             }
         }
-        PlayerPrefs.SetFloat("PlayerPosX",PlayerController.instance.transform.position.x);
-        PlayerPrefs.SetFloat("PlayerPosY",PlayerController.instance.transform.position.y);
+        PlayerPrefs.SetFloat("PlayerPosX", PlayerController.instance.transform.position.x);
+        PlayerPrefs.SetFloat("PlayerPosY", PlayerController.instance.transform.position.y);
 
-        foreach(var v in PlayerController.instance.UnlockedUpgrades)
+        foreach (var v in PlayerController.instance.UnlockedUpgrades)
         {
             PlayerPrefs.SetInt(v.Key, v.Value ? 1 : 0);
         }
@@ -113,10 +111,10 @@ public class SaveNLoad : MonoBehaviour
             PlayerPrefs.GetFloat("PlayerPosY"),
             0);
 
-        
+
         foreach (var v in PlayerController.instance.UnlockedUpgrades.ToArray())
         {
-            PlayerController.instance.UnlockedUpgrades[v.Key] = PlayerPrefs.GetInt(v.Key)==1;
+            PlayerController.instance.UnlockedUpgrades[v.Key] = PlayerPrefs.GetInt(v.Key) == 1;
         }
     }
 }

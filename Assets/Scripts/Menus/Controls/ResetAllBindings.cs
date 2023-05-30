@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +10,7 @@ public class ResetAllBindings : MonoBehaviour
     }
     public void ResetBindings()
     {
-        
+
         foreach (var action in inputActions.actionMaps)
         {
             action.RemoveAllBindingOverrides();

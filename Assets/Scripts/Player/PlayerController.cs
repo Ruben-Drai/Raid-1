@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private PauseMenu pauseMenu;
     [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f;
-    
+
     private bool _canJump = false;
     private float TimeFromLastJump = 0f;
     private Vector2 movement;
@@ -19,9 +19,9 @@ public class PlayerController : MonoBehaviour
     [NonSerialized] public PlayerInput Controller;
     [NonSerialized] public Vector2 SlopeAdjustment;
     [NonSerialized] public bool IsPushingBox = false;
-    [NonSerialized] public bool IsMoving= false;
-    [NonSerialized] public bool IsInJump= true;
-    [NonSerialized] public bool CanDoubleJump= true;
+    [NonSerialized] public bool IsMoving = false;
+    [NonSerialized] public bool IsInJump = true;
+    [NonSerialized] public bool CanDoubleJump = true;
 
     public bool CanJump { get { return _canJump; } set { if (!IsInJump) _canJump = value; } }
     public Dictionary<string, bool> UnlockedUpgrades;
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
             {"ArmGun", false},
             {"DoubleJump",true}
         };
-        Controller = GetComponent<PlayerInput>();  
+        Controller = GetComponent<PlayerInput>();
     }
     private void Update()
     {
@@ -84,12 +84,12 @@ public class PlayerController : MonoBehaviour
                 AvailableInteraction.Interact();
             }
         }
-        
+
     }
 
     public void Pause(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (context.performed)
             pauseMenu.Escape();
     }
 
@@ -98,16 +98,16 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Interactible>()!=null)
+        if (collision.GetComponent<Interactible>() != null)
         {
             AvailableInteraction = collision.GetComponent<Interactible>();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<Interactible>() != null 
+        if (collision.GetComponent<Interactible>() != null
             && AvailableInteraction == collision.GetComponent<Interactible>()
-            && Vector2.Distance(transform.position, collision.transform.position)>0.5f)
+            && Vector2.Distance(transform.position, collision.transform.position) > 0.5f)
         {
             AvailableInteraction = null;
         }
@@ -120,11 +120,11 @@ public class PlayerController : MonoBehaviour
         float pushingBoxSlow = IsPushingBox ? 0.5f : 1;
         float airSpeedSlow = _canJump && CanDoubleJump ? 1 : 0.5f;
         float speed = pushingBoxSlow * airSpeedSlow * MovementSpeed;
-        if (rb!=null) //Don't even ask about the formula, I destroyed my brain doing this
+        if (rb != null) //Don't even ask about the formula, I destroyed my brain doing this
             rb.velocity = new(movement.x * speed * -SlopeAdjustment.x,
-                 !IsInJump && _canJump && IsMoving? movement.x * -SlopeAdjustment.y * speed: rb.velocity.y);
+                 !IsInJump && _canJump && IsMoving ? movement.x * -SlopeAdjustment.y * speed : rb.velocity.y);
 
     }
 
-    
+
 }

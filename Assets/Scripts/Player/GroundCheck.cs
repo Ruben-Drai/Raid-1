@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
@@ -24,7 +22,7 @@ public class GroundCheck : MonoBehaviour
         foreach (var v in Enum.GetNames(typeof(GroundState)))
         {
             //for ease of debugging
-            var Hit = Physics2D.Raycast(transform.position, Vector2.down, 2.5f * (controller.transform.localScale.x/3), LayerMask.GetMask(v));
+            var Hit = Physics2D.Raycast(transform.position, Vector2.down, 2.5f * (controller.transform.localScale.x / 3), LayerMask.GetMask(v));
             Debug.DrawRay(Hit.point, Vector2.Perpendicular(Hit.normal).normalized, Color.blue);
             Debug.DrawRay(Hit.point, Hit.normal, Color.green);
             if (Hit == true)
@@ -37,7 +35,7 @@ public class GroundCheck : MonoBehaviour
         }
         //Can the player Jump ? only set if the player isn't already in a jump so that it doesn't redetect the ground at the beginning of a jump
         controller.CanJump = groundState == GroundState.Interactibles && InteractibleIsTrigger ? false : groundState != GroundState.Air;
-        
+
 
         if (groundState == GroundState.Slope && !controller.IsInJump)
         {
@@ -56,7 +54,7 @@ public class GroundCheck : MonoBehaviour
         }
 
     }
-    
+
 }
 
 public enum GroundState

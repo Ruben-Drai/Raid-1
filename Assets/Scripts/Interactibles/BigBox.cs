@@ -41,6 +41,6 @@ public class BigBox : Interactible
                 IsBeingLifted = false;
                 PlayerController.instance.IsPushingBox = false;
             }
-        } 
+        }
     }
 }

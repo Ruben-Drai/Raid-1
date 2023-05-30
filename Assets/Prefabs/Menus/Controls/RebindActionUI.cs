@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using UnityEngine;
-using System.Linq;
 
 ////TODO: localization support
 
@@ -19,7 +17,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         /// <summary>
         /// Reference to the action that is to be rebound.
         /// </summary>
-        
+
         public InputActionReference actionReference
         {
             get => m_Action;
@@ -249,7 +247,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 if ((!newBinding.isPartOfComposite && binding.action == newBinding.action)
                     || (newBinding.isPartOfComposite && binding.name == newBinding.name))
                     continue;
-                
+
                 if (binding.effectivePath == newBinding.path)
                 {
                     // Swap the two actions.
@@ -303,7 +301,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 .WithControlsExcluding("<Pointer>/position")
                 .WithControlsExcluding("<Gamepad>/leftstick")
                 .WithControlsExcluding("<Gamepad>/rightstick")
-                .WithCancelingThrough(PlayerController.instance.GetComponent<PlayerInput>().currentControlScheme=="K&M"?"<Keyboard>/escape": "<GamePad>/start")
+                .WithCancelingThrough(PlayerController.instance.GetComponent<PlayerInput>().currentControlScheme == "K&M" ? "<Keyboard>/escape" : "<GamePad>/start")
                 .OnCancel(
                     operation =>
                     {
@@ -491,7 +489,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         {
             UpdateActionLabel();
             UpdateBindingDisplay();
-            
+
         }
 
 #endif
@@ -499,7 +497,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         {
             UpdateActionLabel();
             UpdateBindingDisplay();
-           
+
         }
         private void UpdateActionLabel()
         {

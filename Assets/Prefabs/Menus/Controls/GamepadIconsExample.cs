@@ -16,7 +16,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         public GamepadIcons xbox;
         public GamepadIcons ps4;
 
-        
+
         protected void OnEnable()
         {
             // Hook into all updateBindingUIEvents on all RebindActionUI components in our hierarchy.
