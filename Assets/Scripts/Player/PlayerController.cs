@@ -8,9 +8,10 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     [SerializeField] private PauseMenu pauseMenu;
-    [SerializeField] private float JumpForce = 10f, MovementSpeed = 10f;
+    [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f;
     
     private bool _canJump = false;
+    private float TimeFromLastJump = 0f;
     private Vector2 movement;
 
     [NonSerialized] public Interactible AvailableInteraction;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [NonSerialized] public bool IsPushingBox = false;
     [NonSerialized] public bool IsMoving= false;
     [NonSerialized] public bool IsInJump= true;
+    [NonSerialized] public bool CanDoubleJump= true;
 
     public bool CanJump { get { return _canJump; } set { if (!IsInJump) _canJump = value; } }
     public Dictionary<string, bool> UnlockedUpgrades;
@@ -38,11 +40,14 @@ public class PlayerController : MonoBehaviour
             {"Leg",false},
             {"Arm",false},
             {"ArmGun", false},
-            {"DoubleJump",false}
+            {"DoubleJump",true}
         };
         Controller = GetComponent<PlayerInput>();  
     }
-    // Update is called once per frame
+    private void Update()
+    {
+        TimeFromLastJump += Time.deltaTime;
+    }
     public void Move(InputAction.CallbackContext context)
     {
         movement = context.ReadValue<Vector2>();
@@ -50,13 +55,17 @@ public class PlayerController : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext context)
     {
-        if (_canJump && !IsPushingBox && context.performed)
+        if (TimeFromLastJump > JumpCooldown && _canJump && !IsPushingBox && context.performed)
         {
+            TimeFromLastJump = 0f;
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
             IsMoving = true;
             IsInJump = true;
             //just in case player spams button, since groundcheck is only done once every 0.1s
-            _canJump = false;
+            if (CanDoubleJump && UnlockedUpgrades["DoubleJump"])
+                CanDoubleJump = false;
+
+            else _canJump = false;
         }
     }
     public void Interact(InputAction.CallbackContext context)
@@ -69,6 +78,7 @@ public class PlayerController : MonoBehaviour
             {
                 AvailableInteraction.Interact();
             }
+            //if the interactible is a box, call interact when key is released
             if (AvailableInteraction != null && context.canceled && AvailableInteraction.GetComponent<BigBox>() != null)
             {
                 AvailableInteraction.Interact();
@@ -105,13 +115,15 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (movement.x == 0 && Mathf.Abs(rb.velocity.y) < 0.001) IsMoving = false;
+        if (rb.velocity.y < -0.4f) IsInJump = true;
 
         float pushingBoxSlow = IsPushingBox ? 0.5f : 1;
-        float airSpeedSlow = _canJump ? 1 : 0.5f;
+        float airSpeedSlow = _canJump && CanDoubleJump ? 1 : 0.5f;
         float speed = pushingBoxSlow * airSpeedSlow * MovementSpeed;
         if (rb!=null) //Don't even ask about the formula, I destroyed my brain doing this
             rb.velocity = new(movement.x * speed * -SlopeAdjustment.x,
                  !IsInJump && _canJump && IsMoving? movement.x * -SlopeAdjustment.y * speed: rb.velocity.y);
+
     }
 
     

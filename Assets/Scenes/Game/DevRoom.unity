@@ -249,7 +249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 38371743}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Interactibles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 158999603}
   - component: {fileID: 158999604}
   - component: {fileID: 158999605}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -700,7 +700,7 @@ GameObject:
   - component: {fileID: 222330606}
   - component: {fileID: 222330608}
   - component: {fileID: 222330607}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1181,7 +1181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 533978396}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: obstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1608,7 +1608,7 @@ GameObject:
   - component: {fileID: 746527116}
   - component: {fileID: 746527118}
   - component: {fileID: 746527117}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1832,7 +1832,7 @@ GameObject:
   - component: {fileID: 814099247}
   - component: {fileID: 814099246}
   - component: {fileID: 814099245}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2016,7 +2016,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 903384254}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LAYER01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2285,7 +2285,7 @@ GameObject:
   - component: {fileID: 1122693849}
   - component: {fileID: 1122693851}
   - component: {fileID: 1122693850}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: little wall
   m_TagString: Walkable
   m_Icon: {fileID: 0}
@@ -2514,7 +2514,7 @@ GameObject:
   - component: {fileID: 1274927909}
   - component: {fileID: 1274927908}
   - component: {fileID: 1274927910}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2722,7 +2722,7 @@ GameObject:
   - component: {fileID: 1323958542}
   - component: {fileID: 1323958544}
   - component: {fileID: 1323958543}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 3rd big wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2911,7 +2911,7 @@ GameObject:
   - component: {fileID: 1376775389}
   - component: {fileID: 1376775391}
   - component: {fileID: 1376775390}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: roof
   m_TagString: Walkable
   m_Icon: {fileID: 0}
@@ -3106,7 +3106,7 @@ GameObject:
   - component: {fileID: 1404422325}
   - component: {fileID: 1404422327}
   - component: {fileID: 1404422326}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 2nd big wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3385,7 +3385,7 @@ GameObject:
   - component: {fileID: 1510642609}
   - component: {fileID: 1510642611}
   - component: {fileID: 1510642610}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bird plateform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3497,7 +3497,7 @@ GameObject:
   - component: {fileID: 1525099644}
   - component: {fileID: 1525099643}
   - component: {fileID: 1525099645}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3621,7 +3621,7 @@ GameObject:
   - component: {fileID: 1544970815}
   - component: {fileID: 1544970817}
   - component: {fileID: 1544970816}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: big wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3732,7 +3732,7 @@ GameObject:
   - component: {fileID: 1595158504}
   - component: {fileID: 1595158507}
   - component: {fileID: 1595158505}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Layer_0001_8 (1)
   m_TagString: Walkable
   m_Icon: {fileID: 0}
@@ -4297,7 +4297,7 @@ GameObject:
   - component: {fileID: 1846014445}
   - component: {fileID: 1846014448}
   - component: {fileID: 1846014446}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Layer_0001_8
   m_TagString: Walkable
   m_Icon: {fileID: 0}
@@ -4661,7 +4661,7 @@ GameObject:
   - component: {fileID: 2050623930}
   - component: {fileID: 2050623929}
   - component: {fileID: 2050623931}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: lever
   m_TagString: Untagged
   m_Icon: {fileID: 0}

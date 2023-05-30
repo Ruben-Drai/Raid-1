@@ -325,7 +325,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 672176528}
   m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -789,6 +789,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
+--- !u!20 &672176528 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1607095311026243984, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
+  m_PrefabInstance: {fileID: 672176527}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &828122200
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,7 +805,7 @@ GameObject:
   - component: {fileID: 828122203}
   - component: {fileID: 828122202}
   - component: {fileID: 828122201}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: rock (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

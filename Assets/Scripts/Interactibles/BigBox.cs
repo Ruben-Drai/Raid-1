@@ -34,7 +34,7 @@ public class BigBox : Interactible
     {
         if (IsBeingLifted)
         {
-            rb.velocity = PlayerController.instance.GetComponent<Rigidbody2D>().velocity;
+            rb.velocity = PlayerController.instance.rb.velocity;
             if (PlayerController.instance.AvailableInteraction == null)
             {
                 rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
