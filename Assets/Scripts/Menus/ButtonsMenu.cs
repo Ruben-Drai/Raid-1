@@ -1,31 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 //Manage buttons' sprites appearances
 public class ButtonsMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private Sprite spriteNotSelected,
+    [SerializeField]
+    private Sprite spriteNotSelected,
                                     spriteSelected,
                                     spritePushed;
 
-  
+
     // Start is called before the first frame update
     void Start()
     {
         GetComponent<Image>().sprite = spriteNotSelected;
         if (name == "Continue Button")
             GetComponent<UnityEngine.UI.Button>().interactable = PlayerPrefs.HasKey("PlayerPosX");
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (EventSystem.current.currentSelectedGameObject == null 
+        if (EventSystem.current.currentSelectedGameObject == null
             && PlayerController.instance.Controller.currentControlScheme == "Gamepad")
         {
             ChangeButtonSpriteWithGamePad();

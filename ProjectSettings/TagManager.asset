@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Walkable
   - PlayerFist
   layers:
   - Default
@@ -13,13 +12,13 @@ TagManager:
   - 
   - Water
   - UI
-  - Feet
+  - Slope
+  - Platform
+  - Ground
   - Interactibles
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - BoundingBox
+  - Animals
   - 
   - 
   - 

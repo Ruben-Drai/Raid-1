@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using UnityEngine;
 
 ////TODO: localization support
 
@@ -18,7 +17,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         /// <summary>
         /// Reference to the action that is to be rebound.
         /// </summary>
-        
+
         public InputActionReference actionReference
         {
             get => m_Action;
@@ -245,13 +244,17 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             for (int i = 0; i < action.actionMap.bindings.Count; ++i)
             {
                 InputBinding binding = action.actionMap.bindings[i];
-                if (binding.action == newBinding.action)
+                if ((!newBinding.isPartOfComposite && binding.action == newBinding.action)
+                    || (newBinding.isPartOfComposite && binding.name == newBinding.name))
                     continue;
-                
+
                 if (binding.effectivePath == newBinding.path)
                 {
                     // Swap the two actions.
-                    action.actionMap.FindAction(binding.action).ApplyBindingOverride(FindFirstObjectByType<PlayerInput>().currentControlScheme == "K&M" ? 0 : 1, newBinding.overridePath);
+
+                    var ToReplace = action.actionMap.FindAction(binding.action);
+                    var index = ToReplace.GetBindingIndex(null, binding.path);
+                    ToReplace.ApplyBindingOverride(index, newBinding.overridePath);
                     action.RemoveBindingOverride(bindingIndex);
                     return true;
                 }
@@ -267,15 +270,17 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             if (!ResolveActionAndBinding(out var action, out var bindingIndex))
                 return;
 
+            var firstPartIndex = bindingIndex + 1;
+
             // If the binding is a composite, we need to rebind each part in turn.
             if (action.bindings[bindingIndex].isComposite)
             {
-                var firstPartIndex = bindingIndex + 1;
                 if (firstPartIndex < action.bindings.Count && action.bindings[firstPartIndex].isPartOfComposite)
                     PerformInteractiveRebind(action, firstPartIndex, allCompositeParts: true);
             }
             else
             {
+
                 PerformInteractiveRebind(action, bindingIndex);
             }
         }
@@ -296,7 +301,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 .WithControlsExcluding("<Pointer>/position")
                 .WithControlsExcluding("<Gamepad>/leftstick")
                 .WithControlsExcluding("<Gamepad>/rightstick")
-                .WithCancelingThrough(PlayerController.instance.GetComponent<PlayerInput>().currentControlScheme=="K&M"?"<Keyboard>/escape": "<GamePad>/start")
+                .WithCancelingThrough(PlayerController.instance.GetComponent<PlayerInput>().currentControlScheme == "K&M" ? "<Keyboard>/escape" : "<GamePad>/start")
                 .OnCancel(
                     operation =>
                     {
@@ -364,7 +369,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             InputBinding newBinding = action.bindings[bindingIndex];
             foreach (InputBinding binding in action.actionMap.bindings)
             {
-                if (binding.action == newBinding.action)
+                if (binding.name == newBinding.name)
                     continue;
 
                 if (binding.effectivePath == newBinding.effectivePath)
@@ -484,7 +489,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         {
             UpdateActionLabel();
             UpdateBindingDisplay();
-            
+
         }
 
 #endif
@@ -492,7 +497,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         {
             UpdateActionLabel();
             UpdateBindingDisplay();
-           
+
         }
         private void UpdateActionLabel()
         {

@@ -1,10 +1,9 @@
-using UnityEngine;
 public class SparePart : Interactible
 {
 
     private void Update()
     {
-        if(IsActivated) gameObject.SetActive(false);
+        if (IsActivated) gameObject.SetActive(false);
     }
     public override void Interact()
     {

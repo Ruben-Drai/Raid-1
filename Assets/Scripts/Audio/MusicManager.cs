@@ -3,26 +3,28 @@ using UnityEngine.UI;
 
 public class MusicManager : MonoBehaviour
 {
-    [SerializeField] Slider volumeMusicSlider;
-    public Image mutedMusicImage;
+    [SerializeField] private Slider volumeMusicSlider;
 
+
+    public Image mutedMusicImage;
     public Sprite mutedMusicSprite;
     public Sprite notMutedMusicSprite;
-    //[SerializeField] AudioSource Music;
+
+
     void Start()
     {
-        Load();    
+        Load();
     }
 
     public void ChangeVolume()
     {
-        //Music.volume = volumeMusicSlider.value;
+        GameObject.Find("Music").GetComponent<AudioSource>().volume = volumeMusicSlider.value;
         Save();
     }
-
     private void Load()
     {
         volumeMusicSlider.value = PlayerPrefs.GetFloat("musicVolume", 0.5f);
+        GameObject.Find("Music").GetComponent<AudioSource>().volume = volumeMusicSlider.value;
     }
 
     private void Save()
@@ -36,7 +38,7 @@ public class MusicManager : MonoBehaviour
         {
             mutedMusicImage.sprite = notMutedMusicSprite;
         }
-        else if(volumeMusicSlider.value == 0)
+        else if (volumeMusicSlider.value == 0)
             mutedMusicImage.sprite = mutedMusicSprite;
     }
 }

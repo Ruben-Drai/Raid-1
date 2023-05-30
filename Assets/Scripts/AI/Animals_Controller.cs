@@ -1,32 +1,47 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class Animals_Controller : MonoBehaviour
 {
     //Minimum & Maximum variable = Mm
-    public bool isBird = true;
-    private Animator animator;
-    private Rigidbody2D rb;
-    public float speed = 1.0f;
-    public Vector2 distanceMm = new Vector2(0,10);
-    public Vector2 waitTimeMm = new Vector2( 1, 10 );
-    public int toDo = 0;
-    public float waitTime = 0;
+    [Header("Min & Max")]
+    public Vector2 distanceMm = new Vector2(0, 10);
+    public Vector2 waitTimeMm = new Vector2(1, 10);
+
+    [Header("Animal Information")]
+    [Range(0, 10)] public float speed = 1.0f;
+    public int toDo = 0; //What the animals need to do (percentage(0-99) of chance to do an action)
+    public Vector2 startEndPos = new Vector2(0, 0); // startEndPos [0] Start position, startEndPos [1] distance in x axis,
     private int direction = 0; // 0 = right and 1 =  left
-    public Vector2 distance = new Vector2(0,0); // distance to travel when GameObject move, with x the start and y the distance to travel
-    public float timer = 0;
-    private GameObject eye;
-    private GameObject player;
-    private RaycastHit2D eyeRay;
-    public LayerMask layerMask;
+
+
+    [Header("Flee")]
+    public bool isBird = true;
+    public float disappearSpeed = 7;
     private bool flee = false;
     private float fleeTimer = 0;
-    private RaycastHit2D obstacle;
-    private int pastTime = 0;
-    public float disappearSpeed = 7;
+
+    //GameObject
+    private GameObject eye;
+    private GameObject player;
+    private Animator animator;
+    private Rigidbody2D rb;
+
+    //Timer
+    public float waitTime = 0; // Time to wait during the idle event
+    public float timer = 0;
+    private int pastTime = 0; // Use for make disappear the animal during the flee
+
+    //LayerMask
+    private RaycastHit2D eyeRay; // see in direction of the player for know if the animal need to flee
+    private RaycastHit2D obstacle; // see if there is obstacle front of animal direction
+
+    //Audio
+    private float soundTimer = 0;
+    private float waitSound;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,16 +56,16 @@ public class Animals_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Sound();
         if (!flee)
         {
             fleeTimer = Time.time;
-            Vector3 heading = player.transform.position - eye.transform.position;
-            Debug.DrawRay(eye.transform.position, heading / heading.magnitude * 5, Color.red);
-            eyeRay = Physics2D.Raycast(eye.transform.position, heading / heading.magnitude, 5f, layerMask);
+            Vector2 heading = player.transform.position - eye.transform.position;
 
-            if (eyeRay.collider != null && eyeRay.collider.tag == "Player")
+            eyeRay = Physics2D.Raycast(eye.transform.position, heading.normalized, 5f, LayerMask.GetMask("Player"));
+
+            if (eyeRay.collider != null && eyeRay.collider.CompareTag("Player"))
             {
-                Debug.DrawRay(eye.transform.position, heading / heading.magnitude * 5, Color.green);
                 flee = true;
             }
 
@@ -66,13 +81,10 @@ public class Animals_Controller : MonoBehaviour
                     transform.rotation = new Quaternion(0, 0, 0, 0);
                     rb.velocity = new Vector2(speed, rb.velocity.y);
                 }
-                if(Mathf.Abs(rb.velocity.x) <= 0.01f)
-                {
 
-                }
-                Debug.DrawRay(eye.transform.position, gameObject.transform.right * 0.5f, Color.red);
-                obstacle = Physics2D.Raycast(eye.transform.position, gameObject.transform.right, 0.5f, layerMask);
-                if (Mathf.Abs(transform.position.x - distance.x) > distance.y || obstacle.collider != null)
+                obstacle = Physics2D.Raycast(eye.transform.position, gameObject.transform.right, 0.5f, LayerMask.GetMask("Player"));
+
+                if (Mathf.Abs(transform.position.x - startEndPos.x) > startEndPos.y || obstacle.collider != null)
                 {
                     toDo = Movement();
                 }
@@ -90,28 +102,28 @@ public class Animals_Controller : MonoBehaviour
                 BirdFlee();
             else
                 RatFlee();
-            if(Time.time - fleeTimer > disappearSpeed)
+            if (Time.time - fleeTimer > disappearSpeed)
             {
                 Destroy(gameObject);
             }
-            else if(Time.time - fleeTimer > pastTime)
+            else if (Time.time - fleeTimer > pastTime)
             {
-                gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, gameObject.GetComponent<SpriteRenderer>().color.a - 1f/disappearSpeed);
+                gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, gameObject.GetComponent<SpriteRenderer>().color.a - 1f / disappearSpeed);
                 pastTime++;
             }
 
         }
     }
 
-    private int Movement()
+    private int Movement() //  for know the animation to play
 
     {
         int a = UnityEngine.Random.Range(0, 100);
         if (a > 50)
         {
             direction = UnityEngine.Random.Range(0, 2);
-            distance.x = transform.position.x;
-            distance.y = UnityEngine.Random.Range(distanceMm.x, distanceMm.y);
+            startEndPos.x = transform.position.x;
+            startEndPos.y = UnityEngine.Random.Range(distanceMm.x, distanceMm.y);
             animator.SetBool("Move", true);
 
         }
@@ -124,10 +136,21 @@ public class Animals_Controller : MonoBehaviour
         return a;
     }
 
+    private void Sound()
+    {
+        if (Time.time - soundTimer > waitSound)
+        {
+            soundTimer = Time.time;
+            waitSound = UnityEngine.Random.Range(0, 20);
+            GetComponent<AudioSource>().Play();
+        }
+
+    }
+
     private void BirdFlee()
     {
         animator.SetBool("Move", true);
-        if(player.transform.position.x - transform.position.x < 0)
+        if (player.transform.position.x - transform.position.x < 0)
         {
             transform.rotation = new Quaternion(0, 0, 0, 0);
             rb.velocity = new Vector2(5, 5);
@@ -137,10 +160,10 @@ public class Animals_Controller : MonoBehaviour
             transform.rotation = new Quaternion(0, 180, 0, 0);
             rb.velocity = new Vector2(-5, 5);
         }
-           
+
     }
 
-    private void RatFlee() 
+    private void RatFlee()
     {
         animator.SetBool("Move", true);
         if (player.transform.position.x - transform.position.x < 0)
@@ -153,10 +176,10 @@ public class Animals_Controller : MonoBehaviour
             transform.rotation = new Quaternion(0, 180, 0, 0);
             rb.velocity = new Vector2(-5, rb.velocity.y);
         }
-           
+
     }
 
-    public void Death()
+    public void Death() // Using in the Animation of the death for make disappear the animal
     {
         Destroy(gameObject);
     }
