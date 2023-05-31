@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
@@ -99,6 +100,7 @@ public class PlayerController : MonoBehaviour
         //if the player is on the ground currently
         if (!IsInJump && feet.groundState != GroundState.Interactibles)
         {
+
             //TODO: make it so that it starts following the player from the moment he interacts with it
             if (AvailableInteraction != null && context.performed)
             {
@@ -136,6 +138,8 @@ public class PlayerController : MonoBehaviour
         if (collision.GetComponent<Interactible>() != null)
         {
             AvailableInteraction = collision.GetComponent<Interactible>();
+            //AvailableInteraction.transform.GetChild(1).gameObject.SetActive(true);
+            AvailableInteraction.transform.Find("Highlight").gameObject.SetActive(true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -144,6 +148,8 @@ public class PlayerController : MonoBehaviour
             && AvailableInteraction == collision.GetComponent<Interactible>()
             && Vector2.Distance(transform.position, collision.transform.position) > 0.5f)
         {
+            //AvailableInteraction.transform.GetChild(1).gameObject.SetActive(false);
+            AvailableInteraction.transform.Find("Highlight").gameObject.SetActive(false);
             AvailableInteraction = null;
         }
     }

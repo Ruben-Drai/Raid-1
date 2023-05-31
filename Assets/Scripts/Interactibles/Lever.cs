@@ -5,7 +5,7 @@ public class Lever : Interactible
     {
         if (IsActivated)
         {
-            transform.GetChild(0).gameObject.SetActive(false);
+            transform.Find("door").gameObject.SetActive(false);
         }
     }
     public override void Interact()
