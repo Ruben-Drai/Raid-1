@@ -1,11 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Android.Types;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 
 public class ArmController : MonoBehaviour
 {
@@ -27,7 +21,7 @@ public class ArmController : MonoBehaviour
     public bool returning; //If the fist is currently returning to the arm
 
     private float rotationSpeed = 12f;
-   
+
     private Vector3 cursorDirection;
     private Vector3 joystickDirection;
     private Vector3 currentDirection;
@@ -36,7 +30,7 @@ public class ArmController : MonoBehaviour
     private float fistSpeed = 10f;
     private Vector2 Direction = Vector2.zero;
     private Rigidbody2D rb;
-    
+
     [SerializeField] private Transform originalFistPos; //Where the fist is on the arm
 
     private void Start()
@@ -48,8 +42,8 @@ public class ArmController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-        canRotate = onHold && !shooting; 
+
+        canRotate = onHold && !shooting;
 
         if (canRotate)
             Rotate();
@@ -97,7 +91,7 @@ public class ArmController : MonoBehaviour
            The character should be able */
         if (currentDirection.x < 0)
             flipped = true;
-        else 
+        else
             flipped = false;
 
         /* Clamp the rotation of the player depending of which side he's facing */
@@ -131,10 +125,10 @@ public class ArmController : MonoBehaviour
             onHold = false;
 
             Direction = fist.transform.position - transform.position;
-            
+
         }
     }
-    
+
     /* Calculs to make the fist go back to his original point */
     public void ReturnFist()
     {
@@ -167,7 +161,7 @@ public class ArmController : MonoBehaviour
             canRotate = false;
         }
 
-        if (Mathf.Abs(transform.rotation.eulerAngles.z - originalRotation.eulerAngles.z)<1f && !canRotate && !shooting)
+        if (Mathf.Abs(transform.rotation.eulerAngles.z - originalRotation.eulerAngles.z) < 1f && !canRotate && !shooting)
         {
             arm.SetActive(false);
         }

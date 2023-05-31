@@ -28,12 +28,12 @@ public class SoundManager : MonoBehaviour
     {
         foreach (var v in FindObjectsOfType<AudioSource>())
         {
-            if(v.gameObject.name!="Music")
+            if (v.gameObject.name != "Music")
                 v.volume = volumeSoundSlider.value;
         }
         Save();
     }
-
+    
     private void Load()
     {
         volumeSoundSlider.value = PlayerPrefs.GetFloat("soundVolume", 0.5f);
@@ -47,21 +47,18 @@ public class SoundManager : MonoBehaviour
 
     void Update()
     {
-        if (volumeSoundSlider.value == 0)
+        if (volumeSoundSlider != null)
         {
-            mutedSoundImage.sprite = mutedSoundSprite;
+            if (volumeSoundSlider.value == 0)
+                mutedSoundImage.sprite = mutedSoundSprite;
+            else if (volumeSoundSlider.value > 0 && volumeSoundSlider.value < 0.33)
+                mutedSoundImage.sprite = lowSoundSprite;
+            else if (volumeSoundSlider.value < 0.66)
+                mutedSoundImage.sprite = middleSoundSprite;
+            else if (volumeSoundSlider.value == 1)
+                mutedSoundImage.sprite = loudSoundSprite;
         }
-        else if (volumeSoundSlider.value > 0 && volumeSoundSlider.value < 0.33)
-        {
-            mutedSoundImage.sprite = lowSoundSprite;
-        }
-        else if (volumeSoundSlider.value < 0.66)
-        {
-            mutedSoundImage.sprite = middleSoundSprite;
-        }
-        else if (volumeSoundSlider.value == 1)
-        {
-            mutedSoundImage.sprite = loudSoundSprite;
-        }
+        else
+            volumeSoundSlider = GameObject.Find("Sound").GetComponent<Slider>();
     }
 }

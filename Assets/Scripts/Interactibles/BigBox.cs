@@ -21,17 +21,19 @@ public class BigBox : Interactible
         PlayerController.instance.IsPushingBox = false;
 
     }
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    // Update is called once per frame
     void Update()
     {
         if (IsBeingLifted)
         {
-            rb.velocity = new(PlayerController.instance.rb.velocity.x,rb.velocity.y);
+            //effectively follows player, I would love for it to be better but I don't have an easier method,
+            //so I'll have to stick with the impossiblity of pushing the box if the player can't move an inch
+            rb.velocity = new(PlayerController.instance.rb.velocity.x, rb.velocity.y);
+
+            //releases box if the player somehow loses the box from the trigger box around the player
             if (PlayerController.instance.AvailableInteraction == null)
             {
                 rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
@@ -39,5 +41,9 @@ public class BigBox : Interactible
                 PlayerController.instance.IsPushingBox = false;
             }
         }
+
+        //freezes the box on X and the rotation on Z if the player doesn't interact with the box anymore or if it's falling
+        if (Mathf.Abs(rb.velocity.y) > 0.1f) rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+
     }
 }

@@ -2397,6 +2397,7 @@ MonoBehaviour:
   JumpForce: 10
   MovementSpeed: 10
   JumpCooldown: 0.1
+  CoyoteTime: 0.4
 --- !u!1 &1056466136
 GameObject:
   m_ObjectHideFlags: 0
@@ -5044,10 +5045,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 7233670744056604433, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233670744337568784, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233670744405093667, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7233670744603056384, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
       propertyPath: MainMenuButtons
       value: 
       objectReference: {fileID: 1107846199}
+    - target: {fileID: 7233670744603056384, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: menuStack.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7233670744603056384, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
       propertyPath: menuStack.Array.data[0]
       value: 
@@ -5134,6 +5151,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7233670744603056385, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233670744702433275, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

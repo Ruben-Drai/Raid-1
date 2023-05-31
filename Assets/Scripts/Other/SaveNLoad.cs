@@ -20,7 +20,9 @@ public class SaveNLoad : MonoBehaviour
     {
     }
 
-
+    //All data is saved into playerprefs, I don't know if this is efficient since playerprefs are inherently Register Keys
+    //It might be better to save as a file but I don't have the time for that
+    //This basically saves player pos as well as all interactibles' activation status, and position if they can be pushed
     public void Save()
     {
         Interactibles = GameObject.Find("Interactibles");

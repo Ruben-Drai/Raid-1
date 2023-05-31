@@ -14,7 +14,7 @@ public class PlatformChoser : MonoBehaviour
         controlScheme = PlayerController.instance.GetComponent<PlayerInput>();
     }
 
-    // Update is called once per frame
+    //switches what rebind screen is shown depending on the currently active control scheme
     void Update()
     {
         if (controlScheme.currentControlScheme == "K&M" && !KMtree.activeSelf)

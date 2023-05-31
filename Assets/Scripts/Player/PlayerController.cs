@@ -2,14 +2,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
 
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
 
     [SerializeField] private PauseMenu pauseMenu;
-    [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime=0.4f;
+    [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime = 0.4f;
 
     private bool _canJump = true;
     private float TimeFromLastJump = 0f;
@@ -27,16 +26,16 @@ public class PlayerController : MonoBehaviour
     [NonSerialized] public bool IsInJump = true;
     [NonSerialized] public bool CanDoubleJump = true;
 
-    public bool CanJump 
-    { 
-        get 
-        { 
-            return _canJump; 
+    public bool CanJump
+    {
+        get
+        {
+            return _canJump;
         }
         set
         {
-            if ((!IsInJump && value == true) || (IsInJump && CoyoteTimer > CoyoteTime && value==false))
-            {                
+            if ((!IsInJump && value == true) || (IsInJump && CoyoteTimer > CoyoteTime && value == false))
+            {
                 _canJump = value;
                 CoyoteTimer = 0f;
             }
@@ -58,9 +57,9 @@ public class PlayerController : MonoBehaviour
         UnlockedUpgrades = new Dictionary<string, bool>()
         {
             {"Leg",false},
-            {"Arm",false},
+            {"Arm",true},
             {"ArmGun", false},
-            {"DoubleJump",true}
+            {"DoubleJump",false}
         };
         Controller = GetComponent<PlayerInput>();
     }
@@ -92,20 +91,19 @@ public class PlayerController : MonoBehaviour
                 _canJump = false;
             else if (CanDoubleJump && UnlockedUpgrades["DoubleJump"])
                 CanDoubleJump = false;
-            
+
         }
     }
     public void Interact(InputAction.CallbackContext context)
     {
-        //if the player is on the ground currently
+        //if the player is on the ground currently and not on an interactible such as a box so that you can't push a box to the right from the top of it
         if (!IsInJump && feet.groundState != GroundState.Interactibles)
         {
-            //TODO: make it so that it starts following the player from the moment he interacts with it
             if (AvailableInteraction != null && context.performed)
             {
                 AvailableInteraction.Interact();
             }
-            //if the interactible is a box, call interact when key is released, problem when key is released and box is redetected
+            //if the interactible is a box, stop interacting with the box
             if (AvailableInteraction != null && context.canceled && AvailableInteraction.GetComponent<BigBox>() != null)
             {
                 AvailableInteraction.GetComponent<BigBox>().StopInteraction();
@@ -125,13 +123,14 @@ public class PlayerController : MonoBehaviour
         {
             if (UnlockedUpgrades["ArmGun"])
             {
-                if(context.performed)
+                if (context.performed)
                     arm.ActivateArm();
-                else if(context.canceled)
+                else if (context.canceled)
                     arm.ShootFist();
             }
         }
     }
+    //gets interactible from trigger box around the player
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<Interactible>() != null)
@@ -148,11 +147,14 @@ public class PlayerController : MonoBehaviour
             AvailableInteraction = null;
         }
     }
+
+    //Player movement
     private void FixedUpdate()
     {
-        if (movement.x == 0 && Mathf.Abs(rb.velocity.y) < 0.001) 
+        //state stuff
+        if (movement.x == 0 && Mathf.Abs(rb.velocity.y) < 0.001)
             IsMoving = false;
-        if (Mathf.Abs(rb.velocity.y)>1f) 
+        if (Mathf.Abs(rb.velocity.y) > 1f)
             IsInJump = true;
 
         //speed stuff
@@ -163,10 +165,11 @@ public class PlayerController : MonoBehaviour
 
         //slope stuff
         bool slope = feet.groundState == GroundState.Slope && !IsInJump;
-        float SlopeMovementY = movement.x * -SlopeAdjustment.y * speed;
+        float SlopeMovementY = movement.normalized.x * -SlopeAdjustment.y * speed;
 
+        //final movement formula
         if (rb != null)
-            rb.velocity = new(movement.x * speed * Immobilize * -SlopeAdjustment.x, slope ? SlopeMovementY : rb.velocity.y);
+            rb.velocity = new(movement.normalized.x * speed * Immobilize * -SlopeAdjustment.x, slope ? SlopeMovementY : rb.velocity.y);
 
 
     }

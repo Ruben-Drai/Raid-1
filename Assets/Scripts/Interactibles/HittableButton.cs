@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Button : Interactible
+public class HittableButton : Interactible
 {
     private bool DoorClosed = true;
 
