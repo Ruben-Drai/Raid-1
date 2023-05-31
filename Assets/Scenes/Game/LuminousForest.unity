@@ -200,6 +200,10 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 503086546}
+    - target: {fileID: 6287506163292819440, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: CoyoteTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819443, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_RootOrder
       value: 4
