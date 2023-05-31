@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     [SerializeField] private PauseMenu pauseMenu;
-    [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime=0.2f;
+    [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime=0.4f;
 
     private bool _canJump = true;
     private float TimeFromLastJump = 0f;
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         set
         {
             if ((!IsInJump && value == true) || (IsInJump && CoyoteTimer > CoyoteTime && value==false))
-            {
+            {                
                 _canJump = value;
                 CoyoteTimer = 0f;
             }
@@ -81,17 +81,18 @@ public class PlayerController : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext context)
     {
-        if (TimeFromLastJump > JumpCooldown && _canJump && !IsPushingBox && context.performed && !arm.LimitMovement)
+        if (TimeFromLastJump > JumpCooldown && (_canJump || (CanDoubleJump && UnlockedUpgrades["DoubleJump"]) && !IsPushingBox && context.performed && !arm.LimitMovement))
         {
             TimeFromLastJump = 0f;
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
             IsMoving = true;
             IsInJump = true;
             //just in case player spams button, since groundcheck is only done once every 0.1s
-            if (CanDoubleJump && UnlockedUpgrades["DoubleJump"])
+            if (_canJump)
+                _canJump = false;
+            else if (CanDoubleJump && UnlockedUpgrades["DoubleJump"])
                 CanDoubleJump = false;
-
-            else _canJump = false;
+            
         }
     }
     public void Interact(InputAction.CallbackContext context)
@@ -166,6 +167,8 @@ public class PlayerController : MonoBehaviour
 
         if (rb != null)
             rb.velocity = new(movement.x * speed * Immobilize * -SlopeAdjustment.x, slope ? SlopeMovementY : rb.velocity.y);
+
+
     }
 
 
