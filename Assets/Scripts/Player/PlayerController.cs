@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour
 
         //speed stuff
         float pushingBoxSlow = IsPushingBox ? 0.5f : 1;
-        float airSpeedSlow = _canJump && CanDoubleJump ? 1 : 0.5f;
+        float airSpeedSlow = _canJump && CanDoubleJump ? 1 : 0.75f;
         float Immobilize = arm.LimitMovement ? 0 : 1;
         float speed = pushingBoxSlow * airSpeedSlow * MovementSpeed;
 
