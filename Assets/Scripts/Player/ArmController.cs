@@ -19,12 +19,13 @@ public class ArmController : MonoBehaviour
     private Quaternion originalRotation = Quaternion.Euler(0, 0, -90);
 
     public bool canRotate = false; //If the arm can rotate
-    public bool LimitMovement { get { return canRotate || shooting; } }
+    public bool LimitMovement { get { return playerController.IsHunging || playerController.ReturnGrappleToInitialPosition ? false : canRotate || shooting; } }
 
     private bool onHold = false; //If the fire button is currently holded
     private bool flipped = false; //If the player's sprite is flipped
     public bool shooting = false; //If the player is currently shooting the fist
     public bool returning; //If the fist is currently returning to the arm
+    public bool isReturnToOrigin = true; //If the fist is totally retun to is original position
 
     private float rotationSpeed = 12f;
    
@@ -38,6 +39,7 @@ public class ArmController : MonoBehaviour
     private Rigidbody2D rb;
     
     [SerializeField] private Transform originalFistPos; //Where the fist is on the arm
+    [SerializeField] private PlayerController playerController;
 
     private void Start()
     {
@@ -48,7 +50,7 @@ public class ArmController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        Debug.Log(isReturnToOrigin);  
         canRotate = onHold && !shooting; 
 
         if (canRotate)
@@ -57,15 +59,34 @@ public class ArmController : MonoBehaviour
 
         Vector2 _direction = originalFistPos.position - fist.transform.position;
         float dist = Mathf.Sqrt(_direction.x * _direction.x + _direction.y * _direction.y);
+        if(playerController.ReturnGrappleToInitialPosition)
+        {
+            GrappleReturned();
+        }
+        if(playerController.IsHunging)
+        {
+            RotateArmWhenHunging();
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
 
-        if (returning || dist > 10) /* limit fist distance, prevent it to go into infinity */
+
+        if (playerController.ReturnGrappleToInitialPosition)
+            RotateArmWhenGrappleReturn();
+
+
+        else if (returning || dist > 10) /* limit fist distance, prevent it to go into infinity */
             ReturnFist();
+
+        if (!playerController.IsHunging)
+        {
+            rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+        }
     }
 
     private void FixedUpdate()
     {
-        FistMovement();
-
+        if(!playerController.IsHunging)
+            FistMovement();
     }
     /* Activate the arm so he can be rotated */
     public void ActivateArm()
@@ -129,6 +150,7 @@ public class ArmController : MonoBehaviour
             canRotate = false;
             shooting = true;
             onHold = false;
+            isReturnToOrigin = false;
 
             Direction = fist.transform.position - transform.position;
             
@@ -145,7 +167,10 @@ public class ArmController : MonoBehaviour
     /* Actual movement of the fist */
     void FistMovement()
     {
-        rb.velocity = Direction.normalized * fistSpeed;
+        if (!isReturnToOrigin)
+            rb.velocity = Direction.normalized * fistSpeed;
+        else
+            fist.transform.position = transform.position;
         transform.rotation = Quaternion.Slerp(transform.rotation, currentRotation, rotationSpeed * Time.deltaTime); //Smooth the rotation
 
         FistReturned();
@@ -159,22 +184,48 @@ public class ArmController : MonoBehaviour
         if (returning && dist < 0.2f)
         {
             currentRotation = originalRotation;
-
-            Direction = Vector2.zero;
+            
+            playerController.ReturnGrappleToInitialPosition = false;
 
             shooting = false;
             returning = false;
             canRotate = false;
+            isReturnToOrigin = true;
         }
 
         if (Mathf.Abs(transform.rotation.eulerAngles.z - originalRotation.eulerAngles.z)<1f && !canRotate && !shooting)
         {
+            isReturnToOrigin = false;
             arm.SetActive(false);
         }
     }
 
+    private void GrappleReturned()
+    {
+        playerController.IsHunging = false;
+        rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+        ReturnFist();
+        FistReturned();
+    }
 
 
+    void RotateArmWhenHunging()
+    {
+        Vector3 HangPointPosition = fist.GetComponent<Fist>().positionOfCollision;
+        Quaternion rotation = Quaternion.LookRotation
+            (HangPointPosition - transform.position, transform.TransformDirection(Vector3.up));
+        transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+        fist.transform.position = HangPointPosition;
+    }
+
+    void RotateArmWhenGrappleReturn()
+    {
+        Vector3 FistPos = new Vector3(fist.transform.position.x, fist.transform.position.y, fist.transform.position.z);
+        Quaternion rotation = Quaternion.LookRotation
+            (fist.transform.position - transform.position, transform.TransformDirection(Vector3.up));
+        transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+        fist.transform.position = FistPos;
+    }
 
     public void SetDirection(Vector2 direction)
     {

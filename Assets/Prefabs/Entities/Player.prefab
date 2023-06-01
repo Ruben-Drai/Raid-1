@@ -29,6 +29,7 @@ Transform:
   m_LocalScale: {x: 0.30927452, y: 0.39127687, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1874899951558436102}
   - {fileID: 1238696576476964480}
   m_Father: {fileID: 4612771924755074648}
   m_RootOrder: 0
@@ -209,6 +210,106 @@ MonoBehaviour:
   shooting: 0
   returning: 0
   originalFistPos: {fileID: 1238696576476964480}
+  playerController: {fileID: 6287506163292819440}
+--- !u!1 &6159323185590805560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1874899951558436102}
+  - component: {fileID: 399297188848739392}
+  - component: {fileID: 5756595200557905452}
+  m_Layer: 0
+  m_Name: Rope
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1874899951558436102
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6159323185590805560}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.015256796}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2238637700828433443}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &399297188848739392
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6159323185590805560}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 0, g: 0.16778421, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &5756595200557905452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6159323185590805560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a51ef96ac4eadb468d7f01bab956e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  origin: {fileID: 3437514146109133383}
+  target: {fileID: 8168045339954622545}
 --- !u!1 &6287506163292819445
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,6 +418,9 @@ MonoBehaviour:
   JumpForce: 17
   MovementSpeed: 10
   JumpCooldown: 0.1
+  CoyoteTime: 0.2
+  fist: {fileID: 8168045339954622545}
+  IsHunging: 0
 --- !u!114 &6287506163292819442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,6 +534,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: b01b3172-bce2-4877-9ad1-85447c258436
     m_ActionName: Game/Aim
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6287506163292819440}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Grapple
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4b2b4c83-8b11-4d6a-8db2-a25d663bdf61
+    m_ActionName: Game/Grapple[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: K&M
   m_DefaultActionMap: Game
@@ -624,7 +744,7 @@ Transform:
   m_Children:
   - {fileID: 8159449897371208242}
   m_Father: {fileID: 2238637700828433443}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8168045339954622545
 GameObject:
@@ -762,3 +882,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ddd919a363808942929e6237d8590fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionOfCollision: {x: 0, y: 0, z: 0}
