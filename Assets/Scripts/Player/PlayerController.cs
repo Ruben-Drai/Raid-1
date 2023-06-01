@@ -8,15 +8,14 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     [SerializeField] private PauseMenu pauseMenu;
-    [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime=0.2f;
-    [SerializeField] private GameObject fist;
+    [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime = 0.2f;
+    [SerializeField] private GrapplingGun hook;
 
     private bool _canJump = true;
     private float TimeFromLastJump = 0f;
     private float CoyoteTimer = 0f;
     private Vector2 movement;
     private GroundCheck feet;
-    private ArmController arm;
 
     [NonSerialized] public Interactible AvailableInteraction;
     [NonSerialized] public Rigidbody2D rb;
@@ -24,9 +23,7 @@ public class PlayerController : MonoBehaviour
     [NonSerialized] public Vector2 SlopeAdjustment;
     [NonSerialized] public bool IsPushingBox = false;
     [NonSerialized] public bool IsMoving = false;
-    /*[NonSerialized]*/ public bool IsHunging = false;
-    [NonSerialized] public bool IsGrappleMove = false;
-    [NonSerialized] public bool ReturnGrappleToInitialPosition = false;
+
     [NonSerialized] public bool IsInJump = true;
     [NonSerialized] public bool CanDoubleJump = true;
 
@@ -55,15 +52,16 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
-        arm = GetComponentInChildren<ArmController>();
         feet = GetComponentInChildren<GroundCheck>();
         rb = GetComponent<Rigidbody2D>();
         UnlockedUpgrades = new Dictionary<string, bool>()
         {
-            {"Leg",false},
-            {"Arm",false},
+            {"Jump",false},
+            {"Sprint&Sneak",false},
+            {"Strength",false},
             {"ArmGun", true},
-            {"DoubleJump",true}
+            {"DoubleJump",true},
+            {"Hook",true}
         };
         Controller = GetComponent<PlayerInput>();
     }
@@ -80,18 +78,16 @@ public class PlayerController : MonoBehaviour
     //gamepad and mobile only
     public void Aim(InputAction.CallbackContext context)
     {
-        arm.SetDirection(context.ReadValue<Vector2>());
+        hook.Direction = context.ReadValue<Vector2>();
+
     }
     public void Jump(InputAction.CallbackContext context)
     {
         if (TimeFromLastJump > JumpCooldown
-            && (_canJump || (CanDoubleJump && UnlockedUpgrades["DoubleJump"])) 
-            && !IsPushingBox 
-            && context.performed 
-            && !arm.LimitMovement
-            && !IsHunging)
+            && (_canJump || (CanDoubleJump && UnlockedUpgrades["DoubleJump"]))
+            && !IsPushingBox
+            && context.performed)
         {
-            if (context.performed) Debug.Log("tes");
             TimeFromLastJump = 0f;
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
             IsMoving = true;
@@ -103,11 +99,6 @@ public class PlayerController : MonoBehaviour
                 CanDoubleJump = false;
 
         }
-    }
-
-    public void Grapple(InputAction.CallbackContext context)
-    {
-        IsGrappleMove = context.ReadValueAsButton();  
     }
     public void Interact(InputAction.CallbackContext context)
     {
@@ -134,19 +125,25 @@ public class PlayerController : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext context)
     {
-        if (IsHunging)
-            ReturnGrappleToInitialPosition = true;
-
-        else if (rb.velocity.y == 0)
+        if (UnlockedUpgrades["ArmGun"])
         {
-            if (UnlockedUpgrades["ArmGun"])
+            if (context.performed)
             {
-                if (context.performed)
-                    arm.ActivateArm();
-                else if (context.canceled)
-                    arm.ShootFist();
+                if (!hook.HasShot)
+                {
+                    hook.ActivateHook();
+                }
+
+            }
+            else if (context.canceled)
+            {
+                if (hook.HasShot)
+                    hook.ReturnHook();
+                else
+                    hook.FireHook();
             }
         }
+
     }
     //gets interactible from trigger box around the player
     private void OnTriggerEnter2D(Collider2D collision)
@@ -178,37 +175,14 @@ public class PlayerController : MonoBehaviour
         //speed stuff
         float pushingBoxSlow = IsPushingBox ? 0.5f : 1;
         float airSpeedSlow = _canJump && CanDoubleJump ? 1 : 0.75f;
-        float Immobilize = arm.LimitMovement ? 0 : 1;
         float speed = pushingBoxSlow * airSpeedSlow * MovementSpeed;
 
         //slope stuff
         bool slope = feet.groundState == GroundState.Slope && !IsInJump;
         float SlopeMovementY = movement.normalized.x * -SlopeAdjustment.y * speed;
 
-        if (rb != null && !IsHunging)
-            rb.velocity = new(movement.normalized.x * speed * Immobilize * -SlopeAdjustment.x, slope ? SlopeMovementY : rb.velocity.y);
-
-        if(IsHunging && IsGrappleMove )
-        {
-            GrappleMovement();
-        }
-        else if (ReturnGrappleToInitialPosition)
-        {
-            GetComponent<DistanceJoint2D>().enabled = false;
-        }
-        else if(!IsGrappleMove&&IsHunging) 
-        { rb.gravityScale = 1;
-            GetComponent<DistanceJoint2D>().enabled = true;
-        }
-
-    }
-
-    private void GrappleMovement()
-    {
-        Vector2 Direction = fist.transform.position - transform.position;
-        rb.gravityScale = 0;
-        rb.velocity = Direction.normalized * MovementSpeed;
-        GetComponent<DistanceJoint2D>().enabled = false;
+        if (rb != null && !hook.HasShot)
+            rb.velocity = new(movement.normalized.x * speed * -SlopeAdjustment.x, slope ? SlopeMovementY : rb.velocity.y);
     }
 
 }

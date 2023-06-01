@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Build;
 using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
@@ -10,7 +7,7 @@ public class CheckPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!used && collision.GetComponent<PlayerController>() != null)
+        if (!used && collision.GetComponent<PlayerController>() != null)
         {
             Debug.Log("checkpoint");
             used = true;

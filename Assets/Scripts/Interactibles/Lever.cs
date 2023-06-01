@@ -10,7 +10,7 @@ public class Lever : Interactible
     }
     public override void Interact()
     {
-        if (PlayerController.instance.UnlockedUpgrades["Arm"]) // use lever part.2
+        if (PlayerController.instance.UnlockedUpgrades["Strength"]) // use lever part.2
         {
             IsActivated = true;
         }

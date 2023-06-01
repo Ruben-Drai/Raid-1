@@ -67,15 +67,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Grapple",
-                    "type": "Button",
-                    "id": "4b2b4c83-8b11-4d6a-8db2-a25d663bdf61",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -296,17 +287,6 @@
                     "processors": "",
                     "groups": "GamePad",
                     "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5edf38c1-72b2-4027-a447-105a6e3f9ffd",
-                    "path": "<Keyboard>/space",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "K&M",
-                    "action": "Grapple",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

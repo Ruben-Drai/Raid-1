@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -24,7 +21,7 @@ public class GameUI : MonoBehaviour
 
     public static GameUI instance;
     private void Awake()
-    {            
+    {
         if (instance == null) instance = this;
         else Destroy(gameObject);
     }
@@ -50,7 +47,7 @@ public class GameUI : MonoBehaviour
         }
 
         //if bossfight?
-        if(SceneManager.GetActiveScene().name == "BossFight")
+        if (SceneManager.GetActiveScene().name == "BossFight")
         {
             AutoBatteryDrain();
             BossTimerDisplay();
@@ -104,7 +101,7 @@ public class GameUI : MonoBehaviour
         }
 
         /* Display the timer */
-        if(timerTxt!= null)
+        if (timerTxt != null)
             timerTxt.text = string.Format("{0:00}:{01:00}", minutes, secondes);
 
     }

@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 
 public class Fist : MonoBehaviour
 {
@@ -21,12 +21,12 @@ public class Fist : MonoBehaviour
     {
         if(collision!=null && collision.CompareTag("CanBeHung"))
         {
-            if(!playerController.IsHunging)
+            if(!playerController.IsHanging)
             {
                 positionOfCollision = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             }
                 
-            playerController.IsHunging = true;
+            playerController.IsHanging = true;
         }
         else if(collision != null && armController.shooting && !collision.isTrigger && collision.GetComponent<PlayerController>() == null)
         {
@@ -34,3 +34,4 @@ public class Fist : MonoBehaviour
         }
     }
 }
+*/

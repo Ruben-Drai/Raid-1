@@ -73,7 +73,7 @@ public class SaveNLoad : MonoBehaviour
             yield return null;
         }
         Save();
-        if(quit) Application.Quit();
+        if (quit) Application.Quit();
     }
     public IEnumerator LoadRoutine()
     {

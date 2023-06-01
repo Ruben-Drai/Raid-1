@@ -16,8 +16,8 @@ public class PauseMenu : MonoBehaviour
     {
         //selects a button if none are and current control scheme is set to gamepad
         if (EventSystem.current.currentSelectedGameObject == null
-            && PlayerController.instance.Controller.currentControlScheme == "Gamepad" && menuStack.Count>0)
-                EventSystem.current.SetSelectedGameObject(FindObjectOfType<Button>().gameObject);
+            && PlayerController.instance.Controller.currentControlScheme == "Gamepad" && menuStack.Count > 0)
+            EventSystem.current.SetSelectedGameObject(FindObjectOfType<Button>().gameObject);
     }
     public void ShowMenu()
     {
@@ -48,7 +48,7 @@ public class PauseMenu : MonoBehaviour
     {
         if ((SceneManager.GetActiveScene().name == "MainMenu" && menuStack.Count >= 2)
             || (SceneManager.GetActiveScene().name != "MainMenu" && menuStack.Count >= 1))
-                Back();
+            Back();
 
         else if (SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "GameOver")
         {

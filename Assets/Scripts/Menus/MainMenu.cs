@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
         if (EventSystem.current.currentSelectedGameObject == null
            && PlayerController.instance.Controller.currentControlScheme == "Gamepad")
             EventSystem.current.SetSelectedGameObject(FindObjectOfType<Button>().gameObject);
-            
+
     }
 
     public void StartGame()

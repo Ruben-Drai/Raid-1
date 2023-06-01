@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using Unity.Android.Types;
 using Unity.VisualScripting;
@@ -19,7 +19,13 @@ public class ArmController : MonoBehaviour
     private Quaternion originalRotation = Quaternion.Euler(0, 0, -90);
 
     public bool canRotate = false; //If the arm can rotate
-    public bool LimitMovement { get { return playerController.IsHunging || playerController.ReturnGrappleToInitialPosition ? false : canRotate || shooting; } }
+    public bool LimitMovement 
+    { 
+        get 
+        { 
+            return playerController.IsHanging || playerController.ReturnGrappleToInitialPosition ? false : canRotate || shooting; 
+        } 
+    }
 
     private bool onHold = false; //If the fire button is currently holded
     private bool flipped = false; //If the player's sprite is flipped
@@ -50,7 +56,6 @@ public class ArmController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(isReturnToOrigin);  
         canRotate = onHold && !shooting; 
 
         if (canRotate)
@@ -59,11 +64,11 @@ public class ArmController : MonoBehaviour
 
         Vector2 _direction = originalFistPos.position - fist.transform.position;
         float dist = Mathf.Sqrt(_direction.x * _direction.x + _direction.y * _direction.y);
-        if(playerController.ReturnGrappleToInitialPosition)
+        *//*if(playerController.ReturnGrappleToInitialPosition)
         {
             GrappleReturned();
         }
-        if(playerController.IsHunging)
+        if(playerController.IsHanging)
         {
             RotateArmWhenHunging();
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -74,27 +79,30 @@ public class ArmController : MonoBehaviour
             RotateArmWhenGrappleReturn();
 
 
-        else if (returning || dist > 10) /* limit fist distance, prevent it to go into infinity */
+        else if (returning || dist > 10) *//* limit fist distance, prevent it to go into infinity *//*
             ReturnFist();
 
-        if (!playerController.IsHunging)
+        if (!playerController.IsHanging)
         {
             rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
-        }
+        }*//*
     }
 
     private void FixedUpdate()
     {
-        if(!playerController.IsHunging)
+        if(!playerController.IsHanging)
             FistMovement();
     }
-    /* Activate the arm so he can be rotated */
+    *//* Activate the arm so he can be rotated *//*
     public void ActivateArm()
     {
-        onHold = true;
-        arm.SetActive(true);
+        if (!arm.activeSelf)
+        {
+            onHold = true;
+            arm.SetActive(true);
+        }
     }
-    /* Rotate arm toward the mouse's cursor */
+    *//* Rotate arm toward the mouse's cursor *//*
     void Rotate()
     {
         fist.transform.localPosition = Vector3.zero;
@@ -114,14 +122,14 @@ public class ArmController : MonoBehaviour
             currentDirection = joystickDirection;
         }
 
-        /* Flip the character sprite depending of the mouse's position 
-           The character should be able */
+        *//* Flip the character sprite depending of the mouse's position 
+           The character should be able *//*
         if (currentDirection.x < 0)
             flipped = true;
         else 
             flipped = false;
 
-        /* Clamp the rotation of the player depending of which side he's facing */
+        *//* Clamp the rotation of the player depending of which side he's facing *//*
         if (flipped)
         {
             currentDirection.x *= -1;
@@ -142,7 +150,7 @@ public class ArmController : MonoBehaviour
         //Debug.Log(angle);
     }
 
-    /* Calculs to get where the fist will go */
+    *//* Calculs to get where the fist will go *//*
     public void ShootFist()
     {
         if (!shooting)
@@ -157,20 +165,21 @@ public class ArmController : MonoBehaviour
         }
     }
     
-    /* Calculs to make the fist go back to his original point */
+    *//* Calculs to make the fist go back to his original point *//*
     public void ReturnFist()
     {
         returning = true;
         Direction = originalFistPos.position - fist.transform.position;
     }
 
-    /* Actual movement of the fist */
+    *//* Actual movement of the fist *//*
     void FistMovement()
     {
         if (!isReturnToOrigin)
             rb.velocity = Direction.normalized * fistSpeed;
         else
-            fist.transform.position = transform.position;
+            fist.transform.position = originalFistPos.position;
+        
         transform.rotation = Quaternion.Slerp(transform.rotation, currentRotation, rotationSpeed * Time.deltaTime); //Smooth the rotation
 
         FistReturned();
@@ -180,7 +189,7 @@ public class ArmController : MonoBehaviour
     {
         float dist = Vector2.Distance(originalFistPos.position, fist.transform.position); //Distance between the original position of the fist and the current position of it
 
-        /* While the fist is returning we check the distance to know when we put the fist back to it's original place */
+        *//* While the fist is returning we check the distance to know when we put the fist back to it's original place *//*
         if (returning && dist < 0.2f)
         {
             currentRotation = originalRotation;
@@ -202,7 +211,7 @@ public class ArmController : MonoBehaviour
 
     private void GrappleReturned()
     {
-        playerController.IsHunging = false;
+        playerController.IsHanging = false;
         rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
         ReturnFist();
         FistReturned();
@@ -232,3 +241,4 @@ public class ArmController : MonoBehaviour
         joystickDirection = direction;
     }
 }
+*/
