@@ -15,5 +15,7 @@ public class ResetAllBindings : MonoBehaviour
             action.RemoveAllBindingOverrides();
 
         PlayerPrefs.DeleteKey("rebinds");
+        SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
+
     }
 }

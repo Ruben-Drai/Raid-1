@@ -4,12 +4,11 @@ using UnityEngine.UI;
 public class SoundManager : MonoBehaviour
 {
     public Slider volumeSoundSlider;
-    public Image mutedSoundImage;
+    public Image SoundImage;
     public Sprite mutedSoundSprite;
     public Sprite lowSoundSprite;
     public Sprite loudSoundSprite;
     public Sprite middleSoundSprite;
-
     public AudioSource Back;
     public AudioSource Click;
 
@@ -34,7 +33,7 @@ public class SoundManager : MonoBehaviour
         Save();
     }
     
-    private void Load()
+    public void Load()
     {
         volumeSoundSlider.value = PlayerPrefs.GetFloat("soundVolume", 0.5f);
         ChangeVolume();
@@ -48,17 +47,13 @@ public class SoundManager : MonoBehaviour
     void Update()
     {
         if (volumeSoundSlider != null)
-        {
             if (volumeSoundSlider.value == 0)
-                mutedSoundImage.sprite = mutedSoundSprite;
+                SoundImage.sprite = mutedSoundSprite;
             else if (volumeSoundSlider.value > 0 && volumeSoundSlider.value < 0.33)
-                mutedSoundImage.sprite = lowSoundSprite;
+                SoundImage.sprite = lowSoundSprite;
             else if (volumeSoundSlider.value < 0.66)
-                mutedSoundImage.sprite = middleSoundSprite;
+                SoundImage.sprite = middleSoundSprite;
             else if (volumeSoundSlider.value == 1)
-                mutedSoundImage.sprite = loudSoundSprite;
-        }
-        else
-            volumeSoundSlider = GameObject.Find("Sound").GetComponent<Slider>();
+                SoundImage.sprite = loudSoundSprite;
     }
 }

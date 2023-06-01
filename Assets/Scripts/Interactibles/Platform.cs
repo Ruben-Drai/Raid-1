@@ -28,7 +28,7 @@ public class Platform : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, wayPoints[currentWaypointIndex].position, PlatformSpeed * Time.deltaTime);
 
             yield return null;
-            if (Vector2.Distance(transform.position, wayPoints[currentWaypointIndex].position) < 1f)
+            if (Vector2.Distance(transform.position, wayPoints[currentWaypointIndex].position) < 0.5f)
             {
                 yield return new WaitForSeconds(WaitTimeBewteenWayPoints);
                 //add one, or if at end of list go back to 0

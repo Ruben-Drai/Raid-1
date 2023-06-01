@@ -66,13 +66,14 @@ public class SaveNLoad : MonoBehaviour
             PlayerPrefs.DeleteKey(v.Key);
         }
     }
-    public IEnumerator SaveRoutine()
+    public IEnumerator SaveRoutine(bool quit = false)
     {
         while (SceneManager.GetActiveScene().name != "DevRoom")
         {
             yield return null;
         }
         Save();
+        if(quit) Application.Quit();
     }
     public IEnumerator LoadRoutine()
     {

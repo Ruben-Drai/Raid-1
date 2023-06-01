@@ -33,7 +33,6 @@ public class PauseMenu : MonoBehaviour
         Controls.SetActive(true);
         menuStack.Add(Controls);
         SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
-
     }
     public void ShowSettings()
     {
@@ -51,7 +50,7 @@ public class PauseMenu : MonoBehaviour
             || (SceneManager.GetActiveScene().name != "MainMenu" && menuStack.Count >= 1))
                 Back();
 
-        else if (SceneManager.GetActiveScene().name == "DevRoom")
+        else if (SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "GameOver")
         {
             Time.timeScale = 0;
             ShowMenu();
@@ -63,7 +62,11 @@ public class PauseMenu : MonoBehaviour
         SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
         SceneManager.LoadSceneAsync("MainMenu");
     }
-
+    public void SaveQuit()
+    {
+        SaveNLoad.instance.StartCoroutine(SaveNLoad.instance.SaveRoutine(true));
+        SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
+    }
     public void Back()
     {
         DisableMenus();
