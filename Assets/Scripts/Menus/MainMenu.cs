@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -9,7 +10,10 @@ public class MainMenu : MonoBehaviour
 
     private void Update()
     {
-        SelectButtons();
+        if (EventSystem.current.currentSelectedGameObject == null
+           && PlayerController.instance.Controller.currentControlScheme == "Gamepad")
+            EventSystem.current.SetSelectedGameObject(FindObjectOfType<Button>().gameObject);
+            
     }
 
     public void StartGame()
@@ -39,12 +43,4 @@ public class MainMenu : MonoBehaviour
     }
 
     /* Set the first button to be selected when a gamepad is used */
-    void SelectButtons()
-    {
-        if (EventSystem.current.currentSelectedGameObject == null
-            && PlayerController.instance.Controller.currentControlScheme == "Gamepad")
-        {
-            EventSystem.current.SetSelectedGameObject(m_newGameButton);
-        }
-    }
 }

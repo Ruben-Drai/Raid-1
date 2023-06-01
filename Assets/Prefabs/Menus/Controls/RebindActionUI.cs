@@ -235,6 +235,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 action.RemoveBindingOverride(bindingIndex);
             }
             UpdateBindingDisplay();
+            SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
+
         }
         private bool SwapResetBindings(InputAction action, int bindingIndex)
         {
