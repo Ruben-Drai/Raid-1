@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
             {"Leg",false},
             {"Arm",true},
             {"ArmGun", false},
-            {"DoubleJump",false}
+            {"DoubleJump",true}
         };
         Controller = GetComponent<PlayerInput>();
     }
@@ -80,8 +80,13 @@ public class PlayerController : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext context)
     {
-        if (TimeFromLastJump > JumpCooldown && (_canJump || (CanDoubleJump && UnlockedUpgrades["DoubleJump"]) && !IsPushingBox && context.performed && !arm.LimitMovement))
+        if (TimeFromLastJump > JumpCooldown
+            && (_canJump || (CanDoubleJump && UnlockedUpgrades["DoubleJump"])) 
+            && !IsPushingBox 
+            && context.performed 
+            && !arm.LimitMovement)
         {
+            if (context.performed) Debug.Log("tes");
             TimeFromLastJump = 0f;
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
             IsMoving = true;
