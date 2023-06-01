@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     [SerializeField] private PauseMenu pauseMenu;
-    [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime = 0.4f;
+    [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime=0.2f;
+    [SerializeField] private GameObject fist;
 
     private bool _canJump = true;
     private float TimeFromLastJump = 0f;
@@ -23,6 +24,9 @@ public class PlayerController : MonoBehaviour
     [NonSerialized] public Vector2 SlopeAdjustment;
     [NonSerialized] public bool IsPushingBox = false;
     [NonSerialized] public bool IsMoving = false;
+    /*[NonSerialized]*/ public bool IsHunging = false;
+    [NonSerialized] public bool IsGrappleMove = false;
+    [NonSerialized] public bool ReturnGrappleToInitialPosition = false;
     [NonSerialized] public bool IsInJump = true;
     [NonSerialized] public bool CanDoubleJump = true;
 
@@ -57,8 +61,8 @@ public class PlayerController : MonoBehaviour
         UnlockedUpgrades = new Dictionary<string, bool>()
         {
             {"Leg",false},
-            {"Arm",true},
-            {"ArmGun", false},
+            {"Arm",false},
+            {"ArmGun", true},
             {"DoubleJump",true}
         };
         Controller = GetComponent<PlayerInput>();
@@ -84,7 +88,8 @@ public class PlayerController : MonoBehaviour
             && (_canJump || (CanDoubleJump && UnlockedUpgrades["DoubleJump"])) 
             && !IsPushingBox 
             && context.performed 
-            && !arm.LimitMovement)
+            && !arm.LimitMovement
+            && !IsHunging)
         {
             if (context.performed) Debug.Log("tes");
             TimeFromLastJump = 0f;
@@ -98,6 +103,11 @@ public class PlayerController : MonoBehaviour
                 CanDoubleJump = false;
 
         }
+    }
+
+    public void Grapple(InputAction.CallbackContext context)
+    {
+        IsGrappleMove = context.ReadValueAsButton();  
     }
     public void Interact(InputAction.CallbackContext context)
     {
@@ -124,7 +134,10 @@ public class PlayerController : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext context)
     {
-        if (rb.velocity.y == 0)
+        if (IsHunging)
+            ReturnGrappleToInitialPosition = true;
+
+        else if (rb.velocity.y == 0)
         {
             if (UnlockedUpgrades["ArmGun"])
             {
@@ -172,12 +185,30 @@ public class PlayerController : MonoBehaviour
         bool slope = feet.groundState == GroundState.Slope && !IsInJump;
         float SlopeMovementY = movement.normalized.x * -SlopeAdjustment.y * speed;
 
-        //final movement formula
-        if (rb != null)
+        if (rb != null && !IsHunging)
             rb.velocity = new(movement.normalized.x * speed * Immobilize * -SlopeAdjustment.x, slope ? SlopeMovementY : rb.velocity.y);
 
+        if(IsHunging && IsGrappleMove )
+        {
+            GrappleMovement();
+        }
+        else if (ReturnGrappleToInitialPosition)
+        {
+            GetComponent<DistanceJoint2D>().enabled = false;
+        }
+        else if(!IsGrappleMove&&IsHunging) 
+        { rb.gravityScale = 1;
+            GetComponent<DistanceJoint2D>().enabled = true;
+        }
 
     }
 
+    private void GrappleMovement()
+    {
+        Vector2 Direction = fist.transform.position - transform.position;
+        rb.gravityScale = 0;
+        rb.velocity = Direction.normalized * MovementSpeed;
+        GetComponent<DistanceJoint2D>().enabled = false;
+    }
 
 }

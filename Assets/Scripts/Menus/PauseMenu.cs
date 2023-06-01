@@ -69,6 +69,10 @@ public class PauseMenu : MonoBehaviour
     }
     public void Back()
     {
+        if (PlayerController.instance.Controller.currentControlScheme != "Gamepad")
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
         DisableMenus();
         menuStack.RemoveAt(menuStack.Count - 1);
         EventSystem.current.SetSelectedGameObject(null);

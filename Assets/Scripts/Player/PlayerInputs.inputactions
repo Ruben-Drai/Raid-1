@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Grapple",
+                    "type": "Button",
+                    "id": "4b2b4c83-8b11-4d6a-8db2-a25d663bdf61",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -87,7 +96,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "Press",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "GamePad",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -109,7 +118,7 @@
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "GamePad",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -118,7 +127,7 @@
                     "name": "",
                     "id": "d354fd53-2790-46d1-a5eb-2a20a0be4a55",
                     "path": "<Keyboard>/e",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "K&M",
                     "action": "Interact",
@@ -128,10 +137,10 @@
                 {
                     "name": "",
                     "id": "6e3d7fe6-e26c-4410-acdc-81b623c1a66e",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "Hold,Press",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "GamePad",
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -153,7 +162,7 @@
                     "path": "<Gamepad>/start",
                     "interactions": "Press",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "GamePad",
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -208,7 +217,7 @@
                     "path": "<Gamepad>/dpad/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "GamePad",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -219,7 +228,7 @@
                     "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "GamePad",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -241,7 +250,7 @@
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "GamePad",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -252,7 +261,7 @@
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "GamePad",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -274,7 +283,7 @@
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "GamePad",
                     "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -285,8 +294,19 @@
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "GamePad",
                     "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5edf38c1-72b2-4027-a447-105a6e3f9ffd",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "K&M",
+                    "action": "Grapple",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -311,8 +331,8 @@
             ]
         },
         {
-            "name": "Gamepad",
-            "bindingGroup": "Gamepad",
+            "name": "GamePad",
+            "bindingGroup": "GamePad",
             "devices": [
                 {
                     "devicePath": "<XInputController>",
