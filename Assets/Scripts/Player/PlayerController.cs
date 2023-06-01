@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -110,6 +111,7 @@ public class PlayerController : MonoBehaviour
             if (AvailableInteraction != null && context.canceled && AvailableInteraction.GetComponent<BigBox>() != null)
             {
                 AvailableInteraction.GetComponent<BigBox>().StopInteraction();
+                AvailableInteraction.transform.Find("Highlight").gameObject.SetActive(true);
             }
         }
     }
@@ -138,8 +140,8 @@ public class PlayerController : MonoBehaviour
         if (collision.GetComponent<Interactible>() != null)
         {
             AvailableInteraction = collision.GetComponent<Interactible>();
-            //AvailableInteraction.transform.GetChild(1).gameObject.SetActive(true);
-            AvailableInteraction.transform.Find("Highlight").gameObject.SetActive(true);
+            AvailableInteraction.transform.Find("Highlight").gameObject.SetActive(true); // Activates highlighting when the player is close by
+            //kAvailableInteraction.transform.Find("Help").gameObject.SetActive(true); // Activates Help when the player is close by
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -148,8 +150,8 @@ public class PlayerController : MonoBehaviour
             && AvailableInteraction == collision.GetComponent<Interactible>()
             && Vector2.Distance(transform.position, collision.transform.position) > 0.5f)
         {
-            //AvailableInteraction.transform.GetChild(1).gameObject.SetActive(false);
-            AvailableInteraction.transform.Find("Highlight").gameObject.SetActive(false);
+            AvailableInteraction.transform.Find("Highlight").gameObject.SetActive(false); // Deactivates highlighting when player moves away.
+            //AvailableInteraction.transform.Find("Help").gameObject.SetActive(false); // Deactivates Help when player moves away.
             AvailableInteraction = null;
         }
     }
