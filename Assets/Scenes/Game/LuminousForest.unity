@@ -194,7 +194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1874899951558436102, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2238637700828433443, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_RootOrder
@@ -284,6 +284,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: eaecd66a67270cb469c2a7150dcf29dd, type: 3}
+    - target: {fileID: 6579975691542562971, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: MyFistPos
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65ca959e473df58449468d20430c864c, type: 3}
 --- !u!1 &168488319
