@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         UnlockedUpgrades = new Dictionary<string, bool>()
         {
-            {"Leg",false},
+            {"Leg",true},
             {"Arm",true},
             {"ArmGun", false},
             {"DoubleJump",true}
