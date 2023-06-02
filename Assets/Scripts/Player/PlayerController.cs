@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +10,7 @@ using UnityEngine.UIElements;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
+    public TextMeshPro BInteract;
 
     [SerializeField] private PauseMenu pauseMenu;
     [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime=0.2f;
@@ -57,8 +59,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        //Debug.Log(instance.actionMap.FindAction("Interact").bindings[0].effectivePath);  // test ~~ take error
-
         arm = GetComponentInChildren<ArmController>();
         feet = GetComponentInChildren<GroundCheck>();
         rb = GetComponent<Rigidbody2D>();
@@ -147,6 +147,7 @@ public class PlayerController : MonoBehaviour
         {
             AvailableInteraction = collision.GetComponent<Interactible>();
             AvailableInteraction.transform.Find("Highlight").gameObject.SetActive(true); // Activates highlighting when the player is close by
+
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -178,6 +179,12 @@ public class PlayerController : MonoBehaviour
 
         if (rb != null)
             rb.velocity = new(movement.x * speed * Immobilize * -SlopeAdjustment.x, slope ? SlopeMovementY : rb.velocity.y);
+
+        // Button for Interract
+        string fullpath = instance.actionMap.FindAction("Interact").bindings[0].effectivePath;
+        var lastChars = fullpath.Substring(fullpath.Length - 1, 1);
+
+        BInteract.text = lastChars;
     }
 
 
