@@ -9,11 +9,20 @@ public class DialogueTrigger : MonoBehaviour
     public GameObject HologramBox;
     public Animator dialogueAnimation;
 
+    public DialogueManager DialogueManager;
+
     public void StartDialogue()
     {
         DialogueBox.SetActive(true);
         FindObjectOfType<DialogueManager>().OpenDialogues(messages, actors);
         dialogueAnimation.SetBool("DialogueIsActive", true);
+    }
+
+    public void DialogueSetting()
+    {
+        DialogueManager.isActive = false;
+        DialogueManager.messageText.text = "";
+        FindObjectOfType<DialogueManager>().OpenDialoguesSetting(messages, actors);
     }
 }
 

@@ -19,6 +19,13 @@ public class DialogueManager : MonoBehaviour
     public Text messageText;
     public RectTransform backgroundBox;
 
+    [Header("Name Color")]
+    public Color robot = new Color(198f, 0f, 0f);
+    public Color narator = new Color(255f, 128f, 0f);
+    public Color system = new Color(0f, 204f, 0f);
+    public Color ai = new Color(0f, 0f, 204f);
+
+    public Slider speedText;
     private Coroutine displayLineCoroutine;
     private bool canSkip = false;
     private bool submitSkip;
@@ -27,21 +34,46 @@ public class DialogueManager : MonoBehaviour
     int activeMessage = 0;
     public static bool isActive = false;
     private Dictionary<int, Color> actorNameColors = new Dictionary<int, Color>();
+    public DialogueTrigger dialogueTrigger;
 
-    private void InitializeActorNameColors()
+    public void ChangeTextSpeed()
     {
-        actorNameColors.Add(0, Color.red); 
-        actorNameColors.Add(1, Color.green); 
-        actorNameColors.Add(2, Color.blue); 
+        switch(speedText.value)
+        {
+            case 0:
+                typingSpeed = 0.07f;
+                dialogueTrigger.DialogueSetting();
+                break;
+            case 1:
+                typingSpeed = 0.04f;
+                dialogueTrigger.DialogueSetting();
+                break;
+            case 2:
+                typingSpeed = 0.01f;
+                dialogueTrigger.DialogueSetting();
+                break;
+            default:
+                typingSpeed = 0.04f;
+                dialogueTrigger.DialogueSetting();
+                break;
+        }
+    }
+    public void InitializeActorNameColors()
+    {
+        actorNameColors.Add(0, robot); 
+        actorNameColors.Add(1, narator); 
+        actorNameColors.Add(2, system); 
+        actorNameColors.Add(3, ai); 
     }
 
     private void Start()
     {
-        InitializeActorNameColors();
+        //InitializeActorNameColors();
     }
 
     public void OpenDialogues(Message[] messages, Actor[] actors)
     {
+        InitializeActorNameColors();
         currentMessages = messages;
         currentActors = actors;
         activeMessage = 0;
@@ -49,6 +81,17 @@ public class DialogueManager : MonoBehaviour
         dialogueAnimation.SetBool("DialogueIsActive", true);
         arrowAnimation.SetBool("DialogueIsActive", true);
         DisplayActorInfo();
+    }
+
+    public void OpenDialoguesSetting(Message[] messages, Actor[] actors)
+    {
+        Debug.Log("coco");
+        currentMessages = messages;
+        currentActors = actors;
+        activeMessage = 0;
+        isActive = true;
+        DisplayActorInfo();
+        StartDisplayingMessage();
     }
 
     //use for dialoguebox animation
