@@ -3767,8 +3767,7 @@ MonoBehaviour:
   MainMenuButtons: {fileID: 0}
   TextSettings: {fileID: 9031183602619882740}
   DialogueBox: {fileID: 1416854256804142723}
-  menuStack:
-  - {fileID: 0}
+  menuStack: []
 --- !u!1 &7233670743149399357
 GameObject:
   m_ObjectHideFlags: 0
@@ -9946,7 +9945,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: X
+  m_Text: Y
 --- !u!1 &7233670744487990941
 GameObject:
   m_ObjectHideFlags: 0

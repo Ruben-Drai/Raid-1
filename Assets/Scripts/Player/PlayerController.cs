@@ -10,10 +10,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private PauseMenu pauseMenu;
     [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime = 0.2f, RopeShrinkSpeed=3f;
-    [SerializeField] private GrapplingGun hook;
     [SerializeField] private BoxCollider2D StandingColl;
     [SerializeField] private BoxCollider2D SneakingColl;
     [SerializeField] private CapsuleCollider2D InteractionTrigger;
+    public GrapplingGun hook;
 
     private bool _canJump = true;
     private bool IsChangingLen = false;

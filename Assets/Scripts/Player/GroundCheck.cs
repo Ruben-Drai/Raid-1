@@ -47,7 +47,7 @@ public class GroundCheck : MonoBehaviour
 
 
         //"Sticks" the player to the platform if the player is on a platform
-        if (groundState == GroundState.Platform && !controller.IsInJump && transform.parent.parent == null)
+        if (groundState == GroundState.Platform && !controller.hook.HasShot && !controller.IsInJump && transform.parent.parent == null)
         {
             transform.parent.SetParent(Hit.collider.transform);
             controller.rb.interpolation = RigidbodyInterpolation2D.None;
