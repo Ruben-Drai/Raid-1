@@ -3,9 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - PlayerFist
-  - CanBeHung
+  tags: []
   layers:
   - Default
   - TransparentFX
