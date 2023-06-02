@@ -5369,34 +5369,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 53869431}
     m_Modifications:
-    - target: {fileID: 3738504266929328472, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: Music
+    - target: {fileID: 962990280109293635, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_Value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 962990280109293635, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_MaxValue
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 962990280109293635, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_WholeNumbers
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140969558451747190, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1753389044}
+      objectReference: {fileID: 21300000, guid: 6363498c0d673f64491c4900d8077187, type: 3}
+    - target: {fileID: 4754840659724981387, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754840659724981387, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754840659724981387, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7233670743135970035, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
       propertyPath: m_Name
       value: PauseMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 7233670744056604433, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7233670744337568784, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7233670744405093667, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7233670744603056384, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
       propertyPath: MainMenuButtons
       value: 
       objectReference: {fileID: 1107846199}
-    - target: {fileID: 7233670744603056384, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: menuStack.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7233670744603056384, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
       propertyPath: menuStack.Array.data[0]
       value: 
@@ -5485,11 +5493,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7233670744702433275, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
+    - target: {fileID: 7515049204826604491, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_Text
+      value: 'IA : '
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3738504266929328472, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-    - {fileID: 9189044443525087076, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+    - target: {fileID: 9031183602619882740, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
