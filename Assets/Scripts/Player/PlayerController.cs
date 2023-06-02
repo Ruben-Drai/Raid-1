@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.Rendering.LookDev;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
+    public TextMeshPro BInteract;
 
     [SerializeField] private PauseMenu pauseMenu;
     [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime = 0.2f, RopeShrinkSpeed=3f;
@@ -25,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private GroundCheck feet;
     private SpringJoint2D joint;
 
+
     [NonSerialized] public Interactible AvailableInteraction;
     [NonSerialized] public Rigidbody2D rb;
     [NonSerialized] public PlayerInput Controller;
@@ -34,6 +39,7 @@ public class PlayerController : MonoBehaviour
 
     [NonSerialized] public bool IsInJump = true;
     [NonSerialized] public bool CanDoubleJump = true;
+    [NonSerialized] public InputActionMap actionMap;
 
     public bool CanJump
     {
@@ -58,11 +64,13 @@ public class PlayerController : MonoBehaviour
         if (instance == null) instance = this;
         else Destroy(gameObject);
     }
+
     void Start()
     {
         joint = GetComponent<SpringJoint2D>();
         feet = GetComponentInChildren<GroundCheck>();
         rb = GetComponent<Rigidbody2D>();
+        actionMap = GetComponent<PlayerInput>().actions.actionMaps[0];
         UnlockedUpgrades = new Dictionary<string, bool>()
         {
             {"Jump",false},
@@ -142,6 +150,7 @@ public class PlayerController : MonoBehaviour
             if (AvailableInteraction != null && context.canceled && AvailableInteraction.GetComponent<BigBox>() != null)
             {
                 AvailableInteraction.GetComponent<BigBox>().StopInteraction();
+                AvailableInteraction.transform.Find("Highlight").gameObject.SetActive(true);
             }
         }
     }
@@ -199,6 +208,8 @@ public class PlayerController : MonoBehaviour
         if (collision.GetComponent<Interactible>() != null)
         {
             AvailableInteraction = collision.GetComponent<Interactible>();
+            AvailableInteraction.transform.Find("Highlight").gameObject.SetActive(true); // Activates highlighting when the player is close by
+
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -207,6 +218,7 @@ public class PlayerController : MonoBehaviour
             && AvailableInteraction == collision.GetComponent<Interactible>()
             && Vector2.Distance(transform.position, collision.transform.position) > 0.5f)
         {
+            AvailableInteraction.transform.Find("Highlight").gameObject.SetActive(false); // Deactivates highlighting when player moves away.
             AvailableInteraction = null;
         }
     }
@@ -234,6 +246,12 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new(movement.normalized.x * speed * -SlopeAdjustment.x, slope ? SlopeMovementY : rb.velocity.y);
             else
                 rb.AddForce(new(movement.normalized.x*speed,0),ForceMode2D.Force);
+
+        // Button for Interract
+        string fullpath = instance.actionMap.FindAction("Interact").bindings[0].effectivePath;
+        var lastChars = fullpath.Substring(fullpath.Length - 1, 1);
+
+        BInteract.text = lastChars;
     }
 
 }
