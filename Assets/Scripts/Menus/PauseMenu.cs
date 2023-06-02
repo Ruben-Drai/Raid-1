@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField]
-    private GameObject Menu, Settings, Controls, MainMenuButtons;
+    private GameObject Menu, Settings, Controls, MainMenuButtons, TextSettings, DialogueBox;
 
     [SerializeField]
     private List<GameObject> menuStack;
@@ -40,7 +40,14 @@ public class PauseMenu : MonoBehaviour
         Settings.SetActive(!Settings.activeSelf);
         menuStack.Add(Settings);
         SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
+    }
 
+    public void ShowTextSetting()
+    {
+        DisableMenus();
+        TextSettings.SetActive(!TextSettings.activeSelf);
+        menuStack.Add(TextSettings);
+        SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
     }
     //goes back to the previous menu if there is one, otherwise do nothing except if the player is not on the main menu
     //in which case the pause menu is shown
@@ -83,6 +90,11 @@ public class PauseMenu : MonoBehaviour
             menuStack[menuStack.Count - 1].SetActive(true);
         else
             Time.timeScale = 1;
+
+        if(TextSettings.activeSelf == false) 
+        {
+            DialogueBox.transform.position = new Vector3(DialogueBox.transform.position.x, -500, DialogueBox.transform.position.z);
+        }
     }
     private void DisableMenus()
     {
@@ -96,6 +108,6 @@ public class PauseMenu : MonoBehaviour
 
         Settings.SetActive(false);
         Controls.SetActive(false);
-
+        TextSettings.SetActive(false);
     }
 }
