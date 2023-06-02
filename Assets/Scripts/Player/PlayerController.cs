@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,14 +9,21 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     [SerializeField] private PauseMenu pauseMenu;
-    [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime = 0.2f;
+    [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime = 0.2f, RopeShrinkSpeed=3f;
     [SerializeField] private GrapplingGun hook;
+    [SerializeField] private BoxCollider2D StandingColl;
+    [SerializeField] private BoxCollider2D SneakingColl;
+    [SerializeField] private CapsuleCollider2D InteractionTrigger;
 
     private bool _canJump = true;
+    private bool IsChangingLen = false;
+    private bool IsSneaking = false;
     private float TimeFromLastJump = 0f;
     private float CoyoteTimer = 0f;
+    private float lenModifier = 0f;
     private Vector2 movement;
     private GroundCheck feet;
+    private SpringJoint2D joint;
 
     [NonSerialized] public Interactible AvailableInteraction;
     [NonSerialized] public Rigidbody2D rb;
@@ -52,6 +60,7 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
+        joint = GetComponent<SpringJoint2D>();
         feet = GetComponentInChildren<GroundCheck>();
         rb = GetComponent<Rigidbody2D>();
         UnlockedUpgrades = new Dictionary<string, bool>()
@@ -69,6 +78,25 @@ public class PlayerController : MonoBehaviour
     {
         TimeFromLastJump += Time.deltaTime;
         CoyoteTimer += Time.deltaTime;
+        if (hook.HasShot && IsChangingLen)
+        {
+            joint.distance += lenModifier*RopeShrinkSpeed * Time.deltaTime;
+        }
+        if (IsSneaking)
+        {
+            SneakingColl.enabled = true;
+            InteractionTrigger.enabled = false;
+            StandingColl.enabled = false;
+        }
+        else
+        {
+            if (!Physics2D.Raycast(transform.position, Vector2.up, 0.5f))
+            {
+                SneakingColl.enabled = false;
+                InteractionTrigger.enabled = true;
+                StandingColl.enabled = true;
+            }
+        }
     }
     public void Move(InputAction.CallbackContext context)
     {
@@ -79,7 +107,6 @@ public class PlayerController : MonoBehaviour
     public void Aim(InputAction.CallbackContext context)
     {
         hook.Direction = context.ReadValue<Vector2>();
-
     }
     public void Jump(InputAction.CallbackContext context)
     {
@@ -88,6 +115,9 @@ public class PlayerController : MonoBehaviour
             && !IsPushingBox
             && context.performed)
         {
+            if (hook.HasShot)
+                hook.ReturnHook();
+
             TimeFromLastJump = 0f;
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
             IsMoving = true;
@@ -97,7 +127,6 @@ public class PlayerController : MonoBehaviour
                 _canJump = false;
             else if (CanDoubleJump && UnlockedUpgrades["DoubleJump"])
                 CanDoubleJump = false;
-
         }
     }
     public void Interact(InputAction.CallbackContext context)
@@ -116,16 +145,36 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+    public void Sneak(InputAction.CallbackContext context)
+    {
+        IsSneaking = !IsSneaking;
+    }
     public void Pause(InputAction.CallbackContext context)
     {
         if (context.performed)
             pauseMenu.Escape();
     }
+    public void ChangeHookLength(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            IsChangingLen = true;
+            lenModifier = context.ReadValue<Vector2>().normalized.y;
 
+        }
+        else if (context.canceled) 
+        {
+            IsChangingLen = false;
+            lenModifier = 0f;
+
+        }
+
+
+
+    }
     public void Fire(InputAction.CallbackContext context)
     {
-        if (UnlockedUpgrades["ArmGun"])
+        if (!IsSneaking && UnlockedUpgrades["ArmGun"])
         {
             if (context.performed)
             {
@@ -143,7 +192,6 @@ public class PlayerController : MonoBehaviour
                     hook.FireHook();
             }
         }
-
     }
     //gets interactible from trigger box around the player
     private void OnTriggerEnter2D(Collider2D collision)
@@ -181,8 +229,11 @@ public class PlayerController : MonoBehaviour
         bool slope = feet.groundState == GroundState.Slope && !IsInJump;
         float SlopeMovementY = movement.normalized.x * -SlopeAdjustment.y * speed;
 
-        if (rb != null && !hook.HasShot)
-            rb.velocity = new(movement.normalized.x * speed * -SlopeAdjustment.x, slope ? SlopeMovementY : rb.velocity.y);
+        if (rb != null)
+            if(!hook.HasShot)
+                rb.velocity = new(movement.normalized.x * speed * -SlopeAdjustment.x, slope ? SlopeMovementY : rb.velocity.y);
+            else
+                rb.AddForce(new(movement.normalized.x*speed,0),ForceMode2D.Force);
     }
 
 }

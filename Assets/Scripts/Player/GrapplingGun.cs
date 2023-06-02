@@ -21,7 +21,6 @@ public class GrapplingGun : MonoBehaviour
     public Rigidbody2D m_rigidbody;
 
     [Header("Rotation:")]
-    [SerializeField] private bool rotateOverTime = true;
     [Range(0, 60)][SerializeField] private float rotationSpeed = 4;
 
     [Header("Distance:")]
@@ -61,14 +60,14 @@ public class GrapplingGun : MonoBehaviour
     public void ActivateHook()
     {
         gameObject.SetActive(true);
+        grappleRope.m_Fist.gameObject.SetActive(true);
         IsAiming = true;
     }
     public void ReturnHook()
     {
-        grappleRope.enabled = false;
+        grappleRope.isReturning = true;
         m_springJoint2D.enabled = false;
         m_rigidbody.gravityScale = 1;
-        HasShot = false;
         IsAiming = false;
     }
     public void FireHook()
@@ -87,21 +86,15 @@ public class GrapplingGun : MonoBehaviour
             }
         }
     }
+
     private void Update()
     {
         if(IsAiming)
         {
-            if (grappleRope.enabled)
-            {
-                RotateGun(grapplePoint, false);
-            }
-            else
-            {
-                Vector2 mousePos = m_camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-                RotateGun(mousePos, true);
-            }
 
-            
+            Vector2 mousePos = m_camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            RotateGun(mousePos);
+ 
         }
         else if(!HasShot)
         {
@@ -109,21 +102,19 @@ public class GrapplingGun : MonoBehaviour
             if (gunPivot.rotation.eulerAngles.z == Quaternion.LookRotation(Vector3.forward, Vector2.down).eulerAngles.z)
                 gameObject.SetActive(false);
         }
-    }
-
-    void RotateGun(Vector3 lookPoint, bool allowRotationOverTime)
-    {
-        Vector3 distanceVector = lookPoint - gunPivot.position;
-
-        float angle = Mathf.Atan2(distanceVector.y, distanceVector.x) * Mathf.Rad2Deg;
-        if (rotateOverTime && allowRotationOverTime)
-        {
-            gunPivot.rotation = Quaternion.Slerp(gunPivot.rotation, Quaternion.LookRotation(Vector3.forward, distanceVector), Time.deltaTime * rotationSpeed);
-        }
         else
         {
-            gunPivot.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            if (grappleRope.enabled)
+            {
+                RotateGun(grapplePoint);
+            }
         }
+    }
+
+    void RotateGun(Vector3 lookPoint)
+    {
+        Vector3 distanceVector = lookPoint - gunPivot.position;
+        gunPivot.rotation = Quaternion.Slerp(gunPivot.rotation, Quaternion.LookRotation(Vector3.forward, distanceVector), Time.deltaTime * rotationSpeed);
     }
 
     void SetGrapplePoint()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    [SerializeField] private bool IsActivated = false;
+    [SerializeField] public bool IsActivated = false;
     [SerializeField] private List<Transform> wayPoints;
     [SerializeField] private float PlatformSpeed = 1.0f;
     [SerializeField] private float WaitTimeBewteenWayPoints = 1.0f;
