@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private GroundCheck feet;
     private ArmController arm;
 
+
     [NonSerialized] public Interactible AvailableInteraction;
     [NonSerialized] public Rigidbody2D rb;
     [NonSerialized] public PlayerInput Controller;
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [NonSerialized] public bool IsMoving = false;
     [NonSerialized] public bool IsInJump = true;
     [NonSerialized] public bool CanDoubleJump = true;
+    [NonSerialized] public InputActionMap actionMap;
 
     public bool CanJump 
     { 
@@ -52,11 +54,15 @@ public class PlayerController : MonoBehaviour
         if (instance == null) instance = this;
         else Destroy(gameObject);
     }
+
     void Start()
     {
+        //Debug.Log(instance.actionMap.FindAction("Interact").bindings[0].effectivePath);  // test ~~ take error
+
         arm = GetComponentInChildren<ArmController>();
         feet = GetComponentInChildren<GroundCheck>();
         rb = GetComponent<Rigidbody2D>();
+        actionMap = GetComponent<PlayerInput>().actions.actionMaps[0];
         UnlockedUpgrades = new Dictionary<string, bool>()
         {
             {"Leg",false},
@@ -141,7 +147,6 @@ public class PlayerController : MonoBehaviour
         {
             AvailableInteraction = collision.GetComponent<Interactible>();
             AvailableInteraction.transform.Find("Highlight").gameObject.SetActive(true); // Activates highlighting when the player is close by
-            //kAvailableInteraction.transform.Find("Help").gameObject.SetActive(true); // Activates Help when the player is close by
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -151,7 +156,6 @@ public class PlayerController : MonoBehaviour
             && Vector2.Distance(transform.position, collision.transform.position) > 0.5f)
         {
             AvailableInteraction.transform.Find("Highlight").gameObject.SetActive(false); // Deactivates highlighting when player moves away.
-            //AvailableInteraction.transform.Find("Help").gameObject.SetActive(false); // Deactivates Help when player moves away.
             AvailableInteraction = null;
         }
     }
