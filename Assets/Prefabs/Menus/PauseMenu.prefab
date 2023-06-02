@@ -374,8 +374,7 @@ GameObject:
   - component: {fileID: 1601002224989273961}
   - component: {fileID: 6306307314962966242}
   - component: {fileID: 1258220933728952117}
-  - component: {fileID: 2927464417437820192}
-  - component: {fileID: 3776192333492845861}
+  - component: {fileID: 1140197621813266579}
   m_Layer: 5
   m_Name: DialogueBox
   m_TagString: Untagged
@@ -404,7 +403,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.0000038147, y: -26.784}
+  m_AnchoredPosition: {x: 0.0000038146973, y: -26.783997}
   m_SizeDelta: {x: 1420, y: 253.5686}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6306307314962966242
@@ -445,7 +444,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2927464417437820192
+--- !u!114 &1140197621813266579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -454,76 +453,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1416854256804142723}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Script: {fileID: 11500000, guid: bb0b43316e5639f42b5665672e17b129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: d73f8fd36c4f04447aeefe804116d4e3, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f97bb95c-fd6b-43a0-9f3c-e55e71cec665
-    m_ActionName: Game/Jump[/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: dbac44ab-e8b4-48a6-8a9a-6a6cdd3f4d0c
-    m_ActionName: Game/Fire[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5924818b-c7b1-4a77-afdb-4fd2756c8312
-    m_ActionName: Game/Interact[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6a91f6ee-14f3-4fc1-86c9-5325bd5df9ff
-    m_ActionName: Game/Pause[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a4248b3a-85c7-4f66-a16e-bef436212dd5
-    m_ActionName: Game/Move[/Keyboard/q,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4c8f207d-d169-4ab5-b9c1-c90a4339bbbc
-    m_ActionName: Game/Sprint[/Keyboard/shift]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b01b3172-bce2-4877-9ad1-85447c258436
-    m_ActionName: Game/Aim
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: K&M
-  m_DefaultActionMap: Game
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!95 &3776192333492845861
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1416854256804142723}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 19be6ab4f1e3dca4eb52633fb0ae60bf, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  typingSpeed: 0.04
+  dialogueAnimation: {fileID: 0}
+  arrowAnimation: {fileID: 0}
+  actorImage: {fileID: 0}
+  actorName: {fileID: 0}
+  messageText: {fileID: 0}
+  backgroundBox: {fileID: 0}
 --- !u!1 &1635786270188883505
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,7 +891,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Name : '
+  m_Text: 'IA : '
 --- !u!1 &2546644303284011240
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,7 +1264,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 6363498c0d673f64491c4900d8077187, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12100,9 +12039,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4754840659724981387}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 0
+  m_MaxValue: 2
+  m_WholeNumbers: 1
+  m_Value: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
