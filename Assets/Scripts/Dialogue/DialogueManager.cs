@@ -25,17 +25,21 @@ public class DialogueManager : MonoBehaviour
     public Color system = new Color(0f, 204f, 0f);
     public Color ai = new Color(0f, 0f, 204f);
 
-    public Slider speedText;
-    private Coroutine displayLineCoroutine;
-    private bool canSkip = false;
-    private bool submitSkip;
     Message[] currentMessages;
     Actor[] currentActors;
-    int activeMessage = 0;
+
+    public Slider speedText;
     public static bool isActive = false;
-    private Dictionary<int, Color> actorNameColors = new Dictionary<int, Color>();
     public DialogueTrigger dialogueTrigger;
 
+    private bool canSkip = false;
+    private bool submitSkip;
+    private Coroutine displayLineCoroutine;
+    private Dictionary<int, Color> actorNameColors = new Dictionary<int, Color>();
+
+    int activeMessage = 0;
+
+    //This switch allows the slider to change the speed of the text according to its value. It also calls "DialogueSetting", which resets the text.
     public void ChangeTextSpeed()
     {
         switch(speedText.value)
@@ -58,6 +62,14 @@ public class DialogueManager : MonoBehaviour
                 break;
         }
     }
+
+    private void Awake()
+    {
+        InitializeActorNameColors();
+    }
+
+    //This method changes the colour of the actor's name according to its index in a dictionary.
+    //The actors are the characters who speak in the dialogue.
     public void InitializeActorNameColors()
     {
         actorNameColors.Add(0, robot); 
@@ -66,14 +78,8 @@ public class DialogueManager : MonoBehaviour
         actorNameColors.Add(3, ai); 
     }
 
-    private void Start()
-    {
-        //InitializeActorNameColors();
-    }
-
     public void OpenDialogues(Message[] messages, Actor[] actors)
     {
-        InitializeActorNameColors();
         currentMessages = messages;
         currentActors = actors;
         activeMessage = 0;
@@ -83,9 +89,9 @@ public class DialogueManager : MonoBehaviour
         DisplayActorInfo();
     }
 
+    //This method launches the dialogue in settings. It launches the animations, initializes the actors: their names, sprites and messages.
     public void OpenDialoguesSetting(Message[] messages, Actor[] actors)
     {
-        Debug.Log("coco");
         currentMessages = messages;
         currentActors = actors;
         activeMessage = 0;
@@ -94,12 +100,13 @@ public class DialogueManager : MonoBehaviour
         StartDisplayingMessage();
     }
 
-    //use for dialoguebox animation
+    //This method is called at the end of the dialogue box animation. 
     public void StartDisplayingMessage()
     {
         DisplayMessageText();
     }
 
+    //This method displays the dialogue text at the end of the animation. It also launches the coroutine to display the message letter by letter.
     private void DisplayMessageText()
     {
         Message messageToDisplay = currentMessages[activeMessage];
@@ -110,6 +117,7 @@ public class DialogueManager : MonoBehaviour
         displayLineCoroutine = StartCoroutine(DisplayLine(messageToDisplay.message));
     }
 
+    //This method configures the players. Their names and sprites and sets the default colour to white if no colour is specified.
     private void DisplayActorInfo()
     {
         Message messageToDisplay = currentMessages[activeMessage];
@@ -122,10 +130,11 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            actorName.color = Color.black; 
+            actorName.color = Color.white; 
         }
     }
 
+    //This coroutine allows you to display the message all at once without waiting for each letter to be displayed.
     private IEnumerator CanSkip()
     {
         canSkip = false;
@@ -133,6 +142,7 @@ public class DialogueManager : MonoBehaviour
         canSkip = true;
     }
 
+    //This coroutine displays the message letter by letter.
     private IEnumerator DisplayLine(string line)
     {
         messageText.text = "";
@@ -155,6 +165,7 @@ public class DialogueManager : MonoBehaviour
         canSkip = false;
     }
 
+    //On pressed escape or left click 
     public void NextMessage()
     {
         activeMessage++;
@@ -173,7 +184,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void Dialogue(InputAction.CallbackContext context)
+    public void ControlsDialogue(InputAction.CallbackContext context)
     {
         if (isActive && context.performed && transform.position.y > 169.9)
         {

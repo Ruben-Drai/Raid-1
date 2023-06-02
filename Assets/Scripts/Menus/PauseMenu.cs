@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField]
-    private GameObject Menu, Settings, Controls, MainMenuButtons, TextSettings;
+    private GameObject Menu, Settings, Controls, MainMenuButtons, TextSettings, DialogueBox;
 
     [SerializeField]
     private List<GameObject> menuStack;
@@ -40,7 +40,6 @@ public class PauseMenu : MonoBehaviour
         Settings.SetActive(!Settings.activeSelf);
         menuStack.Add(Settings);
         SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
-
     }
 
     public void ShowTextSetting()
@@ -87,6 +86,11 @@ public class PauseMenu : MonoBehaviour
             menuStack[menuStack.Count - 1].SetActive(true);
         else
             Time.timeScale = 1;
+
+        if(TextSettings.activeSelf == false) 
+        {
+            DialogueBox.transform.position = new Vector3(DialogueBox.transform.position.x, -500, DialogueBox.transform.position.z);
+        }
     }
     private void DisableMenus()
     {

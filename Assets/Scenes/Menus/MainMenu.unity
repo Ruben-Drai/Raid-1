@@ -2472,40 +2472,6 @@ Transform:
   m_Father: {fileID: 1092856229}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1022141033 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9031183602619882740, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-  m_PrefabInstance: {fileID: 7233670744717219775}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1022141035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1022141033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e41e2229a4b17a46bf42d7ecf84eff8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  messages:
-  - actorID: 3
-    message: "Le Lorem Ipsum est simplement du faux texte employ\xE9 dans la composition
-      et la mise en page avant impression."
-  actors:
-  - name: 'Robot :'
-    sprite: {fileID: 21300000, guid: eaecd66a67270cb469c2a7150dcf29dd, type: 3}
-  - name: 'Narator  :'
-    sprite: {fileID: 221432869, guid: 3990143069415db4c8ba7d7bf569593b, type: 3}
-  - name: 'System :'
-    sprite: {fileID: -602524893, guid: 3990143069415db4c8ba7d7bf569593b, type: 3}
-  - name: 'AI :'
-    sprite: {fileID: 21300000, guid: 6363498c0d673f64491c4900d8077187, type: 3}
-  DialogueBox: {fileID: 1904884723}
-  HologramBox: {fileID: 0}
-  dialogueAnimation: {fileID: 7233670744717219789}
-  DialogueManager: {fileID: 7233670744717219790}
 --- !u!1 &1030904852
 GameObject:
   m_ObjectHideFlags: 0
@@ -4803,11 +4769,6 @@ Transform:
   m_Father: {fileID: 1092856229}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1904884723 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1416854256804142723, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-  m_PrefabInstance: {fileID: 7233670744717219775}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1948921775
 GameObject:
   m_ObjectHideFlags: 0
@@ -5408,66 +5369,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 53869431}
     m_Modifications:
-    - target: {fileID: 692457828, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 692457828, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 692457828, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 692457828, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 692457828, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DialogueSetting
-      objectReference: {fileID: 0}
-    - target: {fileID: 692457828, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: DialogueTrigger, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 692457828, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 962990280109293635, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_Value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 962990280109293635, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_WholeNumbers
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 962990280109293635, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1140197621813266579, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: DialogueTrigger
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1140197621813266579, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: dialogueTrigger
-      value: 
-      objectReference: {fileID: 1022141035}
-    - target: {fileID: 4754840659724981387, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4754840659724981387, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4754840659724981387, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7233670743135970035, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
       propertyPath: m_Name
       value: PauseMenu
@@ -5564,65 +5465,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8623951176672237320, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8623951176672237320, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8623951176672237320, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 187829951}
-    - target: {fileID: 8623951176672237320, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1022141035}
-    - target: {fileID: 8623951176672237320, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8623951176672237320, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowTextSetting
-      objectReference: {fileID: 0}
-    - target: {fileID: 8623951176672237320, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: StartDialogue
-      objectReference: {fileID: 0}
-    - target: {fileID: 8623951176672237320, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PauseMenu, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8623951176672237320, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: DialogueTrigger, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8623951176672237320, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 9031183602619882740, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
---- !u!95 &7233670744717219789 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7233670744717219789, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-  m_PrefabInstance: {fileID: 7233670744717219775}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7233670744717219790 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1140197621813266579, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
-  m_PrefabInstance: {fileID: 7233670744717219775}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1904884723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb0b43316e5639f42b5665672e17b129, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

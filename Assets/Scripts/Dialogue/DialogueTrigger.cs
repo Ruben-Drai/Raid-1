@@ -11,17 +11,22 @@ public class DialogueTrigger : MonoBehaviour
 
     public DialogueManager DialogueManager;
 
+    public void ResetPosition()
+    {
+        DialogueBox.transform.position = new Vector3(DialogueBox.transform.position.x, -500, DialogueBox.transform.position.z);
+    }
     public void StartDialogue()
     {
         DialogueBox.SetActive(true);
         FindObjectOfType<DialogueManager>().OpenDialogues(messages, actors);
         dialogueAnimation.SetBool("DialogueIsActive", true);
+        Debug.Log("coco");
     }
 
     public void DialogueSetting()
     {
-        DialogueManager.isActive = false;
         DialogueManager.messageText.text = "";
+        DialogueManager.isActive = false;
         FindObjectOfType<DialogueManager>().OpenDialoguesSetting(messages, actors);
     }
 }
