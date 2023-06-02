@@ -74,11 +74,11 @@ public class PlayerController : MonoBehaviour
         UnlockedUpgrades = new Dictionary<string, bool>()
         {
             {"Jump",false},
-            {"Sprint&Sneak",false},
+            {"Sneak",true},
             {"Strength",false},
-            {"ArmGun", true},
-            {"DoubleJump",true},
-            {"Hook",true}
+            {"ArmGun", false},
+            {"DoubleJump",false},
+            {"Hook",false}
         };
         Controller = GetComponent<PlayerInput>();
     }
@@ -156,7 +156,13 @@ public class PlayerController : MonoBehaviour
     }
     public void Sneak(InputAction.CallbackContext context)
     {
-        IsSneaking = !IsSneaking;
+        Debug.Log("test");
+        if (context.performed || context.canceled)
+        {
+            if (UnlockedUpgrades["Sneak"])
+                IsSneaking = !IsSneaking;
+        }
+        
     }
     public void Pause(InputAction.CallbackContext context)
     {
@@ -183,7 +189,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Fire(InputAction.CallbackContext context)
     {
-        if (!IsSneaking && UnlockedUpgrades["ArmGun"])
+        if (!IsSneaking && UnlockedUpgrades["ArmGun"] && Time.timeScale==1)
         {
             if (context.performed)
             {

@@ -382,7 +382,7 @@
                     "path": "<Keyboard>/ctrl",
                     "interactions": "",
                     "processors": "",
-                    "groups": "GamePad",
+                    "groups": "K&M",
                     "action": "Sneak",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -393,7 +393,7 @@
                     "path": "<Gamepad>/rightStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "K&M",
+                    "groups": "GamePad",
                     "action": "Sneak",
                     "isComposite": false,
                     "isPartOfComposite": false

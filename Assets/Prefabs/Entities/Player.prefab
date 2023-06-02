@@ -312,16 +312,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e69f8eaafa4dfb64f865f16faa804386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BInteract: {fileID: 0}
   pauseMenu: {fileID: 0}
   JumpForce: 17
   MovementSpeed: 10
   JumpCooldown: 0.1
   CoyoteTime: 0.2
   RopeShrinkSpeed: 3
-  hook: {fileID: 148341381461873333}
   StandingColl: {fileID: 6553580001067263295}
   SneakingColl: {fileID: 8018268210188467063}
   InteractionTrigger: {fileID: 7777774721333183780}
+  hook: {fileID: 148341381461873333}
 --- !u!114 &6287506163292819442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,11 +429,19 @@ MonoBehaviour:
     m_ActionId: a4248b3a-85c7-4f66-a16e-bef436212dd5
     m_ActionName: Game/Move[/Keyboard/q,/Keyboard/d,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/right,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4c8f207d-d169-4ab5-b9c1-c90a4339bbbc
-    m_ActionName: Game/Sprint[/Keyboard/shift]
-  - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6287506163292819440}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Aim
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b01b3172-bce2-4877-9ad1-85447c258436
     m_ActionName: Game/Aim
   - m_PersistentCalls:
@@ -451,8 +460,24 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 9d768043-8f29-4d43-b5ed-8cb612a39b2c
     m_ActionName: Game/HookLength[/Keyboard/w,/Keyboard/s]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: K&M
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6287506163292819440}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Sneak
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ca356d87-392a-4ece-9f6a-ace3acc8e120
+    m_ActionName: Game/Sneak[/Keyboard/ctrl]
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: GamePad
   m_DefaultActionMap: Game
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -622,7 +647,7 @@ SpringJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6287506163292819445}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 0}
@@ -632,7 +657,7 @@ SpringJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 7.9937005
+  m_Distance: 1.9816451
   m_DampingRatio: 1
   m_Frequency: 1
 --- !u!61 &8018268210188467063
