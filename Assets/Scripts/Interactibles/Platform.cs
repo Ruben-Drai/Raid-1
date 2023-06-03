@@ -10,8 +10,8 @@ public class Platform : MonoBehaviour
     [SerializeField] private float PlatformSpeed = 1.0f;
     [SerializeField] private float WaitTimeBewteenWayPoints = 1.0f;
 
-    private int currentWaypointIndex = 0;
-    private Coroutine MoveRoutine = null;
+    public int currentWaypointIndex = 0;
+    public Coroutine MoveRoutine = null;
 
     //Basically just loops through the list of waypoints and moves towards the current one
     //When near enough, go to the next, if at the last one, loop back to the beginning
@@ -20,7 +20,7 @@ public class Platform : MonoBehaviour
     {
         MoveRoutine = (IsActivated && MoveRoutine == null) ? StartCoroutine(IMoveRoutine()) : (!IsActivated && MoveRoutine != null) ? null : MoveRoutine;
     }
-    private IEnumerator IMoveRoutine()
+    public IEnumerator IMoveRoutine()
     {
         yield return null;
 

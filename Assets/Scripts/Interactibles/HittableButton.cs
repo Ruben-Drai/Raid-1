@@ -13,9 +13,6 @@ public class HittableButton : Interactible
     {
         if (IsActivated)
         {
-            /*transform.GetChild(0).gameObject.SetActive(false);
-            DoorClosed = false;*/
-
             if (moveOnce)
             {
                 for (int i = 0; i < platforms.Length; i++)
@@ -42,7 +39,16 @@ public class HittableButton : Interactible
             {
                 for (int i = 0; i < platforms.Length; i++)
                 {
-                    //platforms[i].GetComponent<Platform>().currentWaypointIndex = 0;
+                    Platform currentPlatform = platforms[i].GetComponent<Platform>();
+
+                    currentPlatform.currentWaypointIndex = 1;
+                    currentPlatform.MoveRoutine = currentPlatform.StartCoroutine(currentPlatform.IMoveRoutine());
+
+                    if (currentPlatform.isNear)
+                    {
+                        currentPlatform.isNear = false;
+                        currentPlatform.IsActivated = false;
+                    }
                 }
             }
         }
@@ -55,6 +61,7 @@ public class HittableButton : Interactible
             transform.localScale /= 2;
         }*/
 
+        IsActivated = IsActivated ? false : true;
         transform.GetChild(0).gameObject.SetActive(!transform.GetChild(0).gameObject.activeSelf);
         transform.GetChild(1).gameObject.SetActive(!transform.GetChild(1).gameObject.activeSelf);
     }
@@ -68,7 +75,6 @@ public class HittableButton : Interactible
 
         if (collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("PlayerFist") || collision.gameObject.CompareTag("Player"))
         {
-            IsActivated = true;
             moveDoOnce = true;
             Interact();
         }
@@ -78,7 +84,6 @@ public class HittableButton : Interactible
     {
         if (collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player"))
         {
-            IsActivated = false;
             Interact();
         }
     }

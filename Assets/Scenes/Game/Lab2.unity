@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 108900309}
   - component: {fileID: 108900311}
   - component: {fileID: 108900310}
+  - component: {fileID: 108900312}
   m_Layer: 7
   m_Name: PlatformLore
   m_TagString: Untagged
@@ -333,6 +334,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &108900312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108900308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57643436b1a3cab40a98386292a9821d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsActivated: 0
+  isNear: 0
+  wayPoints:
+  - {fileID: 1702077884}
+  - {fileID: 649436003}
+  PlatformSpeed: 1
+  WaitTimeBewteenWayPoints: 0
+  currentWaypointIndex: 0
 --- !u!4 &109589851 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3940813992872767082, guid: 944296d2e850e8645b1e7d8d2e5d78ee, type: 3}
@@ -482,11 +503,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819443, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.59
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819443, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.86
+      value: -1.0000005
       objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819443, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1605,6 +1626,7 @@ MonoBehaviour:
   - {fileID: 1370219622}
   PlatformSpeed: 3
   WaitTimeBewteenWayPoints: 2
+  currentWaypointIndex: 0
 --- !u!1 &649436002
 GameObject:
   m_ObjectHideFlags: 0
@@ -1739,7 +1761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311026243985, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.5880129
+      value: 1.5880115
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311026243985, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1759,11 +1781,11 @@ PrefabInstance:
       objectReference: {fileID: 397048911}
     - target: {fileID: 1607095311481806078, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.95224
+      value: -9.362239
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311481806078, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.32958645
+      value: 0.5304131
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311481806078, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2213,6 +2235,7 @@ MonoBehaviour:
   - {fileID: 1844690713}
   PlatformSpeed: 1
   WaitTimeBewteenWayPoints: 1
+  currentWaypointIndex: 0
 --- !u!1 &1067588699
 GameObject:
   m_ObjectHideFlags: 0
@@ -2262,10 +2285,11 @@ MonoBehaviour:
   IsActivated: 0
   isNear: 0
   wayPoints:
-  - {fileID: 2044631720}
   - {fileID: 338295465}
+  - {fileID: 2044631720}
   PlatformSpeed: 1
-  WaitTimeBewteenWayPoints: 1
+  WaitTimeBewteenWayPoints: 0
+  currentWaypointIndex: 0
 --- !u!61 &1067588702
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -34637,10 +34661,11 @@ MonoBehaviour:
   IsActivated: 0
   isNear: 0
   wayPoints:
-  - {fileID: 868694047}
   - {fileID: 1329414804}
+  - {fileID: 868694047}
   PlatformSpeed: 1
-  WaitTimeBewteenWayPoints: 1
+  WaitTimeBewteenWayPoints: 0
+  currentWaypointIndex: 0
 --- !u!1 &1702077883
 GameObject:
   m_ObjectHideFlags: 0

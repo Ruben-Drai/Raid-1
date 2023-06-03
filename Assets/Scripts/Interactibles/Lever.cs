@@ -13,6 +13,7 @@ public class Lever : Interactible
     [SerializeField] private Color colorHide = new Color(0.5566038f, 0.5566038f, 0.5566038f, 1);
 
     [SerializeField] private GameObject[] platforms;
+    [SerializeField] private int nbDo = 0;
 
 
     private void Update()
@@ -21,31 +22,25 @@ public class Lever : Interactible
         {
             for (int i =  0; i < platforms.Length; i++)
             {
+                Platform currentPlatform = platforms[i].GetComponent<Platform>();
+
                 if (move)
                 {
-                    platforms[i].GetComponent<Platform>().IsActivated = true;
+                    currentPlatform.IsActivated = true;
                 }
                 else if (moveOnce)
                 {
-                    Platform currentPlatform = platforms[i].GetComponent<Platform>();
-
-                    if (moveDoOnce)
+                    /*if (moveDoOnce)
                     {
-                        if (i == platforms.Length - 1)
-                        {
-                            moveDoOnce = false;
-                        }
-
-                        //moveDoOnce = i == platforms.Length - 1 ? false : true;
+                        moveDoOnce = i == platforms.Length - 1 ? false : true;
                         currentPlatform.IsActivated = true;
-                            Debug.Log("yes");
                     }
 
                     if (currentPlatform.isNear)
                     {
                         currentPlatform.isNear = false;
                         currentPlatform.IsActivated = false;
-                    }
+                    }*/
                 }
             }
         }
@@ -53,9 +48,42 @@ public class Lever : Interactible
         {
             for (int i = 0; i < platforms.Length; i++)
             {
+                Platform currentPlatform = platforms[i].GetComponent<Platform>();
+
                 if (move)
                 {
-                    platforms[i].GetComponent<Platform>().IsActivated = false;
+                    currentPlatform.IsActivated = false;
+                }
+                /*else if (moveOnce)
+                {
+                    if (currentPlatform.isNear)
+                    {
+                        currentPlatform.isNear = false;
+                        currentPlatform.IsActivated = false;
+                    }
+                }*/
+            }
+        }
+
+        if (moveOnce)
+        {
+            for (int i = 0; i < platforms.Length; i++)
+            {
+                Platform currentPlatform = platforms[i].GetComponent<Platform>();
+
+                if (moveDoOnce)
+                {
+                    moveDoOnce = i == platforms.Length - 1 ? false : true;
+                    currentPlatform.IsActivated = true;
+                }
+
+                if (currentPlatform.isNear)
+                {
+                    currentPlatform.isNear = false;
+                    currentPlatform.IsActivated = false;
+
+                    nbDo = i == platforms.Length - 1 ? nbDo - 1 : nbDo;
+                    moveDoOnce = nbDo <= 0 ? false : true;
                 }
             }
         }
@@ -65,6 +93,8 @@ public class Lever : Interactible
         if (PlayerController.instance.UnlockedUpgrades["Arm"]) // use lever part.2
         {
             IsActivated = IsActivated ? false : true;
+            nbDo += IsActivated ? 1 : 0;
+
             transform.GetChild(0).gameObject.SetActive(!transform.GetChild(0).gameObject.activeSelf);
             transform.GetChild(1).gameObject.SetActive(!transform.GetChild(1).gameObject.activeSelf);
 
@@ -83,7 +113,7 @@ public class Lever : Interactible
             }
             else if (moveOnce)
             {
-                moveDoOnce = IsActivated ? true : false;
+                moveDoOnce = IsActivated;
             }
         }
     }

@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
             {"Leg",true},
             {"Arm",true},
             {"ArmGun", false},
-            {"DoubleJump",true}
+            {"DoubleJump",false}
         };
         Controller = GetComponent<PlayerInput>();
     }
