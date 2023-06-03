@@ -12,9 +12,10 @@ public class ResetAllBindings : MonoBehaviour
     {
 
         foreach (var action in inputActions.actionMaps)
-        {
             action.RemoveAllBindingOverrides();
-        }
+
         PlayerPrefs.DeleteKey("rebinds");
+        SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
+
     }
 }
