@@ -297,7 +297,6 @@ MonoBehaviour:
   - {fileID: 647579306}
   - {fileID: 68485753}
   - {fileID: 511943918}
-  isHologramActive: 0
 --- !u!1 &511943918
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,7 +398,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 511943920}
-  writer: 
   delayBeforeStart: 4
   timeBtwChars: 0.01
   startOnEnable: 1
@@ -608,6 +606,7 @@ GameObject:
   - component: {fileID: 813444537}
   - component: {fileID: 813444536}
   - component: {fileID: 813444535}
+  - component: {fileID: 813444538}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -681,6 +680,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &813444538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813444534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &834210434
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,17 +1180,15 @@ MonoBehaviour:
     message: ok.
   actors:
   - name: 'Robot :'
-    sprite: {fileID: 21300000, guid: 8f7dee71ee1e1884c938f484d50ffa5c, type: 3}
-    actorID: 0
+    sprite: {fileID: 21300000, guid: 6363498c0d673f64491c4900d8077187, type: 3}
   - name: 'Le rat originel :'
     sprite: {fileID: 1387961116, guid: 390ef889b85eb63478912fbf45db32dc, type: 3}
-    actorID: 0
   - name: 'Bird :'
     sprite: {fileID: -977537970, guid: fa9dfbda31e81064a9c3292a3dd5dbf1, type: 3}
-    actorID: 0
   DialogueBox: {fileID: 2122065928}
   HologramBox: {fileID: 510729589}
   dialogueAnimation: {fileID: 2122065934}
+  DialogueManager: {fileID: 0}
 --- !u!1 &1361880733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1769,17 +1799,15 @@ MonoBehaviour:
     message: "Tu as raison. Emp\xEAchons cela !"
   actors:
   - name: 'Robot :'
-    sprite: {fileID: 21300000, guid: 8f7dee71ee1e1884c938f484d50ffa5c, type: 3}
-    actorID: 0
+    sprite: {fileID: 21300000, guid: 6363498c0d673f64491c4900d8077187, type: 3}
   - name: 'Le rat originel :'
     sprite: {fileID: 1387961116, guid: 390ef889b85eb63478912fbf45db32dc, type: 3}
-    actorID: 0
   - name: 'Bird :'
     sprite: {fileID: -977537970, guid: fa9dfbda31e81064a9c3292a3dd5dbf1, type: 3}
-    actorID: 0
   DialogueBox: {fileID: 2122065928}
   HologramBox: {fileID: 510729589}
   dialogueAnimation: {fileID: 2122065934}
+  DialogueManager: {fileID: 0}
 --- !u!114 &2056171313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2054,11 +2082,12 @@ MonoBehaviour:
   actorName: {fileID: 834210436}
   messageText: {fileID: 1149382341}
   backgroundBox: {fileID: 2122065929}
-  canSkip: 0
-  submitSkip: 0
-  currentMessages: []
-  currentActors: []
-  activeMessage: 0
+  robot: {r: 198, g: 0, b: 0, a: 1}
+  narator: {r: 255, g: 128, b: 0, a: 1}
+  system: {r: 0, g: 204, b: 0, a: 1}
+  ai: {r: 0, g: 0, b: 204, a: 1}
+  speedText: {fileID: 0}
+  dialogueTrigger: {fileID: 0}
 --- !u!114 &2122065933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2085,7 +2114,19 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2122065932}
+        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+        m_MethodName: ControlsDialogue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: f97bb95c-fd6b-43a0-9f3c-e55e71cec665
     m_ActionName: Game/Jump[/Keyboard/space]
   - m_PersistentCalls:
@@ -2106,40 +2147,16 @@ MonoBehaviour:
     m_ActionName: Game/Move[/Keyboard/q,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 4c8f207d-d169-4ab5-b9c1-c90a4339bbbc
-    m_ActionName: Game/Sprint[/Keyboard/shift]
+    m_ActionId: b01b3172-bce2-4877-9ad1-85447c258436
+    m_ActionName: Game/Aim
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2122065932}
-        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-        m_MethodName: Dialogue
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: d13a731d-e707-4de7-b5ef-dc0f3652522f
-    m_ActionName: Game/Dialogue[/Keyboard/space]
+      m_Calls: []
+    m_ActionId: 9d768043-8f29-4d43-b5ed-8cb612a39b2c
+    m_ActionName: Game/HookLength[/Keyboard/z,/Keyboard/s]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 510729592}
-        m_TargetAssemblyTypeName: HologramManager, Assembly-CSharp
-        m_MethodName: Close
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 4cba63a9-f371-4562-82a5-a31c92006570
-    m_ActionName: Game/Skip[/Keyboard/escape]
+      m_Calls: []
+    m_ActionId: ca356d87-392a-4ece-9f6a-ace3acc8e120
+    m_ActionName: Game/Sneak[/Keyboard/ctrl]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: K&M
   m_DefaultActionMap: Game

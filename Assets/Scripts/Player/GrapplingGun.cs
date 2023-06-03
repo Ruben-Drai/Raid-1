@@ -49,7 +49,7 @@ public class GrapplingGun : MonoBehaviour
 
     private bool IsAiming = false;
     [HideInInspector] public bool HasShot;
-
+    private Vector2 AimPoint;
     private void Start()
     {
         grappleRope.enabled = false;
@@ -91,16 +91,23 @@ public class GrapplingGun : MonoBehaviour
     {
         if(IsAiming)
         {
-
-            Vector2 mousePos = m_camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            RotateGun(mousePos);
+            if (PlayerController.instance.Controller.currentControlScheme == "K&M")
+                AimPoint = m_camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            else
+                AimPoint = new (PlayerController.instance.GamePadAimDirection.x + gunPivot.position.x, PlayerController.instance.GamePadAimDirection.y + gunPivot.position.y);
+            
+            RotateGun(AimPoint);
  
         }
         else if(!HasShot)
         {
             gunPivot.rotation = Quaternion.Slerp(gunPivot.rotation, Quaternion.LookRotation(Vector3.forward, Vector2.down), Time.deltaTime * rotationSpeed);
             if (gunPivot.rotation.eulerAngles.z == Quaternion.LookRotation(Vector3.forward, Vector2.down).eulerAngles.z)
+            {
                 gameObject.SetActive(false);
+                grappleRope.m_Fist.gameObject.SetActive(false);
+            }
+                
         }
         else
         {
@@ -119,7 +126,7 @@ public class GrapplingGun : MonoBehaviour
 
     void SetGrapplePoint()
     {
-        Vector2 distanceVector = m_camera.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - gunPivot.position;
+        Vector2 distanceVector = new(AimPoint.x - gunPivot.position.x,AimPoint.y-gunPivot.position.y);
         if (Physics2D.Raycast(firePoint.position, distanceVector.normalized))
         {
 

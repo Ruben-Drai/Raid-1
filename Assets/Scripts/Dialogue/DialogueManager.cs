@@ -159,7 +159,7 @@ public class DialogueManager : MonoBehaviour
                 break;
             }
             messageText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
+            yield return new WaitForSecondsRealtime(typingSpeed);
         }
 
         canSkip = false;

@@ -787,7 +787,7 @@ MonoBehaviour:
   grappleRope: {fileID: 5820558502992974763}
   mask:
     serializedVersion: 2
-    m_Bits: 4947
+    m_Bits: 5075
   gunHolder: {fileID: 6287506163292819443}
   gunPivot: {fileID: 8964733122397447408}
   firePoint: {fileID: 179132361778093369}
@@ -799,7 +799,7 @@ MonoBehaviour:
   launchToPoint: 0
   launchType: 1
   launchSpeed: 1
-  autoConfigureDistance: 0
+  autoConfigureDistance: 1
   targetDistance: 3
   targetFrequncy: 1
   grapplePoint: {x: 0, y: 0}
@@ -846,7 +846,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8611835902219531293}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -954,7 +954,7 @@ MonoBehaviour:
   m_lineRenderer: {fileID: 8717295553394094609}
   m_Fist: {fileID: 55393271417078121}
   precision: 40
-  straightenLineSpeed: 10
+  straightenLineSpeed: 20
   ropeAnimationCurve:
     serializedVersion: 2
     m_Curve:
@@ -968,8 +968,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.13638313
     - serializedVersion: 3
-      time: 0.31924766
-      value: 0.9079468
+      time: 0.28949302
+      value: 0.38952947
       inSlope: -1.6675491
       outSlope: -1.6675491
       tangentMode: 0
@@ -977,8 +977,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.55098677
     - serializedVersion: 3
-      time: 0.47453988
-      value: -0.42119533
+      time: 0.442649
+      value: -0.16005641
       inSlope: 0.0690034
       outSlope: 0.0690034
       tangentMode: 0
@@ -986,8 +986,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.63537776
     - serializedVersion: 3
-      time: 0.62713367
-      value: 0.6619345
+      time: 0.5250829
+      value: 0.15503752
       inSlope: 2.9631476
       outSlope: 2.9631476
       tangentMode: 0
@@ -995,8 +995,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.09156941
     - serializedVersion: 3
-      time: 0.79313254
-      value: 0.26636887
+      time: 0.7697561
+      value: 0.27404404
       inSlope: 6.4438896
       outSlope: 6.4438896
       tangentMode: 0

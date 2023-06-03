@@ -36,12 +36,15 @@ public class GrapplingRope : MonoBehaviour
 
         LinePointsToFirePoint();
 
-        m_lineRenderer.enabled = true;
+        if (PlayerController.instance.UnlockedUpgrades["Hook"])
+            m_lineRenderer.enabled = true;
     }
 
     private void OnDisable()
     {
-        m_lineRenderer.enabled = false;
+        if (PlayerController.instance.UnlockedUpgrades["Hook"])
+            m_lineRenderer.enabled = false;
+
         isGrappling = false;
     }
 
@@ -68,10 +71,13 @@ public class GrapplingRope : MonoBehaviour
         if (!isReturning)
         {
             if (!strightLine)
-            {
-                if (m_lineRenderer.GetPosition(precision - 1).x == grapplingGun.grapplePoint.x)
+            {//problem here with it being reset before the shot
+                if (m_lineRenderer.GetPosition(precision - 1).x == grapplingGun.grapplePoint.x
+                    ||( !PlayerController.instance.UnlockedUpgrades["Hook"] && Vector2.Distance(m_Fist.position,grapplingGun.grapplePoint)<0.1f))
                 {
                     strightLine = true;
+                    if(!PlayerController.instance.UnlockedUpgrades["Hook"])
+                        isReturning= true;
                 }
                 else
                 {
@@ -82,7 +88,9 @@ public class GrapplingRope : MonoBehaviour
             {
                 if (!isGrappling)
                 {
-                    grapplingGun.Grapple();
+                    if (PlayerController.instance.UnlockedUpgrades["Hook"])
+                        grapplingGun.Grapple();
+
                     isGrappling = true;
                 }
                 if (waveSize > 0)
@@ -99,18 +107,18 @@ public class GrapplingRope : MonoBehaviour
                     DrawRopeNoWaves();
                 }
             }
+            
         }
         else
         {
             ReturnRope();
-            if (Vector2.Distance(m_Fist.position, grapplingGun.firePoint.position)==0)
+            if (Vector2.Distance(m_Fist.position, grapplingGun.firePoint.position)<0.1f)
             {
                 isReturning = false;
                 enabled = false;
                 m_Fist.parent = transform.parent.parent;
                 m_Fist.gameObject.SetActive(false);
                 grapplingGun.HasShot = false;
-                
             }
         }
         
@@ -126,6 +134,7 @@ public class GrapplingRope : MonoBehaviour
             Vector2 currentPosition = Vector2.Lerp(grapplingGun.firePoint.position, targetPosition, ropeProgressionCurve.Evaluate(moveTime) * ropeProgressionSpeed);
 
             m_lineRenderer.SetPosition(i, currentPosition);
+
             m_Fist.position = currentPosition;
             m_Fist.transform.parent = null;
         }
@@ -134,7 +143,6 @@ public class GrapplingRope : MonoBehaviour
     {
         m_lineRenderer.positionCount = precision;
 
-        
         for (int i = precision-1; i >=0 ; i--)
         {
             float delta = (float)i / ((float)precision - 1f);
@@ -143,6 +151,7 @@ public class GrapplingRope : MonoBehaviour
             Vector2 currentPosition = Vector2.Lerp(grapplingGun.firePoint.position, targetPosition, ropeProgressionCurve.Evaluate(moveTime) * ropeProgressionSpeed);
 
             m_lineRenderer.SetPosition(i, currentPosition);
+
             m_Fist.position = currentPosition;
             m_Fist.transform.parent = null;
         }

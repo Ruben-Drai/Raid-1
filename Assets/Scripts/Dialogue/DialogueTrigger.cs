@@ -20,7 +20,6 @@ public class DialogueTrigger : MonoBehaviour
         DialogueBox.SetActive(true);
         FindObjectOfType<DialogueManager>().OpenDialogues(messages, actors);
         dialogueAnimation.SetBool("DialogueIsActive", true);
-        Debug.Log("coco");
     }
 
     public void DialogueSetting()

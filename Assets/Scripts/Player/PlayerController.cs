@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     [NonSerialized] public Rigidbody2D rb;
     [NonSerialized] public PlayerInput Controller;
     [NonSerialized] public Vector2 SlopeAdjustment;
+    [NonSerialized] public Vector2 GamePadAimDirection;
     [NonSerialized] public bool IsPushingBox = false;
     [NonSerialized] public bool IsMoving = false;
 
@@ -73,11 +74,11 @@ public class PlayerController : MonoBehaviour
         actionMap = GetComponent<PlayerInput>().actions.actionMaps[0];
         UnlockedUpgrades = new Dictionary<string, bool>()
         {
-            {"Jump",false},
+            {"Jump",true},
             {"Sneak",true},
-            {"Strength",false},
-            {"ArmGun", false},
-            {"DoubleJump",false},
+            {"Strength",true},
+            {"ArmGun", true},
+            {"DoubleJump",true},
             {"Hook",false}
         };
         Controller = GetComponent<PlayerInput>();
@@ -114,7 +115,7 @@ public class PlayerController : MonoBehaviour
     //gamepad and mobile only
     public void Aim(InputAction.CallbackContext context)
     {
-        hook.Direction = context.ReadValue<Vector2>();
+        GamePadAimDirection = context.ReadValue<Vector2>();
     }
     public void Jump(InputAction.CallbackContext context)
     {
@@ -201,9 +202,9 @@ public class PlayerController : MonoBehaviour
             }
             else if (context.canceled)
             {
-                if (hook.HasShot)
+                if (hook.HasShot && UnlockedUpgrades["Hook"])
                     hook.ReturnHook();
-                else
+                else if (hook.gameObject.activeSelf && !hook.HasShot)
                     hook.FireHook();
             }
         }
@@ -248,7 +249,7 @@ public class PlayerController : MonoBehaviour
         float SlopeMovementY = movement.normalized.x * -SlopeAdjustment.y * speed;
 
         if (rb != null)
-            if(!hook.HasShot)
+            if(!hook.HasShot || !UnlockedUpgrades["Hook"])
                 rb.velocity = new(movement.normalized.x * speed * -SlopeAdjustment.x, slope ? SlopeMovementY : rb.velocity.y);
             else
                 rb.AddForce(new(movement.normalized.x*speed,0),ForceMode2D.Force);
@@ -257,7 +258,8 @@ public class PlayerController : MonoBehaviour
         string fullpath = instance.actionMap.FindAction("Interact").bindings[0].effectivePath;
         var lastChars = fullpath.Substring(fullpath.Length - 1, 1);
 
-        BInteract.text = lastChars;
+        if(BInteract!=null)
+            BInteract.text = lastChars;
     }
 
 }
