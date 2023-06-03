@@ -654,7 +654,7 @@ GameObject:
   - component: {fileID: 311595274}
   - component: {fileID: 311595273}
   - component: {fileID: 311595272}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Worl Bounding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4221,6 +4221,10 @@ PrefabInstance:
     - target: {fileID: 6287506163292819445, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819445, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6654861578538338842, guid: 65ca959e473df58449468d20430c864c, type: 3}
