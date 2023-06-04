@@ -18,59 +18,23 @@ public class Lever : Interactible
 
     private void Update()
     {
-        if (IsActivated)
+        for (int i = 0; i < platforms.Length; i++)
         {
-            for (int i =  0; i < platforms.Length; i++)
-            {
-                Platform currentPlatform = platforms[i].GetComponent<Platform>();
+            Platform currentPlatform = platforms[i].GetComponent<Platform>();
 
-                if (move)
+            if (move)
+            {
+                if (IsActivated)
                 {
                     currentPlatform.IsActivated = true;
                 }
-                else if (moveOnce)
-                {
-                    /*if (moveDoOnce)
-                    {
-                        moveDoOnce = i == platforms.Length - 1 ? false : true;
-                        currentPlatform.IsActivated = true;
-                    }
-
-                    if (currentPlatform.isNear)
-                    {
-                        currentPlatform.isNear = false;
-                        currentPlatform.IsActivated = false;
-                    }*/
-                }
-            }
-        }
-        else
-        {
-            for (int i = 0; i < platforms.Length; i++)
-            {
-                Platform currentPlatform = platforms[i].GetComponent<Platform>();
-
-                if (move)
+                else
                 {
                     currentPlatform.IsActivated = false;
                 }
-                /*else if (moveOnce)
-                {
-                    if (currentPlatform.isNear)
-                    {
-                        currentPlatform.isNear = false;
-                        currentPlatform.IsActivated = false;
-                    }
-                }*/
             }
-        }
-
-        if (moveOnce)
-        {
-            for (int i = 0; i < platforms.Length; i++)
+            else if (moveOnce)
             {
-                Platform currentPlatform = platforms[i].GetComponent<Platform>();
-
                 if (moveDoOnce)
                 {
                     moveDoOnce = i == platforms.Length - 1 ? false : true;
@@ -92,11 +56,11 @@ public class Lever : Interactible
     {
         if (PlayerController.instance.UnlockedUpgrades["Arm"]) // use lever part.2
         {
-            IsActivated = IsActivated ? false : true;
+            IsActivated = !IsActivated;
             nbDo += IsActivated ? 1 : 0;
 
-            transform.GetChild(0).gameObject.SetActive(!transform.GetChild(0).gameObject.activeSelf);
-            transform.GetChild(1).gameObject.SetActive(!transform.GetChild(1).gameObject.activeSelf);
+            transform.GetChild(0).gameObject.SetActive(!IsActivated);
+            transform.GetChild(1).gameObject.SetActive(IsActivated);
 
             if (appearance)
             {
@@ -106,9 +70,7 @@ public class Lever : Interactible
                     colorSprite = colorSprite == colorShow ? colorHide : colorShow;
                     platforms[i].GetComponent<SpriteRenderer>().color = colorSprite;
 
-                    bool collider = platforms[i].GetComponent<Collider2D>().enabled;
-                    collider = collider ? false : true;
-                    platforms[i].GetComponent<Collider2D>().enabled = collider;
+                    platforms[i].GetComponent<Collider2D>().enabled = !platforms[i].GetComponent<Collider2D>().enabled;
                 }
             }
             else if (moveOnce)

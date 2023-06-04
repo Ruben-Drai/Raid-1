@@ -2,27 +2,30 @@ using UnityEngine;
 
 public class HittableButton : Interactible
 {
-    private bool DoorClosed = true;
-
+    [SerializeField] private bool move = false;
     [SerializeField] private bool moveOnce = false;
-    private bool moveDoOnce = false;
+    private bool moveDoOnce = true;
 
     [SerializeField] private GameObject[] platforms;
 
     private void Update()
     {
-        if (IsActivated)
+        for (int i = 0; i < platforms.Length; i++)
         {
-            if (moveOnce)
-            {
-                for (int i = 0; i < platforms.Length; i++)
-                {
-                    Platform currentPlatform = platforms[i].GetComponent<Platform>();
+            Platform currentPlatform = platforms[i].GetComponent<Platform>();
 
+            if (IsActivated)
+            {
+                if (move)
+                {
+                    currentPlatform.IsActivated = true;
+                }
+                else if (moveOnce)
+                {
                     if (moveDoOnce)
                     {
-                        currentPlatform.IsActivated = true;
                         moveDoOnce = i == platforms.Length - 1 ? false : true;
+                        currentPlatform.IsActivated = true;
                     }
 
                     if (currentPlatform.isNear)
@@ -32,17 +35,21 @@ public class HittableButton : Interactible
                     }
                 }
             }
-        }
-        else
-        {
-            if (moveOnce)
+            else
             {
-                for (int i = 0; i < platforms.Length; i++)
+                if (move)
                 {
-                    Platform currentPlatform = platforms[i].GetComponent<Platform>();
+                    currentPlatform.IsActivated = false;
+                }
+                else if (moveOnce)
+                {
+                    /*if (moveDoOnce)
+                    {
+                        currentPlatform.currentWaypointIndex = 1;
+                        currentPlatform.MoveRoutine = currentPlatform.StartCoroutine(currentPlatform.IMoveRoutine());
 
-                    currentPlatform.currentWaypointIndex = 1;
-                    currentPlatform.MoveRoutine = currentPlatform.StartCoroutine(currentPlatform.IMoveRoutine());
+                        moveDoOnce = i == platforms.Length - 1 ? false : true;
+                    }*/
 
                     if (currentPlatform.isNear)
                     {
@@ -53,27 +60,18 @@ public class HittableButton : Interactible
             }
         }
     }
+
     public override void Interact()
     {
-        /*if (PlayerController.instance.UnlockedUpgrades["ArmGun"] && DoorClosed)
-        {
-            IsActivated = true;
-            transform.localScale /= 2;
-        }*/
-
-        IsActivated = IsActivated ? false : true;
-        transform.GetChild(0).gameObject.SetActive(!transform.GetChild(0).gameObject.activeSelf);
-        transform.GetChild(1).gameObject.SetActive(!transform.GetChild(1).gameObject.activeSelf);
+        IsActivated = !IsActivated;
+        //moveDoOnce = true;
+        transform.GetChild(0).gameObject.SetActive(!IsActivated);
+        transform.GetChild(1).gameObject.SetActive(IsActivated);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        /*if (collision.gameObject.CompareTag("PlayerFist"))
-        {
-            Interact();
-        }*/
-
-        if (collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("PlayerFist") || collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("PlayerFist"))
         {
             moveDoOnce = true;
             Interact();
