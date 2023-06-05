@@ -215,7 +215,7 @@ public class PlayerController : MonoBehaviour
         if (collision.GetComponent<Interactible>() != null)
         {
             AvailableInteraction = collision.GetComponent<Interactible>();
-            AvailableInteraction.transform.Find("Highlight").gameObject.SetActive(true); // Activates highlighting when the player is close by
+            AvailableInteraction.transform.Find("Highlight")?.gameObject.SetActive(true); // Activates highlighting when the player is close by
 
         }
     }
@@ -225,7 +225,7 @@ public class PlayerController : MonoBehaviour
             && AvailableInteraction == collision.GetComponent<Interactible>()
             && Vector2.Distance(transform.position, collision.transform.position) > 0.5f)
         {
-            AvailableInteraction.transform.Find("Highlight").gameObject.SetActive(false); // Deactivates highlighting when player moves away.
+            AvailableInteraction.transform.Find("Highlight")?.gameObject.SetActive(false); // Deactivates highlighting when player moves away.
             AvailableInteraction = null;
         }
     }
