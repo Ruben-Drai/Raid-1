@@ -30,7 +30,7 @@ public class BigBox : Interactible
         if (IsBeingLifted)
         {
             rb.velocity = new(PlayerController.instance.rb.velocity.x,rb.velocity.y);
-            transform.Find("Highlight").gameObject.SetActive(false); // Deactivates highlighting when the box is moved.
+            transform.Find("Highlight")?.gameObject.SetActive(false); // Deactivates highlighting when the box is moved.
             if (PlayerController.instance.AvailableInteraction == null)
             {
                 rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
@@ -42,5 +42,14 @@ public class BigBox : Interactible
         //freezes the box on X and the rotation on Z if the player doesn't interact with the box anymore or if it's falling
         if (Mathf.Abs(rb.velocity.y) > 0.1f) rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("DestroyablePlatform"))
+        {
+            //play sound?
+            collision.gameObject.SetActive(false);
+        }
     }
 }
