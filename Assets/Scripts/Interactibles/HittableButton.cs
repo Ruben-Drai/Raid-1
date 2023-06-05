@@ -3,8 +3,7 @@ using UnityEngine;
 public class HittableButton : Interactible
 {
     [SerializeField] private bool move = false;
-    [SerializeField] private bool moveOnce = false;
-    private bool moveDoOnce = true;
+    private bool moveDoOnce = false;
 
     [SerializeField] private GameObject[] platforms;
 
@@ -14,25 +13,24 @@ public class HittableButton : Interactible
         {
             Platform currentPlatform = platforms[i].GetComponent<Platform>();
 
+
             if (IsActivated)
             {
+
                 if (move)
                 {
                     currentPlatform.IsActivated = true;
                 }
-                else if (moveOnce)
+                else if (currentPlatform.moveOnce)
                 {
                     if (moveDoOnce)
                     {
-                        moveDoOnce = i == platforms.Length - 1 ? false : true;
+                        currentPlatform.currentWaypointIndex = 1;
                         currentPlatform.IsActivated = true;
+                        moveDoOnce = !(i == platforms.Length - 1);
                     }
 
-                    if (currentPlatform.isNear)
-                    {
-                        currentPlatform.isNear = false;
-                        currentPlatform.IsActivated = false;
-                    }
+                    
                 }
             }
             else
@@ -41,20 +39,13 @@ public class HittableButton : Interactible
                 {
                     currentPlatform.IsActivated = false;
                 }
-                else if (moveOnce)
+                else if (currentPlatform.moveOnce)
                 {
-                    /*if (moveDoOnce)
+                    if (moveDoOnce)
                     {
-                        currentPlatform.currentWaypointIndex = 1;
-                        currentPlatform.MoveRoutine = currentPlatform.StartCoroutine(currentPlatform.IMoveRoutine());
-
-                        moveDoOnce = i == platforms.Length - 1 ? false : true;
-                    }*/
-
-                    if (currentPlatform.isNear)
-                    {
-                        currentPlatform.isNear = false;
-                        currentPlatform.IsActivated = false;
+                        currentPlatform.currentWaypointIndex = 0;
+                        currentPlatform.IsActivated = true;
+                        moveDoOnce = !(i == platforms.Length - 1);
                     }
                 }
             }
@@ -64,7 +55,7 @@ public class HittableButton : Interactible
     public override void Interact()
     {
         IsActivated = !IsActivated;
-        //moveDoOnce = true;
+        moveDoOnce = true;
         transform.GetChild(0).gameObject.SetActive(!IsActivated);
         transform.GetChild(1).gameObject.SetActive(IsActivated);
     }
@@ -73,7 +64,6 @@ public class HittableButton : Interactible
     {
         if (collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("PlayerFist"))
         {
-            moveDoOnce = true;
             Interact();
         }
     }

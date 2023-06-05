@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Platform : MonoBehaviour
@@ -9,6 +10,7 @@ public class Platform : MonoBehaviour
     [SerializeField] private List<Transform> wayPoints;
     [SerializeField] private float PlatformSpeed = 1.0f;
     [SerializeField] private float WaitTimeBewteenWayPoints = 1.0f;
+    public bool moveOnce = false;
 
     public int currentWaypointIndex = 0;
     public Coroutine MoveRoutine = null;
@@ -18,7 +20,11 @@ public class Platform : MonoBehaviour
     //This is done only while IsActivated is true, which prevents MoveRoutine from being set to null
     private void Update()
     {
-        MoveRoutine = (IsActivated && MoveRoutine == null) ? StartCoroutine(IMoveRoutine()) : (!IsActivated && MoveRoutine != null) ? null : MoveRoutine;
+        MoveRoutine ??= IsActivated ? StartCoroutine(IMoveRoutine()) :null;
+        if (!IsActivated)
+        {
+            MoveRoutine = null;
+        }
     }
     public IEnumerator IMoveRoutine()
     {
@@ -36,7 +42,10 @@ public class Platform : MonoBehaviour
                 //add one, or if at end of list go back to 0
                 currentWaypointIndex += currentWaypointIndex == (wayPoints.Count - 1) ? -currentWaypointIndex : 1;
                 isNear = false;
+                if (moveOnce)
+                { IsActivated= false; break; }
             }
         }
+        MoveRoutine = null;
     }
 }

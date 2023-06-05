@@ -86,7 +86,6 @@ public class PlayerController : MonoBehaviour
             && context.performed 
             && !arm.LimitMovement)
         {
-            if (context.performed) Debug.Log("tes");
             TimeFromLastJump = 0f;
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
             IsMoving = true;

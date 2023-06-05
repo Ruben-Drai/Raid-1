@@ -353,6 +353,7 @@ MonoBehaviour:
   - {fileID: 649436003}
   PlatformSpeed: 1
   WaitTimeBewteenWayPoints: 0
+  moveOnce: 0
   currentWaypointIndex: 0
 --- !u!4 &109589851 stripped
 Transform:
@@ -1513,7 +1514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &616115893
 Transform:
   m_ObjectHideFlags: 0
@@ -1626,6 +1627,7 @@ MonoBehaviour:
   - {fileID: 1370219622}
   PlatformSpeed: 3
   WaitTimeBewteenWayPoints: 2
+  moveOnce: 0
   currentWaypointIndex: 0
 --- !u!1 &649436002
 GameObject:
@@ -2231,10 +2233,11 @@ MonoBehaviour:
   IsActivated: 0
   isNear: 0
   wayPoints:
-  - {fileID: 1844690713}
   - {fileID: 267506535}
+  - {fileID: 1844690713}
   PlatformSpeed: 1
-  WaitTimeBewteenWayPoints: 1
+  WaitTimeBewteenWayPoints: 0
+  moveOnce: 1
   currentWaypointIndex: 0
 --- !u!1 &1067588699
 GameObject:
@@ -2289,6 +2292,7 @@ MonoBehaviour:
   - {fileID: 2044631720}
   PlatformSpeed: 1
   WaitTimeBewteenWayPoints: 0
+  moveOnce: 0
   currentWaypointIndex: 0
 --- !u!61 &1067588702
 BoxCollider2D:
@@ -34666,6 +34670,7 @@ MonoBehaviour:
   - {fileID: 868694047}
   PlatformSpeed: 1
   WaitTimeBewteenWayPoints: 0
+  moveOnce: 0
   currentWaypointIndex: 0
 --- !u!1 &1702077883
 GameObject:
