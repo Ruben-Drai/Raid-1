@@ -43,7 +43,7 @@ public class Platform : MonoBehaviour
                 currentWaypointIndex += currentWaypointIndex == (wayPoints.Count - 1) ? -currentWaypointIndex : 1;
                 isNear = false;
                 if (moveOnce)
-                { IsActivated= false; break; }
+                { IsActivated = false; break; }
             }
         }
         MoveRoutine = null;
