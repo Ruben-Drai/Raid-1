@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class HittableButton : Interactible
 {
+    private bool isExploded = false;
     [SerializeField] private bool move = false;
     private bool moveDoOnce = false;
 
@@ -62,15 +63,17 @@ public class HittableButton : Interactible
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("PlayerFist"))
+        if (((collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player")) && !isExploded)
+            || (collision.gameObject.CompareTag("PlayerFist") && !IsActivated))
         {
             Interact();
+            isExploded = collision.gameObject.CompareTag("PlayerFist");
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player"))
+        if ((collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player")) && !isExploded)
         {
             Interact();
         }
