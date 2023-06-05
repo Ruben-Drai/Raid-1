@@ -30,7 +30,7 @@ public class BigBox : Interactible
         if (IsBeingLifted)
         {
             rb.velocity = new(PlayerController.instance.rb.velocity.x,rb.velocity.y);
-            transform.Find("Highlight").gameObject.SetActive(false); // Deactivates highlighting when the box is moved.
+            transform.Find("Highlight")?.gameObject.SetActive(false); // Deactivates highlighting when the box is moved.
             if (PlayerController.instance.AvailableInteraction == null)
             {
                 rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
