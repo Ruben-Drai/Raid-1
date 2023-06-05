@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
             {"Strength",true},
             {"ArmGun", true},
             {"DoubleJump",true},
-            {"Hook",false}
+            {"Hook",true}
         };
         Controller = GetComponent<PlayerInput>();
     }
@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
     public void Jump(InputAction.CallbackContext context)
     {
         if (TimeFromLastJump > JumpCooldown
-            && (_canJump || (CanDoubleJump && UnlockedUpgrades["DoubleJump"]))
+            && ((_canJump && UnlockedUpgrades["Jump"]) || (CanDoubleJump && UnlockedUpgrades["DoubleJump"]))
             && !IsPushingBox
             && context.performed)
         {
@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
             IsMoving = true;
             IsInJump = true;
             //just in case player spams button, since groundcheck is only done once every 0.1s
-            if (_canJump)
+            if (_canJump && UnlockedUpgrades["Jump"])
                 _canJump = false;
             else if (CanDoubleJump && UnlockedUpgrades["DoubleJump"])
                 CanDoubleJump = false;
@@ -151,13 +151,12 @@ public class PlayerController : MonoBehaviour
             if (AvailableInteraction != null && context.canceled && AvailableInteraction.GetComponent<BigBox>() != null)
             {
                 AvailableInteraction.GetComponent<BigBox>().StopInteraction();
-                AvailableInteraction.transform.Find("Highlight").gameObject.SetActive(true);
+                AvailableInteraction.transform.Find("Highlight")?.gameObject.SetActive(true);
             }
         }
     }
     public void Sneak(InputAction.CallbackContext context)
     {
-        Debug.Log("test");
         if (context.performed || context.canceled)
         {
             if (UnlockedUpgrades["Sneak"])

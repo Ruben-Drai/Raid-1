@@ -36,13 +36,13 @@ public class GrapplingRope : MonoBehaviour
 
         LinePointsToFirePoint();
 
-        if (PlayerController.instance.UnlockedUpgrades["Hook"])
+        if (!grapplingGun.FistOnly)
             m_lineRenderer.enabled = true;
     }
 
     private void OnDisable()
     {
-        if (PlayerController.instance.UnlockedUpgrades["Hook"])
+        if (!grapplingGun.FistOnly)
             m_lineRenderer.enabled = false;
 
         isGrappling = false;
@@ -73,10 +73,10 @@ public class GrapplingRope : MonoBehaviour
             if (!strightLine)
             {//problem here with it being reset before the shot
                 if (m_lineRenderer.GetPosition(precision - 1).x == grapplingGun.grapplePoint.x
-                    ||( !PlayerController.instance.UnlockedUpgrades["Hook"] && Vector2.Distance(m_Fist.position,grapplingGun.grapplePoint)<0.1f))
+                    ||(grapplingGun.FistOnly && Vector2.Distance(m_Fist.position,grapplingGun.grapplePoint)<0.1f))
                 {
                     strightLine = true;
-                    if(!PlayerController.instance.UnlockedUpgrades["Hook"])
+                    if(grapplingGun.FistOnly)
                         isReturning= true;
                 }
                 else
@@ -88,7 +88,7 @@ public class GrapplingRope : MonoBehaviour
             {
                 if (!isGrappling)
                 {
-                    if (PlayerController.instance.UnlockedUpgrades["Hook"])
+                    if (!grapplingGun.FistOnly)
                         grapplingGun.Grapple();
 
                     isGrappling = true;

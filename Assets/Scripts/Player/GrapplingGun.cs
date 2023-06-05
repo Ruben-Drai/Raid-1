@@ -46,6 +46,7 @@ public class GrapplingGun : MonoBehaviour
     [HideInInspector] public Vector2 grapplePoint;
     [HideInInspector] public Vector2 grappleDistanceVector;
     [HideInInspector] public Vector2 Direction;
+    [HideInInspector] public bool FistOnly;
 
     private bool IsAiming = false;
     [HideInInspector] public bool HasShot;
@@ -135,7 +136,10 @@ public class GrapplingGun : MonoBehaviour
             {
                 if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistance || !hasMaxDistance)
                 {
+                    FistOnly = !PlayerController.instance.UnlockedUpgrades["Hook"] || _hit.collider.GetComponent<Interactible>() != null;
                     grapplePoint = _hit.point;
+                    if (FistOnly) grapplePoint += distanceVector.normalized/10f;
+
                     grappleDistanceVector = grapplePoint - (Vector2)gunPivot.position;
                     grappleRope.enabled = true;
                 }

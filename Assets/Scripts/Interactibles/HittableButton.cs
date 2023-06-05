@@ -56,8 +56,8 @@ public class HittableButton : Interactible
     {
         IsActivated = !IsActivated;
         moveDoOnce = true;
-        transform.GetChild(0).gameObject.SetActive(!IsActivated);
-        transform.GetChild(1).gameObject.SetActive(IsActivated);
+        transform.GetChild(0)?.gameObject.SetActive(!IsActivated);
+        transform.GetChild(1)?.gameObject.SetActive(IsActivated);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
