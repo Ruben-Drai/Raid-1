@@ -16,13 +16,15 @@ public class SaveNLoad : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-    void Start()
-    {
-    }
+    
 
-
+    //All data is saved into playerprefs, I don't know if this is efficient since playerprefs are inherently Register Keys
+    //It might be better to save as a file but I don't have the time for that
+    //This basically saves player pos as well as all interactibles' activation status, and position if they can be pushed
     public void Save()
     {
+        PlayerPrefs.SetString("SceneName",SceneManager.GetActiveScene().name);
+
         Interactibles = GameObject.Find("Interactibles");
 
         for (int i = 0; i < Interactibles.transform.childCount; i++)
@@ -46,7 +48,7 @@ public class SaveNLoad : MonoBehaviour
     public void ResetSave()
     {
         Interactibles = GameObject.Find("Interactibles");
-
+        PlayerPrefs.DeleteKey("SceneName");
         for (int i = 0; i < Interactibles.transform.childCount; i++)
         {
             PlayerPrefs.DeleteKey("Child" + i);
@@ -64,13 +66,14 @@ public class SaveNLoad : MonoBehaviour
             PlayerPrefs.DeleteKey(v.Key);
         }
     }
-    public IEnumerator SaveRoutine()
+    public IEnumerator SaveRoutine(bool quit = false)
     {
         while (SceneManager.GetActiveScene().name != "DevRoom")
         {
             yield return null;
         }
         Save();
+        if (quit) Application.Quit();
     }
     public IEnumerator LoadRoutine()
     {
@@ -94,7 +97,7 @@ public class SaveNLoad : MonoBehaviour
     public void Load()
     {
         Interactibles = GameObject.Find("Interactibles");
-
+        
         for (int i = 0; i < Interactibles.transform.childCount; i++)
         {
             Interactibles.transform.GetChild(i).GetComponent<Interactible>().IsActivated = (PlayerPrefs.GetInt("Child" + i) == 1);
