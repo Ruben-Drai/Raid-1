@@ -43,4 +43,13 @@ public class BigBox : Interactible
         if (Mathf.Abs(rb.velocity.y) > 0.1f) rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
 
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("DestroyablePlatform"))
+        {
+            //play sound?
+            collision.gameObject.SetActive(false);
+        }
+    }
 }

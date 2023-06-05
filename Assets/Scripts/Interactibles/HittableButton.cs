@@ -16,7 +16,7 @@ public class HittableButton : Interactible
     {
         if (PlayerController.instance.UnlockedUpgrades["ArmGun"] && DoorClosed)
         {
-            IsActivated = true;
+            IsActivated = !IsActivated;
             transform.localScale /= 2;
         }
     }

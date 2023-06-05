@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7086749403158981731}
   m_Layer: 10
   m_Name: Fist
-  m_TagString: Untagged
+  m_TagString: PlayerFist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
