@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private BoxCollider2D StandingColl;
     [SerializeField] private BoxCollider2D SneakingColl;
     [SerializeField] private CapsuleCollider2D InteractionTrigger;
+
     public GrapplingGun hook;
 
     private bool _canJump = true;
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
     private GroundCheck feet;
     private SpringJoint2D joint;
+    private Animator animator;
 
 
     [NonSerialized] public Interactible AvailableInteraction;
@@ -36,7 +38,7 @@ public class PlayerController : MonoBehaviour
     [NonSerialized] public Vector2 SlopeAdjustment;
     [NonSerialized] public Vector2 GamePadAimDirection;
     [NonSerialized] public bool IsPushingBox = false;
-    [NonSerialized] public bool IsMoving = false;
+    /*[NonSerialized]*/ public bool IsMoving = false;
 
     [NonSerialized] public bool IsInJump = true;
     [NonSerialized] public bool CanDoubleJump = true;
@@ -68,6 +70,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         joint = GetComponent<SpringJoint2D>();
         feet = GetComponentInChildren<GroundCheck>();
         rb = GetComponent<Rigidbody2D>();
@@ -77,7 +80,7 @@ public class PlayerController : MonoBehaviour
             {"Jump",true},
             {"Sneak",true},
             {"Strength",true},
-            {"ArmGun", true},
+            {"ArmGun", false},
             {"DoubleJump",true},
             {"Hook",false}
         };
@@ -85,6 +88,8 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        Animation();
+
         TimeFromLastJump += Time.deltaTime;
         CoyoteTimer += Time.deltaTime;
         if (hook.HasShot && IsChangingLen)
@@ -262,4 +267,22 @@ public class PlayerController : MonoBehaviour
             BInteract.text = lastChars;
     }
 
+
+    private void Animation()
+    {
+        animator.SetBool("UnlockArm", UnlockedUpgrades["ArmGun"]);
+        if(rb.velocity.x > 0.1f)
+        {
+            animator.SetBool("IsMoving", true);
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else if(rb.velocity.x < -0.1f)
+        { 
+            animator.SetBool("IsMoving", true);
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+            animator.SetBool("IsMoving", false);
+
+    }
 }
