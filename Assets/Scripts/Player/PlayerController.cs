@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         {
             {"Leg",true},
             {"Arm",true},
-            {"ArmGun", false},
+            {"ArmGun", true},
             {"DoubleJump",true}
         };
         Controller = GetComponent<PlayerInput>();
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
             && context.performed 
             && !arm.LimitMovement)
         {
-            if (context.performed) Debug.Log("tes");
+            //if (context.performed) Debug.Log("tes");
             TimeFromLastJump = 0f;
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
             IsMoving = true;
