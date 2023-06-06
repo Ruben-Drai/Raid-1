@@ -14,6 +14,7 @@ public class Lever : Interactible
     [SerializeField] private bool moveDoOnce = false;
 
     [SerializeField] private bool appearance = false;
+    [SerializeField] private bool door  = false;
     [SerializeField] private Color colorShow = Color.white;
     [SerializeField] private Color colorHide = new Color(0.5566038f, 0.5566038f, 0.5566038f, 1);
 
@@ -31,39 +32,43 @@ public class Lever : Interactible
         {
             Platform currentPlatform = platforms[i].GetComponent<Platform>();
 
-            if (move)
+            if (IsActivated)
             {
-                if (IsActivated)
+                if (moveOnce)
+                {
+                    if (moveDoOnce)
+                    {
+                        currentPlatform.currentWaypointIndex = 1;
+                        currentPlatform.IsActivated = true;
+                        moveDoOnce = !(i == platforms.Length - 1);
+                    }
+                }
+                else if (move)
                 {
                     currentPlatform.IsActivated = true;
-                }
-                else
-                {
-                    currentPlatform.IsActivated = false;
                 }
             }
-            else if (moveOnce)
+            else
             {
-                if (moveDoOnce)
+                if (moveOnce)
                 {
-                    moveDoOnce = i == platforms.Length - 1 ? false : true;
-                    currentPlatform.IsActivated = true;
+                    if (moveDoOnce)
+                    {
+                        currentPlatform.currentWaypointIndex = 0;
+                        currentPlatform.IsActivated = true;
+                        moveDoOnce = !(i == platforms.Length - 1);
+                    }
                 }
-
-                if (currentPlatform.isNear)
+                else if (move)
                 {
-                    currentPlatform.isNear = false;
                     currentPlatform.IsActivated = false;
-
-                    nbDo = i == platforms.Length - 1 ? nbDo - 1 : nbDo;
-                    moveDoOnce = nbDo <= 0 ? false : true;
                 }
             }
         }
     }
     public override void Interact()
     {
-        if (PlayerController.instance.UnlockedUpgrades["Strength"] &&(!moveOnce ||(moveOnce && !IsActivated)))
+        if (PlayerController.instance.UnlockedUpgrades["Strength"] /*&&(!moveOnce ||(moveOnce && !IsActivated))*/)
         {
             IsActivated = !IsActivated;
             nbDo += IsActivated ? 1 : 0;
@@ -71,6 +76,8 @@ public class Lever : Interactible
             transform.GetChild(0).gameObject.SetActive(!IsActivated);
             transform.GetChild(1).gameObject.SetActive(IsActivated);
             if(LaunchesCutscene) cutscene ??= StartCoroutine(LaunchCutscene());
+
+            /* Move in and out platforms */
             if (appearance)
             {
                 for (int i = 0; i < platforms.Length; i++)
@@ -84,7 +91,17 @@ public class Lever : Interactible
             }
             else if (moveOnce)
             {
-                moveDoOnce = IsActivated;
+                moveDoOnce = true;
+            }
+
+            /* Open laser doors */
+            if (door)
+            {
+                for (int i = 0; i < platforms.Length; i++)
+                {
+                    platforms[i].transform.GetChild(0).gameObject.SetActive(!IsActivated);
+                    platforms[i].transform.GetChild(1).gameObject.SetActive(IsActivated);
+                }
             }
         }
     }

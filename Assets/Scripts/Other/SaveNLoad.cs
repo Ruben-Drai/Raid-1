@@ -26,14 +26,14 @@ public class SaveNLoad : MonoBehaviour
         PlayerPrefs.SetString("SceneName", SceneManager.GetActiveScene().name);
 
         Interactibles = GameObject.Find("Interactibles");
-
-        for (int i = 0; i < Interactibles.transform.childCount; i++)
+        var c = Interactibles.GetComponentsInChildren<Interactible>();
+        for (int i = 0; i < c.Length; i++)
         {
-            PlayerPrefs.SetInt("Child" + i, Interactibles.transform.GetChild(i).GetComponent<Interactible>().IsActivated ? 1 : 0);
-            if (Interactibles.transform.GetChild(i).GetComponent<BigBox>() != null)
+            PlayerPrefs.SetInt("Child" + i, c[i].IsActivated ? 1 : 0);
+            if (c[i].GetComponent<BigBox>() != null)
             {
-                PlayerPrefs.SetFloat("ChildPosX" + i, Interactibles.transform.GetChild(i).transform.position.x);
-                PlayerPrefs.SetFloat("ChildPosY" + i, Interactibles.transform.GetChild(i).transform.position.y);
+                PlayerPrefs.SetFloat("ChildPosX" + i, c[i].transform.position.x);
+                PlayerPrefs.SetFloat("ChildPosY" + i, c[i].transform.position.y);
             }
         }
         PlayerPrefs.SetFloat("PlayerPosX", PlayerController.instance.transform.position.x);
@@ -44,15 +44,51 @@ public class SaveNLoad : MonoBehaviour
             PlayerPrefs.SetInt(v.Key, v.Value ? 1 : 0);
         }
     }
+    public void Load(bool FirstScene, bool NewScene)
+    {
+        Interactibles = GameObject.Find("Interactibles");
 
+        if (!NewScene)
+        {
+            var c = Interactibles.GetComponentsInChildren<Interactible>();
+            for (int i = 0; i < c.Length; i++)
+            {
+                if (c[i].GetComponent<BigBox>() != null)
+                {
+                    c[i].transform.position = new(
+                         PlayerPrefs.GetFloat("ChildPosX" + i),
+                         PlayerPrefs.GetFloat("ChildPosY" + i),
+                         0);
+                }
+                else if (PlayerPrefs.GetInt("Child" + i) == 1)
+                {
+                    c[i].Interact();
+                }
+            }
+        }
+            
+
+        if (FirstScene)
+            PlayerController.instance.transform.position = new Vector3(
+                PlayerPrefs.GetFloat("PlayerPosX"),
+                PlayerPrefs.GetFloat("PlayerPosY"),
+                0);
+
+
+        foreach (var v in PlayerController.instance.UnlockedUpgrades.ToArray())
+        {
+            PlayerController.instance.UnlockedUpgrades[v.Key] = PlayerPrefs.GetInt(v.Key) == 1;
+        }
+    }
     public void ResetSave()
     {
         Interactibles = GameObject.Find("Interactibles");
         PlayerPrefs.DeleteKey("SceneName");
-        for (int i = 0; i < Interactibles.transform.childCount; i++)
-        {
+        var c = Interactibles.GetComponentsInChildren<Interactible>();
+        for (int i = 0; i < c.Length; i++) 
+        { 
             PlayerPrefs.DeleteKey("Child" + i);
-            if (Interactibles.transform.GetChild(i).GetComponent<BigBox>() != null)
+            if (c[i].GetComponent<BigBox>() != null)
             {
                 PlayerPrefs.DeleteKey("ChildPosX" + i);
                 PlayerPrefs.DeleteKey("ChildPosY" + i);
@@ -95,33 +131,5 @@ public class SaveNLoad : MonoBehaviour
 
         ResetSave();
     }
-    public void Load(bool FirstScene, bool NewScene)
-    {
-        Interactibles = GameObject.Find("Interactibles");
-
-        if(!NewScene)
-        for (int i = 0; i < Interactibles.transform.childCount; i++)
-        {
-            Interactibles.transform.GetChild(i).GetComponent<Interactible>().IsActivated = (PlayerPrefs.GetInt("Child" + i) == 1);
-            if (Interactibles.transform.GetChild(i).GetComponent<BigBox>() != null)
-            {
-                Interactibles.transform.GetChild(i).transform.position = new(
-                     PlayerPrefs.GetFloat("ChildPosX" + i),
-                     PlayerPrefs.GetFloat("ChildPosY" + i),
-                     0);
-            }
-        }
-
-        if (FirstScene)
-            PlayerController.instance.transform.position = new Vector3(
-                PlayerPrefs.GetFloat("PlayerPosX"),
-                PlayerPrefs.GetFloat("PlayerPosY"),
-                0);
-
-
-        foreach (var v in PlayerController.instance.UnlockedUpgrades.ToArray())
-        {
-            PlayerController.instance.UnlockedUpgrades[v.Key] = PlayerPrefs.GetInt(v.Key) == 1;
-        }
-    }
+    
 }
