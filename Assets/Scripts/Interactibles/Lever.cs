@@ -70,6 +70,8 @@ public class Lever : Interactible
             transform.GetChild(0).gameObject.SetActive(!IsActivated);
             transform.GetChild(1).gameObject.SetActive(IsActivated);
             if(LaunchesCutscene) cutscene ??= StartCoroutine(LaunchCutscene());
+
+            /* Move in and out platforms */
             if (appearance)
             {
                 for (int i = 0; i < platforms.Length; i++)
@@ -86,6 +88,7 @@ public class Lever : Interactible
                 moveDoOnce = IsActivated;
             }
 
+            /* Open laser doors */
             if (door)
             {
                 for (int i = 0; i < platforms.Length; i++)
