@@ -8,6 +8,7 @@ public class HittableButton : Interactible
     [SerializeField] private bool LaunchesCutscene = false;
     [SerializeField] private bool canExplode = false;
     [SerializeField] private float CutsceneFreezeDuration = 2f;
+    [SerializeField] private bool door = false;
 
     private bool moveDoOnce = false;
     private bool isExploded = false;
@@ -19,6 +20,8 @@ public class HittableButton : Interactible
 
     private void Update()
     {
+        if(!door)
+        
         for (int i = 0; i < platforms.Length; i++)
         {
             Platform currentPlatform = platforms[i].GetComponent<Platform>();
@@ -70,6 +73,17 @@ public class HittableButton : Interactible
         transform.GetChild(1).gameObject.SetActive(IsActivated);
         if (LaunchesCutscene && isExploded && canExplode) cutscene ??= StartCoroutine(LaunchCutscene());
 
+
+        if (door)
+        {
+            for (int i = 0; i < platforms.Length; i++)
+            {
+                platforms[i].transform.GetChild(0).gameObject.SetActive(!IsActivated);
+                platforms[i].transform.GetChild(1).gameObject.SetActive(IsActivated);
+
+                platforms[i].GetComponent<Collider2D>().enabled = !platforms[i].GetComponent<Collider2D>().enabled;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

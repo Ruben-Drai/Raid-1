@@ -138,7 +138,8 @@ public class GrapplingGun : MonoBehaviour
                 {
                     FistOnly = !PlayerController.instance.UnlockedUpgrades["Hook"] || _hit.collider.GetComponent<Interactible>() != null;
                     grapplePoint = _hit.point;
-                    if (FistOnly) grapplePoint += distanceVector.normalized / 10f;
+                    if (FistOnly) 
+                        grapplePoint += distanceVector.normalized / 2f;
 
                     grappleDistanceVector = grapplePoint - (Vector2)gunPivot.position;
                     grappleRope.enabled = true;
