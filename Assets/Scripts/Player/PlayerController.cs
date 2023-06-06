@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
             {"Jump",true},
             {"Sneak",true},
             {"Strength",true},
-            {"ArmGun", true},
+            {"ArmGun", false},
             {"DoubleJump",true},
             {"Hook",true}
         };
