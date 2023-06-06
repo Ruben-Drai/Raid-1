@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
         {
             {"Jump",true},
             {"Strength",true},
-            {"ArmGun", false},
+            {"ArmGun", true},
             {"DoubleJump&Sneak",true},
             {"Hook",true}
         };

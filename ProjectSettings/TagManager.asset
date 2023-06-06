@@ -7,7 +7,7 @@ TagManager:
   - PlayerFist
   - Crate
   - DestroyablePlatform
-  - Walkable
+  - Fistable
   layers:
   - Default
   - TransparentFX

@@ -31,39 +31,43 @@ public class Lever : Interactible
         {
             Platform currentPlatform = platforms[i].GetComponent<Platform>();
 
-            if (move)
+            if (IsActivated)
             {
-                if (IsActivated)
+                if (moveOnce)
+                {
+                    if (moveDoOnce)
+                    {
+                        currentPlatform.currentWaypointIndex = 1;
+                        currentPlatform.IsActivated = true;
+                        moveDoOnce = !(i == platforms.Length - 1);
+                    }
+                }
+                else if (move)
                 {
                     currentPlatform.IsActivated = true;
-                }
-                else
-                {
-                    currentPlatform.IsActivated = false;
                 }
             }
-            else if (moveOnce)
+            else
             {
-                if (moveDoOnce)
+                if (moveOnce)
                 {
-                    moveDoOnce = i == platforms.Length - 1 ? false : true;
-                    currentPlatform.IsActivated = true;
+                    if (moveDoOnce)
+                    {
+                        currentPlatform.currentWaypointIndex = 0;
+                        currentPlatform.IsActivated = true;
+                        moveDoOnce = !(i == platforms.Length - 1);
+                    }
                 }
-
-                if (currentPlatform.isNear)
+                else if (move)
                 {
-                    currentPlatform.isNear = false;
                     currentPlatform.IsActivated = false;
-
-                    nbDo = i == platforms.Length - 1 ? nbDo - 1 : nbDo;
-                    moveDoOnce = nbDo <= 0 ? false : true;
                 }
             }
         }
     }
     public override void Interact()
     {
-        if (PlayerController.instance.UnlockedUpgrades["Strength"] &&(!moveOnce ||(moveOnce && !IsActivated)))
+        if (PlayerController.instance.UnlockedUpgrades["Strength"] /*&&(!moveOnce ||(moveOnce && !IsActivated))*/)
         {
             IsActivated = !IsActivated;
             nbDo += IsActivated ? 1 : 0;
@@ -84,7 +88,7 @@ public class Lever : Interactible
             }
             else if (moveOnce)
             {
-                moveDoOnce = IsActivated;
+                moveDoOnce = true;
             }
         }
     }
