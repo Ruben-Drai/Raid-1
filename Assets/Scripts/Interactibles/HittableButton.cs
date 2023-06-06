@@ -34,12 +34,7 @@ public class HittableButton : Interactible
 
             if (IsActivated)
             {
-
-                if (move)
-                {
-                    currentPlatform.IsActivated = true;
-                }
-                else if (currentPlatform.moveOnce)
+                if (currentPlatform.moveOnce)
                 {
                     if (moveDoOnce)
                     {
@@ -47,17 +42,15 @@ public class HittableButton : Interactible
                         currentPlatform.IsActivated = true;
                         moveDoOnce = !(i == platforms.Length - 1);
                     }
-
-
+                }
+                else if (move)
+                {
+                    currentPlatform.IsActivated = true;
                 }
             }
             else
             {
-                if (move)
-                {
-                    currentPlatform.IsActivated = false;
-                }
-                else if (currentPlatform.moveOnce)
+                if (currentPlatform.moveOnce)
                 {
                     if (moveDoOnce)
                     {
@@ -66,20 +59,12 @@ public class HittableButton : Interactible
                         moveDoOnce = !(i == platforms.Length - 1);
                     }
                 }
+                else if (move)
+                {
+                    currentPlatform.IsActivated = false;
+                }
             }
         }
-
-        /* Change button appearance */
-        //if (IsActivated)
-        //{
-        //    transform.GetChild(0).gameObject.SetActive(false);
-        //    transform.GetChild(1).gameObject.SetActive(true);
-        //}
-        //else
-        //{
-        //    transform.GetChild(0).gameObject.SetActive(true);
-        //    transform.GetChild(1).gameObject.SetActive(false);
-        //}
     }
 
     public override void Interact()
@@ -98,8 +83,6 @@ public class HittableButton : Interactible
             {
                 platforms[i].transform.GetChild(0).gameObject.SetActive(!IsActivated);
                 platforms[i].transform.GetChild(1).gameObject.SetActive(IsActivated);
-
-                platforms[i].GetComponent<Collider2D>().enabled = !platforms[i].GetComponent<Collider2D>().enabled;
             }
         }
 
@@ -133,12 +116,6 @@ public class HittableButton : Interactible
         {
             Interact();
         }
-
-        ///* Deactivate button when leaving the trigger so it get back in place */
-        //if (collision.gameObject.CompareTag("PlayerFist"))
-        //{
-        //    IsActivated = false;
-        //}
     }
 
     public IEnumerator LaunchCutscene()
