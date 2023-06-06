@@ -132,7 +132,7 @@ public class GrapplingGun : MonoBehaviour
         {
 
             RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized, 500, mask);
-            if (_hit == true)
+            if (_hit == true && _hit.collider.CompareTag("Fistable"))
             {
                 if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistance || !hasMaxDistance)
                 {

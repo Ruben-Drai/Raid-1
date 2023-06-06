@@ -8,6 +8,7 @@ TagManager:
   - Crate
   - DestroyablePlatform
   - Walkable
+  - Fistable
   layers:
   - Default
   - TransparentFX

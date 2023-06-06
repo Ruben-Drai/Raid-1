@@ -68,18 +68,6 @@ public class HittableButton : Interactible
                 }
             }
         }
-
-        /* Change button appearance */
-        //if (IsActivated)
-        //{
-        //    transform.GetChild(0).gameObject.SetActive(false);
-        //    transform.GetChild(1).gameObject.SetActive(true);
-        //}
-        //else
-        //{
-        //    transform.GetChild(0).gameObject.SetActive(true);
-        //    transform.GetChild(1).gameObject.SetActive(false);
-        //}
     }
 
     public override void Interact()
@@ -98,8 +86,6 @@ public class HittableButton : Interactible
             {
                 platforms[i].transform.GetChild(0).gameObject.SetActive(!IsActivated);
                 platforms[i].transform.GetChild(1).gameObject.SetActive(IsActivated);
-
-                platforms[i].GetComponent<Collider2D>().enabled = !platforms[i].GetComponent<Collider2D>().enabled;
             }
         }
 
@@ -133,12 +119,6 @@ public class HittableButton : Interactible
         {
             Interact();
         }
-
-        ///* Deactivate button when leaving the trigger so it get back in place */
-        //if (collision.gameObject.CompareTag("PlayerFist"))
-        //{
-        //    IsActivated = false;
-        //}
     }
 
     public IEnumerator LaunchCutscene()
