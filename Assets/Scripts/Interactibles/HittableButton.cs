@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class HittableButton : Interactible
 {
+    private bool isExploded = false;
     [SerializeField] private bool move = false;
     private bool moveDoOnce = false;
 
@@ -30,7 +31,7 @@ public class HittableButton : Interactible
                         moveDoOnce = !(i == platforms.Length - 1);
                     }
 
-                    
+
                 }
             }
             else
@@ -56,21 +57,23 @@ public class HittableButton : Interactible
     {
         IsActivated = !IsActivated;
         moveDoOnce = true;
-        transform.GetChild(0)?.gameObject.SetActive(!IsActivated);
-        transform.GetChild(1)?.gameObject.SetActive(IsActivated);
+        transform.GetChild(0).gameObject.SetActive(!IsActivated);
+        transform.GetChild(1).gameObject.SetActive(IsActivated);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("PlayerFist"))
+        if (((collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player")) && !isExploded)
+            || (collision.gameObject.CompareTag("PlayerFist") && !IsActivated))
         {
             Interact();
+            isExploded = collision.gameObject.CompareTag("PlayerFist");
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player"))
+        if ((collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player")) && !isExploded)
         {
             Interact();
         }
