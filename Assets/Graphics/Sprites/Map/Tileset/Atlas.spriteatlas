@@ -72,6 +72,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: e05f0adceeede144ea14d6f855f9f65a, type: 3}
     - {fileID: 2800000, guid: 7f93f3f5e8aeb3a4aa7560215e091268, type: 3}
     - {fileID: 2800000, guid: b107885f88bea0f4ebc691f40a40b99c, type: 3}
+    - {fileID: 2800000, guid: 51a80658dd2c3e44b8202e1433f4a708, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -376,6 +377,7 @@ SpriteAtlas:
   - {fileID: 560333532, guid: d962fc281f1770548a0392bc0add612a, type: 3}
   - {fileID: 670566240, guid: d962fc281f1770548a0392bc0add612a, type: 3}
   - {fileID: 21300000, guid: e49da2481f592294eb9e162a36bbc7da, type: 3}
+  - {fileID: 21300000, guid: 51a80658dd2c3e44b8202e1433f4a708, type: 3}
   - {fileID: 21300000, guid: 1617a249449d37c4d929fdbb0c1c4def, type: 3}
   - {fileID: 21300000, guid: 7bfb9b990da1d284cbc90e061ae331b9, type: 3}
   - {fileID: 21300000, guid: d5af24b924a81284cb81a2bb99fa4914, type: 3}
@@ -1187,6 +1189,7 @@ SpriteAtlas:
   - LuminousForest_10
   - LuminousForest_11
   - Right_Corner_Down
+  - Button
   - Test5
   - Right_Corner_Up
   - Middle
