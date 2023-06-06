@@ -623,6 +623,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3940813992872767083, guid: 944296d2e850e8645b1e7d8d2e5d78ee, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 944296d2e850e8645b1e7d8d2e5d78ee, type: 3}
 --- !u!1 &252111743
@@ -35374,6 +35378,10 @@ PrefabInstance:
     - target: {fileID: 3940813992872767083, guid: 944296d2e850e8645b1e7d8d2e5d78ee, type: 3}
       propertyPath: m_Name
       value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940813992872767083, guid: 944296d2e850e8645b1e7d8d2e5d78ee, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 944296d2e850e8645b1e7d8d2e5d78ee, type: 3}

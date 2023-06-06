@@ -58,10 +58,10 @@ public class GrapplingRope : MonoBehaviour
 
     private void Update()
     {
-        
-        if(!isReturning && !isGrappling)
+
+        if (!isReturning && !isGrappling)
             moveTime += Time.deltaTime;
-        else if(isReturning)
+        else if (isReturning)
             moveTime -= Time.deltaTime;
 
         DrawRope();
@@ -73,11 +73,11 @@ public class GrapplingRope : MonoBehaviour
             if (!strightLine)
             {//problem here with it being reset before the shot
                 if (m_lineRenderer.GetPosition(precision - 1).x == grapplingGun.grapplePoint.x
-                    ||(grapplingGun.FistOnly && Vector2.Distance(m_Fist.position,grapplingGun.grapplePoint)<0.1f))
+                    || (grapplingGun.FistOnly && Vector2.Distance(m_Fist.position, grapplingGun.grapplePoint) < 0.1f))
                 {
                     strightLine = true;
-                    if(grapplingGun.FistOnly)
-                        isReturning= true;
+                    if (grapplingGun.FistOnly)
+                        isReturning = true;
                 }
                 else
                 {
@@ -107,12 +107,12 @@ public class GrapplingRope : MonoBehaviour
                     DrawRopeNoWaves();
                 }
             }
-            
+
         }
         else
         {
             ReturnRope();
-            if (Vector2.Distance(m_Fist.position, grapplingGun.firePoint.position)<0.1f)
+            if (Vector2.Distance(m_Fist.position, grapplingGun.firePoint.position) < 0.1f)
             {
                 isReturning = false;
                 enabled = false;
@@ -121,7 +121,7 @@ public class GrapplingRope : MonoBehaviour
                 grapplingGun.HasShot = false;
             }
         }
-        
+
     }
 
     void DrawRopeWaves()
@@ -143,7 +143,7 @@ public class GrapplingRope : MonoBehaviour
     {
         m_lineRenderer.positionCount = precision;
 
-        for (int i = precision-1; i >=0 ; i--)
+        for (int i = precision - 1; i >= 0; i--)
         {
             float delta = (float)i / ((float)precision - 1f);
             Vector2 offset = Vector2.Perpendicular(grapplingGun.grappleDistanceVector).normalized * ropeAnimationCurve.Evaluate(delta) * waveSize;
