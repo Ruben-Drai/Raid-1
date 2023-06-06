@@ -45,9 +45,3 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Obstacles
-    uniqueID: 2067505315
-    locked: 0
-  - name: UI
-    uniqueID: 3424409335
-    locked: 0

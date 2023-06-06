@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        Animation();
+        //Animation();
 
         TimeFromLastJump += Time.deltaTime;
         CoyoteTimer += Time.deltaTime;
