@@ -124,7 +124,12 @@ public class PlayerController : MonoBehaviour
             && context.performed)
         {
             if (hook.HasShot)
+            {
                 hook.ReturnHook();
+                _canJump = false;
+                if (UnlockedUpgrades["DoubleJump"])
+                    CanDoubleJump = true;
+            }
 
             TimeFromLastJump = 0f;
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
