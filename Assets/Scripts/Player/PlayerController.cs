@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private BoxCollider2D StandingColl;
     [SerializeField] private BoxCollider2D SneakingColl;
     [SerializeField] private CapsuleCollider2D InteractionTrigger;
+
     public GrapplingGun hook;
 
     private bool _canJump = true;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
     private GroundCheck feet;
     private SpringJoint2D joint;
+    private Animator animator;
 
 
     [NonSerialized] public Interactible AvailableInteraction;
@@ -35,11 +37,13 @@ public class PlayerController : MonoBehaviour
     [NonSerialized] public Vector2 SlopeAdjustment;
     [NonSerialized] public Vector2 GamePadAimDirection;
     [NonSerialized] public bool IsPushingBox = false;
-    [NonSerialized] public bool IsMoving = false;
+    /*[NonSerialized]*/ public bool IsMoving = false;
 
     [NonSerialized] public bool IsInJump = true;
     [NonSerialized] public bool CanDoubleJump = true;
     [NonSerialized] public InputActionMap actionMap;
+
+    private bool IsDoubleJumping = false;
 
     public bool CanJump
     {
@@ -67,6 +71,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         joint = GetComponent<SpringJoint2D>();
         feet = GetComponentInChildren<GroundCheck>();
         rb = GetComponent<Rigidbody2D>();
@@ -83,6 +88,8 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        Animation();
+
         TimeFromLastJump += Time.deltaTime;
         CoyoteTimer += Time.deltaTime;
         if (hook.HasShot && IsChangingLen)
@@ -140,8 +147,11 @@ public class PlayerController : MonoBehaviour
                 _canJump = false;
             else if (CanDoubleJump && UnlockedUpgrades["DoubleJump&Sneak"])
                 CanDoubleJump = false;
+                IsDoubleJumping = true;
+            }
+               
         }
-    }
+    
     public void Interact(InputAction.CallbackContext context)
     {
         //if the player is on the ground currently and not on an interactible such as a box so that you can't push a box to the right from the top of it
@@ -266,4 +276,24 @@ public class PlayerController : MonoBehaviour
 
     }
 
+
+    private void Animation()
+    {
+        animator.SetBool("UnlockArm", UnlockedUpgrades["ArmGun"]);
+        animator.SetFloat("Velocity_Y", rb.velocity.y);
+        animator.SetBool("DoubleJump", IsDoubleJumping);
+        if (rb.velocity.x > 0.1f)
+        {
+            animator.SetBool("IsMoving", true);
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else if(rb.velocity.x < -0.1f)
+        { 
+            animator.SetBool("IsMoving", true);
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+            animator.SetBool("IsMoving", false);
+
+    }
 }
