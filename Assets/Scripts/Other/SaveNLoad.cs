@@ -70,19 +70,20 @@ public class SaveNLoad : MonoBehaviour
     {
         while (SceneManager.GetActiveScene().name == "MainMenu" || SceneManager.GetActiveScene().name == "GameOver")
         {
+            
             yield return null;
         }
         Save();
         if (quit) Application.Quit();
     }
-    public IEnumerator LoadRoutine(bool firstScene)
+    public IEnumerator LoadRoutine(bool firstScene, bool NewScene = false)
     {
         //waits for objects with saved values to be instantiated
         while (SceneManager.GetActiveScene().name == "MainMenu" || SceneManager.GetActiveScene().name == "GameOver")
         {
             yield return null;
         }
-        Load(firstScene);
+        Load(firstScene,NewScene);
     }
     public IEnumerator ResetRoutine()
     {
@@ -94,10 +95,11 @@ public class SaveNLoad : MonoBehaviour
 
         ResetSave();
     }
-    public void Load(bool FirstScene)
+    public void Load(bool FirstScene, bool NewScene)
     {
         Interactibles = GameObject.Find("Interactibles");
 
+        if(!NewScene)
         for (int i = 0; i < Interactibles.transform.childCount; i++)
         {
             Interactibles.transform.GetChild(i).GetComponent<Interactible>().IsActivated = (PlayerPrefs.GetInt("Child" + i) == 1);
@@ -109,6 +111,7 @@ public class SaveNLoad : MonoBehaviour
                      0);
             }
         }
+
         if (FirstScene)
             PlayerController.instance.transform.position = new Vector3(
                 PlayerPrefs.GetFloat("PlayerPosX"),

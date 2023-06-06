@@ -2,28 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyablePlatform : MonoBehaviour
+public class DestroyablePlatform : Interactible
 {
     [SerializeField] private Sprite destroyedSprite;
 
-    private bool isDestroyed;
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public bool isDestroyed;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!isDestroyed)
-        {
-            if (collision.gameObject.CompareTag("Crate"))
-            {
-                isDestroyed = true;
-                GetComponent<BoxCollider2D>().enabled = false;
-                GetComponent<SpriteRenderer>().sprite = destroyedSprite;
-            }
+        if (!isDestroyed && collision.gameObject.CompareTag("Crate"))
+        { 
+            Interact();   
         }
+    }
+
+    public override void Interact()
+    {
+        isDestroyed = true;
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(true);
     }
 }

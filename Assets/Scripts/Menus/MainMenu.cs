@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadSceneAsync("DevRoom");
+        SceneManager.LoadSceneAsync("Lab3");
         SaveNLoad.instance.StartCoroutine(SaveNLoad.instance.ResetRoutine());
         Time.timeScale = 1;
         SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);

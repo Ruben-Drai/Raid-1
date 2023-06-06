@@ -639,11 +639,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsActivated: 0
-  canExplode: 0
+  canExplode: 1
   move: 0
   LaunchesCutscene: 0
   CutsceneFreezeDuration: 2
-  door: 0
+  door: 1
   appearance: 0
   colorShow: {r: 1, g: 1, b: 1, a: 1}
   colorHide: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}

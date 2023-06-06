@@ -2469,7 +2469,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1109219334}
   m_Layer: 0
-  m_Name: Interac
+  m_Name: Interactibles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
