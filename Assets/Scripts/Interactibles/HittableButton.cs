@@ -1,12 +1,21 @@
+using Cinemachine;
+using System.Collections;
 using UnityEngine;
 
 public class HittableButton : Interactible
 {
-    private bool isExploded = false;
     [SerializeField] private bool move = false;
+    [SerializeField] private bool LaunchesCutscene = false;
+    [SerializeField] private bool canExplode = false;
+    [SerializeField] private float CutsceneFreezeDuration = 2f;
+
     private bool moveDoOnce = false;
+    private bool isExploded = false;
 
     [SerializeField] private GameObject[] platforms;
+
+
+    private Coroutine cutscene;
 
     private void Update()
     {
@@ -59,6 +68,8 @@ public class HittableButton : Interactible
         moveDoOnce = true;
         transform.GetChild(0).gameObject.SetActive(!IsActivated);
         transform.GetChild(1).gameObject.SetActive(IsActivated);
+        if (LaunchesCutscene && isExploded && canExplode) cutscene ??= StartCoroutine(LaunchCutscene());
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -67,7 +78,7 @@ public class HittableButton : Interactible
             || (collision.gameObject.CompareTag("PlayerFist") && !IsActivated))
         {
             Interact();
-            isExploded = collision.gameObject.CompareTag("PlayerFist");
+            isExploded = collision.gameObject.CompareTag("PlayerFist") && canExplode;
         }
     }
 
@@ -77,5 +88,17 @@ public class HittableButton : Interactible
         {
             Interact();
         }
+    }
+
+    public IEnumerator LaunchCutscene()
+    {
+        foreach (var platform in platforms)
+        {
+            FindFirstObjectByType<CinemachineVirtualCamera>().Follow = platform.transform;
+
+            yield return new WaitForSeconds(CutsceneFreezeDuration);
+        }
+        yield return null;
+        FindFirstObjectByType<CinemachineVirtualCamera>().Follow = PlayerController.instance.transform;
     }
 }

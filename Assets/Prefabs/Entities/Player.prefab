@@ -768,7 +768,7 @@ SpringJoint2D:
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
-  m_AutoConfigureDistance: 1
+  m_AutoConfigureDistance: 0
   m_Distance: 1.9816451
   m_DampingRatio: 1
   m_Frequency: 1
@@ -911,12 +911,13 @@ MonoBehaviour:
   launchToPoint: 0
   launchType: 1
   launchSpeed: 1
-  autoConfigureDistance: 1
+  autoConfigureDistance: 0
   targetDistance: 3
   targetFrequncy: 1
   grapplePoint: {x: 0, y: 0}
   grappleDistanceVector: {x: 0, y: 0}
   Direction: {x: 0, y: 0}
+  FistOnly: 0
   HasShot: 0
 --- !u!1 &8611835902219531293
 GameObject:

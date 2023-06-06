@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed || context.canceled)
         {
-            if (UnlockedUpgrades["Sneak"])
+            if (UnlockedUpgrades["Sneak"] && !IsInJump)
                 IsSneaking = !IsSneaking;
         }
         

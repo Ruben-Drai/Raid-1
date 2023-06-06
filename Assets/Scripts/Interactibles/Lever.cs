@@ -1,9 +1,14 @@
+using Cinemachine;
 using System;
+using System.Collections;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Lever : Interactible
 {
     [SerializeField] private bool move = false;
+    [SerializeField] private bool LaunchesCutscene = false;
+    [SerializeField] private float CutsceneFreezeDuration = 2f;
 
     [SerializeField] private bool moveOnce = false;
     [SerializeField] private bool moveDoOnce = false;
@@ -15,6 +20,8 @@ public class Lever : Interactible
     [SerializeField] private GameObject[] platforms;
     [SerializeField] private int nbDo = 0;
 
+
+    private Coroutine cutscene;
 
     private void Update()
     {
@@ -54,14 +61,14 @@ public class Lever : Interactible
     }
     public override void Interact()
     {
-        if (PlayerController.instance.UnlockedUpgrades["Strength"]) // use lever part.2
+        if (PlayerController.instance.UnlockedUpgrades["Strength"])
         {
             IsActivated = !IsActivated;
             nbDo += IsActivated ? 1 : 0;
 
             transform.GetChild(0).gameObject.SetActive(!IsActivated);
             transform.GetChild(1).gameObject.SetActive(IsActivated);
-
+            if(LaunchesCutscene) cutscene ??= StartCoroutine(LaunchCutscene());
             if (appearance)
             {
                 for (int i = 0; i < platforms.Length; i++)
@@ -79,5 +86,16 @@ public class Lever : Interactible
             }
         }
     }
+    public IEnumerator LaunchCutscene()
+    {
+        foreach(var platform in platforms)
+        {
+            FindFirstObjectByType<CinemachineVirtualCamera>().Follow = platform.transform;
 
+            yield return new WaitForSeconds(CutsceneFreezeDuration); 
+        }
+        yield return null;
+        FindFirstObjectByType<CinemachineVirtualCamera>().Follow = PlayerController.instance.transform;
+    }
+    
 }
