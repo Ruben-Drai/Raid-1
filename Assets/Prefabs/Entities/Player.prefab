@@ -446,7 +446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e69f8eaafa4dfb64f865f16faa804386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BInteract: {fileID: 0}
   pauseMenu: {fileID: 0}
   JumpForce: 17
   MovementSpeed: 10
@@ -457,6 +456,7 @@ MonoBehaviour:
   SneakingColl: {fileID: 8018268210188467063}
   InteractionTrigger: {fileID: 7777774721333183780}
   hook: {fileID: 148341381461873333}
+  IsMoving: 0
 --- !u!114 &6287506163292819442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -933,7 +933,7 @@ MonoBehaviour:
   launchToPoint: 0
   launchType: 1
   launchSpeed: 1
-  autoConfigureDistance: 0
+  autoConfigureDistance: 1
   targetDistance: 3
   targetFrequncy: 1
   grapplePoint: {x: 0, y: 0}
