@@ -6,11 +6,11 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
     public bool IsActivated = false;
+    public bool moveOnce = false;
     public bool isNear = false;
     [SerializeField] private List<Transform> wayPoints;
     [SerializeField] private float PlatformSpeed = 1.0f;
     [SerializeField] private float WaitTimeBewteenWayPoints = 1.0f;
-    public bool moveOnce = false;
 
     public int currentWaypointIndex = 0;
     public Coroutine MoveRoutine = null;
