@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Parallax : MonoBehaviour
 {
@@ -11,7 +12,10 @@ public class Parallax : MonoBehaviour
     void Start()
     {
         startpos = transform.position.x; // Take X pos at the start.
-        lenght = GetComponent<SpriteRenderer>().bounds.size.x; // Take.
+        if (GetComponent<SpriteRenderer>() != null)
+            lenght = GetComponent<SpriteRenderer>().bounds.size.x; // Take X bound.
+        else if (GetComponent<TilemapRenderer>() != null)
+            lenght = GetComponent<TilemapRenderer>().bounds.size.x;
     }
 
     // Update is called once per frame
