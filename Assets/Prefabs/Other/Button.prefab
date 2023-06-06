@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 3940813992872767082}
   - component: {fileID: 1622346411972721530}
   - component: {fileID: 4017355949153760975}
-  - component: {fileID: 1125757218078307404}
+  - component: {fileID: 2313710940010191214}
   m_Layer: 9
   m_Name: Button
   m_TagString: Fistable
@@ -256,7 +256,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.37, y: 0.39999998}
   m_EdgeRadius: 0
---- !u!114 &1125757218078307404
+--- !u!114 &2313710940010191214
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -14,6 +14,7 @@ public class Lever : Interactible
     [SerializeField] private bool moveDoOnce = false;
 
     [SerializeField] private bool appearance = false;
+    [SerializeField] private bool door  = false;
     [SerializeField] private Color colorShow = Color.white;
     [SerializeField] private Color colorHide = new Color(0.5566038f, 0.5566038f, 0.5566038f, 1);
 
@@ -75,6 +76,8 @@ public class Lever : Interactible
             transform.GetChild(0).gameObject.SetActive(!IsActivated);
             transform.GetChild(1).gameObject.SetActive(IsActivated);
             if(LaunchesCutscene) cutscene ??= StartCoroutine(LaunchCutscene());
+
+            /* Move in and out platforms */
             if (appearance)
             {
                 for (int i = 0; i < platforms.Length; i++)
@@ -89,6 +92,16 @@ public class Lever : Interactible
             else if (moveOnce)
             {
                 moveDoOnce = true;
+            }
+
+            /* Open laser doors */
+            if (door)
+            {
+                for (int i = 0; i < platforms.Length; i++)
+                {
+                    platforms[i].transform.GetChild(0).gameObject.SetActive(!IsActivated);
+                    platforms[i].transform.GetChild(1).gameObject.SetActive(IsActivated);
+                }
             }
         }
     }
