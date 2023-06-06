@@ -74,10 +74,9 @@ public class PlayerController : MonoBehaviour
         UnlockedUpgrades = new Dictionary<string, bool>()
         {
             {"Jump",true},
-            {"Sneak",true},
             {"Strength",true},
             {"ArmGun", false},
-            {"DoubleJump",true},
+            {"DoubleJump&Sneak",true},
             {"Hook",true}
         };
         Controller = GetComponent<PlayerInput>();
@@ -98,7 +97,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (!Physics2D.Raycast(transform.position, Vector2.up, 0.5f))
+            var v = Physics2D.Raycast(transform.position, Vector2.up, 0.5f,LayerMask.GetMask("BoudingBox"));
+            if (!v)
             {
                 SneakingColl.enabled = false;
                 InteractionTrigger.enabled = true;
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
     public void Jump(InputAction.CallbackContext context)
     {
         if (TimeFromLastJump > JumpCooldown
-            && ((_canJump && UnlockedUpgrades["Jump"]) || (CanDoubleJump && UnlockedUpgrades["DoubleJump"]))
+            && ((_canJump && UnlockedUpgrades["Jump"]) || (CanDoubleJump && UnlockedUpgrades["DoubleJump&Sneak"]))
             && !IsPushingBox
             && context.performed)
         {
@@ -127,10 +127,10 @@ public class PlayerController : MonoBehaviour
             {
                 hook.ReturnHook();
                 _canJump = false;
-                if (UnlockedUpgrades["DoubleJump"])
+                if (UnlockedUpgrades["DoubleJump&Sneak"])
                     CanDoubleJump = true;
             }
-
+            IsSneaking = false;
             TimeFromLastJump = 0f;
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
             IsMoving = true;
@@ -138,14 +138,14 @@ public class PlayerController : MonoBehaviour
             //just in case player spams button, since groundcheck is only done once every 0.1s
             if (_canJump && UnlockedUpgrades["Jump"])
                 _canJump = false;
-            else if (CanDoubleJump && UnlockedUpgrades["DoubleJump"])
+            else if (CanDoubleJump && UnlockedUpgrades["DoubleJump&Sneak"])
                 CanDoubleJump = false;
         }
     }
     public void Interact(InputAction.CallbackContext context)
     {
         //if the player is on the ground currently and not on an interactible such as a box so that you can't push a box to the right from the top of it
-        if (!IsInJump && feet.groundState != GroundState.Interactibles)
+        if (!IsInJump && feet.groundState != GroundState.Interactibles && !IsSneaking)
         {
             if (AvailableInteraction != null && context.performed)
             {
@@ -161,12 +161,11 @@ public class PlayerController : MonoBehaviour
     }
     public void Sneak(InputAction.CallbackContext context)
     {
-        if (context.performed || context.canceled)
+        if (UnlockedUpgrades["DoubleJump&Sneak"] && !IsInJump && !hook.HasShot)
         {
-            if (UnlockedUpgrades["Sneak"] && !IsInJump)
-                IsSneaking = !IsSneaking;
+            if(context.performed)IsSneaking = true;
+            else if (context.canceled) IsSneaking = false;
         }
-        
     }
     public void Pause(InputAction.CallbackContext context)
     {
@@ -208,7 +207,10 @@ public class PlayerController : MonoBehaviour
                 if (hook.HasShot && UnlockedUpgrades["Hook"])
                     hook.ReturnHook();
                 else if (hook.gameObject.activeSelf && !hook.HasShot)
+                {
                     hook.FireHook();
+                    IsSneaking = false;
+                }
             }
         }
     }

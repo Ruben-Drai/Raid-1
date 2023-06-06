@@ -21,6 +21,8 @@ public class Lever : Interactible
     [SerializeField] private int nbDo = 0;
 
 
+    [SerializeField] private CinemachineVirtualCamera[] vms;
+
     private Coroutine cutscene;
 
     private void Update()
@@ -88,11 +90,12 @@ public class Lever : Interactible
     }
     public IEnumerator LaunchCutscene()
     {
-        foreach(var platform in platforms)
+        foreach(var pos in vms)
         {
-            FindFirstObjectByType<CinemachineVirtualCamera>().Follow = platform.transform;
+            pos.Priority = 11;
 
-            yield return new WaitForSeconds(CutsceneFreezeDuration); 
+            yield return new WaitForSeconds(CutsceneFreezeDuration);
+            pos.Priority = 9;
         }
         yield return null;
         FindFirstObjectByType<CinemachineVirtualCamera>().Follow = PlayerController.instance.transform;
