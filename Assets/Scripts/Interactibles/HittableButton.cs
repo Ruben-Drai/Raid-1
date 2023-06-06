@@ -9,12 +9,10 @@ public class HittableButton : Interactible
     [SerializeField] private bool canExplode = false;
     [SerializeField] private bool move = false;
     [SerializeField] private bool LaunchesCutscene = false;
-    [SerializeField] private bool canExplode = false;
     [SerializeField] private float CutsceneFreezeDuration = 2f;
     [SerializeField] private bool door = false;
 
     private bool moveDoOnce = false;
-    [SerializeField] private bool door = false;
 
     [SerializeField] private bool appearance = false;
     [SerializeField] private Color colorShow = Color.white;
