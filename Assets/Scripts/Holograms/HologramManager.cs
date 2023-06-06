@@ -44,6 +44,8 @@ public class HologramManager : MonoBehaviour
             holoSound.Stop();
 
             isHologramActive = false;
+            PlayerController.instance.Controller.SwitchCurrentActionMap("Game");
+
         }
     }
 }

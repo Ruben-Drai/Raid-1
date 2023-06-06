@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class HologramEnter : MonoBehaviour
 {
-    public HologramTrigger trigger;
-    public PlayerController playerController;
+    [SerializeField] private GameObject HologramBox;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") == true)
-            trigger.Open();
-        playerController.Controller.SwitchCurrentActionMap("Dialogue");
+        if (collision.gameObject.CompareTag("Player") == true && !collision.isTrigger)
+        {
+            HologramBox.SetActive(true);
+            FindObjectOfType<HologramManager>().Hologram();
+            PlayerController.instance.Controller.SwitchCurrentActionMap("Dialogue");
+        }
+            
     }
 }
