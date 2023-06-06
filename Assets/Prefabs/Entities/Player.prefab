@@ -610,8 +610,8 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ca356d87-392a-4ece-9f6a-ace3acc8e120
     m_ActionName: Game/Sneak[/Keyboard/ctrl]
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: GamePad
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: K&M
   m_DefaultActionMap: Game
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

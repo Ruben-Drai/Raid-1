@@ -68,7 +68,7 @@ public class SaveNLoad : MonoBehaviour
     }
     public IEnumerator SaveRoutine(bool quit = false)
     {
-        while (SceneManager.GetActiveScene().name != "DevRoom")
+        while (SceneManager.GetActiveScene().name == "MainMenu" || SceneManager.GetActiveScene().name == "GameOver")
         {
             yield return null;
         }
@@ -78,7 +78,7 @@ public class SaveNLoad : MonoBehaviour
     public IEnumerator LoadRoutine(bool firstScene)
     {
         //waits for objects with saved values to be instantiated
-        while (SceneManager.GetActiveScene().name != "DevRoom")
+        while (SceneManager.GetActiveScene().name == "MainMenu" || SceneManager.GetActiveScene().name == "GameOver")
         {
             yield return null;
         }
@@ -87,7 +87,7 @@ public class SaveNLoad : MonoBehaviour
     public IEnumerator ResetRoutine()
     {
         //waits for objects with saved values to be instantiated
-        while (SceneManager.GetActiveScene().name != "DevRoom")
+        while (SceneManager.GetActiveScene().name == "MainMenu" || SceneManager.GetActiveScene().name == "GameOver")
         {
             yield return null;
         }

@@ -10,7 +10,6 @@ using UnityEngine.UIElements;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
-    public TextMeshPro BInteract;
 
     [SerializeField] private PauseMenu pauseMenu;
     [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime = 0.2f, RopeShrinkSpeed=3f;
@@ -257,8 +256,7 @@ public class PlayerController : MonoBehaviour
         string fullpath = instance.actionMap.FindAction("Interact").bindings[0].effectivePath;
         var lastChars = fullpath.Substring(fullpath.Length - 1, 1);
 
-        if(BInteract!=null)
-            BInteract.text = lastChars;
+
     }
 
 }
