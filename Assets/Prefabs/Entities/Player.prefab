@@ -476,6 +476,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ca356d87-392a-4ece-9f6a-ace3acc8e120
     m_ActionName: Game/Sneak[/Keyboard/ctrl]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+        m_MethodName: ControlsDialogue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b8efa5cd-2604-4140-82b6-5204f45cb964
+    m_ActionName: Game/Dialogue[/Keyboard/space,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+        m_MethodName: ControlsDialogue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2cd4f9eb-7912-47fe-85a7-900374ecfea9
+    m_ActionName: Game/Skip[/Keyboard/space,/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: GamePad
   m_DefaultActionMap: Game

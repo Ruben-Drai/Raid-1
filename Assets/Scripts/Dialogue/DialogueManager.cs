@@ -32,6 +32,9 @@ public class DialogueManager : MonoBehaviour
     public static bool isActive = false;
     public DialogueTrigger dialogueTrigger;
 
+    [HideInInspector] public bool finishedAnimationUp = false;
+    [HideInInspector] public bool finishedAnimationDown = false;
+    
     private bool canSkip = false;
     private bool submitSkip;
     private Coroutine displayLineCoroutine;
@@ -104,6 +107,13 @@ public class DialogueManager : MonoBehaviour
     public void StartDisplayingMessage()
     {
         DisplayMessageText();
+        finishedAnimationUp = true;
+
+    }
+
+    public void EndAnimation()
+    {
+        finishedAnimationDown = true;
     }
 
     //This method displays the dialogue text at the end of the animation. It also launches the coroutine to display the message letter by letter.
@@ -180,13 +190,15 @@ public class DialogueManager : MonoBehaviour
             isActive = false;
             dialogueAnimation.SetBool("DialogueIsActive", false);
             arrowAnimation.SetBool("DialogueIsActive", false);
+            finishedAnimationUp = false;
+            finishedAnimationDown = false;
             messageText.text = "";
         }
     }
 
     public void ControlsDialogue(InputAction.CallbackContext context)
     {
-        if (isActive && context.performed && transform.position.y > 169.9)
+        if (isActive && context.performed && finishedAnimationUp)
         {
             if (canSkip)
                 submitSkip = true;

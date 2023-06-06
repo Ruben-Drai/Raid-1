@@ -157,7 +157,6 @@ public class PlayerController : MonoBehaviour
     }
     public void Sneak(InputAction.CallbackContext context)
     {
-        Debug.Log("test");
         if (context.performed || context.canceled)
         {
             if (UnlockedUpgrades["Sneak"])

@@ -6,7 +6,6 @@ public class DialogueTrigger : MonoBehaviour
     public Actor[] actors;
 
     public GameObject DialogueBox;
-    public GameObject HologramBox;
     public Animator dialogueAnimation;
 
     public DialogueManager DialogueManager;

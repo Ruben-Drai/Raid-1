@@ -1,0 +1,59 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class BlackScreenController : MonoBehaviour
+{
+    public GameObject player;
+    public GameObject Narator;
+    public PlayerController playerController;
+    public DialogueManager dialogueManager;
+    public CanvasGroup blackScreen;
+
+    [SerializeField] private int space;
+
+    private bool fadeOut = false;
+
+    void Start()
+    {
+        FindObjectOfType<DialogueTrigger>().StartDialogue();
+        playerController.Controller.SwitchCurrentActionMap("Dialogue");
+        //Robot.SetActive(false);
+    }
+
+    void Update()
+    {
+        if(space >= 1 && dialogueManager.finishedAnimationDown)
+        {
+            fadeOut = true;
+        }
+
+        if(fadeOut) 
+        { 
+            if(blackScreen.alpha >= 0) 
+            {
+                blackScreen.alpha -= Time.deltaTime;
+                if(blackScreen.alpha == 1) 
+                {
+                    fadeOut = false;   
+                }
+            }
+        }
+
+        if(blackScreen.alpha == 0)
+        {
+            this.gameObject.SetActive(false);
+            playerController.Controller.SwitchCurrentActionMap("Game");
+        }
+    }
+
+    public void SpaceCounting(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if(dialogueManager.finishedAnimationUp)
+                space++;      
+        }
+    }
+}
