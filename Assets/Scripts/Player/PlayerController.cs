@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour
     [NonSerialized] public bool CanDoubleJump = true;
     [NonSerialized] public InputActionMap actionMap;
 
+    private bool IsDoubleJumping = false;
+
     public bool CanJump
     {
         get
@@ -138,9 +140,17 @@ public class PlayerController : MonoBehaviour
             IsInJump = true;
             //just in case player spams button, since groundcheck is only done once every 0.1s
             if (_canJump)
+            {
                 _canJump = false;
+                IsDoubleJumping = false;
+            }
+
             else if (CanDoubleJump && UnlockedUpgrades["DoubleJump"])
+            {
                 CanDoubleJump = false;
+                IsDoubleJumping = true;
+            }
+               
         }
     }
     public void Interact(InputAction.CallbackContext context)
@@ -271,7 +281,9 @@ public class PlayerController : MonoBehaviour
     private void Animation()
     {
         animator.SetBool("UnlockArm", UnlockedUpgrades["ArmGun"]);
-        if(rb.velocity.x > 0.1f)
+        animator.SetFloat("Velocity_Y", rb.velocity.y);
+        animator.SetBool("DoubleJump", IsDoubleJumping);
+        if (rb.velocity.x > 0.1f)
         {
             animator.SetBool("IsMoving", true);
             GetComponent<SpriteRenderer>().flipX = false;
