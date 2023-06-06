@@ -5,16 +5,20 @@ using static Cinemachine.CinemachinePathBase;
 
 public class HittableButton : Interactible
 {
-    private bool isExploded = false;
+    /*can be touched once or more*/
     [SerializeField] private bool canExplode = false;
-    [SerializeField] private bool move = false;
-    [SerializeField] private bool LaunchesCutscene = false;
-    [SerializeField] private float CutsceneFreezeDuration = 2f;
-    [SerializeField] private bool door = false;
+    private bool isExploded = false;
 
+    /*different modes*/
+    [SerializeField] private bool move = false;
+    [SerializeField] private bool door = false;
+    [SerializeField] private bool appearance = false;
     private bool moveDoOnce = false;
 
-    [SerializeField] private bool appearance = false;
+    [SerializeField] private bool LaunchesCutscene = false;
+    [SerializeField] private float CutsceneFreezeDuration = 2f;
+
+    /*color for mode appearance*/
     [SerializeField] private Color colorShow = Color.white;
     [SerializeField] private Color colorHide = new Color(0.5566038f, 0.5566038f, 0.5566038f, 1);
 
@@ -30,7 +34,6 @@ public class HittableButton : Interactible
         for (int i = 0; i < platforms.Length; i++)
         {
             Platform currentPlatform = platforms[i].GetComponent<Platform>();
-
 
             if (IsActivated)
             {
@@ -102,8 +105,7 @@ public class HittableButton : Interactible
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (((collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player")) && !isExploded)
-            || (collision.gameObject.CompareTag("PlayerFist") && !IsActivated))
+        if (((collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player")) && !isExploded) || (collision.gameObject.CompareTag("PlayerFist") && !IsActivated))
         {
             Interact();
             isExploded = collision.gameObject.CompareTag("PlayerFist") && canExplode;
@@ -112,7 +114,7 @@ public class HittableButton : Interactible
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if ((collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player")) || (collision.gameObject.CompareTag("PlayerFist") && IsActivated) && !isExploded)
+        if (((collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player")) && !isExploded) || (collision.gameObject.CompareTag("PlayerFist") && !IsActivated))
         {
             Interact();
         }
