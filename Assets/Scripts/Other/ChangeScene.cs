@@ -23,7 +23,10 @@ public class ChangeScene : MonoBehaviour
     {
         if(changeScene)
             if(Occultation())
+            {
                 SceneManager.LoadScene(LevelToLoad);
+            }
+                
 
     }
 

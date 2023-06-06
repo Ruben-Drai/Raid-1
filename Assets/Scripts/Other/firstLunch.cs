@@ -7,11 +7,13 @@ public class firstLunch : MonoBehaviour
     [SerializeField] private float transitionSpeed = 0.05f;
     private float timer;
     private SpriteRenderer ocultation;
-    private bool _firstLunch = true;
+    public bool _firstLunch = true;
     // Start is called before the first frame update
     void Start()
     {
-     ocultation = GetComponent<SpriteRenderer>();   
+        ocultation = GetComponent<SpriteRenderer>();
+
+        SaveNLoad.instance.StartCoroutine(SaveNLoad.instance.LoadRoutine(false));
     }
 
     // Update is called once per frame
