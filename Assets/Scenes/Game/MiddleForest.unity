@@ -880,6 +880,7 @@ GameObject:
   m_Component:
   - component: {fileID: 381280351}
   - component: {fileID: 381280352}
+  - component: {fileID: 381280353}
   m_Layer: 0
   m_Name: Labo2
   m_TagString: Untagged
@@ -928,6 +929,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 3}
   m_EdgeRadius: 0
+--- !u!114 &381280353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381280350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf4ec970d66f9e4f8edce618d97cb17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelToLoad: Lab2
+  transitionSpeed: 0.05
+  ocultation: {fileID: 0}
 --- !u!1 &385608260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1605,7 +1621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311026243985, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.08801198
+      value: -9.536131
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311026243985, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1629,7 +1645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311481806078, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.16224
+      value: -10.162241
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311481806078, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.y

@@ -16,14 +16,14 @@ public class SaveNLoad : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-    
+
 
     //All data is saved into playerprefs, I don't know if this is efficient since playerprefs are inherently Register Keys
     //It might be better to save as a file but I don't have the time for that
     //This basically saves player pos as well as all interactibles' activation status, and position if they can be pushed
     public void Save()
     {
-        PlayerPrefs.SetString("SceneName",SceneManager.GetActiveScene().name);
+        PlayerPrefs.SetString("SceneName", SceneManager.GetActiveScene().name);
 
         Interactibles = GameObject.Find("Interactibles");
 
@@ -75,14 +75,14 @@ public class SaveNLoad : MonoBehaviour
         Save();
         if (quit) Application.Quit();
     }
-    public IEnumerator LoadRoutine()
+    public IEnumerator LoadRoutine(bool firstScene)
     {
         //waits for objects with saved values to be instantiated
         while (SceneManager.GetActiveScene().name != "DevRoom")
         {
             yield return null;
         }
-        Load();
+        Load(firstScene);
     }
     public IEnumerator ResetRoutine()
     {
@@ -94,10 +94,10 @@ public class SaveNLoad : MonoBehaviour
 
         ResetSave();
     }
-    public void Load()
+    public void Load(bool FirstScene)
     {
         Interactibles = GameObject.Find("Interactibles");
-        
+
         for (int i = 0; i < Interactibles.transform.childCount; i++)
         {
             Interactibles.transform.GetChild(i).GetComponent<Interactible>().IsActivated = (PlayerPrefs.GetInt("Child" + i) == 1);
@@ -109,10 +109,11 @@ public class SaveNLoad : MonoBehaviour
                      0);
             }
         }
-        PlayerController.instance.transform.position = new Vector3(
-            PlayerPrefs.GetFloat("PlayerPosX"),
-            PlayerPrefs.GetFloat("PlayerPosY"),
-            0);
+        if (FirstScene)
+            PlayerController.instance.transform.position = new Vector3(
+                PlayerPrefs.GetFloat("PlayerPosX"),
+                PlayerPrefs.GetFloat("PlayerPosY"),
+                0);
 
 
         foreach (var v in PlayerController.instance.UnlockedUpgrades.ToArray())
