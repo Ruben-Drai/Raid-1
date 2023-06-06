@@ -34,12 +34,7 @@ public class HittableButton : Interactible
 
             if (IsActivated)
             {
-
-                if (move)
-                {
-                    currentPlatform.IsActivated = true;
-                }
-                else if (currentPlatform.moveOnce)
+                if (currentPlatform.moveOnce)
                 {
                     if (moveDoOnce)
                     {
@@ -47,17 +42,15 @@ public class HittableButton : Interactible
                         currentPlatform.IsActivated = true;
                         moveDoOnce = !(i == platforms.Length - 1);
                     }
-
-
+                }
+                else if (move)
+                {
+                    currentPlatform.IsActivated = true;
                 }
             }
             else
             {
-                if (move)
-                {
-                    currentPlatform.IsActivated = false;
-                }
-                else if (currentPlatform.moveOnce)
+                if (currentPlatform.moveOnce)
                 {
                     if (moveDoOnce)
                     {
@@ -65,6 +58,10 @@ public class HittableButton : Interactible
                         currentPlatform.IsActivated = true;
                         moveDoOnce = !(i == platforms.Length - 1);
                     }
+                }
+                else if (move)
+                {
+                    currentPlatform.IsActivated = false;
                 }
             }
         }
@@ -86,8 +83,6 @@ public class HittableButton : Interactible
             {
                 platforms[i].transform.GetChild(0).gameObject.SetActive(!IsActivated);
                 platforms[i].transform.GetChild(1).gameObject.SetActive(IsActivated);
-
-                platforms[i].GetComponent<Collider2D>().enabled = !platforms[i].GetComponent<Collider2D>().enabled;
             }
         }
 
