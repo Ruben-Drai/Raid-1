@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip DoubleJump;
 
     public GrapplingGun hook;
+    public LayerMask SneakIgnoreCheckLayers;
 
     private bool _canJump = true;
     private bool IsChangingLen = false;
@@ -36,14 +37,15 @@ public class PlayerController : MonoBehaviour
     [NonSerialized] public Interactible AvailableInteraction;
     [NonSerialized] public Rigidbody2D rb;
     [NonSerialized] public PlayerInput Controller;
+    [NonSerialized] public InputActionMap actionMap;
+
     [NonSerialized] public Vector2 SlopeAdjustment;
     [NonSerialized] public Vector2 GamePadAimDirection;
-    [NonSerialized] public bool IsPushingBox = false;
-    /*[NonSerialized]*/ public bool IsMoving = false;
 
+    [NonSerialized] public bool IsPushingBox = false;
+    [NonSerialized] public bool IsMoving = false;
     [NonSerialized] public bool IsInJump = true;
     [NonSerialized] public bool CanDoubleJump = true;
-    [NonSerialized] public InputActionMap actionMap;
 
     private bool IsDoubleJumping = false;
 
@@ -101,17 +103,29 @@ public class PlayerController : MonoBehaviour
         if (IsSneaking)
         {
             SneakingColl.enabled = true;
+            InteractionTrigger.enabled = false;
             StandingColl.enabled = false;
         }
         else
         {
-            var v = Physics2D.Raycast(transform.position, Vector2.up, 2f, LayerMask.GetMask("BoundingBox"));
-            if (!v)
+            if (CanUncrouch)
             {
                 SneakingColl.enabled = false;
+                InteractionTrigger.enabled = true;
                 StandingColl.enabled = true;
             }
         }
+
+    }
+    private bool CanUncrouch
+    {
+        get 
+        {
+            return !Physics2D.Raycast(transform.position, Vector2.up, 2f, SneakIgnoreCheckLayers)
+            && !Physics2D.Raycast(transform.position + Vector3.right/2, Vector2.up, 2f, SneakIgnoreCheckLayers)
+            && !Physics2D.Raycast(transform.position + Vector3.left/2, Vector2.up, 2f, SneakIgnoreCheckLayers);
+        }
+        
     }
     public void Move(InputAction.CallbackContext context)
     {
@@ -128,7 +142,8 @@ public class PlayerController : MonoBehaviour
         if (TimeFromLastJump > JumpCooldown
             && ((_canJump && UnlockedUpgrades["Jump"]) || (CanDoubleJump && UnlockedUpgrades["DoubleJump&Sneak"]))
             && !IsPushingBox
-            && context.performed)
+            && context.performed
+            && CanUncrouch)
         {
             if (hook.HasShot)
             {
@@ -165,15 +180,12 @@ public class PlayerController : MonoBehaviour
     public void Interact(InputAction.CallbackContext context)
     {
         //if the player is on the ground currently and not on an interactible such as a box so that you can't push a box to the right from the top of it
-        if (!IsInJump && feet.groundState != GroundState.Interactibles)
+        if (!IsInJump && feet.groundState != GroundState.Interactibles && !IsSneaking)
         {
             if (AvailableInteraction != null && context.performed)
             {
-                if(!IsSneaking || (IsSneaking && AvailableInteraction.GetComponent<BigBox>() == null))
-                    AvailableInteraction.Interact();
-                
+                AvailableInteraction.Interact();
             }
-            
             
         }
     }
@@ -237,14 +249,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.GetComponent<Interactible>() != null)
         {
-            if(AvailableInteraction == null)
-                AvailableInteraction = collision.GetComponent<Interactible>();
-            else if(AvailableInteraction.GetComponent<BigBox>() == null 
-                && Vector2.Distance(transform.position,AvailableInteraction.transform.position)
-                >
-                Vector2.Distance(transform.position, collision.transform.position))
-                    AvailableInteraction = collision.GetComponent<Interactible>();
-
+            AvailableInteraction = collision.GetComponent<Interactible>();
+            AvailableInteraction.transform.Find("Highlight")?.gameObject.SetActive(true); // Activates highlighting when the player is close by
 
         }
     }
@@ -254,6 +260,7 @@ public class PlayerController : MonoBehaviour
             && AvailableInteraction == collision.GetComponent<Interactible>()
             && Vector2.Distance(transform.position, collision.transform.position) > 0.5f)
         {
+            AvailableInteraction.transform.Find("Highlight")?.gameObject.SetActive(false); // Deactivates highlighting when player moves away.
             AvailableInteraction = null;
         }
     }
@@ -288,10 +295,10 @@ public class PlayerController : MonoBehaviour
             GetComponent<AudioSource>().volume = SoundManager.instance== null ?1f: SoundManager.instance.volumeSoundSlider.value;
             GetComponent<AudioSource>().PlayOneShot(Walk);
         }
-        /*else if (!IsMoving && !IsInJump )
+        else if (!IsMoving && !IsInJump && GetComponent<AudioSource>().isPlaying)
         {
             GetComponent<AudioSource>().Stop();
-        }*/
+        }
 
     }
 
