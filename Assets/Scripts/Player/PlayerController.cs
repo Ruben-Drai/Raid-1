@@ -150,11 +150,12 @@ public class PlayerController : MonoBehaviour
             {
                 _canJump = false;
                 IsDoubleJumping = false;
+                
 
             }
             else if (CanDoubleJump && UnlockedUpgrades["DoubleJump&Sneak"])
             {
-                GetComponent<AudioSource>().volume = SoundManager.instance.volumeSoundSlider.value;
+                GetComponent<AudioSource>().volume = SoundManager.instance == null ? 1f : SoundManager.instance.volumeSoundSlider.value;
                 GetComponent<AudioSource>().PlayOneShot(DoubleJump);
                 CanDoubleJump = false;
                 IsDoubleJumping = true;
@@ -173,12 +174,7 @@ public class PlayerController : MonoBehaviour
             {
                 AvailableInteraction.Interact();
             }
-            //if the interactible is a box, stop interacting with the box
-            if (AvailableInteraction != null && context.canceled && AvailableInteraction.GetComponent<BigBox>() != null)
-            {
-                AvailableInteraction.GetComponent<BigBox>().StopInteraction();
-                AvailableInteraction.transform.Find("Highlight")?.gameObject.SetActive(true);
-            }
+            
         }
     }
     public void Sneak(InputAction.CallbackContext context)
@@ -284,7 +280,7 @@ public class PlayerController : MonoBehaviour
         
         if(IsMoving && !IsInJump && !GetComponent<AudioSource>().isPlaying)
         {
-            GetComponent<AudioSource>().volume = SoundManager.instance.volumeSoundSlider.value;
+            GetComponent<AudioSource>().volume = SoundManager.instance== null ?1f: SoundManager.instance.volumeSoundSlider.value;
             GetComponent<AudioSource>().PlayOneShot(Walk);
         }
         else if (!IsMoving && !IsInJump && GetComponent<AudioSource>().isPlaying)
