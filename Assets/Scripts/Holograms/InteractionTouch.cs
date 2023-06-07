@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using static UnityEngine.InputSystem.Samples.RebindUI.GamepadIconsExample;
 
 ////TODO: localization support
 
@@ -17,6 +18,9 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         /// <summary>
         /// Reference to the action that is to be rebound.
         /// </summary>
+        /// 
+
+        
 
         public InputActionReference actionReference
         {
@@ -137,6 +141,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
         protected void OnEnable()
         {
+
             if (s_RebindActionUIs == null)
                 s_RebindActionUIs = new List<InteractionTouch>();
             s_RebindActionUIs.Add(this);
@@ -147,8 +152,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         protected void OnDisable()
         {
 
-            m_BindingText.gameObject.SetActive(true);
-            m_BindingText.transform.parent.gameObject.SetActive(true);
+            m_BindingText?.gameObject.SetActive(true);
+            m_BindingText?.transform.parent.gameObject.SetActive(true);
 
 
             s_RebindActionUIs.Remove(this);

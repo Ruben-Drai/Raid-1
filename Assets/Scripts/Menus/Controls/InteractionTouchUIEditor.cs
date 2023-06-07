@@ -53,7 +53,6 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             EditorGUILayout.LabelField(m_UILabel, Styles.boldLabel);
             using (new EditorGUI.IndentLevelScope())
             {
-                EditorGUILayout.PropertyField(m_ActionLabelProperty);
                 EditorGUILayout.PropertyField(m_BindingTextProperty);
 
             }
@@ -144,7 +143,6 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
         private SerializedProperty m_ActionProperty;
         private SerializedProperty m_BindingIdProperty;
-        private SerializedProperty m_ActionLabelProperty;
         private SerializedProperty m_BindingTextProperty;
         private SerializedProperty m_UpdateBindingUIEventProperty;
         private SerializedProperty m_DisplayStringOptionsProperty;
