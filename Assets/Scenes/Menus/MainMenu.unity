@@ -2707,7 +2707,9 @@ MonoBehaviour:
   Walk: {fileID: 0}
   DoubleJump: {fileID: 0}
   hook: {fileID: 0}
-  IsMoving: 0
+  SneakIgnoreCheckLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1056466136
 GameObject:
   m_ObjectHideFlags: 0

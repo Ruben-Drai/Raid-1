@@ -152,10 +152,6 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         protected void OnDisable()
         {
 
-            m_BindingText?.gameObject.SetActive(true);
-            m_BindingText?.transform.parent.gameObject.SetActive(true);
-
-
             s_RebindActionUIs.Remove(this);
             if (s_RebindActionUIs.Count == 0)
             {
