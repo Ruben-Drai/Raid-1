@@ -113,7 +113,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (IsInJump) AvailableInteraction = null;
     }
     public void Move(InputAction.CallbackContext context)
     {
@@ -146,13 +145,20 @@ public class PlayerController : MonoBehaviour
             IsInJump = true;
             //just in case player spams button, since groundcheck is only done once every 0.1s
             if (_canJump && UnlockedUpgrades["Jump"])
+            {
                 _canJump = false;
+                IsDoubleJumping = false;
+
+            }
             else if (CanDoubleJump && UnlockedUpgrades["DoubleJump&Sneak"])
+            {
                 CanDoubleJump = false;
                 IsDoubleJumping = true;
             }
-               
+                
         }
+               
+    }
     
     public void Interact(InputAction.CallbackContext context)
     {
