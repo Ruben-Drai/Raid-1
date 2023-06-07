@@ -412,6 +412,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SkipHologram",
+                    "type": "Button",
+                    "id": "8dacda38-1801-4a32-8832-5d8ae74178cf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -445,6 +454,28 @@
                     "processors": "",
                     "groups": "GamePad",
                     "action": "Skip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b638785f-afe3-471a-957b-910595b762fa",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "K&M",
+                    "action": "SkipHologram",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8377c551-af6e-451b-8e24-aa00f002ed8a",
+                    "path": "<Gamepad>/start",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "SkipHologram",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -7,14 +7,15 @@ using static UnityEditor.PlayerSettings;
 public class Lever : Interactible
 {
     [SerializeField] private bool move = false;
+    [SerializeField] private bool moveOnce = false;
+    [SerializeField] private bool door = false;
+
     [SerializeField] private bool LaunchesCutscene = false;
     [SerializeField] private float CutsceneFreezeDuration = 2f;
 
-    [SerializeField] private bool moveOnce = false;
     [SerializeField] private bool moveDoOnce = false;
 
     [SerializeField] private bool appearance = false;
-    [SerializeField] private bool door  = false;
     [SerializeField] private Color colorShow = Color.white;
     [SerializeField] private Color colorHide = new Color(0.5566038f, 0.5566038f, 0.5566038f, 1);
 
@@ -71,6 +72,7 @@ public class Lever : Interactible
         if (PlayerController.instance.UnlockedUpgrades["Strength"] /*&&(!moveOnce ||(moveOnce && !IsActivated))*/)
         {
             IsActivated = !IsActivated;
+            moveDoOnce = IsActivated;
             nbDo += IsActivated ? 1 : 0;
 
             transform.GetChild(0).gameObject.SetActive(!IsActivated);
@@ -89,7 +91,7 @@ public class Lever : Interactible
                     platforms[i].GetComponent<Collider2D>().enabled = !platforms[i].GetComponent<Collider2D>().enabled;
                 }
             }
-            else if (moveOnce)
+            else if (door)
             {
                 moveDoOnce = true;
             }

@@ -894,6 +894,8 @@ MonoBehaviour:
   ai: {r: 0, g: 0, b: 204, a: 1}
   speedText: {fileID: 962990280109293635}
   dialogueTrigger: {fileID: 1022141035}
+  finishedAnimationUp: 0
+  finishedAnimationDown: 0
 --- !u!1 &1619396942780389744
 GameObject:
   m_ObjectHideFlags: 0
@@ -8715,7 +8717,7 @@ GameObject:
   - component: {fileID: 7233670743956164722}
   - component: {fileID: 7233670743956164721}
   m_Layer: 5
-  m_Name: Sound
+  m_Name: SoundSettings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12464,7 +12466,7 @@ GameObject:
   - component: {fileID: 7233670744698823459}
   - component: {fileID: 7233670744698823458}
   m_Layer: 5
-  m_Name: Music
+  m_Name: MusicSettings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13742,7 +13744,6 @@ MonoBehaviour:
   - name: 'AI :'
     sprite: {fileID: 21300000, guid: 6363498c0d673f64491c4900d8077187, type: 3}
   DialogueBox: {fileID: 1416854256804142723}
-  HologramBox: {fileID: 0}
   dialogueAnimation: {fileID: 7233670744717219789}
   DialogueManager: {fileID: 7233670744717219794}
 --- !u!1 &9100661975158765964
