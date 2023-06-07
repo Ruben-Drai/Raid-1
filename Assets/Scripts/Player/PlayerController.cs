@@ -302,7 +302,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
     private void Animation()
     {
         animator.SetBool("UnlockArm", UnlockedUpgrades["ArmGun"]);
