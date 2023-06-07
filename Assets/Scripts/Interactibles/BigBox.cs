@@ -9,17 +9,10 @@ public class BigBox : Interactible
     {
         if (PlayerController.instance.UnlockedUpgrades["Strength"])
         {
-            IsBeingLifted = true;
-            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            PlayerController.instance.IsPushingBox = true;
+            IsBeingLifted = !IsBeingLifted;
+            rb.constraints = IsBeingLifted ? RigidbodyConstraints2D.FreezeRotation: RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            PlayerController.instance.IsPushingBox = IsBeingLifted;
         }
-    }
-    public void StopInteraction()
-    {
-        IsBeingLifted = false;
-        rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-        PlayerController.instance.IsPushingBox = false;
-
     }
     void Start()
     {
