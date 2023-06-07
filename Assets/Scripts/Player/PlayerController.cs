@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private BoxCollider2D StandingColl;
     [SerializeField] private BoxCollider2D SneakingColl;
     [SerializeField] private CapsuleCollider2D InteractionTrigger;
+    [SerializeField] private AudioClip Walk;
+    [SerializeField] private AudioClip DoubleJump;
 
     public GrapplingGun hook;
 
@@ -88,7 +90,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        //Animation();
+        Animation();
 
         TimeFromLastJump += Time.deltaTime;
         CoyoteTimer += Time.deltaTime;
@@ -112,6 +114,7 @@ public class PlayerController : MonoBehaviour
                 StandingColl.enabled = true;
             }
         }
+
     }
     public void Move(InputAction.CallbackContext context)
     {
@@ -144,13 +147,23 @@ public class PlayerController : MonoBehaviour
             IsInJump = true;
             //just in case player spams button, since groundcheck is only done once every 0.1s
             if (_canJump && UnlockedUpgrades["Jump"])
+            {
                 _canJump = false;
+                IsDoubleJumping = false;
+                
+
+            }
             else if (CanDoubleJump && UnlockedUpgrades["DoubleJump&Sneak"])
+            {
+                GetComponent<AudioSource>().volume = SoundManager.instance == null ? 1f : SoundManager.instance.volumeSoundSlider.value;
+                GetComponent<AudioSource>().PlayOneShot(DoubleJump);
                 CanDoubleJump = false;
                 IsDoubleJumping = true;
             }
-               
+                
         }
+               
+    }
     
     public void Interact(InputAction.CallbackContext context)
     {
@@ -161,12 +174,7 @@ public class PlayerController : MonoBehaviour
             {
                 AvailableInteraction.Interact();
             }
-            //if the interactible is a box, stop interacting with the box
-            if (AvailableInteraction != null && context.canceled && AvailableInteraction.GetComponent<BigBox>() != null)
-            {
-                AvailableInteraction.GetComponent<BigBox>().StopInteraction();
-                AvailableInteraction.transform.Find("Highlight")?.gameObject.SetActive(true);
-            }
+            
         }
     }
     public void Sneak(InputAction.CallbackContext context)
@@ -269,10 +277,16 @@ public class PlayerController : MonoBehaviour
             else
                 rb.AddForce(new(movement.normalized.x*speed,0),ForceMode2D.Force);
 
-        // Button for Interract
-        string fullpath = instance.actionMap.FindAction("Interact").bindings[0].effectivePath;
-        var lastChars = fullpath.Substring(fullpath.Length - 1, 1);
-
+        
+        if(IsMoving && !IsInJump && !GetComponent<AudioSource>().isPlaying)
+        {
+            GetComponent<AudioSource>().volume = SoundManager.instance== null ?1f: SoundManager.instance.volumeSoundSlider.value;
+            GetComponent<AudioSource>().PlayOneShot(Walk);
+        }
+        else if (!IsMoving && !IsInJump && GetComponent<AudioSource>().isPlaying)
+        {
+            GetComponent<AudioSource>().Stop();
+        }
 
     }
 
@@ -282,18 +296,12 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("UnlockArm", UnlockedUpgrades["ArmGun"]);
         animator.SetFloat("Velocity_Y", rb.velocity.y);
         animator.SetBool("DoubleJump", IsDoubleJumping);
+        animator.SetBool("IsMoving", IsMoving);
+
         if (rb.velocity.x > 0.1f)
-        {
-            animator.SetBool("IsMoving", true);
             GetComponent<SpriteRenderer>().flipX = false;
-        }
         else if(rb.velocity.x < -0.1f)
-        { 
-            animator.SetBool("IsMoving", true);
             GetComponent<SpriteRenderer>().flipX = true;
-        }
-        else
-            animator.SetBool("IsMoving", false);
 
     }
 }

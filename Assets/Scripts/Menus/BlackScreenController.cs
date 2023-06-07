@@ -7,6 +7,7 @@ public class BlackScreenController : MonoBehaviour
 {
     public GameObject player;
     public GameObject Narator;
+    public GameObject robot;
     public DialogueManager dialogueManager;
     public CanvasGroup blackScreen;
 
@@ -18,7 +19,6 @@ public class BlackScreenController : MonoBehaviour
     {
         FindObjectOfType<DialogueTrigger>().StartDialogue();
         PlayerController.instance.GetComponent<PlayerInput>().SwitchCurrentActionMap("Dialogue");
-        //Robot.SetActive(false);
     }
 
     void Update()
@@ -44,6 +44,8 @@ public class BlackScreenController : MonoBehaviour
         {
             this.gameObject.SetActive(false);
             PlayerController.instance.Controller.SwitchCurrentActionMap("Game");
+            robot.SetActive(true);
+            Narator.SetActive(false);
         }
     }
 

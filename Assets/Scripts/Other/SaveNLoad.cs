@@ -25,7 +25,7 @@ public class SaveNLoad : MonoBehaviour
     {
         PlayerPrefs.SetString("SceneName", SceneManager.GetActiveScene().name);
 
-        Interactibles = GameObject.Find("Interactibles");
+        Interactibles = GameObject.Find("Props");
         var c = Interactibles.GetComponentsInChildren<Interactible>();
         for (int i = 0; i < c.Length; i++)
         {
@@ -46,7 +46,7 @@ public class SaveNLoad : MonoBehaviour
     }
     public void Load(bool FirstScene, bool NewScene)
     {
-        Interactibles = GameObject.Find("Interactibles");
+        Interactibles = GameObject.Find("Props");
 
         if (!NewScene)
         {
@@ -82,7 +82,7 @@ public class SaveNLoad : MonoBehaviour
     }
     public void ResetSave()
     {
-        Interactibles = GameObject.Find("Interactibles");
+        Interactibles = GameObject.Find("Props");
         PlayerPrefs.DeleteKey("SceneName");
         var c = Interactibles.GetComponentsInChildren<Interactible>();
         for (int i = 0; i < c.Length; i++) 

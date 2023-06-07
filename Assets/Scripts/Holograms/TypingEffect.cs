@@ -2,16 +2,22 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
+using Unity.VisualScripting;
 
 public class TypingEffect : MonoBehaviour
 {
-    [SerializeField] Text text;
-    string writer;
+    public Text text;
     [SerializeField] private Coroutine coroutine;
-
-    [SerializeField] float delayBeforeStart = 0f;
-    [SerializeField] float timeBtwChars = 0.1f;
     [Space(10)][SerializeField] private bool startOnEnable = false;
+    [SerializeField] private float timeBtwChars = 0.1f;
+
+    private bool isTyping = false;
+    private bool ShowText = false;
+    private string writer;
+
+    public static bool canSkip = false;
+    public static float delayBeforeStart = 4f;
 
     enum options { clear, complete }
 
@@ -22,7 +28,7 @@ public class TypingEffect : MonoBehaviour
             writer = text.text;
         }
     }
-
+    
     void Start()
     {
         if (text != null)
@@ -30,12 +36,20 @@ public class TypingEffect : MonoBehaviour
             text.text = "";
         }
     }
-
     private void OnEnable()
     {
-        if (startOnEnable) StartTypewriter();
+        ShowText = true;
     }
 
+
+    private void Update()
+    {
+        if (startOnEnable && ShowText)
+        {
+            StartTypewriter();
+            ShowText = false;
+        }
+    }
     private void StartTypewriter()
     {
         StopAllCoroutines();
@@ -43,14 +57,15 @@ public class TypingEffect : MonoBehaviour
         if (text != null)
         {
             text.text = "";
-
-            StartCoroutine("TypeWriterText");
+            isTyping = true;
+            coroutine = StartCoroutine("TypeWriterText");
         }
     }
 
     private void OnDisable()
     {
         StopAllCoroutines();
+        text.text = "";
     }
 
     IEnumerator TypeWriterText()
@@ -64,8 +79,18 @@ public class TypingEffect : MonoBehaviour
                 text.text = text.text.Substring(0, text.text.Length);
             }
             text.text += c;
+            isTyping = true;
             yield return new WaitForSeconds(timeBtwChars);
         }
         yield return null;
+    }
+
+    public void DisplayText(InputAction.CallbackContext context)
+    {
+        if(context.performed && context.control.path != "/Mouse/leftButton" && isTyping && canSkip) 
+        {
+            StopCoroutine(coroutine);
+            text.text = writer;
+        }
     }
 }
