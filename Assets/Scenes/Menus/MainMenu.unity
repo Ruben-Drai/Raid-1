@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_newGameButton: {fileID: 1976556065}
-  m_newGameScene: Lab3
+  m_newGameScene: Lab0
 --- !u!1 &149729600
 GameObject:
   m_ObjectHideFlags: 0

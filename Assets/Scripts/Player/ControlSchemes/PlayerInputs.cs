@@ -434,6 +434,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkipHologram"",
+                    ""type"": ""Button"",
+                    ""id"": ""8dacda38-1801-4a32-8832-5d8ae74178cf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -467,6 +476,28 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""GamePad"",
                     ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b638785f-afe3-471a-957b-910595b762fa"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""K&M"",
+                    ""action"": ""SkipHologram"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8377c551-af6e-451b-8e24-aa00f002ed8a"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""SkipHologram"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -516,6 +547,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         // Dialogue
         m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
         m_Dialogue_Skip = m_Dialogue.FindAction("Skip", throwIfNotFound: true);
+        m_Dialogue_SkipHologram = m_Dialogue.FindAction("SkipHologram", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -680,11 +712,13 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Dialogue;
     private List<IDialogueActions> m_DialogueActionsCallbackInterfaces = new List<IDialogueActions>();
     private readonly InputAction m_Dialogue_Skip;
+    private readonly InputAction m_Dialogue_SkipHologram;
     public struct DialogueActions
     {
         private @PlayerInputs m_Wrapper;
         public DialogueActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Skip => m_Wrapper.m_Dialogue_Skip;
+        public InputAction @SkipHologram => m_Wrapper.m_Dialogue_SkipHologram;
         public InputActionMap Get() { return m_Wrapper.m_Dialogue; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -697,6 +731,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Skip.started += instance.OnSkip;
             @Skip.performed += instance.OnSkip;
             @Skip.canceled += instance.OnSkip;
+            @SkipHologram.started += instance.OnSkipHologram;
+            @SkipHologram.performed += instance.OnSkipHologram;
+            @SkipHologram.canceled += instance.OnSkipHologram;
         }
 
         private void UnregisterCallbacks(IDialogueActions instance)
@@ -704,6 +741,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Skip.started -= instance.OnSkip;
             @Skip.performed -= instance.OnSkip;
             @Skip.canceled -= instance.OnSkip;
+            @SkipHologram.started -= instance.OnSkipHologram;
+            @SkipHologram.performed -= instance.OnSkipHologram;
+            @SkipHologram.canceled -= instance.OnSkipHologram;
         }
 
         public void RemoveCallbacks(IDialogueActions instance)
@@ -753,5 +793,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     public interface IDialogueActions
     {
         void OnSkip(InputAction.CallbackContext context);
+        void OnSkipHologram(InputAction.CallbackContext context);
     }
 }
