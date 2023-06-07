@@ -68,6 +68,7 @@ public class PauseMenu : MonoBehaviour
         SaveNLoad.instance.StartCoroutine(SaveNLoad.instance.SaveRoutine());
         SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
         SceneManager.LoadSceneAsync("MainMenu");
+        Time.timeScale = 1;
     }
     public void SaveQuit()
     {

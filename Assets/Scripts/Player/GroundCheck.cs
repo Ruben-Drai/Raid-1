@@ -66,6 +66,12 @@ public class GroundCheck : MonoBehaviour
         {
             controller.IsInJump = false;
             controller.CanDoubleJump = true;
+            if(controller.IsInJump)
+            {
+                GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioSource>().clip);
+                Debug.Log("SoundPlaying");
+            }
+            
         }
 
     }
