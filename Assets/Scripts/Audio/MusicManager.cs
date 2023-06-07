@@ -17,10 +17,7 @@ public class MusicManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    void Start()
-    {
-        Load();
-    }
+   
 
     public void ChangeVolume()
     {

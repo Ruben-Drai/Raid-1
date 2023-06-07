@@ -1060,7 +1060,7 @@ GameObject:
   - component: {fileID: 479923380}
   - component: {fileID: 479923381}
   m_Layer: 0
-  m_Name: Sound
+  m_Name: SoundManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2704,6 +2704,8 @@ MonoBehaviour:
   StandingColl: {fileID: 0}
   SneakingColl: {fileID: 0}
   InteractionTrigger: {fileID: 0}
+  Walk: {fileID: 0}
+  DoubleJump: {fileID: 0}
   hook: {fileID: 0}
   IsMoving: 0
 --- !u!1 &1056466136
@@ -4628,7 +4630,7 @@ GameObject:
   - component: {fileID: 1753389043}
   - component: {fileID: 1753389045}
   m_Layer: 0
-  m_Name: Music
+  m_Name: MusicManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
