@@ -276,9 +276,29 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819455, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819455, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: eaecd66a67270cb469c2a7150dcf29dd, type: 3}
+    - target: {fileID: 6553580001067263295, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553580001067263295, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 8018268210188467063, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 8018268210188467063, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.77
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65ca959e473df58449468d20430c864c, type: 3}
 --- !u!1 &168488319
