@@ -101,20 +101,17 @@ public class PlayerController : MonoBehaviour
         if (IsSneaking)
         {
             SneakingColl.enabled = true;
-            InteractionTrigger.enabled = false;
             StandingColl.enabled = false;
         }
         else
         {
-            var v = Physics2D.Raycast(transform.position, Vector2.up, 0.5f,LayerMask.GetMask("BoudingBox"));
+            var v = Physics2D.Raycast(transform.position, Vector2.up, 2f, LayerMask.GetMask("BoundingBox"));
             if (!v)
             {
                 SneakingColl.enabled = false;
-                InteractionTrigger.enabled = true;
                 StandingColl.enabled = true;
             }
         }
-
     }
     public void Move(InputAction.CallbackContext context)
     {
@@ -168,12 +165,15 @@ public class PlayerController : MonoBehaviour
     public void Interact(InputAction.CallbackContext context)
     {
         //if the player is on the ground currently and not on an interactible such as a box so that you can't push a box to the right from the top of it
-        if (!IsInJump && feet.groundState != GroundState.Interactibles && !IsSneaking)
+        if (!IsInJump && feet.groundState != GroundState.Interactibles)
         {
             if (AvailableInteraction != null && context.performed)
             {
-                AvailableInteraction.Interact();
+                if(!IsSneaking || (IsSneaking && AvailableInteraction.GetComponent<BigBox>() == null))
+                    AvailableInteraction.Interact();
+                
             }
+            
             
         }
     }
@@ -237,8 +237,14 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.GetComponent<Interactible>() != null)
         {
-            AvailableInteraction = collision.GetComponent<Interactible>();
-            AvailableInteraction.transform.Find("Highlight")?.gameObject.SetActive(true); // Activates highlighting when the player is close by
+            if(AvailableInteraction == null)
+                AvailableInteraction = collision.GetComponent<Interactible>();
+            else if(AvailableInteraction.GetComponent<BigBox>() == null 
+                && Vector2.Distance(transform.position,AvailableInteraction.transform.position)
+                >
+                Vector2.Distance(transform.position, collision.transform.position))
+                    AvailableInteraction = collision.GetComponent<Interactible>();
+
 
         }
     }
@@ -248,7 +254,6 @@ public class PlayerController : MonoBehaviour
             && AvailableInteraction == collision.GetComponent<Interactible>()
             && Vector2.Distance(transform.position, collision.transform.position) > 0.5f)
         {
-            AvailableInteraction.transform.Find("Highlight")?.gameObject.SetActive(false); // Deactivates highlighting when player moves away.
             AvailableInteraction = null;
         }
     }
@@ -283,10 +288,10 @@ public class PlayerController : MonoBehaviour
             GetComponent<AudioSource>().volume = SoundManager.instance== null ?1f: SoundManager.instance.volumeSoundSlider.value;
             GetComponent<AudioSource>().PlayOneShot(Walk);
         }
-        else if (!IsMoving && !IsInJump && GetComponent<AudioSource>().isPlaying)
+        /*else if (!IsMoving && !IsInJump )
         {
             GetComponent<AudioSource>().Stop();
-        }
+        }*/
 
     }
 

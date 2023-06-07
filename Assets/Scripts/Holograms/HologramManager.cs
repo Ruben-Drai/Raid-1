@@ -43,6 +43,7 @@ public class HologramManager : MonoBehaviour
             }
             holoAnimation.SetBool("IsActive", false);
             holoSound.Stop();
+            //Value ? out of my ass...
             TypingEffect.delayBeforeStart = 4f;
             isHologramActive = false;
             PlayerController.instance.Controller.SwitchCurrentActionMap("Game");
