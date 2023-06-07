@@ -112,6 +112,8 @@ public class PlayerController : MonoBehaviour
                 StandingColl.enabled = true;
             }
         }
+
+        if (IsInJump) AvailableInteraction = null;
     }
     public void Move(InputAction.CallbackContext context)
     {
