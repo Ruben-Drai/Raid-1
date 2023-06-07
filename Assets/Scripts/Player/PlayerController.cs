@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private BoxCollider2D StandingColl;
     [SerializeField] private BoxCollider2D SneakingColl;
     [SerializeField] private CapsuleCollider2D InteractionTrigger;
+    [SerializeField] private AudioClip Walk;
+    [SerializeField] private AudioClip DoubleJump;
 
     public GrapplingGun hook;
 
@@ -152,6 +154,8 @@ public class PlayerController : MonoBehaviour
             }
             else if (CanDoubleJump && UnlockedUpgrades["DoubleJump&Sneak"])
             {
+                GetComponent<AudioSource>().volume = SoundManager.instance.volumeSoundSlider.value;
+                GetComponent<AudioSource>().PlayOneShot(DoubleJump);
                 CanDoubleJump = false;
                 IsDoubleJumping = true;
             }
@@ -277,10 +281,16 @@ public class PlayerController : MonoBehaviour
             else
                 rb.AddForce(new(movement.normalized.x*speed,0),ForceMode2D.Force);
 
-        // Button for Interract
-        string fullpath = instance.actionMap.FindAction("Interact").bindings[0].effectivePath;
-        var lastChars = fullpath.Substring(fullpath.Length - 1, 1);
-
+        
+        if(IsMoving && !IsInJump && !GetComponent<AudioSource>().isPlaying)
+        {
+            GetComponent<AudioSource>().volume = SoundManager.instance.volumeSoundSlider.value;
+            GetComponent<AudioSource>().PlayOneShot(Walk);
+        }
+        else if (!IsMoving && !IsInJump && GetComponent<AudioSource>().isPlaying)
+        {
+            GetComponent<AudioSource>().Stop();
+        }
 
     }
 
@@ -290,18 +300,12 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("UnlockArm", UnlockedUpgrades["ArmGun"]);
         animator.SetFloat("Velocity_Y", rb.velocity.y);
         animator.SetBool("DoubleJump", IsDoubleJumping);
+        animator.SetBool("IsMoving", IsMoving);
+
         if (rb.velocity.x > 0.1f)
-        {
-            animator.SetBool("IsMoving", true);
             GetComponent<SpriteRenderer>().flipX = false;
-        }
         else if(rb.velocity.x < -0.1f)
-        { 
-            animator.SetBool("IsMoving", true);
             GetComponent<SpriteRenderer>().flipX = true;
-        }
-        else
-            animator.SetBool("IsMoving", false);
 
     }
 }
