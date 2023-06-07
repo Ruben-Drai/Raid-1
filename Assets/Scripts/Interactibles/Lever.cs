@@ -7,10 +7,12 @@ using static UnityEditor.PlayerSettings;
 public class Lever : Interactible
 {
     [SerializeField] private bool move = false;
+    [SerializeField] private bool moveOnce = false;
+    [SerializeField] private bool door = false;
+
     [SerializeField] private bool LaunchesCutscene = false;
     [SerializeField] private float CutsceneFreezeDuration = 2f;
 
-    [SerializeField] private bool moveOnce = false;
     [SerializeField] private bool moveDoOnce = false;
 
     [SerializeField] private bool appearance = false;
@@ -64,11 +66,13 @@ public class Lever : Interactible
         if (PlayerController.instance.UnlockedUpgrades["Strength"])
         {
             IsActivated = !IsActivated;
+            moveDoOnce = IsActivated;
             nbDo += IsActivated ? 1 : 0;
 
             transform.GetChild(0).gameObject.SetActive(!IsActivated);
             transform.GetChild(1).gameObject.SetActive(IsActivated);
             if(LaunchesCutscene) cutscene ??= StartCoroutine(LaunchCutscene());
+
             if (appearance)
             {
                 for (int i = 0; i < platforms.Length; i++)
@@ -80,9 +84,13 @@ public class Lever : Interactible
                     platforms[i].GetComponent<Collider2D>().enabled = !platforms[i].GetComponent<Collider2D>().enabled;
                 }
             }
-            else if (moveOnce)
+            else if (door)
             {
-                moveDoOnce = IsActivated;
+                for (int i = 0; i < platforms.Length; i++)
+                {
+                    platforms[i].transform.GetChild(0).gameObject.SetActive(!IsActivated);
+                    platforms[i].transform.GetChild(1).gameObject.SetActive(IsActivated);
+                }
             }
         }
     }
