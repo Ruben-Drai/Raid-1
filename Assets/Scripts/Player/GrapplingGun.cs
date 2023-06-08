@@ -132,13 +132,14 @@ public class GrapplingGun : MonoBehaviour
         {
 
             RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized, 500, mask);
-            if (_hit == true)
+            if (_hit == true && _hit.collider.CompareTag("Fistable"))
             {
                 if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistance || !hasMaxDistance)
                 {
                     FistOnly = !PlayerController.instance.UnlockedUpgrades["Hook"] || _hit.collider.GetComponent<Interactible>() != null;
                     grapplePoint = _hit.point;
-                    if (FistOnly) grapplePoint += distanceVector.normalized / 10f;
+                    if (FistOnly) 
+                        grapplePoint += distanceVector.normalized / 2f;
 
                     grappleDistanceVector = grapplePoint - (Vector2)gunPivot.position;
                     grappleRope.enabled = true;

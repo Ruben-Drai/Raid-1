@@ -20,7 +20,7 @@ public class Platform : MonoBehaviour
     //This is done only while IsActivated is true, which prevents MoveRoutine from being set to null
     private void Update()
     {
-        MoveRoutine ??= IsActivated ? StartCoroutine(IMoveRoutine()) :null;
+        MoveRoutine ??= IsActivated ? StartCoroutine(IMoveRoutine()) : null;
         if (!IsActivated)
         {
             MoveRoutine = null;

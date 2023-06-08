@@ -10,14 +10,17 @@ using UnityEngine.UIElements;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
-    public TextMeshPro BInteract;
 
     [SerializeField] private PauseMenu pauseMenu;
     [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime = 0.2f, RopeShrinkSpeed=3f;
     [SerializeField] private BoxCollider2D StandingColl;
     [SerializeField] private BoxCollider2D SneakingColl;
     [SerializeField] private CapsuleCollider2D InteractionTrigger;
+    [SerializeField] private AudioClip Walk;
+    [SerializeField] private AudioClip DoubleJump;
+
     public GrapplingGun hook;
+    public LayerMask SneakIgnoreCheckLayers;
 
     private bool _canJump = true;
     private bool IsChangingLen = false;
@@ -28,19 +31,23 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
     private GroundCheck feet;
     private SpringJoint2D joint;
+    private Animator animator;
 
 
     [NonSerialized] public Interactible AvailableInteraction;
     [NonSerialized] public Rigidbody2D rb;
     [NonSerialized] public PlayerInput Controller;
+    [NonSerialized] public InputActionMap actionMap;
+
     [NonSerialized] public Vector2 SlopeAdjustment;
     [NonSerialized] public Vector2 GamePadAimDirection;
+
     [NonSerialized] public bool IsPushingBox = false;
     [NonSerialized] public bool IsMoving = false;
-
     [NonSerialized] public bool IsInJump = true;
     [NonSerialized] public bool CanDoubleJump = true;
-    [NonSerialized] public InputActionMap actionMap;
+
+    private bool IsDoubleJumping = false;
 
     public bool CanJump
     {
@@ -68,6 +75,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         joint = GetComponent<SpringJoint2D>();
         feet = GetComponentInChildren<GroundCheck>();
         rb = GetComponent<Rigidbody2D>();
@@ -75,16 +83,17 @@ public class PlayerController : MonoBehaviour
         UnlockedUpgrades = new Dictionary<string, bool>()
         {
             {"Jump",true},
-            {"Sneak",true},
             {"Strength",true},
             {"ArmGun", true},
-            {"DoubleJump",true},
-            {"Hook",false}
+            {"DoubleJump&Sneak",true},
+            {"Hook",true}
         };
         Controller = GetComponent<PlayerInput>();
     }
     private void Update()
     {
+        Animation();
+
         TimeFromLastJump += Time.deltaTime;
         CoyoteTimer += Time.deltaTime;
         if (hook.HasShot && IsChangingLen)
@@ -99,13 +108,24 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (!Physics2D.Raycast(transform.position, Vector2.up, 0.5f))
+            if (CanUncrouch)
             {
                 SneakingColl.enabled = false;
                 InteractionTrigger.enabled = true;
                 StandingColl.enabled = true;
             }
         }
+
+    }
+    private bool CanUncrouch
+    {
+        get 
+        {
+            return !Physics2D.Raycast(transform.position, Vector2.up, 2f, SneakIgnoreCheckLayers)
+            && !Physics2D.Raycast(transform.position + Vector3.right/2, Vector2.up, 2f, SneakIgnoreCheckLayers)
+            && !Physics2D.Raycast(transform.position + Vector3.left/2, Vector2.up, 2f, SneakIgnoreCheckLayers);
+        }
+        
     }
     public void Move(InputAction.CallbackContext context)
     {
@@ -120,50 +140,62 @@ public class PlayerController : MonoBehaviour
     public void Jump(InputAction.CallbackContext context)
     {
         if (TimeFromLastJump > JumpCooldown
-            && (_canJump || (CanDoubleJump && UnlockedUpgrades["DoubleJump"]))
+            && ((_canJump && UnlockedUpgrades["Jump"]) || (CanDoubleJump && UnlockedUpgrades["DoubleJump&Sneak"]))
             && !IsPushingBox
-            && context.performed)
+            && context.performed
+            && CanUncrouch)
         {
             if (hook.HasShot)
+            {
                 hook.ReturnHook();
-
+                _canJump = false;
+                if (UnlockedUpgrades["DoubleJump&Sneak"])
+                    CanDoubleJump = true;
+            }
+            IsSneaking = false;
             TimeFromLastJump = 0f;
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
             IsMoving = true;
             IsInJump = true;
             //just in case player spams button, since groundcheck is only done once every 0.1s
-            if (_canJump)
+            if (_canJump && UnlockedUpgrades["Jump"])
+            {
                 _canJump = false;
-            else if (CanDoubleJump && UnlockedUpgrades["DoubleJump"])
+                IsDoubleJumping = false;
+                
+
+            }
+            else if (CanDoubleJump && UnlockedUpgrades["DoubleJump&Sneak"])
+            {
+                GetComponent<AudioSource>().volume = SoundManager.instance == null ? 1f : SoundManager.instance.volumeSoundSlider.value;
+                GetComponent<AudioSource>().PlayOneShot(DoubleJump);
                 CanDoubleJump = false;
+                IsDoubleJumping = true;
+            }
+                
         }
+               
     }
+    
     public void Interact(InputAction.CallbackContext context)
     {
         //if the player is on the ground currently and not on an interactible such as a box so that you can't push a box to the right from the top of it
-        if (!IsInJump && feet.groundState != GroundState.Interactibles)
+        if (!IsInJump && feet.groundState != GroundState.Interactibles && !IsSneaking)
         {
             if (AvailableInteraction != null && context.performed)
             {
                 AvailableInteraction.Interact();
             }
-            //if the interactible is a box, stop interacting with the box
-            if (AvailableInteraction != null && context.canceled && AvailableInteraction.GetComponent<BigBox>() != null)
-            {
-                AvailableInteraction.GetComponent<BigBox>().StopInteraction();
-                AvailableInteraction.transform.Find("Highlight").gameObject.SetActive(true);
-            }
+            
         }
     }
     public void Sneak(InputAction.CallbackContext context)
     {
-        Debug.Log("test");
-        if (context.performed || context.canceled)
+        if (UnlockedUpgrades["DoubleJump&Sneak"] && !IsInJump && !hook.HasShot)
         {
-            if (UnlockedUpgrades["Sneak"])
-                IsSneaking = !IsSneaking;
+            if(context.performed)IsSneaking = true;
+            else if (context.canceled) IsSneaking = false;
         }
-        
     }
     public void Pause(InputAction.CallbackContext context)
     {
@@ -205,7 +237,10 @@ public class PlayerController : MonoBehaviour
                 if (hook.HasShot && UnlockedUpgrades["Hook"])
                     hook.ReturnHook();
                 else if (hook.gameObject.activeSelf && !hook.HasShot)
+                {
                     hook.FireHook();
+                    IsSneaking = false;
+                }
             }
         }
     }
@@ -254,12 +289,30 @@ public class PlayerController : MonoBehaviour
             else
                 rb.AddForce(new(movement.normalized.x*speed,0),ForceMode2D.Force);
 
-        // Button for Interract
-        string fullpath = instance.actionMap.FindAction("Interact").bindings[0].effectivePath;
-        var lastChars = fullpath.Substring(fullpath.Length - 1, 1);
+        
+        if(IsMoving && !IsInJump && !GetComponent<AudioSource>().isPlaying)
+        {
+            GetComponent<AudioSource>().volume = SoundManager.instance== null ?1f: SoundManager.instance.volumeSoundSlider.value;
+            GetComponent<AudioSource>().PlayOneShot(Walk);
+        }
+        else if (!IsMoving && !IsInJump && GetComponent<AudioSource>().isPlaying)
+        {
+            GetComponent<AudioSource>().Stop();
+        }
 
-        if(BInteract!=null)
-            BInteract.text = lastChars;
     }
 
+    private void Animation()
+    {
+        animator.SetBool("UnlockArm", UnlockedUpgrades["ArmGun"]);
+        animator.SetFloat("Velocity_Y", rb.velocity.y);
+        animator.SetBool("DoubleJump", IsDoubleJumping);
+        animator.SetBool("IsMoving", IsMoving);
+
+        if (rb.velocity.x > 0.1f)
+            GetComponent<SpriteRenderer>().flipX = false;
+        else if(rb.velocity.x < -0.1f)
+            GetComponent<SpriteRenderer>().flipX = true;
+
+    }
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject m_newGameButton;
+    [SerializeField] private string m_newGameScene;
 
 
     private void Update()
@@ -18,7 +19,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadSceneAsync("DevRoom");
+        SceneManager.LoadSceneAsync(m_newGameScene);
         SaveNLoad.instance.StartCoroutine(SaveNLoad.instance.ResetRoutine());
         Time.timeScale = 1;
         SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
@@ -28,7 +29,7 @@ public class MainMenu : MonoBehaviour
     {
         //TODO: Check for save, if no save, don't make button available to click.
         SceneManager.LoadSceneAsync(PlayerPrefs.GetString("SceneName"));
-        SaveNLoad.instance.StartCoroutine(SaveNLoad.instance.LoadRoutine());
+        SaveNLoad.instance.StartCoroutine(SaveNLoad.instance.LoadRoutine(true));
         Time.timeScale = 1;
         SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
 
@@ -36,7 +37,6 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("Quit Game button clicked");
         SoundManager.instance.Back.PlayOneShot(SoundManager.instance.Back.clip);
 
         Application.Quit();
