@@ -24,6 +24,8 @@ public class HittableButton : Interactible
 
     [SerializeField] private GameObject[] platforms;
 
+    [SerializeField] private CinemachineVirtualCamera[] vms;
+
 
     private Coroutine cutscene;
 
@@ -77,7 +79,7 @@ public class HittableButton : Interactible
 
         transform.GetChild(0).gameObject.SetActive(!IsActivated);
         transform.GetChild(1).gameObject.SetActive(IsActivated);
-        if (LaunchesCutscene && isExploded && canExplode) cutscene ??= StartCoroutine(LaunchCutscene());
+        if (LaunchesCutscene) cutscene ??= StartCoroutine(LaunchCutscene());
 
 
         if (door)
@@ -114,8 +116,12 @@ public class HittableButton : Interactible
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (((collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player")) && !isExploded) || (collision.gameObject.CompareTag("PlayerFist") && !IsActivated))
+        /* Suddenly the buttons were not working properly in the city (the appearances one)
+            there was a "!isActivated" variable so I changed it to "!isExploded", if your buttons don't workd anymore
+            in another map that may be why */
+        if (((collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player")) && !isExploded) || (collision.gameObject.CompareTag("PlayerFist") && !isExploded))
         {
+            Debug.Log("trigger exit");
             Interact();
         }
        
@@ -123,11 +129,12 @@ public class HittableButton : Interactible
 
     public IEnumerator LaunchCutscene()
     {
-        foreach (var platform in platforms)
+        foreach (var pos in vms)
         {
-            FindFirstObjectByType<CinemachineVirtualCamera>().Follow = platform.transform;
+            pos.Priority = 11;
 
             yield return new WaitForSeconds(CutsceneFreezeDuration);
+            pos.Priority = 9;
         }
         yield return null;
         FindFirstObjectByType<CinemachineVirtualCamera>().Follow = PlayerController.instance.transform;

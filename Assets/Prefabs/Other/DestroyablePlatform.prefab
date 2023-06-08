@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8698102955815478853}
   - component: {fileID: 8034206817264870896}
   - component: {fileID: 7600738488255975459}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DestroyablePlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 457320380924686099}
   - component: {fileID: 6625853052126657172}
   - component: {fileID: 725624153947453523}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DestroyablePlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,6 +159,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsActivated: 0
+  LaunchesCutscene: 0
+  CutsceneFreezeDuration: 2
+  vms: []
 --- !u!50 &725624153947453523
 Rigidbody2D:
   serializedVersion: 4
@@ -192,7 +195,7 @@ GameObject:
   - component: {fileID: 5364810016991791422}
   - component: {fileID: 6563254070458254997}
   - component: {fileID: 7226289509432293528}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DestroyedPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
