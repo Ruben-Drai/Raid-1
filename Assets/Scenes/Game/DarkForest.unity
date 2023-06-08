@@ -749,7 +749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelToLoad: Lab3
-  transitionSpeed: 0.05
+  transitionSpeed: 0.005
   ocultation: {fileID: 672176528}
 --- !u!1 &382572228 stripped
 GameObject:
