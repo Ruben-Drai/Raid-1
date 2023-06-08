@@ -93,6 +93,12 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         Animation();
+        if (hook.HasShot)
+        {
+            _canJump = false;
+            if (UnlockedUpgrades["DoubleJump&Sneak"])
+                CanDoubleJump = true;
+        }
         if (feet.groundState != GroundState.Air) IsDoubleJumping = false;
         TimeFromLastJump += Time.deltaTime;
         CoyoteTimer += Time.deltaTime;
@@ -145,13 +151,10 @@ public class PlayerController : MonoBehaviour
             && context.performed
             && ((IsSneaking && CanUncrouch) || !IsSneaking))
         {
-            if (hook.HasShot)
-            {
+            if(hook.HasShot)
                 hook.ReturnHook();
-                _canJump = false;
-                if (UnlockedUpgrades["DoubleJump&Sneak"])
-                    CanDoubleJump = true;
-            }
+
+
             IsSneaking = false;
             TimeFromLastJump = 0f;
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
