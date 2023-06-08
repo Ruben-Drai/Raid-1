@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 457320380924686099}
   - component: {fileID: 6625853052126657172}
   - component: {fileID: 725624153947453523}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DestroyablePlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
