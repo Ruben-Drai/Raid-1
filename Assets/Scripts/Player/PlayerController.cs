@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         Animation();
-
+        if (feet.groundState != GroundState.Air) IsDoubleJumping = false;
         TimeFromLastJump += Time.deltaTime;
         CoyoteTimer += Time.deltaTime;
         if (hook.HasShot && IsChangingLen)
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
             && ((_canJump && UnlockedUpgrades["Jump"]) || (CanDoubleJump && UnlockedUpgrades["DoubleJump&Sneak"]))
             && !IsPushingBox
             && context.performed
-            && CanUncrouch)
+            && ((IsSneaking && CanUncrouch) || !IsSneaking))
         {
             if (hook.HasShot)
             {
@@ -206,8 +206,21 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            IsChangingLen = true;
-            lenModifier = context.ReadValue<Vector2>().normalized.y;
+            var temp = -context.ReadValue<Vector2>().normalized.y;
+
+            if (feet.groundState == GroundState.Air)
+            {
+                IsChangingLen = true;
+                lenModifier = temp;
+            }
+            else
+            {
+                if (temp<0)
+                {
+                    IsChangingLen = true;
+                    lenModifier = temp;
+                }
+            }
 
         }
         else if (context.canceled) 
@@ -304,6 +317,8 @@ public class PlayerController : MonoBehaviour
 
     private void Animation()
     {
+        animator.SetBool("IsGrappling", hook.HasShot);
+        animator.SetBool("IsGrounded", feet.groundState != GroundState.Air);
         animator.SetBool("UnlockArm", UnlockedUpgrades["ArmGun"]);
         animator.SetFloat("Velocity_Y", rb.velocity.y);
         animator.SetBool("DoubleJump", IsDoubleJumping);
