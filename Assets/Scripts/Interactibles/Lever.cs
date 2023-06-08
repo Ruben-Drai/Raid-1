@@ -114,7 +114,6 @@ public class Lever : Interactible
             pos.Priority = 9;
         }
         yield return null;
-        FindFirstObjectByType<CinemachineVirtualCamera>().Follow = PlayerController.instance.transform;
     }
     
 }

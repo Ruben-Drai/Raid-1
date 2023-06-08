@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using UnityEngine;
 using static Cinemachine.CinemachinePathBase;
+using static UnityEditor.PlayerSettings;
 
 public class HittableButton : Interactible
 {
@@ -23,6 +24,7 @@ public class HittableButton : Interactible
     [SerializeField] private Color colorHide = new Color(0.5566038f, 0.5566038f, 0.5566038f, 1);
 
     [SerializeField] private GameObject[] platforms;
+    [SerializeField] private CinemachineVirtualCamera[] vms;
 
 
     private Coroutine cutscene;
@@ -77,7 +79,7 @@ public class HittableButton : Interactible
 
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(1).gameObject.SetActive(true);
-        if (LaunchesCutscene && isExploded && canExplode) cutscene ??= StartCoroutine(LaunchCutscene());
+        if (LaunchesCutscene) cutscene ??= StartCoroutine(LaunchCutscene());
 
 
         if (door)
@@ -141,13 +143,13 @@ public class HittableButton : Interactible
 
     public IEnumerator LaunchCutscene()
     {
-        foreach (var platform in platforms)
+        foreach (var pos in vms)
         {
-            FindFirstObjectByType<CinemachineVirtualCamera>().Follow = platform.transform;
+            pos.Priority = 11;
 
             yield return new WaitForSeconds(CutsceneFreezeDuration);
+            pos.Priority = 9;
         }
         yield return null;
-        FindFirstObjectByType<CinemachineVirtualCamera>().Follow = PlayerController.instance.transform;
     }
 }

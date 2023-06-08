@@ -1581,22 +1581,6 @@ PrefabInstance:
       propertyPath: m_TrackedObjectOffset.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1607095311026243980, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
-      propertyPath: m_UpdateMethod
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1607095311026243980, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
-      propertyPath: m_BlendUpdateMethod
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1607095311026243980, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
-      propertyPath: m_DefaultBlend.m_Time
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1607095311026243980, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
-      propertyPath: m_DefaultBlend.m_Style
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1607095311026243984, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: orthographic size
       value: 8.5
@@ -1615,7 +1599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311026243985, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.025048494
+      value: 0.08801198
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311026243985, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -21379,7 +21363,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1060281323}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 51.06, y: 0.21, z: -38.757984}
+  m_LocalPosition: {x: 51.06, y: 0.89, z: -38.757984}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
