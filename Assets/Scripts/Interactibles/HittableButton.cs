@@ -75,8 +75,8 @@ public class HittableButton : Interactible
         IsActivated = !IsActivated;
         moveDoOnce = true;
 
-        transform.GetChild(0).gameObject.SetActive(!IsActivated);
-        transform.GetChild(1).gameObject.SetActive(IsActivated);
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(true);
         if (LaunchesCutscene && isExploded && canExplode) cutscene ??= StartCoroutine(LaunchCutscene());
 
 
@@ -90,14 +90,13 @@ public class HittableButton : Interactible
         }
 
         /* Activate or deactivate a platform's collider and show it by changing its color */
-        if (appearance && IsActivated)
+        if (appearance)
         {
             for (int i = 0; i < platforms.Length; i++)
             {
                 Color colorSprite = platforms[i].GetComponent<SpriteRenderer>().color;
                 colorSprite = colorSprite == colorShow ? colorHide : colorShow;
                 platforms[i].GetComponent<SpriteRenderer>().color = colorSprite;
-
                 platforms[i].GetComponent<Collider2D>().enabled = !platforms[i].GetComponent<Collider2D>().enabled;
             }
         }
@@ -105,18 +104,37 @@ public class HittableButton : Interactible
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (((collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player")) && !isExploded) || (collision.gameObject.CompareTag("PlayerFist") && !IsActivated))
+        if (collision.gameObject.CompareTag("Crate") 
+            || collision.gameObject.CompareTag("Player") 
+            || collision.gameObject.CompareTag("PlayerFist"))
         {
-            Interact();
+            if((canExplode && !isExploded) || !canExplode)
+                Interact();
+
             isExploded = collision.gameObject.CompareTag("PlayerFist") && canExplode;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (((collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player")) && !isExploded) || (collision.gameObject.CompareTag("PlayerFist") && !IsActivated))
+        if (collision.gameObject.CompareTag("Crate")
+            || collision.gameObject.CompareTag("Player")
+            || collision.gameObject.CompareTag("PlayerFist"))
         {
-            Interact();
+            
+            if(!canExplode && !collision.CompareTag("PlayerFist"))
+            {
+                Interact(); 
+                transform.GetChild(0).gameObject.SetActive(true);
+                transform.GetChild(1).gameObject.SetActive(false);
+            }
+            else if (!canExplode)
+            {
+                transform.GetChild(0).gameObject.SetActive(true);
+                transform.GetChild(1).gameObject.SetActive(false);
+            }
+            
+                
         }
        
     }
