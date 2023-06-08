@@ -12,14 +12,13 @@ public class Lever : Interactible
     [SerializeField] private bool LaunchesCutscene = false;
     [SerializeField] private float CutsceneFreezeDuration = 2f;
 
-    [SerializeField] private bool moveDoOnce = false;
+    private bool moveDoOnce = false;
 
     [SerializeField] private bool appearance = false;
     [SerializeField] private Color colorShow = Color.white;
     [SerializeField] private Color colorHide = new Color(0.5566038f, 0.5566038f, 0.5566038f, 1);
 
     [SerializeField] private GameObject[] platforms;
-    [SerializeField] private int nbDo = 0;
 
 
     [SerializeField] private CinemachineVirtualCamera[] vms;
@@ -71,8 +70,7 @@ public class Lever : Interactible
         if (PlayerController.instance.UnlockedUpgrades["Strength"] /*&&(!moveOnce ||(moveOnce && !IsActivated))*/)
         {
             IsActivated = !IsActivated;
-            moveDoOnce = IsActivated;
-            nbDo += IsActivated ? 1 : 0;
+            moveDoOnce = true;
 
             transform.GetChild(0).gameObject.SetActive(!IsActivated);
             transform.GetChild(1).gameObject.SetActive(IsActivated);
