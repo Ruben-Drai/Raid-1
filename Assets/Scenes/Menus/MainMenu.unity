@@ -246,8 +246,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294961664
-  m_fontColor: {r: 0, g: 0.91849303, b: 1, a: 1}
+    rgba: 4292464755
+  m_fontColor: {r: 0.4517622, g: 0.81633836, b: 0.8490566, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5403,6 +5403,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 7233670744056604433, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233670744337568784, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233670744405093667, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7233670744603056384, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
       propertyPath: MainMenuButtons
       value: 
@@ -5497,6 +5509,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7233670744603056385, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233670744702433275, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

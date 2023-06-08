@@ -2,7 +2,6 @@ using Cinemachine;
 using System;
 using System.Collections;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class Lever : Interactible
 {
