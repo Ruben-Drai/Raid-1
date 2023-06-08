@@ -8,6 +8,7 @@ public class HologramChangeMessage : MonoBehaviour
 
     public GameObject rightButton;
     public GameObject leftButton;
+    public GameObject exitButton;
 
     public TypingEffect typingEffect;
 
@@ -47,9 +48,10 @@ public class HologramChangeMessage : MonoBehaviour
         TypingEffect.delayBeforeStart = 0;
     }
 
-    public void SetActiveRightButton()
+    public void SetActiveButtons()
     {
         rightButton.SetActive(true);
+        exitButton.SetActive(true);
         TypingEffect.canSkip = true;
     }
 }

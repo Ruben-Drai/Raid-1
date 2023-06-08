@@ -8,10 +8,9 @@ public class HologramManager : MonoBehaviour
 {
     public Animator holoAnimation;
     public AudioSource holoSound;
-    public GameObject leftButton, rigthButton;
-
+    
+    public List<GameObject> buttons;
     public List<GameObject> messages;
-
     public List<GameObject> holoBox;
 
     private bool isHologramActive = false;
@@ -53,8 +52,37 @@ public class HologramManager : MonoBehaviour
             {
                 messages[i].SetActive(false);
             }
-            leftButton.SetActive(false);
-            rigthButton.SetActive(false);
+
+            for (int i = 0; i < buttons.Count; i++)
+            {
+                buttons[i].SetActive(false);
+            }
+
+        }
+    }
+
+    public void ButtonClose()
+    {
+        if (isHologramActive)
+        {
+            for (int i = 0; i < holoBox.Count; i++)
+            {
+                holoBox[i].SetActive(false);
+            }
+            holoAnimation.SetBool("IsActive", false);
+            holoSound.Stop();
+            //Value ? out of my ass...
+            TypingEffect.delayBeforeStart = 4f;
+            isHologramActive = false;
+            PlayerController.instance.Controller.SwitchCurrentActionMap("Game");
+            for (int i = 0; i < messages.Count; i++)
+            {
+                messages[i].SetActive(false);
+            }
+            for (int i = 0; i < buttons.Count; i++)
+            {
+                buttons[i].SetActive(false);
+            }
         }
     }
 }
