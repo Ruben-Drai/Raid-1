@@ -1,8 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using UnityEngine;
-using static Cinemachine.CinemachinePathBase;
-using static UnityEditor.PlayerSettings;
+
 
 public class HittableButton : Interactible
 {

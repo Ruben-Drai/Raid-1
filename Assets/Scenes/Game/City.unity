@@ -1935,6 +1935,7 @@ GameObject:
   m_Component:
   - component: {fileID: 297326561}
   - component: {fileID: 297326562}
+  - component: {fileID: 297326563}
   m_Layer: 0
   m_Name: BossRoom
   m_TagString: Untagged
@@ -1983,6 +1984,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 3}
   m_EdgeRadius: 0
+--- !u!114 &297326563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297326560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf4ec970d66f9e4f8edce618d97cb17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelToLoad: Boss
+  transitionSpeed: 0.05
+  ocultation: {fileID: 0}
 --- !u!1 &335971531
 GameObject:
   m_ObjectHideFlags: 0
@@ -76727,7 +76743,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 180c3f45092e1b942a81b40d1a474278, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0

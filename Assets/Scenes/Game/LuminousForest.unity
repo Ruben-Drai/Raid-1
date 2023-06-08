@@ -518,10 +518,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 503086545}
   - {fileID: 1306892587}
   - {fileID: 1139322136}
   - {fileID: 815822007}
+  - {fileID: 503086545}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -847,6 +847,10 @@ PrefabInstance:
     - target: {fileID: 7233670744603056384, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
       propertyPath: menuStack.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233670744603056385, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0db2433fa6732a745be41d736cf006ae, type: 3}
@@ -1181,7 +1185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6873780437141621545, guid: 007c674fb8fd2134d8b48f66b0165929, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6873780437141621545, guid: 007c674fb8fd2134d8b48f66b0165929, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1760,7 +1764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5435579269853051341, guid: cd058d4c3387f8e44b7ae1b8d8819a0c, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5435579269853051341, guid: cd058d4c3387f8e44b7ae1b8d8819a0c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -24489,7 +24493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1443627202766485715, guid: 7935567a9a375f8419e7ce69f01001a0, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1443627202766485715, guid: 7935567a9a375f8419e7ce69f01001a0, type: 3}
       propertyPath: m_AnchorMax.x
