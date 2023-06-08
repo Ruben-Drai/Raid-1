@@ -8,7 +8,9 @@ public class HologramManager : MonoBehaviour
 {
     public Animator holoAnimation;
     public AudioSource holoSound;
-    public GameObject rightMessage, leftButton, rigthButton;
+    public GameObject leftButton, rigthButton;
+
+    public List<GameObject> messages;
 
     public List<GameObject> holoBox;
 
@@ -47,7 +49,10 @@ public class HologramManager : MonoBehaviour
             TypingEffect.delayBeforeStart = 4f;
             isHologramActive = false;
             PlayerController.instance.Controller.SwitchCurrentActionMap("Game");
-            rightMessage.SetActive(false);
+            for (int i = 0; i < messages.Count; i++)
+            {
+                messages[i].SetActive(false);
+            }
             leftButton.SetActive(false);
             rigthButton.SetActive(false);
         }

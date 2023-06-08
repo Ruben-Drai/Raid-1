@@ -4,34 +4,47 @@ using UnityEngine;
 
 public class HologramChangeMessage : MonoBehaviour
 {
-    public GameObject rightMessage;
-    public GameObject leftMessage;
+    public List<GameObject> messages;
 
     public GameObject rightButton;
     public GameObject leftButton;
 
     public TypingEffect typingEffect;
 
-    public void Right()
-   {
-        rightMessage.SetActive(true);
-        leftMessage.SetActive(false);  
-        
-        leftButton.SetActive(true);
-        rightButton.SetActive(false);
+    [SerializeField] private int currentIndex;
 
-        TypingEffect.delayBeforeStart = 0;
-   }
-    
+    public void Right()
+    {
+        currentIndex++;
+        if (currentIndex >= messages.Count)
+            currentIndex = 0;
+
+        ShowCurrentMessage();
+    }
+
     public void Left()
     {
-        leftMessage.SetActive(true);
-        rightMessage.SetActive(false);
+        currentIndex--;
+        if (currentIndex < 0)
+            currentIndex = messages.Count - 1;
 
-        leftButton.SetActive(false);
-        rightButton.SetActive(true);
+        ShowCurrentMessage();
+    }
+
+    private void ShowCurrentMessage()
+    {
+        for (int i = 0; i < messages.Count; i++)
+        {
+            if (i == currentIndex)
+                messages[i].SetActive(true);
+            else
+                messages[i].SetActive(false);
+        }
+
+        leftButton.SetActive(currentIndex > 0);
+        rightButton.SetActive(currentIndex < messages.Count - 1);
+        
         TypingEffect.delayBeforeStart = 0;
-
     }
 
     public void SetActiveRightButton()

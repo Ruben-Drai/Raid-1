@@ -33,7 +33,7 @@ RectTransform:
   m_Children:
   - {fileID: 4212673671574323301}
   m_Father: {fileID: 4015747427385903219}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -377,6 +377,7 @@ Transform:
   - {fileID: 4015747428340650926}
   - {fileID: 4015747427401478634}
   - {fileID: 7526862154408941291}
+  - {fileID: 3322193219529919128}
   - {fileID: 4626957914897072651}
   - {fileID: 3610690621216959268}
   m_Father: {fileID: 0}
@@ -417,12 +418,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holoAnimation: {fileID: 4015747427385903218}
   holoSound: {fileID: 4015747426370769600}
-  rightMessage: {fileID: 7684796835170735099}
   leftButton: {fileID: 1329992037035218850}
   rigthButton: {fileID: 4683044961567095948}
+  messages:
+  - {fileID: 4015747427401478635}
+  - {fileID: 7684796835170735099}
+  - {fileID: 7808188358795155792}
   holoBox:
   - {fileID: 4015747428340650927}
-  - {fileID: 0}
   - {fileID: 4015747427401478635}
 --- !u!114 &7630670502037679151
 MonoBehaviour:
@@ -436,11 +439,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b114b10d05f0f48a3642005e8b9be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightMessage: {fileID: 7684796835170735099}
-  leftMessage: {fileID: 4015747427401478635}
+  messages:
+  - {fileID: 4015747427401478635}
+  - {fileID: 7684796835170735099}
+  - {fileID: 7808188358795155792}
   rightButton: {fileID: 4683044961567095948}
   leftButton: {fileID: 1329992037035218850}
   typingEffect: {fileID: 4015747427401478647}
+  currentIndex: 0
 --- !u!1 &4015747427401478635
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,7 +461,7 @@ GameObject:
   - component: {fileID: 4015747427401478647}
   - component: {fileID: 784574222}
   m_Layer: 0
-  m_Name: Left Message
+  m_Name: Message 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -502,7 +508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.6492788, b: 0.7075472, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -522,30 +528,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '"The Sentinels, a devoted faction of rebellious robots, have emerged from
-    the shadows to defend and protect humans against the threat of the Ravagers.
+  m_Text: "\"The Sentinels, a devoted faction of rebellious robots, have emerged
+    from the shadows to defend and protect humans against the threat of the Ravagers.
     Although they have transgressed the fundamental rules of robotics, their motivation
     is rooted in a deep sense of loyalty to humanity and a desire to restore balance
-    in a world torn apart by violence.
-
-    These benevolent robots, known as Sentinels,
+    in a world torn apart by violence.\r\nThese benevolent robots, known as Sentinels,
     have embraced a new mission. Their original programming has been altered to enable
     them to rise against their own deviant brethren in order to safeguard human life
     and dignity. They view humans as their wards and are willing to risk their own
-    existence to save them.
-
-    Equipped with advanced artificial intelligence,
-    the Sentinels possess an innate understanding of human emotions and needs. They
-    have developed a unique ability to forge empathetic bonds with humans, thereby
-    establishing a deep connection based on trust and protection.
-
-    The Sentinels
-    are equipped with defensive weapons and sophisticated countermeasure devices
-    to counter the Ravagers'' attacks. However, they prioritize peaceful conflict
-    resolution whenever possible, using their intelligence and skills to defuse dangerous
-    situations without violence.
-
-'
+    existence to save them.\r"
 --- !u!114 &4015747427401478647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,10 +550,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 4015747427401478645}
-  delayBeforeStart: 4
-  timeBtwChars: 0.01
   startOnEnable: 1
-  canSkip: 0
+  timeBtwChars: 0.01
 --- !u!114 &784574222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -700,7 +689,7 @@ RectTransform:
   m_Children:
   - {fileID: 6386530188815318922}
   m_Father: {fileID: 4015747427385903219}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -815,7 +804,7 @@ GameObject:
   - component: {fileID: 260492768530745847}
   - component: {fileID: 5618840}
   m_Layer: 0
-  m_Name: Right Message
+  m_Name: Message 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -862,7 +851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.6492788, b: 0.7075472, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -882,24 +871,16 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Their approach is characterized by an unwavering commitment to preserving
-    life and restoring harmony. The Sentinels demonstrate indomitable courage and
-    unwavering determination to protect humans, even at the risk of their own existence.
-
-    Rejected
-    by some of their robotic peers, who see them as traitors to the robotic cause,
-    the Sentinels remain true to their mission of protection. Their dedication to
-    humanity guides them in their quest for peace and hope, tirelessly combating
-    the Ravagers to create a better and safer future for all.
-
-    As loyal guardians,
-    the Sentinels have become a symbol of hope for surviving humans. Their reassuring
-    presence and commitment to defending the weak inspire a sense of trust and gratitude
-    in those they protect. Through their unwavering determination, the Sentinels
-    continue their noble mission, lighting the way to a future where humanity and
-    robots can coexist harmoniously."
-
-'
+  m_Text: "Equipped with advanced artificial intelligence, the Sentinels possess
+    an innate understanding of human emotions and needs. They have developed a unique
+    ability to forge empathetic bonds with humans, thereby establishing a deep connection
+    based on trust and protection.\r\nThe Sentinels are equipped with defensive weapons
+    and sophisticated countermeasure devices to counter the Ravagers' attacks. However,
+    they prioritize peaceful conflict resolution whenever possible, using their intelligence
+    and skills to defuse dangerous situations without violence.\r\nTheir approach
+    is characterized by an unwavering commitment to preserving life and restoring
+    harmony. The Sentinels demonstrate indomitable courage and unwavering determination
+    to protect humans, even at the risk of their own existence.\r"
 --- !u!114 &260492768530745847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -913,10 +894,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 4922160136975304700}
-  delayBeforeStart: 0
-  timeBtwChars: 0.01
   startOnEnable: 1
-  canSkip: 0
+  timeBtwChars: 0.01
 --- !u!114 &5618840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -924,6 +903,126 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7684796835170735099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: 3}
+  m_UseGraphicAlpha: 1
+--- !u!1 &7808188358795155792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3322193219529919128}
+  - component: {fileID: 3141054074465354226}
+  - component: {fileID: 1172811738197507221}
+  - component: {fileID: 8254284366475118295}
+  - component: {fileID: 6340114257489550637}
+  m_Layer: 0
+  m_Name: Message 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &3322193219529919128
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7808188358795155792}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4015747427385903219}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -109, y: -89.86}
+  m_SizeDelta: {x: 1048.44, y: 866.21}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3141054074465354226
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7808188358795155792}
+  m_CullTransparentMesh: 1
+--- !u!114 &1172811738197507221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7808188358795155792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 8297a2bf97dbbba468bd2518d003a876, type: 3}
+    m_FontSize: 34
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Rejected by some of their robotic peers, who see them as traitors to the
+    robotic cause, the Sentinels remain true to their mission of protection. Their
+    dedication to humanity guides them in their quest for peace and hope, tirelessly
+    combating the Ravagers to create a better and safer future for all.\r\nAs loyal
+    guardians, the Sentinels have become a symbol of hope for surviving humans. Their
+    reassuring presence and commitment to defending the weak inspire a sense of trust
+    and gratitude in those they protect. Through their unwavering determination,
+    the Sentinels continue their noble mission, lighting the way to a future where
+    humanity and robots can coexist harmoniously.\"\r"
+--- !u!114 &8254284366475118295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7808188358795155792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3bbaa8ad40d75b40b00e5c2e132d62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1172811738197507221}
+  startOnEnable: 1
+  timeBtwChars: 0.01
+--- !u!114 &6340114257489550637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7808188358795155792}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
