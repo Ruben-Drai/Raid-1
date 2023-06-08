@@ -6,10 +6,10 @@ using UnityEngine;
 public class Generator : Interactible
 {
     private Animator animator;
+    private static int BossHP = 3;
     [SerializeField] private AudioClip explode;
 
     [SerializeField] private DestroyablePlatform platform;
-    [SerializeField] private GameObject boss;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,7 @@ public class Generator : Interactible
         if (!IsActivated)
         {
             IsActivated = true;
-            boss.GetComponent<BossFight>().DamageBoss();
+            BossHP--;
 
             GetComponent<AudioSource>().PlayOneShot(explode);
 
@@ -38,7 +38,7 @@ public class Generator : Interactible
         {
             platform.Interact();
         }
-
+        if (BossHP <= 0) Debug.Log("Enemy felled");
         GetComponent<SpriteRenderer>().enabled = false;
     }
 }
