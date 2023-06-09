@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
@@ -12,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     [SerializeField] private PauseMenu pauseMenu;
-    [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime = 0.2f, RopeShrinkSpeed=3f;
+    [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime = 0.2f, RopeShrinkSpeed=3f,walkSFXWaitTime =0.2f;
     [SerializeField] private BoxCollider2D StandingColl;
     [SerializeField] private BoxCollider2D SneakingColl;
     [SerializeField] private CapsuleCollider2D InteractionTrigger;
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour
 
     private bool IsDoubleJumping = false;
 
+    private Coroutine WalkSFXRoutine;
     public bool CanJump
     {
         get
@@ -66,6 +68,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     public static Dictionary<string, bool> UnlockedUpgrades = null;
+
 
     // Start is called before the first frame update
     private void Awake()
@@ -314,16 +317,22 @@ public class PlayerController : MonoBehaviour
         
         if(IsMoving && !IsInJump && !GetComponent<AudioSource>().isPlaying)
         {
-            GetComponent<AudioSource>().volume = SoundManager.instance== null ?1f: SoundManager.instance.volumeSoundSlider.value;
-            GetComponent<AudioSource>().PlayOneShot(Walk);
+
         }
         else if (!IsMoving && !IsInJump && GetComponent<AudioSource>().isPlaying)
         {
             GetComponent<AudioSource>().Stop();
         }
-
     }
-
+    private IEnumerator IWalkSFXRoutine()
+    {
+        while (WalkSFXRoutine != null)
+        {
+            GetComponent<AudioSource>().volume = SoundManager.instance == null ? 1f : SoundManager.instance.volumeSoundSlider.value;
+            GetComponent<AudioSource>().PlayOneShot(Walk);
+            yield return new WaitForSeconds(walkSFXWaitTime);
+        } 
+    }
     private void Animation()
     {
         animator.SetBool("IsGrappling", hook.HasShot);

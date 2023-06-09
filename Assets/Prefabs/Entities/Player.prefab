@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &55393271417078121
 Transform:
   m_ObjectHideFlags: 0
@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2802959850458887588}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.002000014, y: 0.29400006, z: -0.016643781}
-  m_LocalScale: {x: 0.116281494, y: 0.116281494, z: 0.116281494}
+  m_LocalPosition: {x: 0.01199993, y: 0.3168, z: -0.016643781}
+  m_LocalScale: {x: 0.165, y: 0.165, z: 0.165}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8964733122397447408}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c2abd279409d30d4c9c46134afad24d1, type: 3}
   m_Color: {r: 1, g: 0.1830188, b: 0.1830188, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -258,7 +258,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4411589145912442754}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.243, z: 0}
+  m_LocalPosition: {x: 0.028, y: 0.146, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -423,7 +423,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: eaecd66a67270cb469c2a7150dcf29dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -453,6 +453,7 @@ MonoBehaviour:
   JumpCooldown: 0.1
   CoyoteTime: 0.2
   RopeShrinkSpeed: 3
+  walkSFXWaitTime: 0.2
   StandingColl: {fileID: 6553580001067263295}
   SneakingColl: {fileID: 8018268210188467063}
   InteractionTrigger: {fileID: 7777774721333183780}
@@ -623,6 +624,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 8dacda38-1801-4a32-8832-5d8ae74178cf
     m_ActionName: Dialogue/SkipHologram[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9c7c2419-9321-447d-9358-12e5f76d1fe3
+    m_ActionName: Dialogue/Right Holograms
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1b28f7ed-c97f-4179-9cb7-6de1541638d4
+    m_ActionName: Dialogue/Left Hologram
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: K&M
   m_DefaultActionMap: Game
@@ -871,7 +880,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &235732244913157853
 Transform:
   m_ObjectHideFlags: 0
@@ -881,8 +890,8 @@ Transform:
   m_GameObject: {fileID: 8383557555096799226}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.011999926, y: 0.128, z: -0.016643781}
-  m_LocalScale: {x: 0.1197549, y: 0.190966, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.165, y: 0.165, z: 0.165}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 179132361778093369}
   m_Father: {fileID: 8964733122397447408}
@@ -928,8 +937,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_SortingOrder: 4
+  m_Sprite: {fileID: 21300000, guid: b38d31296c1727e439433d37d8d4b85d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -992,7 +1001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &179132361778093369
 Transform:
   m_ObjectHideFlags: 0
