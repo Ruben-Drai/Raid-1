@@ -1167,7 +1167,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311026243985, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.016229
+      value: 10.4488735
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311026243985, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13272,6 +13272,7 @@ MonoBehaviour:
   - {fileID: 1215358474}
   PlatformSpeed: 6.05
   WaitTimeBewteenWayPoints: 1
+  returnToStart: 0
   currentWaypointIndex: 0
 --- !u!50 &1536476167
 Rigidbody2D:
@@ -13334,6 +13335,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1125757218078307404, guid: 944296d2e850e8645b1e7d8d2e5d78ee, type: 3}
       propertyPath: move
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1125757218078307404, guid: 944296d2e850e8645b1e7d8d2e5d78ee, type: 3}
+      propertyPath: returnToStart
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1125757218078307404, guid: 944296d2e850e8645b1e7d8d2e5d78ee, type: 3}
