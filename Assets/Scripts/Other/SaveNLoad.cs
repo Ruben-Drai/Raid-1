@@ -39,7 +39,7 @@ public class SaveNLoad : MonoBehaviour
         PlayerPrefs.SetFloat("PlayerPosX", PlayerController.instance.transform.position.x);
         PlayerPrefs.SetFloat("PlayerPosY", PlayerController.instance.transform.position.y);
 
-        foreach (var v in PlayerController.instance.UnlockedUpgrades)
+        foreach (var v in PlayerController.UnlockedUpgrades)
         {
             PlayerPrefs.SetInt(v.Key, v.Value ? 1 : 0);
         }
@@ -75,9 +75,9 @@ public class SaveNLoad : MonoBehaviour
                 0);
 
 
-        foreach (var v in PlayerController.instance.UnlockedUpgrades.ToArray())
+        foreach (var v in PlayerController.UnlockedUpgrades.ToArray())
         {
-            PlayerController.instance.UnlockedUpgrades[v.Key] = PlayerPrefs.GetInt(v.Key) == 1;
+            PlayerController.UnlockedUpgrades[v.Key] = PlayerPrefs.GetInt(v.Key) == 1;
         }
     }
     public void ResetSave()
@@ -97,7 +97,7 @@ public class SaveNLoad : MonoBehaviour
         PlayerPrefs.DeleteKey("PlayerPosX");
         PlayerPrefs.DeleteKey("PlayerPosY");
 
-        foreach (var v in PlayerController.instance.UnlockedUpgrades.ToArray())
+        foreach (var v in PlayerController.UnlockedUpgrades.ToArray())
         {
             PlayerPrefs.DeleteKey(v.Key);
         }

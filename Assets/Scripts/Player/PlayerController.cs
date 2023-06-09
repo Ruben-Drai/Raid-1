@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    public Dictionary<string, bool> UnlockedUpgrades;
+    public static Dictionary<string, bool> UnlockedUpgrades = null;
 
     // Start is called before the first frame update
     private void Awake()
@@ -80,7 +80,8 @@ public class PlayerController : MonoBehaviour
         feet = GetComponentInChildren<GroundCheck>();
         rb = GetComponent<Rigidbody2D>();
         actionMap = GetComponent<PlayerInput>().actions.actionMaps[0];
-        UnlockedUpgrades = new Dictionary<string, bool>()
+        if(UnlockedUpgrades==null) 
+            UnlockedUpgrades = new Dictionary<string, bool>()
         {
             {"Jump",true},
             {"Strength",true},

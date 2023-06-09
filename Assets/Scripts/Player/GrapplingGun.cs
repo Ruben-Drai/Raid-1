@@ -136,7 +136,7 @@ public class GrapplingGun : MonoBehaviour
             {
                 if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistance || !hasMaxDistance)
                 {
-                    FistOnly = !PlayerController.instance.UnlockedUpgrades["Hook"] || _hit.collider.GetComponent<Interactible>() != null;
+                    FistOnly = !PlayerController.UnlockedUpgrades["Hook"] || _hit.collider.GetComponent<Interactible>() != null;
                     grapplePoint = _hit.point;
                     if (FistOnly) 
                         grapplePoint += distanceVector.normalized / 2f;

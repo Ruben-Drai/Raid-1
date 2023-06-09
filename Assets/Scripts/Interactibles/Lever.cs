@@ -67,7 +67,7 @@ public class Lever : Interactible
     }
     public override void Interact()
     {
-        if (PlayerController.instance.UnlockedUpgrades["Strength"] /*&&(!moveOnce ||(moveOnce && !IsActivated))*/)
+        if (PlayerController.UnlockedUpgrades["Strength"] /*&&(!moveOnce ||(moveOnce && !IsActivated))*/)
         {
             IsActivated = !IsActivated;
             moveDoOnce = true;

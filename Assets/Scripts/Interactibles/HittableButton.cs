@@ -110,9 +110,10 @@ public class HittableButton : Interactible
             || collision.gameObject.CompareTag("PlayerFist"))
         {
             if((canExplode && !isExploded) || !canExplode)
+            {
                 Interact();
-
-            isExploded = collision.gameObject.CompareTag("PlayerFist") && canExplode;
+                isExploded = collision.gameObject.CompareTag("PlayerFist") && canExplode;
+            }  
         }
     }
 
@@ -129,13 +130,16 @@ public class HittableButton : Interactible
                 transform.GetChild(0).gameObject.SetActive(true);
                 transform.GetChild(1).gameObject.SetActive(false);
             }
-            else if (!canExplode)
+            else if(!canExplode)
             {
                 transform.GetChild(0).gameObject.SetActive(true);
                 transform.GetChild(1).gameObject.SetActive(false);
             }
-            
-                
+            else if(canExplode && collision.CompareTag("Player") && !isExploded)
+            {
+                transform.GetChild(0).gameObject.SetActive(true);
+                transform.GetChild(1).gameObject.SetActive(false);
+            }       
         }
        
     }

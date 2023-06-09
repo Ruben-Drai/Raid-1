@@ -7,7 +7,7 @@ public class BigBox : Interactible
 
     public override void Interact()
     {
-        if (PlayerController.instance.UnlockedUpgrades["Strength"])
+        if (PlayerController.UnlockedUpgrades["Strength"])
         {
             IsBeingLifted = !IsBeingLifted;
             rb.constraints = IsBeingLifted ? RigidbodyConstraints2D.FreezeRotation: RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;

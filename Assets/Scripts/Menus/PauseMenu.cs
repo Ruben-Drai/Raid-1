@@ -85,7 +85,7 @@ public class PauseMenu : MonoBehaviour
         menuStack.RemoveAt(menuStack.Count - 1);
         EventSystem.current.SetSelectedGameObject(null);
 
-        SoundManager.instance.Back.PlayOneShot(SoundManager.instance.Back.clip);
+        SoundManager.instance?.Back.PlayOneShot(SoundManager.instance.Back.clip);
 
         if (menuStack.Count > 0)
             menuStack[menuStack.Count - 1].SetActive(true);
