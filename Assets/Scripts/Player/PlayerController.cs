@@ -126,7 +126,11 @@ public class PlayerController : MonoBehaviour
                 StandingColl.enabled = true;
             }
         }
-
+        if(IsPushingBox && IsInJump)
+        {
+            AvailableInteraction.Interact();
+            AvailableInteraction = null;
+        }
     }
     private bool CanUncrouch
     {
@@ -266,7 +270,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     //gets interactible from trigger box around the player
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.GetComponent<Interactible>() != null)
         {
