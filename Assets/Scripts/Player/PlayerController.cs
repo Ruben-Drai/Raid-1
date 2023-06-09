@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private bool _canJump = true;
     private bool IsChangingLen = false;
     private bool IsSneaking = false;
+    private bool IsAtMyLeft = false;
     private float TimeFromLastJump = 0f;
     private float CoyoteTimer = 0f;
     private float lenModifier = 0f;
@@ -268,6 +269,10 @@ public class PlayerController : MonoBehaviour
         {
             AvailableInteraction = collision.GetComponent<Interactible>();
             AvailableInteraction.transform.Find("Highlight")?.gameObject.SetActive(true); // Activates highlighting when the player is close by
+            if (collision.transform.position.x > transform.position.x)
+                IsAtMyLeft = false;
+            else
+                IsAtMyLeft = true;
 
         }
     }
@@ -327,11 +332,22 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Velocity_Y", rb.velocity.y);
         animator.SetBool("DoubleJump", IsDoubleJumping);
         animator.SetBool("IsMoving", IsMoving);
+        animator.SetBool("IsPushingBox", IsPushingBox);
+        if(IsPushingBox)
+        {
+            if (IsAtMyLeft)
+                GetComponent<SpriteRenderer>().flipX = true;
+            else
+                GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else
+        {
+            if (rb.velocity.x > 0.1f)
+                GetComponent<SpriteRenderer>().flipX = false;
+            else if (rb.velocity.x < -0.1f)
+                GetComponent<SpriteRenderer>().flipX = true;
+        }
 
-        if (rb.velocity.x > 0.1f)
-            GetComponent<SpriteRenderer>().flipX = false;
-        else if(rb.velocity.x < -0.1f)
-            GetComponent<SpriteRenderer>().flipX = true;
 
     }
 }
