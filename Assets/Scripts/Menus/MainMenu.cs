@@ -37,7 +37,6 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("Quit Game button clicked");
         SoundManager.instance.Back.PlayOneShot(SoundManager.instance.Back.clip);
 
         Application.Quit();

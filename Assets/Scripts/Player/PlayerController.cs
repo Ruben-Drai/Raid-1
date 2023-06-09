@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip DoubleJump;
 
     public GrapplingGun hook;
+    public LayerMask SneakIgnoreCheckLayers;
 
     private bool _canJump = true;
     private bool IsChangingLen = false;
@@ -36,14 +37,15 @@ public class PlayerController : MonoBehaviour
     [NonSerialized] public Interactible AvailableInteraction;
     [NonSerialized] public Rigidbody2D rb;
     [NonSerialized] public PlayerInput Controller;
+    [NonSerialized] public InputActionMap actionMap;
+
     [NonSerialized] public Vector2 SlopeAdjustment;
     [NonSerialized] public Vector2 GamePadAimDirection;
-    [NonSerialized] public bool IsPushingBox = false;
-    /*[NonSerialized]*/ public bool IsMoving = false;
 
+    [NonSerialized] public bool IsPushingBox = false;
+    [NonSerialized] public bool IsMoving = false;
     [NonSerialized] public bool IsInJump = true;
     [NonSerialized] public bool CanDoubleJump = true;
-    [NonSerialized] public InputActionMap actionMap;
 
     private bool IsDoubleJumping = false;
 
@@ -91,7 +93,13 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         Animation();
-
+        if (hook.HasShot)
+        {
+            _canJump = false;
+            if (UnlockedUpgrades["DoubleJump&Sneak"])
+                CanDoubleJump = true;
+        }
+        if (feet.groundState != GroundState.Air) IsDoubleJumping = false;
         TimeFromLastJump += Time.deltaTime;
         CoyoteTimer += Time.deltaTime;
         if (hook.HasShot && IsChangingLen)
@@ -106,8 +114,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            var v = Physics2D.Raycast(transform.position, Vector2.up, 0.5f,LayerMask.GetMask("BoudingBox"));
-            if (!v)
+            if (CanUncrouch)
             {
                 SneakingColl.enabled = false;
                 InteractionTrigger.enabled = true;
@@ -115,6 +122,16 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+    }
+    private bool CanUncrouch
+    {
+        get 
+        {
+            return !Physics2D.Raycast(transform.position, Vector2.up, 2f, SneakIgnoreCheckLayers)
+            && !Physics2D.Raycast(transform.position + Vector3.right/2, Vector2.up, 2f, SneakIgnoreCheckLayers)
+            && !Physics2D.Raycast(transform.position + Vector3.left/2, Vector2.up, 2f, SneakIgnoreCheckLayers);
+        }
+        
     }
     public void Move(InputAction.CallbackContext context)
     {
@@ -131,15 +148,13 @@ public class PlayerController : MonoBehaviour
         if (TimeFromLastJump > JumpCooldown
             && ((_canJump && UnlockedUpgrades["Jump"]) || (CanDoubleJump && UnlockedUpgrades["DoubleJump&Sneak"]))
             && !IsPushingBox
-            && context.performed)
+            && context.performed
+            && ((IsSneaking && CanUncrouch) || !IsSneaking))
         {
-            if (hook.HasShot)
-            {
+            if(hook.HasShot)
                 hook.ReturnHook();
-                _canJump = false;
-                if (UnlockedUpgrades["DoubleJump&Sneak"])
-                    CanDoubleJump = true;
-            }
+
+
             IsSneaking = false;
             TimeFromLastJump = 0f;
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
@@ -194,8 +209,21 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            IsChangingLen = true;
-            lenModifier = context.ReadValue<Vector2>().normalized.y;
+            var temp = -context.ReadValue<Vector2>().normalized.y;
+
+            if (feet.groundState == GroundState.Air)
+            {
+                IsChangingLen = true;
+                lenModifier = temp;
+            }
+            else
+            {
+                if (temp<0)
+                {
+                    IsChangingLen = true;
+                    lenModifier = temp;
+                }
+            }
 
         }
         else if (context.canceled) 
@@ -290,9 +318,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
     private void Animation()
     {
+        animator.SetBool("IsGrappling", hook.HasShot);
+        animator.SetBool("IsGrounded", feet.groundState != GroundState.Air);
         animator.SetBool("UnlockArm", UnlockedUpgrades["ArmGun"]);
         animator.SetFloat("Velocity_Y", rb.velocity.y);
         animator.SetBool("DoubleJump", IsDoubleJumping);

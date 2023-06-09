@@ -42,7 +42,7 @@ public class ChangeScene : MonoBehaviour
     {
         if (ocultation.color.a >= 1)
             return true;
-        if( Time.time - timer > 0.1f)
+        if( Time.time - timer > 0.01f)
         {
             ocultation.color = new Color(ocultation.color.r, ocultation.color.g, ocultation.color.b, ocultation.color.a + transitionSpeed);
             timer = Time.time;

@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 3385936301017991587}
   - component: {fileID: 8558548966740886694}
   m_Layer: 0
-  m_Name: Light 2D (1)
+  m_Name: Flashlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -456,10 +456,12 @@ MonoBehaviour:
   StandingColl: {fileID: 6553580001067263295}
   SneakingColl: {fileID: 8018268210188467063}
   InteractionTrigger: {fileID: 7777774721333183780}
-  Walk: {fileID: 8300000, guid: d976d9251742d274992e51a7b03893be, type: 3}
+  Walk: {fileID: 8300000, guid: 322db6e3066642f4a822894549e6938a, type: 3}
   DoubleJump: {fileID: 8300000, guid: 689f520705179784599b3bc44b9b6496, type: 3}
   hook: {fileID: 148341381461873333}
-  IsMoving: 0
+  SneakIgnoreCheckLayers:
+    serializedVersion: 2
+    m_Bits: 4563
 --- !u!114 &6287506163292819442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,6 +619,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 5f79adba-bfcb-4be5-8b79-43f73e27a579
     m_ActionName: Dialogue/Skip[/Keyboard/space,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8dacda38-1801-4a32-8832-5d8ae74178cf
+    m_ActionName: Dialogue/SkipHologram[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: K&M
   m_DefaultActionMap: Game

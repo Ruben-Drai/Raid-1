@@ -24,7 +24,7 @@ public class PauseMenu : MonoBehaviour
         DisableMenus();
         Menu.SetActive(true);
         menuStack.Add(Menu);
-        SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
+        SoundManager.instance?.Click.PlayOneShot(SoundManager.instance.Click.clip);
 
     }
     public void ShowControls()
@@ -32,14 +32,14 @@ public class PauseMenu : MonoBehaviour
         DisableMenus();
         Controls.SetActive(true);
         menuStack.Add(Controls);
-        SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
+        SoundManager.instance?.Click.PlayOneShot(SoundManager.instance.Click.clip);
     }
     public void ShowSettings()
     {
         DisableMenus();
         Settings.SetActive(!Settings.activeSelf);
         menuStack.Add(Settings);
-        SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
+        SoundManager.instance?.Click.PlayOneShot(SoundManager.instance.Click.clip);
     }
 
     public void ShowTextSetting()
@@ -47,7 +47,7 @@ public class PauseMenu : MonoBehaviour
         DisableMenus();
         TextSettings.SetActive(!TextSettings.activeSelf);
         menuStack.Add(TextSettings);
-        SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
+        SoundManager.instance?.Click.PlayOneShot(SoundManager.instance.Click.clip);
     }
     //goes back to the previous menu if there is one, otherwise do nothing except if the player is not on the main menu
     //in which case the pause menu is shown

@@ -1,7 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using UnityEngine;
-using static Cinemachine.CinemachinePathBase;
+
 
 public class HittableButton : Interactible
 {
@@ -23,6 +23,7 @@ public class HittableButton : Interactible
     [SerializeField] private Color colorHide = new Color(0.5566038f, 0.5566038f, 0.5566038f, 1);
 
     [SerializeField] private GameObject[] platforms;
+    [SerializeField] private CinemachineVirtualCamera[] vms;
 
 
     private Coroutine cutscene;
@@ -75,9 +76,9 @@ public class HittableButton : Interactible
         IsActivated = !IsActivated;
         moveDoOnce = true;
 
-        transform.GetChild(0).gameObject.SetActive(!IsActivated);
-        transform.GetChild(1).gameObject.SetActive(IsActivated);
-        if (LaunchesCutscene && isExploded && canExplode) cutscene ??= StartCoroutine(LaunchCutscene());
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(true);
+        if (LaunchesCutscene) cutscene ??= StartCoroutine(LaunchCutscene());
 
 
         if (door)
@@ -90,14 +91,13 @@ public class HittableButton : Interactible
         }
 
         /* Activate or deactivate a platform's collider and show it by changing its color */
-        if (appearance && IsActivated)
+        if (appearance)
         {
             for (int i = 0; i < platforms.Length; i++)
             {
                 Color colorSprite = platforms[i].GetComponent<SpriteRenderer>().color;
                 colorSprite = colorSprite == colorShow ? colorHide : colorShow;
                 platforms[i].GetComponent<SpriteRenderer>().color = colorSprite;
-
                 platforms[i].GetComponent<Collider2D>().enabled = !platforms[i].GetComponent<Collider2D>().enabled;
             }
         }
@@ -105,31 +105,50 @@ public class HittableButton : Interactible
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (((collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player")) && !isExploded) || (collision.gameObject.CompareTag("PlayerFist") && !IsActivated))
+        if (collision.gameObject.CompareTag("Crate") 
+            || collision.gameObject.CompareTag("Player") 
+            || collision.gameObject.CompareTag("PlayerFist"))
         {
-            Interact();
+            if((canExplode && !isExploded) || !canExplode)
+                Interact();
+
             isExploded = collision.gameObject.CompareTag("PlayerFist") && canExplode;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (((collision.gameObject.CompareTag("Crate") || collision.gameObject.CompareTag("Player")) && !isExploded) || (collision.gameObject.CompareTag("PlayerFist") && !IsActivated))
+        if (collision.gameObject.CompareTag("Crate")
+            || collision.gameObject.CompareTag("Player")
+            || collision.gameObject.CompareTag("PlayerFist"))
         {
-            Interact();
+            
+            if(!canExplode && !collision.CompareTag("PlayerFist"))
+            {
+                Interact(); 
+                transform.GetChild(0).gameObject.SetActive(true);
+                transform.GetChild(1).gameObject.SetActive(false);
+            }
+            else if (!canExplode)
+            {
+                transform.GetChild(0).gameObject.SetActive(true);
+                transform.GetChild(1).gameObject.SetActive(false);
+            }
+            
+                
         }
        
     }
 
     public IEnumerator LaunchCutscene()
     {
-        foreach (var platform in platforms)
+        foreach (var pos in vms)
         {
-            FindFirstObjectByType<CinemachineVirtualCamera>().Follow = platform.transform;
+            pos.Priority = 11;
 
             yield return new WaitForSeconds(CutsceneFreezeDuration);
+            pos.Priority = 9;
         }
         yield return null;
-        FindFirstObjectByType<CinemachineVirtualCamera>().Follow = PlayerController.instance.transform;
     }
 }

@@ -641,10 +641,10 @@ MonoBehaviour:
   IsActivated: 0
   canExplode: 1
   move: 0
-  LaunchesCutscene: 0
-  CutsceneFreezeDuration: 2
   door: 1
   appearance: 0
+  LaunchesCutscene: 0
+  CutsceneFreezeDuration: 2
   colorShow: {r: 1, g: 1, b: 1, a: 1}
   colorHide: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
   platforms: []
@@ -1093,7 +1093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311026243985, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.047371387
+      value: -0.047371507
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311026243985, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4449,12 +4449,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsActivated: 0
   move: 0
+  moveOnce: 0
+  door: 0
   LaunchesCutscene: 0
   CutsceneFreezeDuration: 2
-  moveOnce: 0
   moveDoOnce: 0
   appearance: 0
   colorShow: {r: 1, g: 1, b: 1, a: 1}
   colorHide: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
   platforms: []
   nbDo: 0
+  vms: []

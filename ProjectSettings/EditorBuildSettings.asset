@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/MainMenu.unity
     guid: 88be0e791ea904a4fbfcaa47d8858905
   - enabled: 1
+    path: Assets/Scenes/Game/Boss.unity
+    guid: 1cb92049ae0204243a3def7f4516ba3a
+  - enabled: 1
     path: Assets/Scenes/Game/City.unity
     guid: cf996d03e8da52943b7234d3f7227adf
   - enabled: 1
@@ -29,6 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game/Lab3.unity
     guid: 9bce687475f649541a3f510e918b603c
+  - enabled: 1
+    path: Assets/Scenes/Game/Lab4.unity
+    guid: 5a58d894347d4534296c4510c617fae6
   - enabled: 1
     path: Assets/Scenes/Game/LuminousForest.unity
     guid: 85cde6e1d1d8d054a814fbb932f780c8
