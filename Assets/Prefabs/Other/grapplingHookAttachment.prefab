@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 608879077080327859}
   m_Layer: 8
   m_Name: grapplingHookAttachment
-  m_TagString: Untagged
+  m_TagString: Fistable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
