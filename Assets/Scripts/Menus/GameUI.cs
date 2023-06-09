@@ -63,7 +63,7 @@ public class GameUI : MonoBehaviour
     /* Drain the desired amount of battery when passing a check point, or while in the boss room */
     public void BatterytDrain(int value)
     {
-        Debug.Log("You battery has been drained");
+        Debug.Log("Battery drained");
         charge -= value;
 
         timer = charge * drainSpeed;

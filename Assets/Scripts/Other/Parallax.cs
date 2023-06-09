@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -8,6 +9,8 @@ public class Parallax : MonoBehaviour
     private float lenght, startpos;
     public GameObject cam;
     public float parallaxEffect;
+
+    [SerializeField] bool verticalMovement;
 
     void Start()
     {
@@ -29,5 +32,9 @@ public class Parallax : MonoBehaviour
         if (temp > startpos + lenght) { startpos += lenght; } // Moves the object (background) to the right, adding 1x its width if the camera has exceeded 1 map pattern to the right.
         else if (temp < startpos - lenght) { startpos -= lenght; } // Moves the object (background) to the left, reducing its width by 1x if the camera has exceeded 1 map pattern to the left.
 
+        if (verticalMovement)
+        {
+            transform.position = new Vector2(transform.position.x, cam.transform.position.y);
+        }
     }
 }
