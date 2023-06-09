@@ -212,8 +212,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 503086546}
     - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionId
+      value: 9c7c2419-9321-447d-9358-12e5f76d1fe3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionId
+      value: 1b28f7ed-c97f-4179-9cb7-6de1541638d4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionName
+      value: Dialogue/Right Holograms[/XInputControllerWindows/dpad/right]
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionName
+      value: Dialogue/Left Hologram[/XInputControllerWindows/dpad/left]
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -222,6 +250,14 @@ PrefabInstance:
     - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -237,6 +273,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}

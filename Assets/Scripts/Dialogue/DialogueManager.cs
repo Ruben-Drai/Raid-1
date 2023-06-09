@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     [Header("Params")]
-    [SerializeField] private float typingSpeed = 0.04f;
+    public static float typingSpeed = 0.04f;
 
     [Header("Animations")]
     public Animator dialogueAnimation;

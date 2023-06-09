@@ -421,6 +421,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Right Holograms",
+                    "type": "Button",
+                    "id": "9c7c2419-9321-447d-9358-12e5f76d1fe3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Left Hologram",
+                    "type": "Button",
+                    "id": "1b28f7ed-c97f-4179-9cb7-6de1541638d4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -476,6 +494,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "SkipHologram",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d336be25-b631-45e1-aa76-766632200b54",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right Holograms",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8dbb9f38-57d2-480c-a18e-80039d21da1f",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left Hologram",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
