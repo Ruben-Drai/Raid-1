@@ -13,6 +13,8 @@ public class HittableButton : Interactible
     [SerializeField] private bool move = false;
     [SerializeField] private bool door = false;
     [SerializeField] private bool appearance = false;
+    [SerializeField]private bool returnToStart = false;
+
     private bool moveDoOnce = false;
 
     [SerializeField] private bool LaunchesCutscene = false;
@@ -52,7 +54,7 @@ public class HittableButton : Interactible
                     currentPlatform.IsActivated = true;
                 }
             }
-            else
+            else if (!returnToStart)
             {
                 if (currentPlatform.moveOnce)
                 {
@@ -67,6 +69,11 @@ public class HittableButton : Interactible
                 {
                     currentPlatform.IsActivated = false;
                 }
+            }
+            else
+            {
+                currentPlatform.currentWaypointIndex = 1;
+                currentPlatform.returnToStart = true;
             }
         }
     }
@@ -137,9 +144,11 @@ public class HittableButton : Interactible
             }
             else if(canExplode && collision.CompareTag("Player") && !isExploded)
             {
+                Interact();
                 transform.GetChild(0).gameObject.SetActive(true);
                 transform.GetChild(1).gameObject.SetActive(false);
-            }       
+            }
+            
         }
        
     }

@@ -11,6 +11,7 @@ public class Platform : MonoBehaviour
     [SerializeField] private List<Transform> wayPoints;
     [SerializeField] private float PlatformSpeed = 1.0f;
     [SerializeField] private float WaitTimeBewteenWayPoints = 1.0f;
+    public bool returnToStart = false;
 
     public int currentWaypointIndex = 0;
     public Coroutine MoveRoutine = null;
@@ -38,12 +39,18 @@ public class Platform : MonoBehaviour
             if (Vector2.Distance(transform.position, wayPoints[currentWaypointIndex].position) < 0.01f)
             {
                 isNear = true;
-                yield return new WaitForSeconds(WaitTimeBewteenWayPoints);
+                if(!returnToStart)
+                    yield return new WaitForSeconds(WaitTimeBewteenWayPoints);
+
                 //add one, or if at end of list go back to 0
                 currentWaypointIndex += currentWaypointIndex == (wayPoints.Count - 1) ? -currentWaypointIndex : 1;
                 isNear = false;
-                if (moveOnce)
-                { IsActivated = false; break; }
+                if (moveOnce ||returnToStart)
+                { 
+                    IsActivated = false;
+                    returnToStart = false;
+                    break; 
+                }
             }
         }
         MoveRoutine = null;
