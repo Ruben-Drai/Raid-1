@@ -1,18 +1,20 @@
 using UnityEngine;
 
-public class CheckPoint : MonoBehaviour
+public class CheckPoint : Interactible
 {
-    private bool used = false;
     public int drain = 5;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!used && collision.GetComponent<PlayerController>() != null)
+        if(!IsActivated && collision.GetComponent<PlayerController>() != null)
         {
-            Debug.Log("checkpoint");
-            used = true;
-            GameUI.instance.BatteryDrain(drain);
+            Interact();
             SaveNLoad.instance.Save();
+            GameUI.instance.BatteryDrain(drain);
         }
+    }
+    public override void Interact()
+    {
+        IsActivated = true;
     }
 }
