@@ -11,7 +11,8 @@ public class CheckPoint : MonoBehaviour
         {
             Debug.Log("checkpoint");
             used = true;
-            GameUI.instance.BatterytDrain(drain);
+            GameUI.instance.BatteryDrain(drain);
+            SaveNLoad.instance.Save();
         }
     }
 }

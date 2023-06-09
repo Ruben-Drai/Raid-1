@@ -41,5 +41,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game/MiddleForest.unity
     guid: eab5a14ea38fd4846bd83e05b1f64350
+  - enabled: 1
+    path: Assets/Scenes/Menus/Credits.unity
+    guid: ae59315bcd80b594fb3b6d9fc2815615
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 5f2ce465c4fc84840a4a3a4630b181bd, type: 2}
