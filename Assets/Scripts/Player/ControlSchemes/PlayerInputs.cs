@@ -443,6 +443,24 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right Holograms"",
+                    ""type"": ""Button"",
+                    ""id"": ""9c7c2419-9321-447d-9358-12e5f76d1fe3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left Hologram"",
+                    ""type"": ""Button"",
+                    ""id"": ""1b28f7ed-c97f-4179-9cb7-6de1541638d4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -500,6 +518,28 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""SkipHologram"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d336be25-b631-45e1-aa76-766632200b54"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right Holograms"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8dbb9f38-57d2-480c-a18e-80039d21da1f"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left Hologram"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -548,6 +588,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
         m_Dialogue_Skip = m_Dialogue.FindAction("Skip", throwIfNotFound: true);
         m_Dialogue_SkipHologram = m_Dialogue.FindAction("SkipHologram", throwIfNotFound: true);
+        m_Dialogue_RightHolograms = m_Dialogue.FindAction("Right Holograms", throwIfNotFound: true);
+        m_Dialogue_LeftHologram = m_Dialogue.FindAction("Left Hologram", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -713,12 +755,16 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private List<IDialogueActions> m_DialogueActionsCallbackInterfaces = new List<IDialogueActions>();
     private readonly InputAction m_Dialogue_Skip;
     private readonly InputAction m_Dialogue_SkipHologram;
+    private readonly InputAction m_Dialogue_RightHolograms;
+    private readonly InputAction m_Dialogue_LeftHologram;
     public struct DialogueActions
     {
         private @PlayerInputs m_Wrapper;
         public DialogueActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Skip => m_Wrapper.m_Dialogue_Skip;
         public InputAction @SkipHologram => m_Wrapper.m_Dialogue_SkipHologram;
+        public InputAction @RightHolograms => m_Wrapper.m_Dialogue_RightHolograms;
+        public InputAction @LeftHologram => m_Wrapper.m_Dialogue_LeftHologram;
         public InputActionMap Get() { return m_Wrapper.m_Dialogue; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -734,6 +780,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @SkipHologram.started += instance.OnSkipHologram;
             @SkipHologram.performed += instance.OnSkipHologram;
             @SkipHologram.canceled += instance.OnSkipHologram;
+            @RightHolograms.started += instance.OnRightHolograms;
+            @RightHolograms.performed += instance.OnRightHolograms;
+            @RightHolograms.canceled += instance.OnRightHolograms;
+            @LeftHologram.started += instance.OnLeftHologram;
+            @LeftHologram.performed += instance.OnLeftHologram;
+            @LeftHologram.canceled += instance.OnLeftHologram;
         }
 
         private void UnregisterCallbacks(IDialogueActions instance)
@@ -744,6 +796,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @SkipHologram.started -= instance.OnSkipHologram;
             @SkipHologram.performed -= instance.OnSkipHologram;
             @SkipHologram.canceled -= instance.OnSkipHologram;
+            @RightHolograms.started -= instance.OnRightHolograms;
+            @RightHolograms.performed -= instance.OnRightHolograms;
+            @RightHolograms.canceled -= instance.OnRightHolograms;
+            @LeftHologram.started -= instance.OnLeftHologram;
+            @LeftHologram.performed -= instance.OnLeftHologram;
+            @LeftHologram.canceled -= instance.OnLeftHologram;
         }
 
         public void RemoveCallbacks(IDialogueActions instance)
@@ -794,5 +852,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     {
         void OnSkip(InputAction.CallbackContext context);
         void OnSkipHologram(InputAction.CallbackContext context);
+        void OnRightHolograms(InputAction.CallbackContext context);
+        void OnLeftHologram(InputAction.CallbackContext context);
     }
 }

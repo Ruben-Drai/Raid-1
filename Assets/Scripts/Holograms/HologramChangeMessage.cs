@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class HologramChangeMessage : MonoBehaviour
 {
@@ -14,6 +15,29 @@ public class HologramChangeMessage : MonoBehaviour
 
     [SerializeField] private int currentIndex;
 
+    public void RightGamepad(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            currentIndex++;
+            if (currentIndex >= messages.Count)
+                currentIndex = 0;
+
+            ShowCurrentMessage();
+        }
+    }
+
+    public void LeftGamepad(InputAction.CallbackContext context) 
+    { 
+        if(context.performed)
+        {
+            currentIndex--;
+            if (currentIndex < 0)
+                currentIndex = messages.Count - 1;
+
+            ShowCurrentMessage();
+        }
+    }
     public void Right()
     {
         currentIndex++;
