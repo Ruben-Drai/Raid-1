@@ -25,6 +25,7 @@ public class HittableButton : Interactible
     [SerializeField] private GameObject[] platforms;
 
 
+    [SerializeField] private CinemachineVirtualCamera[] vms;
     private Coroutine cutscene;
 
     private void Update()
@@ -77,7 +78,7 @@ public class HittableButton : Interactible
 
         transform.GetChild(0).gameObject.SetActive(!IsActivated);
         transform.GetChild(1).gameObject.SetActive(IsActivated);
-        if (LaunchesCutscene && isExploded && canExplode) cutscene ??= StartCoroutine(LaunchCutscene());
+        if (LaunchesCutscene) cutscene ??= StartCoroutine(LaunchCutscene());
 
 
         if (door)
@@ -123,11 +124,12 @@ public class HittableButton : Interactible
 
     public IEnumerator LaunchCutscene()
     {
-        foreach (var platform in platforms)
+        foreach (var pos in vms)
         {
-            FindFirstObjectByType<CinemachineVirtualCamera>().Follow = platform.transform;
+            pos.Priority = 11;
 
             yield return new WaitForSeconds(CutsceneFreezeDuration);
+            pos.Priority = 9;
         }
         yield return null;
         FindFirstObjectByType<CinemachineVirtualCamera>().Follow = PlayerController.instance.transform;
