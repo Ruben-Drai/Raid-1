@@ -64,11 +64,15 @@ public class SaveNLoad : MonoBehaviour
                 {
                     c[i].Interact();
                 }
+                else if(!FirstScene && c[i].IsActivated)
+                {
+                    c[i].Interact();
+                }
             }
         }
             
 
-        if (FirstScene)
+        if (!FirstScene)
             PlayerController.instance.transform.position = new Vector3(
                 PlayerPrefs.GetFloat("PlayerPosX"),
                 PlayerPrefs.GetFloat("PlayerPosY"),

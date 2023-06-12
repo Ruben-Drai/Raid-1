@@ -9,7 +9,7 @@ public class CheckPoint : Interactible
         if(!IsActivated && collision.GetComponent<PlayerController>() != null)
         {
             Interact();
-            SaveNLoad.instance.Save();
+            SaveNLoad.instance.StartCoroutine(SaveNLoad.instance.SaveRoutine());
             GameUI.instance.BatteryDrain(drain);
         }
     }

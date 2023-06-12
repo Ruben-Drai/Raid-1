@@ -350,6 +350,7 @@ MonoBehaviour:
   wayPoints: []
   PlatformSpeed: 1
   WaitTimeBewteenWayPoints: 1
+  returnToStart: 0
   currentWaypointIndex: 0
 --- !u!1 &73410149
 GameObject:
@@ -450,6 +451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1607095311883371855}
   parallaxEffect: 1
+  verticalMovement: 0
 --- !u!1 &105528442
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,7 +502,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 1}
+    oldSize: {x: 1, y: 2}
     newSize: {x: 0.16, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1920,7 +1922,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 1}
+    oldSize: {x: 1, y: 2}
     newSize: {x: 0.16, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2059,6 +2061,7 @@ MonoBehaviour:
   wayPoints: []
   PlatformSpeed: 1
   WaitTimeBewteenWayPoints: 1
+  returnToStart: 0
   currentWaypointIndex: 0
 --- !u!1001 &503086544
 PrefabInstance:
@@ -2258,6 +2261,7 @@ MonoBehaviour:
   - {fileID: 1821554936}
   PlatformSpeed: 1
   WaitTimeBewteenWayPoints: 1
+  returnToStart: 0
   currentWaypointIndex: 0
 --- !u!212 &574415125
 SpriteRenderer:
@@ -2467,6 +2471,7 @@ MonoBehaviour:
   wayPoints: []
   PlatformSpeed: 1
   WaitTimeBewteenWayPoints: 1
+  returnToStart: 0
   currentWaypointIndex: 0
 --- !u!1 &647135691
 GameObject:
@@ -2518,7 +2523,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 1}
+    oldSize: {x: 1, y: 2}
     newSize: {x: 0.16, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2848,6 +2853,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsActivated: 0
+  LaunchesCutscene: 0
+  CutsceneFreezeDuration: 2
+  vms: []
 --- !u!1001 &716042129
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3153,6 +3161,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsActivated: 0
+  LaunchesCutscene: 0
+  CutsceneFreezeDuration: 2
+  vms: []
 --- !u!1 &917220374
 GameObject:
   m_ObjectHideFlags: 0
@@ -13288,6 +13299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1607095310356238365}
   parallaxEffect: -0.05
+  verticalMovement: 0
 --- !u!1 &1099098248
 GameObject:
   m_ObjectHideFlags: 0
@@ -28961,6 +28973,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1607095310356238365}
   parallaxEffect: -0.02
+  verticalMovement: 0
 --- !u!4 &1114540690 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6287506163292819443, guid: 65ca959e473df58449468d20430c864c, type: 3}
@@ -75516,7 +75529,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 1}
+    oldSize: {x: 1, y: 2}
     newSize: {x: 0.16, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -75767,7 +75780,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 1}
+    oldSize: {x: 1, y: 2}
     newSize: {x: 0.16, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -76048,6 +76061,7 @@ GameObject:
   - component: {fileID: 1575373718}
   - component: {fileID: 1575373719}
   - component: {fileID: 1575373720}
+  - component: {fileID: 1575373721}
   m_Layer: 0
   m_Name: DeathCable
   m_TagString: Untagged
@@ -76110,6 +76124,102 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Fall: {fileID: 0}
   checkpoint: {fileID: 1355280846}
+--- !u!82 &1575373721
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575373717}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1608900788
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -76526,6 +76636,7 @@ MonoBehaviour:
   - {fileID: 420432411}
   PlatformSpeed: 10
   WaitTimeBewteenWayPoints: 1
+  returnToStart: 0
   currentWaypointIndex: 0
 --- !u!1001 &1768052287
 PrefabInstance:
@@ -76884,7 +76995,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 1}
+    oldSize: {x: 1, y: 2}
     newSize: {x: 0.16, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -87400,7 +87511,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 1}
+    oldSize: {x: 1, y: 2}
     newSize: {x: 0.16, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
