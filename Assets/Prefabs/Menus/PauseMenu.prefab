@@ -881,7 +881,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb0b43316e5639f42b5665672e17b129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typingSpeed: 0.04
   dialogueAnimation: {fileID: 7233670744717219789}
   arrowAnimation: {fileID: 8747364909261846094}
   actorImage: {fileID: 2140969558451747190}
@@ -2797,7 +2796,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 7233670743573002859}
+    m_SelectOnUp: {fileID: 7233670743417086487}
     m_SelectOnDown: {fileID: 7233670742994699912}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -4553,7 +4552,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 7233670743417086487}
+    m_SelectOnUp: {fileID: 6031784344300397188}
     m_SelectOnDown: {fileID: 7233670743573002859}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -6267,7 +6266,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 7233670743573002859}
-    m_SelectOnDown: {fileID: 7233670742994699912}
+    m_SelectOnDown: {fileID: 6031784344300397188}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1

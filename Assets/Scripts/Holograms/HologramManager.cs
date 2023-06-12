@@ -13,11 +13,7 @@ public class HologramManager : MonoBehaviour
     public List<GameObject> messages;
     public List<GameObject> holoBox;
 
-    private bool isHologramActive = false;
-
-    private void Start()
-    {
-    }
+    public bool isHologramActive = false;
 
     public void Hologram()
     {
