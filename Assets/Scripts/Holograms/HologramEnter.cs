@@ -8,24 +8,14 @@ public class HologramEnter : Interactible
 
     public override void Interact()
     {
-        
-    }
+        IsActivated = !IsActivated;
+        HologramVisual.SetActive(IsActivated);
+        HologramBox.SetActive(IsActivated);
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player") == true && !collision.isTrigger)
+        if (IsActivated)
         {
-            HologramVisual.SetActive(true);
-            HologramBox.SetActive(true);
             FindObjectOfType<HologramManager>().Hologram();
             PlayerController.instance.Controller.SwitchCurrentActionMap("Dialogue");
         }
-
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        HologramVisual.SetActive(false);
-        HologramBox.SetActive(false);
     }
 }

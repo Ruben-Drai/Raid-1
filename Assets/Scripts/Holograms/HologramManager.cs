@@ -8,7 +8,8 @@ public class HologramManager : MonoBehaviour
 {
     public Animator holoAnimation;
     public AudioSource holoSound;
-    
+    public HologramEnter trigger;
+
     public List<GameObject> buttons;
     public List<GameObject> messages;
     public List<GameObject> holoBox;
@@ -38,6 +39,7 @@ public class HologramManager : MonoBehaviour
             {
                 holoBox[i].SetActive(false);
             }
+            trigger.Interact();
             holoAnimation.SetBool("IsActive", false);
             holoSound.Stop();
             //Value ? out of my ass...
