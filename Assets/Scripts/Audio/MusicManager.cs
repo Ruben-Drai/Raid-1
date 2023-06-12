@@ -26,7 +26,7 @@ public class MusicManager : MonoBehaviour
     }
     public void Load()
     {
-        volumeMusicSlider.value = PlayerPrefs.GetFloat("musicVolume", 0.5f);
+        volumeMusicSlider.value = PlayerPrefs.GetFloat("musicVolume", 0.5f); 
         var v = GameObject.Find("Music");
         v.GetComponent<AudioSource>().volume = volumeMusicSlider.value;
     }

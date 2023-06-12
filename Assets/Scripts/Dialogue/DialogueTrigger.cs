@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DialogueTrigger : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class DialogueTrigger : MonoBehaviour
         DialogueBox.SetActive(true);
         FindObjectOfType<DialogueManager>().OpenDialogues(messages, actors);
         dialogueAnimation.SetBool("DialogueIsActive", true);
+        PlayerController.instance.GetComponent<PlayerInput>().SwitchCurrentActionMap("Dialogue");
     }
 
     public void DialogueSetting()

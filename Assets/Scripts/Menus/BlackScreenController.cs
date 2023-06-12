@@ -17,7 +17,8 @@ public class BlackScreenController : MonoBehaviour
 
     void Start()
     {
-        FindObjectOfType<DialogueTrigger>().StartDialogue();
+        var v = FindObjectOfType<DialogueTrigger>();
+        v.StartDialogue();
         PlayerController.instance.GetComponent<PlayerInput>().SwitchCurrentActionMap("Dialogue");
     }
 
