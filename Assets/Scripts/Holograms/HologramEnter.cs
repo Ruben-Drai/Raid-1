@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HologramEnter : MonoBehaviour
+public class HologramEnter : Interactible
 {
     [SerializeField] private GameObject HologramVisual, HologramBox;
+
+    public override void Interact()
+    {
+        
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

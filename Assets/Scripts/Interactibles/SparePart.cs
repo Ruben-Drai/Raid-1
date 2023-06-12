@@ -9,7 +9,7 @@ public class SparePart : Interactible
         PlayerController.UnlockedUpgrades[name] = true;
         PlayerController.instance.AvailableInteraction = null;
         gameObject.SetActive(false);
-        dialogue.gameObject.SetActive(true);
-        dialogue.StartDialogue();
+        dialogue?.gameObject.SetActive(true);
+        dialogue?.StartDialogue();
     }
 }
