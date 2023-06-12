@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2295149701435257268}
   - component: {fileID: 5038982154190585032}
   - component: {fileID: 4720152349869522603}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: Fist
   m_TagString: PlayerFist
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8964733122397447408}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: ArmRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 6877367320222175049}
   - component: {fileID: 6748751514301365453}
   - component: {fileID: 868505572709712655}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: Feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -884,7 +884,7 @@ GameObject:
   - component: {fileID: 235732244913157853}
   - component: {fileID: 7476297529692456552}
   - component: {fileID: 148341381461873333}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1005,7 +1005,7 @@ GameObject:
   - component: {fileID: 179132361778093369}
   - component: {fileID: 8717295553394094609}
   - component: {fileID: 5820558502992974763}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
