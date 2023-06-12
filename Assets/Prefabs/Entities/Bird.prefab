@@ -206,6 +206,9 @@ MonoBehaviour:
   speed: 2
   toDo: 0
   startEndPos: {x: 0, y: 0}
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 2003
   isBird: 1
   disappearSpeed: 7
   waitTime: 0
