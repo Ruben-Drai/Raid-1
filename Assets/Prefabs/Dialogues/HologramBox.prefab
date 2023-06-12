@@ -493,7 +493,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4015747427385903219
 Transform:
   m_ObjectHideFlags: 0
@@ -563,6 +563,7 @@ MonoBehaviour:
   holoBox:
   - {fileID: 4015747428340650927}
   - {fileID: 4015747427401478635}
+  isHologramActive: 0
 --- !u!114 &7630670502037679151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,6 +584,7 @@ MonoBehaviour:
   leftButton: {fileID: 1329992037035218850}
   exitButton: {fileID: 504663657500413712}
   typingEffect: {fileID: 4015747427401478647}
+  hologramManager: {fileID: 4015747427385903229}
   currentIndex: 0
 --- !u!1 &4015747427401478635
 GameObject:

@@ -12,28 +12,31 @@ public class HologramChangeMessage : MonoBehaviour
     public GameObject exitButton;
 
     public TypingEffect typingEffect;
+    public HologramManager hologramManager;
 
     [SerializeField] private int currentIndex;
 
     public void RightGamepad(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (context.performed && hologramManager.isHologramActive)
         {
+            Debug.Log("Right");
             currentIndex++;
             if (currentIndex >= messages.Count)
-                currentIndex = 0;
+                currentIndex = messages.Count - 1;
 
             ShowCurrentMessage();
         }
     }
 
-    public void LeftGamepad(InputAction.CallbackContext context) 
-    { 
-        if(context.performed)
+    public void LeftGamepad(InputAction.CallbackContext context)
+    {
+        if (context.performed && hologramManager.isHologramActive)
         {
+            Debug.Log("Left");
             currentIndex--;
             if (currentIndex < 0)
-                currentIndex = messages.Count - 1;
+                currentIndex = 0;
 
             ShowCurrentMessage();
         }
@@ -68,7 +71,7 @@ public class HologramChangeMessage : MonoBehaviour
 
         leftButton.SetActive(currentIndex > 0);
         rightButton.SetActive(currentIndex < messages.Count - 1);
-        
+
         TypingEffect.delayBeforeStart = 0;
     }
 
