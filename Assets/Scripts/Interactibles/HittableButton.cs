@@ -28,7 +28,6 @@ public class HittableButton : Interactible
     [SerializeField] private CinemachineVirtualCamera[] vms;
 
 
-    [SerializeField] private CinemachineVirtualCamera[] vms;
     private Coroutine cutscene;
 
     private void Update()
