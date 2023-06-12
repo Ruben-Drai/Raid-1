@@ -510,11 +510,11 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8377c551-af6e-451b-8e24-aa00f002ed8a"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": ""Press"",
+                    ""id"": ""957496d5-640c-4ce8-adb9-6b729454cb7c"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": """",
                     ""action"": ""SkipHologram"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
