@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
     private bool _canJump = true;
     private bool IsChangingLen = false;
     private bool IsSneaking = false;
-    private bool IsAtMyLeft = false;
     private float TimeFromLastJump = 0f;
     private float CoyoteTimer = 0f;
     private float lenModifier = 0f;
@@ -48,6 +47,7 @@ public class PlayerController : MonoBehaviour
     [NonSerialized] public bool IsMoving = false;
     [NonSerialized] public bool IsInJump = true;
     [NonSerialized] public bool CanDoubleJump = true;
+    [NonSerialized] public bool IsAtMyLeft = false;
 
     private bool IsDoubleJumping = false;
 
@@ -267,30 +267,6 @@ public class PlayerController : MonoBehaviour
                     IsSneaking = false;
                 }
             }
-        }
-    }
-    //gets interactible from trigger box around the player
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.GetComponent<Interactible>() != null)
-        {
-            AvailableInteraction = collision.GetComponent<Interactible>();
-            AvailableInteraction.transform.Find("Highlight")?.gameObject.SetActive(true); // Activates highlighting when the player is close by
-            if (collision.transform.position.x > transform.position.x)
-                IsAtMyLeft = false;
-            else
-                IsAtMyLeft = true;
-
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.GetComponent<Interactible>() != null
-            && AvailableInteraction == collision.GetComponent<Interactible>()
-            && Vector2.Distance(transform.position, collision.transform.position) > 0.5f)
-        {
-            AvailableInteraction.transform.Find("Highlight")?.gameObject.SetActive(false); // Deactivates highlighting when player moves away.
-            AvailableInteraction = null;
         }
     }
 
