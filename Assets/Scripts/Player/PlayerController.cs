@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Fire(InputAction.CallbackContext context)
     {
-        if (!IsSneaking && UnlockedUpgrades["ArmGun"] && Time.timeScale==1)
+        if (!IsPushingBox && !IsSneaking && UnlockedUpgrades["ArmGun"] && Time.timeScale==1)
         {
             if (context.performed)
             {

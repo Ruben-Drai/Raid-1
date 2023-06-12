@@ -82,7 +82,7 @@ public class Animals_Controller : MonoBehaviour
                     rb.velocity = new Vector2(speed, rb.velocity.y);
                 }
 
-                obstacle = Physics2D.Raycast(eye.transform.position, gameObject.transform.right, 0.5f, LayerMask.GetMask("Player"));
+                obstacle = Physics2D.Raycast(eye.transform.position, gameObject.transform.right, 2f, LayerMask.GetMask("Player"));
 
                 if (Mathf.Abs(transform.position.x - startEndPos.x) > startEndPos.y || obstacle.collider != null)
                 {
