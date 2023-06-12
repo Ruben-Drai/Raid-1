@@ -301,6 +301,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6287506163292819440, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: CineBrain
+      value: 
+      objectReference: {fileID: 672176530}
+    - target: {fileID: 6287506163292819440, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: JumpForce
       value: 17
       objectReference: {fileID: 0}
@@ -1525,7 +1529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311026243985, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.2880137
+      value: 1.9340451
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311026243985, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1545,7 +1549,7 @@ PrefabInstance:
       objectReference: {fileID: 397048911}
     - target: {fileID: 1607095311481806078, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.387785
+      value: -10.387784
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311481806078, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1651,6 +1655,17 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 1921293302993805862, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
   m_PrefabInstance: {fileID: 672176527}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &672176530 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1607095311026243980, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
+  m_PrefabInstance: {fileID: 672176527}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672176528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &749004812
 GameObject:
   m_ObjectHideFlags: 0

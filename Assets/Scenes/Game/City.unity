@@ -1289,6 +1289,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1607095310356238367}
     - target: {fileID: 6287506163292819440, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: CineBrain
+      value: 
+      objectReference: {fileID: 1607095310356238339}
+    - target: {fileID: 6287506163292819440, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: JumpForce
       value: 17
       objectReference: {fileID: 0}
