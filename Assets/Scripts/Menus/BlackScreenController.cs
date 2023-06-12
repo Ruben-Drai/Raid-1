@@ -45,7 +45,9 @@ public class BlackScreenController : MonoBehaviour
         {
             this.gameObject.SetActive(false);
             PlayerController.instance.Controller.SwitchCurrentActionMap("Game");
-            robot.SetActive(true);
+            if(robot!= null)
+                robot.SetActive(true);
+
             Narator.SetActive(false);
         }
     }

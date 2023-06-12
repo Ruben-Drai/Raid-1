@@ -67,6 +67,8 @@ public class HologramManager : MonoBehaviour
             {
                 holoBox[i].SetActive(false);
             }
+            trigger.Interact();
+
             holoAnimation.SetBool("IsActive", false);
             holoSound.Stop();
             //Value ? out of my ass...
