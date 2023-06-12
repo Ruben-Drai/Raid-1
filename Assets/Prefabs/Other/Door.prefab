@@ -105,7 +105,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   PlatformSpeed: 1
-  WaitTimeBewteenWayPoints: 1
+  WaitTimeBewteenWayPoints: 0
+  returnToStart: 0
   currentWaypointIndex: 0
 --- !u!61 &1085423032255037280
 BoxCollider2D:

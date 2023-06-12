@@ -63,6 +63,15 @@ public class PauseMenu : MonoBehaviour
             ShowMenu();
         }
     }
+    public void Retry()
+    {
+        DisableMenus(); 
+        menuStack.RemoveAt(menuStack.Count - 1);
+        SaveNLoad.instance.StartCoroutine(SaveNLoad.instance.LoadRoutine(false));
+        SoundManager.instance?.Back.PlayOneShot(SoundManager.instance.Back.clip);
+        EventSystem.current.SetSelectedGameObject(null);
+        Time.timeScale = 1;
+    }
     public void MainMenu()
     {
         SaveNLoad.instance.StartCoroutine(SaveNLoad.instance.SaveRoutine());
