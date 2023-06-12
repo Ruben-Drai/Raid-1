@@ -92,6 +92,7 @@ public class Animals_Controller : MonoBehaviour
             }
             else
             {
+                rb.gravityScale = 1;
                 if (Time.time - timer > waitTime) { toDo = Movement(); }
 
             }
@@ -125,7 +126,7 @@ public class Animals_Controller : MonoBehaviour
             startEndPos.x = transform.position.x;
             startEndPos.y = UnityEngine.Random.Range(distanceMm.x, distanceMm.y);
             animator.SetBool("Move", true);
-
+            
         }
         else
         {
@@ -133,6 +134,8 @@ public class Animals_Controller : MonoBehaviour
             timer = Time.time;
             animator.SetBool("Move", false);
         }
+        rb.gravityScale = isBird?0:1;
+
         return a;
     }
 
@@ -160,7 +163,6 @@ public class Animals_Controller : MonoBehaviour
             transform.rotation = new Quaternion(0, 180, 0, 0);
             rb.velocity = new Vector2(-5, 5);
         }
-
     }
 
     private void RatFlee()
