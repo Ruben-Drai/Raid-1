@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.UIElements;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,10 +20,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CapsuleCollider2D InteractionTrigger;
     [SerializeField] private AudioClip Walk;
     [SerializeField] private AudioClip DoubleJump;
+    [SerializeField] private CinemachineBrain CineBrain;
 
     public GrapplingGun hook;
     public LayerMask SneakIgnoreCheckLayers;
 
+    private bool CantMove = false;
     private bool _canJump = true;
     private bool IsChangingLen = false;
     private bool IsSneaking = false;
@@ -33,6 +36,7 @@ public class PlayerController : MonoBehaviour
     private GroundCheck feet;
     private SpringJoint2D joint;
     private Animator animator;
+
 
 
     [NonSerialized] public Interactible AvailableInteraction;
@@ -131,6 +135,15 @@ public class PlayerController : MonoBehaviour
             AvailableInteraction.Interact();
             AvailableInteraction = null;
         }
+        if (CineBrain != null)
+        {
+            if (CineBrain.ActiveVirtualCamera.Priority == 11)
+            {
+                CantMove = true;
+            }
+            else CantMove = false;
+        }
+
     }
     private bool CanUncrouch
     {
@@ -289,11 +302,15 @@ public class PlayerController : MonoBehaviour
         float SlopeMovementY = movement.normalized.x * -SlopeAdjustment.y * speed;
 
         if (rb != null)
-            if(!hook.HasShot || !UnlockedUpgrades["Hook"])
-                rb.velocity = new(movement.normalized.x * speed * -SlopeAdjustment.x, slope ? SlopeMovementY : rb.velocity.y);
-            else
-                rb.AddForce(new(movement.normalized.x*speed,0),ForceMode2D.Force);
-
+        {
+            if (!CantMove)
+            {
+                if (!hook.HasShot || !UnlockedUpgrades["Hook"])
+                    rb.velocity = new(movement.normalized.x * speed * -SlopeAdjustment.x, slope ? SlopeMovementY : rb.velocity.y);
+                else
+                    rb.AddForce(new(movement.normalized.x * speed, 0), ForceMode2D.Force);
+            }
+        }
         
         if(IsMoving && !IsInJump && !GetComponent<AudioSource>().isPlaying)
         {
