@@ -296,7 +296,7 @@ public class PlayerController : MonoBehaviour
         float pushingBoxSlow = IsPushingBox ? 0.5f : 1;
         float airSpeedSlow = _canJump && CanDoubleJump ? 1 : 0.75f;
         float speed = pushingBoxSlow * airSpeedSlow * MovementSpeed;
-
+        float crouchModifier = IsSneaking ? 0.5f : 1;
         //slope stuff
         bool slope = feet.groundState == GroundState.Slope && !IsInJump;
         float SlopeMovementY = movement.normalized.x * -SlopeAdjustment.y * speed;
@@ -306,7 +306,7 @@ public class PlayerController : MonoBehaviour
             if (!CantMove)
             {
                 if (!hook.HasShot || !UnlockedUpgrades["Hook"])
-                    rb.velocity = new(movement.normalized.x * speed * -SlopeAdjustment.x, slope ? SlopeMovementY : rb.velocity.y);
+                    rb.velocity = new(movement.normalized.x * speed * -SlopeAdjustment.x * crouchModifier, slope ? SlopeMovementY : rb.velocity.y);
                 else
                     rb.AddForce(new(movement.normalized.x * speed, 0), ForceMode2D.Force);
             }
