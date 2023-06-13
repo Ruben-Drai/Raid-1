@@ -143,7 +143,6 @@ public class PlayerController : MonoBehaviour
             }
             else CantMove = false;
         }
-
     }
     private bool CanUncrouch
     {
