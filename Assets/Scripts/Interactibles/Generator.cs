@@ -13,6 +13,7 @@ public class Generator : Interactible
     [SerializeField] private DestroyablePlatform platform;
 
     public DialogueTrigger dialogueTrigger;
+    public DialogueManager dialogueManager;
     public GameObject dialogue;
 
     // Start is called before the first frame update
@@ -45,7 +46,7 @@ public class Generator : Interactible
         {
             platform.Interact();
         }
-        if (BossHP <= 0) 
+        if (BossHP <= 0 && dialogueManager.finishedAnimationDown) 
         {
             PlayLogo.HasWon = true;
             SceneManager.LoadScene("Credits");
