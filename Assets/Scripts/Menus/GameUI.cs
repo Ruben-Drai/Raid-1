@@ -47,10 +47,15 @@ public class GameUI : MonoBehaviour
         }
 
         //if bossfight?
-        if (SceneManager.GetActiveScene().name == "BossFight")
+        if (SceneManager.GetActiveScene().name == "Boss")
         {
             AutoBatteryDrain();
             BossTimerDisplay();
+        }
+
+        if(timer <= 20f)
+        {
+            timerTxt.color = new Color32(255, 21, 0, 255);
         }
     }
 
@@ -88,6 +93,8 @@ public class GameUI : MonoBehaviour
     {
         float minutes = Mathf.FloorToInt(timer / 60);
         float secondes = Mathf.FloorToInt(timer % 60);
+        float millisecondes = Mathf .FloorToInt(timer * 1000);
+        millisecondes = millisecondes % 1000;
 
         if (timer > 0f)
         {
@@ -101,7 +108,7 @@ public class GameUI : MonoBehaviour
 
         /* Display the timer */
         if (timerTxt != null)
-            timerTxt.text = string.Format("{0:00}:{01:00}", minutes, secondes);
+            timerTxt.text = string.Format("{0:00}:{01:00}:{2:000}", minutes, secondes, millisecondes);
 
     }
 }
