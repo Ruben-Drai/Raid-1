@@ -16,5 +16,6 @@ public class CheckPoint : Interactible
     public override void Interact()
     {
         IsActivated = true;
+        GetComponent<BoxCollider2D>().enabled = false;
     }
 }

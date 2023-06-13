@@ -166,7 +166,8 @@ public class PlayerController : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext context)
     {
-        if (TimeFromLastJump > JumpCooldown
+        if (!CantMove && 
+            TimeFromLastJump > JumpCooldown
             && ((_canJump && UnlockedUpgrades["Jump"]) || (CanDoubleJump && UnlockedUpgrades["DoubleJump&Sneak"]))
             && !IsPushingBox
             && context.performed
@@ -204,7 +205,7 @@ public class PlayerController : MonoBehaviour
     public void Interact(InputAction.CallbackContext context)
     {
         //if the player is on the ground currently and not on an interactible such as a box so that you can't push a box to the right from the top of it
-        if (!IsInJump && feet.groundState != GroundState.Interactibles && !IsSneaking)
+        if (!CantMove && !IsInJump && feet.groundState != GroundState.Interactibles && !IsSneaking)
         {
             if (AvailableInteraction != null && context.performed)
             {
@@ -215,7 +216,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Sneak(InputAction.CallbackContext context)
     {
-        if (UnlockedUpgrades["DoubleJump&Sneak"] && !IsInJump && !hook.HasShot)
+        if (!CantMove && UnlockedUpgrades["DoubleJump&Sneak"] && !IsInJump && !hook.HasShot)
         {
             if(context.performed)IsSneaking = true;
             else if (context.canceled) IsSneaking = false;
@@ -228,7 +229,7 @@ public class PlayerController : MonoBehaviour
     }
     public void ChangeHookLength(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (!CantMove && context.performed)
         {
             var temp = -context.ReadValue<Vector2>().normalized.y;
 
@@ -247,7 +248,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        else if (context.canceled) 
+        else if (!CantMove && context.canceled) 
         {
             IsChangingLen = false;
             lenModifier = 0f;
@@ -259,7 +260,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Fire(InputAction.CallbackContext context)
     {
-        if (!IsPushingBox && !IsSneaking && UnlockedUpgrades["ArmGun"] && Time.timeScale==1)
+        if (!CantMove && !IsPushingBox && !IsSneaking && UnlockedUpgrades["ArmGun"] && Time.timeScale==1)
         {
             if (context.performed)
             {
@@ -353,7 +354,5 @@ public class PlayerController : MonoBehaviour
             else if (rb.velocity.x < -0.1f)
                 GetComponent<SpriteRenderer>().flipX = true;
         }
-
-
     }
 }
