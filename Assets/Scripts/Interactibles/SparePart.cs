@@ -8,7 +8,7 @@ public class SparePart : Interactible
         IsActivated = true;
         PlayerController.UnlockedUpgrades[name] = true;
         PlayerController.instance.AvailableInteraction = null;
-        gameObject.SetActive(false);
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
         dialogue?.gameObject.SetActive(true);
         dialogue?.StartDialogue();
     }

@@ -42,6 +42,7 @@ public class HologramManager : MonoBehaviour
             trigger.Interact();
             holoAnimation.SetBool("IsActive", false);
             holoSound.Stop();
+            TypingEffect.canSkip = false;
             //Value ? out of my ass...
             TypingEffect.delayBeforeStart = 4f;
             isHologramActive = false;
@@ -68,7 +69,7 @@ public class HologramManager : MonoBehaviour
                 holoBox[i].SetActive(false);
             }
             trigger.Interact();
-
+            TypingEffect.canSkip = false;
             holoAnimation.SetBool("IsActive", false);
             holoSound.Stop();
             //Value ? out of my ass...
