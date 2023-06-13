@@ -3579,7 +3579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsActivated: 0
-  drain: 5
+  drain: 0
 --- !u!61 &598979491
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3914,7 +3914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsActivated: 0
-  drain: 5
+  drain: 0
 --- !u!61 &637513485
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -52614,7 +52614,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1355280846}
-  - component: {fileID: 1355280847}
   m_Layer: 0
   m_Name: CheckPoint
   m_TagString: Untagged
@@ -52639,20 +52638,6 @@ Transform:
   m_Father: {fileID: 859133465}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1355280847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355280845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 437c58c37099a0942accc861d764c23a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsActivated: 0
-  drain: 5
 --- !u!1001 &1408862196
 PrefabInstance:
   m_ObjectHideFlags: 0
