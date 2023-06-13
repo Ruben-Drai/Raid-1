@@ -6,8 +6,8 @@ using UnityEngine;
 public class HittableButton : Interactible
 {
     /*can be touched once or more*/
-    [SerializeField] private bool canExplode = false;
-    private bool isExploded = false;
+    public bool canExplode = false;
+    public bool isExploded = false;
 
     /*different modes*/
     [SerializeField] private bool move = false;

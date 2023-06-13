@@ -13,12 +13,12 @@ public class SparePart : Interactible
         PlayerController.UnlockedUpgrades[name] = true;
         PlayerController.instance.AvailableInteraction = null;
         GetComponent<BoxCollider2D>().enabled = !IsActivated;
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        gameObject.SetActive(false);
+        gameObject.GetComponent<SpriteRenderer>().enabled = !IsActivated;
+        gameObject.SetActive(!IsActivated);
         if(door != null)
-            door.enabled = false;
+            door.enabled = !IsActivated;
 
-        dialogue?.gameObject.SetActive(true);
+        dialogue?.gameObject.SetActive(!IsActivated);
         dialogue?.StartDialogue();
     }
     private void OnTriggerEnter2D(UnityEngine.Collider2D collision)

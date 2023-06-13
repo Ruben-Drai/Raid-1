@@ -28,10 +28,14 @@ public class GameUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(battery!=null)
         batteryImage = battery.GetComponent<Image>();
 
         /* Display the battery image and it's value */
+        if(batteryImage!=null)
         batteryImage.fillAmount = charge / 100;
+
+        if(chargeText!=null)
         chargeText.text = Mathf.FloorToInt(charge).ToString() + "%";
 
         timer = charge * drainSpeed;
@@ -67,7 +71,10 @@ public class GameUI : MonoBehaviour
 
         timer = charge * drainSpeed;
 
+        if(batteryImage!= null)
         batteryImage.fillAmount = charge / 100;
+
+        if(chargeText!=null)
         chargeText.text = Mathf.FloorToInt(charge).ToString() + "%";
     }
 

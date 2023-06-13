@@ -67,6 +67,14 @@ public class SaveNLoad : MonoBehaviour
                 else if(!FirstScene && c[i].IsActivated)
                 {
                     c[i].Interact();
+                    var p = c[i].gameObject.GetComponent<HittableButton>();
+                    if (p !=null && p.canExplode)
+                    {
+                        p.isExploded = false;
+                        p.IsActivated = false;
+                        p.transform.GetChild(0).gameObject.SetActive(true);
+                        p.transform.GetChild(1).gameObject.SetActive(false);
+                    }
                 }
             }
         }
