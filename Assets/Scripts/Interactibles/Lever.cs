@@ -69,6 +69,9 @@ public class Lever : Interactible
     {
         if (PlayerController.UnlockedUpgrades["Strength"] /*&&(!moveOnce ||(moveOnce && !IsActivated))*/)
         {
+            GetComponent<AudioSource>().volume = SoundManager.instance!=null? SoundManager.instance.volumeSoundSlider.value :1;
+            GetComponent<AudioSource>().Play();
+
             IsActivated = !IsActivated;
             moveDoOnce = true;
 

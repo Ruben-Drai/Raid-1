@@ -120,7 +120,10 @@ public class HittableButton : Interactible
             {
                 Interact();
                 isExploded = collision.gameObject.CompareTag("PlayerFist") && canExplode;
-            }  
+                GetComponent<AudioSource>().volume = SoundManager.instance != null ? SoundManager.instance.volumeSoundSlider.value : 1;
+                GetComponent<AudioSource>().Play();
+
+            }
         }
     }
 

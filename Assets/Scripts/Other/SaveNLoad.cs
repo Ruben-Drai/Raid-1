@@ -26,7 +26,7 @@ public class SaveNLoad : MonoBehaviour
         PlayerPrefs.SetString("SceneName", SceneManager.GetActiveScene().name);
 
         Interactibles = GameObject.Find("Props");
-        var c = Interactibles.GetComponentsInChildren<Interactible>();
+        var c = Interactibles.GetComponentsInChildren<Interactible>(true);
         for (int i = 0; i < c.Length; i++)
         {
             PlayerPrefs.SetInt("Child" + i, c[i].IsActivated ? 1 : 0);
@@ -50,7 +50,7 @@ public class SaveNLoad : MonoBehaviour
 
         if (!NewScene)
         {
-            var c = Interactibles.GetComponentsInChildren<Interactible>();
+            var c = Interactibles.GetComponentsInChildren<Interactible>(true);
             for (int i = 0; i < c.Length; i++)
             {
                 if (c[i].GetComponent<BigBox>() != null)

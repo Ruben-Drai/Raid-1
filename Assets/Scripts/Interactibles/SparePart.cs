@@ -9,9 +9,10 @@ public class SparePart : Interactible
     [SerializeField] Light2D highlight;
     public override void Interact()
     {
-        IsActivated = true;
+        IsActivated = !IsActivated;
         PlayerController.UnlockedUpgrades[name] = true;
         PlayerController.instance.AvailableInteraction = null;
+        GetComponent<BoxCollider2D>().enabled = !IsActivated;
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         gameObject.SetActive(false);
         if(door != null)
