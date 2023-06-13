@@ -14,7 +14,7 @@ public class GameUI : MonoBehaviour
 
     [Header("Boss Timer")]
     [SerializeField] TextMeshProUGUI timerTxt;
-    public int drainSpeed = 3;
+    public float drainSpeed = 3;
 
     private static float timer;
     private static float batteryTimer = 0f;
@@ -66,7 +66,7 @@ public class GameUI : MonoBehaviour
     /* The gameOver ("bad end") screen will be displayed */
     void PlayerShutDown()
     {
-        Debug.Log("You lost !");
+        SceneManager.LoadSceneAsync("Credits");
     }
 
     /* Drain the desired amount of battery when passing a check point, or while in the boss room */

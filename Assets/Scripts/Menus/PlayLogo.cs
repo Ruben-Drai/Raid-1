@@ -7,7 +7,7 @@ public class PlayLogo : MonoBehaviour
 {
     public Animator logo;
     public GameObject imglogo;
-    public static bool HasWon = true;
+    public static bool HasWon = false;
     [SerializeField] private GameObject dialogueWin;
     [SerializeField] private GameObject dialogueLose;
 

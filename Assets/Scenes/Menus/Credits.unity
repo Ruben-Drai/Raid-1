@@ -1222,7 +1222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8206a911752a8c646acbf5b26f1c3a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 1424702437}
+  Losemanager: {fileID: 1082681357}
+  Winmanager: {fileID: 1424702437}
   animator: {fileID: 631524689}
 --- !u!1001 &1667193099
 PrefabInstance:

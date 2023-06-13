@@ -5,7 +5,8 @@ using UnityEngine;
 public class Credit : MonoBehaviour
 {
 
-    public DialogueManager manager;
+    public DialogueManager Losemanager;
+    public DialogueManager Winmanager;
     public Animator animator;
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,8 @@ public class Credit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(manager.finishedAnimationDown) 
+        if(!PlayLogo.HasWon && Losemanager.finishedAnimationDown
+            || PlayLogo.HasWon && Winmanager.finishedAnimationDown) 
         {
             animator.SetBool("PlayingCredit", true);
         }

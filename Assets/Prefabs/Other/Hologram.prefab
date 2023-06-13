@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 317925753187462730}
   - component: {fileID: 2062614454}
   - component: {fileID: 2062614452}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hologram
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 317925753264027265}
   - component: {fileID: 317925753264027270}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HologramActivated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7924330477992984985}
   - component: {fileID: 5926243323963874679}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}

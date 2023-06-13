@@ -172,10 +172,11 @@ public class PlayerController : MonoBehaviour
     {
         if (!CantMove && 
             TimeFromLastJump > JumpCooldown
-            && ((_canJump && UnlockedUpgrades["Jump"]) || (CanDoubleJump && UnlockedUpgrades["DoubleJump&Sneak"]))
+            && ((_canJump && UnlockedUpgrades["Jump"]) 
+            || (CanDoubleJump && UnlockedUpgrades["DoubleJump&Sneak"]))
             && !IsPushingBox
             && context.performed
-            && ((IsSneaking && CanUncrouch) || !IsSneaking))
+            && ((isCrouching && CanUncrouch) || !isCrouching))
         {
             if(hook.HasShot)
                 hook.ReturnHook();
