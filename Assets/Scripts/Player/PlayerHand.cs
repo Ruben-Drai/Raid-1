@@ -17,7 +17,6 @@ public class PlayerHand : MonoBehaviour
         if (collision.GetComponent<Interactible>() != null)
         {
             Player.AvailableInteraction = collision.GetComponent<Interactible>();
-            Player.AvailableInteraction.transform.Find("Highlight")?.gameObject.SetActive(true); // Activates highlighting when the player is close by
             if (collision.transform.position.x > transform.position.x && collision.GetComponent<BigBox>()!=null)
                 Player.IsAtMyLeft = false;
             else if (collision.GetComponent<BigBox>() != null)

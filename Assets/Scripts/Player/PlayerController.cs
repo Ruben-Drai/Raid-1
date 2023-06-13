@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float JumpForce = 17f, MovementSpeed = 10f, JumpCooldown = 0.1f, CoyoteTime = 0.2f, RopeShrinkSpeed=3f,walkSFXWaitTime =0.2f;
     [SerializeField] private BoxCollider2D StandingColl;
     [SerializeField] private BoxCollider2D SneakingColl;
-    [SerializeField] private CapsuleCollider2D InteractionTrigger;
     [SerializeField] private AudioClip Walk;
     [SerializeField] private AudioClip DoubleJump;
     [SerializeField] private CinemachineBrain CineBrain;
@@ -118,7 +117,6 @@ public class PlayerController : MonoBehaviour
         if (IsSneaking)
         {
             SneakingColl.enabled = true;
-            InteractionTrigger.enabled = false;
             StandingColl.enabled = false;
         }
         else
@@ -126,7 +124,6 @@ public class PlayerController : MonoBehaviour
             if (CanUncrouch)
             {
                 SneakingColl.enabled = false;
-                InteractionTrigger.enabled = true;
                 StandingColl.enabled = true;
             }
         }
@@ -148,11 +145,18 @@ public class PlayerController : MonoBehaviour
     {
         get 
         {
-            return !Physics2D.Raycast(transform.position, Vector2.up, 2f, SneakIgnoreCheckLayers)
-            && !Physics2D.Raycast(transform.position + Vector3.right/2, Vector2.up, 2f, SneakIgnoreCheckLayers)
-            && !Physics2D.Raycast(transform.position + Vector3.left/2, Vector2.up, 2f, SneakIgnoreCheckLayers);
+            return !Physics2D.Raycast(transform.position, Vector2.up, 0.385f*transform.lossyScale.x, SneakIgnoreCheckLayers)
+            && !Physics2D.Raycast(transform.position - new Vector3(0.18f * transform.lossyScale.x, 0, 0), Vector2.up, 0.385f * transform.lossyScale.x, SneakIgnoreCheckLayers)
+            && !Physics2D.Raycast(transform.position + new Vector3(0.18f*transform.lossyScale.x,0,0), Vector2.up, 0.385f * transform.lossyScale.x, SneakIgnoreCheckLayers);
         }
         
+    }
+    private bool isCrouching
+    {
+        get
+        {
+            return IsSneaking ? true : !IsSneaking && !CanUncrouch;
+        }
     }
     public void Move(InputAction.CallbackContext context)
     {
@@ -205,13 +209,12 @@ public class PlayerController : MonoBehaviour
     public void Interact(InputAction.CallbackContext context)
     {
         //if the player is on the ground currently and not on an interactible such as a box so that you can't push a box to the right from the top of it
-        if (!CantMove && !IsInJump && feet.groundState != GroundState.Interactibles && !IsSneaking)
+        if (!CantMove && !IsInJump && feet.groundState != GroundState.Interactibles && AvailableInteraction != null && context.performed)
         {
-            if (AvailableInteraction != null && context.performed)
-            {
+            if(AvailableInteraction.GetComponent<BigBox>()!=null && !IsSneaking)  
                 AvailableInteraction.Interact();
-            }
-            
+            else if (AvailableInteraction.GetComponent <BigBox>()== null)
+                AvailableInteraction.Interact();
         }
     }
     public void Sneak(InputAction.CallbackContext context)
@@ -297,7 +300,7 @@ public class PlayerController : MonoBehaviour
         float pushingBoxSlow = IsPushingBox ? 0.5f : 1;
         float airSpeedSlow = _canJump && CanDoubleJump ? 1 : 0.75f;
         float speed = pushingBoxSlow * airSpeedSlow * MovementSpeed;
-        float crouchModifier = IsSneaking ? 0.5f : 1;
+        float crouchModifier = isCrouching ? 0.5f : 1;
         //slope stuff
         bool slope = feet.groundState == GroundState.Slope && !IsInJump;
         float SlopeMovementY = movement.normalized.x * -SlopeAdjustment.y * speed;
@@ -340,7 +343,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("DoubleJump", IsDoubleJumping);
         animator.SetBool("IsMoving", IsMoving);
         animator.SetBool("IsPushingBox", IsPushingBox);
-        animator.SetBool("IsCrouch", IsSneaking);
+        animator.SetBool("IsCrouch", isCrouching);
         if (IsPushingBox)
         {
             if (IsAtMyLeft)

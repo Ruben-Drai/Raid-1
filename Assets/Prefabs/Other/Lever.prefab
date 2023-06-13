@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 872533044942455224}
   - component: {fileID: 3744467061412546564}
   - component: {fileID: 2015099359539266023}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Lever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2088327846088688253}
   - component: {fileID: 2088327846088688252}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LeverEnabled
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2088327846862895238}
   - component: {fileID: 2088327846862895233}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LeverDisabled
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6494420151523210775}
   - component: {fileID: 43731687279821652}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
