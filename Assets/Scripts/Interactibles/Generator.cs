@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Generator : Interactible
 {
@@ -38,7 +39,11 @@ public class Generator : Interactible
         {
             platform.Interact();
         }
-        if (BossHP <= 0) Debug.Log("Enemy felled");
+        if (BossHP <= 0) 
+        {
+            PlayLogo.HasWon = true;
+            SceneManager.LoadScene("Credits");
+        }
         GetComponent<SpriteRenderer>().enabled = false;
     }
 }
