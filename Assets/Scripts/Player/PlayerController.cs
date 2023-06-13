@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
         if(UnlockedUpgrades==null) 
             UnlockedUpgrades = new Dictionary<string, bool>()
         {
-            {"Jump",false},
+            {"Jump",true},
             {"Strength",false},
             {"ArmGun", false},
             {"DoubleJump&Sneak",false},
@@ -339,7 +339,7 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("IsGrappling", hook.HasShot);
         animator.SetBool("IsGrounded", feet.groundState != GroundState.Air);
-        animator.SetBool("UnlockArm", UnlockedUpgrades["ArmGun"]);
+        animator.SetBool("UnlockArm", UnlockedUpgrades["Strength"]);
         animator.SetBool("UnlockLegs", UnlockedUpgrades["Jump"]);
         animator.SetFloat("Velocity_Y", rb.velocity.y);
         animator.SetBool("DoubleJump", IsDoubleJumping);

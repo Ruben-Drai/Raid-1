@@ -17757,7 +17757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsActivated: 0
-  drain: 5
+  drain: 0
 --- !u!1 &1231844914
 GameObject:
   m_ObjectHideFlags: 0

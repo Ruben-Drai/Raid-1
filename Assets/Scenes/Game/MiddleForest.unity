@@ -22361,7 +22361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsActivated: 0
-  drain: 5
+  drain: 0
 --- !u!1 &1361154927
 GameObject:
   m_ObjectHideFlags: 0
@@ -22565,7 +22565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsActivated: 0
-  drain: 5
+  drain: 0
 --- !u!1 &1560976850
 GameObject:
   m_ObjectHideFlags: 0
@@ -37412,7 +37412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsActivated: 0
-  drain: 5
+  drain: 0
 --- !u!1 &2071629378
 GameObject:
   m_ObjectHideFlags: 0
