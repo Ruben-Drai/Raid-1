@@ -20,6 +20,11 @@ public class GameUI : MonoBehaviour
     private static float batteryTimer = 0f;
 
     public static GameUI instance;
+
+    private float minutes = 0;
+    private float secondes = 0;
+    private float millisecondes = 0;
+
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -28,7 +33,11 @@ public class GameUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(battery!=null)
+        minutes = Mathf.FloorToInt(timer / 60);
+        secondes = Mathf.FloorToInt(timer % 60);
+        millisecondes = Mathf.FloorToInt(timer * 1000);
+        millisecondes = millisecondes % 1000;
+
         batteryImage = battery.GetComponent<Image>();
 
         /* Display the battery image and it's value */
@@ -53,11 +62,14 @@ public class GameUI : MonoBehaviour
         //if bossfight?
         if (SceneManager.GetActiveScene().name == "Boss")
         {
-            AutoBatteryDrain();
-            BossTimerDisplay();
+            if (PlayerController.instance.Controller.currentActionMap.name != "Dialogue")
+            {
+                AutoBatteryDrain();
+                BossTimerDisplay();
+            }
         }
 
-        if(timer <= 20f)
+        if (timer <= 20f)
         {
             timerTxt.color = new Color32(255, 21, 0, 255);
         }
@@ -91,16 +103,16 @@ public class GameUI : MonoBehaviour
             BatteryDrain(1);
             batteryTimer = 0;
         }
-        else
-            batteryTimer += Time.deltaTime;
+
+        batteryTimer += Time.deltaTime;
     }
 
     /* Display of the time remaining before the battery is empty */
     void BossTimerDisplay()
     {
-        float minutes = Mathf.FloorToInt(timer / 60);
-        float secondes = Mathf.FloorToInt(timer % 60);
-        float millisecondes = Mathf .FloorToInt(timer * 1000);
+        minutes = Mathf.FloorToInt(timer / 60);
+        secondes = Mathf.FloorToInt(timer % 60);
+        millisecondes = Mathf.FloorToInt(timer * 1000);
         millisecondes = millisecondes % 1000;
 
         if (timer > 0f)
@@ -116,6 +128,5 @@ public class GameUI : MonoBehaviour
         /* Display the timer */
         if (timerTxt != null)
             timerTxt.text = string.Format("{0:00}:{01:00}:{2:000}", minutes, secondes, millisecondes);
-
     }
 }
