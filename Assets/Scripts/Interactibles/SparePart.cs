@@ -5,6 +5,7 @@ using UnityEngine.Rendering.Universal;
 public class SparePart : Interactible
 {    
     public DialogueTrigger dialogue;
+    public BoxCollider2D door;
     [SerializeField] Light2D highlight;
     public override void Interact()
     {
@@ -12,6 +13,10 @@ public class SparePart : Interactible
         PlayerController.UnlockedUpgrades[name] = true;
         PlayerController.instance.AvailableInteraction = null;
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.SetActive(false);
+        if(door != null)
+            door.enabled = false;
+
         dialogue?.gameObject.SetActive(true);
         dialogue?.StartDialogue();
     }
