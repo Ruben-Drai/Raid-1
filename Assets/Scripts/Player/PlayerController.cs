@@ -339,7 +339,8 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("DoubleJump", IsDoubleJumping);
         animator.SetBool("IsMoving", IsMoving);
         animator.SetBool("IsPushingBox", IsPushingBox);
-        if(IsPushingBox)
+        animator.SetBool("IsCrouch", IsSneaking);
+        if (IsPushingBox)
         {
             if (IsAtMyLeft)
                 GetComponent<SpriteRenderer>().flipX = true;
