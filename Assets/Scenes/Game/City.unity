@@ -1683,7 +1683,7 @@ PrefabInstance:
     - target: {fileID: 6287506163292819440, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: CineBrain
       value: 
-      objectReference: {fileID: 1607095310356238339}
+      objectReference: {fileID: 1080967830}
     - target: {fileID: 6287506163292819440, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: JumpForce
       value: 17
@@ -5140,6 +5140,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
+--- !u!114 &1080967830 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1607095311026243980, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
+  m_PrefabInstance: {fileID: 1080967829}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1087023339
 GameObject:
   m_ObjectHideFlags: 0
