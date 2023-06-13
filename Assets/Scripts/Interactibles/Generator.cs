@@ -12,6 +12,9 @@ public class Generator : Interactible
 
     [SerializeField] private DestroyablePlatform platform;
 
+    public DialogueTrigger dialogueTrigger;
+    public GameObject dialogue;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,9 @@ public class Generator : Interactible
 
             /* animation of exploson will play */
             animator.SetBool("Exploding", true);
+
+            dialogue.SetActive(true);
+            dialogueTrigger.StartDialogue();
         }
     }
 
