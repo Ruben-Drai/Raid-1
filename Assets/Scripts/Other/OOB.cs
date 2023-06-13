@@ -5,7 +5,6 @@ public class OOB : MonoBehaviour
     [Header("Audio")]
     public AudioClip Fall;
 
-    [SerializeField] private Transform checkpoint;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
