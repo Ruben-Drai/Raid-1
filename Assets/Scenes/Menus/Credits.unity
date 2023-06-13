@@ -228,12 +228,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6287506163292819440, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
@@ -241,7 +249,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1424702437}
     - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1082681357}
+    - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
@@ -249,11 +265,23 @@ PrefabInstance:
       value: ControlsDialogue
       objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ControlsDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: DialogueManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: DialogueManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287506163292819442, guid: 65ca959e473df58449468d20430c864c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6287506163292819443, guid: 65ca959e473df58449468d20430c864c, type: 3}
@@ -443,6 +471,7 @@ MonoBehaviour:
   logo: {fileID: 3733433}
   imglogo: {fileID: 3733431}
   dialogueWin: {fileID: 1424702432}
+  dialogueLose: {fileID: 1082681355}
 --- !u!95 &631524689
 Animator:
   serializedVersion: 5
@@ -825,6 +854,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueBox Lose
       objectReference: {fileID: 0}
+    - target: {fileID: 6873780437141621544, guid: 007c674fb8fd2134d8b48f66b0165929, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6873780437141621545, guid: 007c674fb8fd2134d8b48f66b0165929, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -981,8 +1014,6 @@ MonoBehaviour:
   - actorID: 1
     message: With the ravager leader out of the way, humanity can now slowly rebuild
       itself.
-  - actorID: 0
-    message: 
   actors:
   - name: Robot
     sprite: {fileID: 21300000, guid: dc284afe5551c37499f2d7bb8b9e033a, type: 3}
