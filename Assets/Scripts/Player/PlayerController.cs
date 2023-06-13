@@ -218,6 +218,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!CantMove && UnlockedUpgrades["DoubleJump&Sneak"] && !IsInJump && !hook.HasShot)
         {
+            hook.ReturnHook();
             if(context.performed)IsSneaking = true;
             else if (context.canceled) IsSneaking = false;
         }
