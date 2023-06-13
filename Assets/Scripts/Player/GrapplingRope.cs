@@ -142,7 +142,7 @@ public class GrapplingRope : MonoBehaviour
     public void ReturnRope()
     {
         m_lineRenderer.positionCount = precision;
-
+        m_Fist.localRotation =Quaternion.identity;
         for (int i = precision - 1; i >= 0; i--)
         {
             float delta = (float)i / ((float)precision - 1f);
