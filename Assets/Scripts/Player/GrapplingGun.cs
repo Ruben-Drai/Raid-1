@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,6 +28,8 @@ public class GrapplingGun : MonoBehaviour
     [SerializeField] private bool hasMaxDistance = false;
     [SerializeField] private float maxDistance = 20;
 
+
+    private Animator animator;
     private enum LaunchType
     {
         Transform_Launch,
@@ -53,6 +56,7 @@ public class GrapplingGun : MonoBehaviour
     private Vector2 AimPoint;
     private void Start()
     {
+        animator = transform.parent.parent.GetComponent<Animator>();
         grappleRope.enabled = false;
         m_springJoint2D.enabled = false;
         m_camera = Camera.main;
@@ -91,6 +95,7 @@ public class GrapplingGun : MonoBehaviour
 
     private void Update()
     {
+        animator.SetBool("IsAiming", IsAiming);
         if (IsAiming)
         {
             if (PlayerController.instance.Controller.currentControlScheme == "K&M")
