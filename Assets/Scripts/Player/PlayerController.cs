@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
         if(UnlockedUpgrades==null) 
             UnlockedUpgrades = new Dictionary<string, bool>()
         {
-            {"Jump",false},
+            {"Jump",true},
             {"Strength",false},
             {"ArmGun", false},
             {"DoubleJump&Sneak",false},
