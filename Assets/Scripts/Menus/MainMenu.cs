@@ -30,7 +30,7 @@ public class MainMenu : MonoBehaviour
     {
         //TODO: Check for save, if no save, don't make button available to click.
         SceneManager.LoadSceneAsync(PlayerPrefs.GetString("SceneName"));
-        SaveNLoad.instance.StartCoroutine(SaveNLoad.instance.LoadRoutine(true));
+        SaveNLoad.instance.StartCoroutine(SaveNLoad.instance.LoadRoutine(false));
         Time.timeScale = 1;
         SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
 
