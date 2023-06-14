@@ -322,6 +322,138 @@ public partial class @PlayerInputsMobile: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Dialogue"",
+            ""id"": ""d12240f1-2b29-4f27-9fd9-569543d5d8f8"",
+            ""actions"": [
+                {
+                    ""name"": ""Skip"",
+                    ""type"": ""Button"",
+                    ""id"": ""d7a3c790-5a2d-4c13-8570-b175023baf12"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkipHologram"",
+                    ""type"": ""Button"",
+                    ""id"": ""7ce9e255-7e53-4579-8e4a-95eb3c687f70"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right Holograms"",
+                    ""type"": ""Button"",
+                    ""id"": ""f252440f-e3e2-42a7-b2f4-c13119aef5f6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left Hologram"",
+                    ""type"": ""Button"",
+                    ""id"": ""81f554bb-8987-4b8c-91d2-3af912cf2c70"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""63998744-b046-4dbb-8b71-2f56e0303714"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""K&M"",
+                    ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dba1898d-d3cb-480f-b009-d70bb4fabdcd"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""K&M"",
+                    ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ab8e59b-18e4-4b96-8cf1-13ae7da306a3"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d40a104-e9c9-4446-a9b0-ae1bfc860550"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9bb81251-8eb3-4549-92ac-36f605fa664e"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""K&M"",
+                    ""action"": ""SkipHologram"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b122ef20-fc0f-4659-8ea0-db9bb79384d7"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkipHologram"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dee1d6d7-3d63-4eb9-8d98-934eb016ebbd"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Right Holograms"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""26b030ee-043d-412c-b936-af90be929615"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Left Hologram"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -348,6 +480,12 @@ public partial class @PlayerInputsMobile: IInputActionCollection2, IDisposable
         m_Game_Aim = m_Game.FindAction("Aim", throwIfNotFound: true);
         m_Game_HookLength = m_Game.FindAction("HookLength", throwIfNotFound: true);
         m_Game_Sneak = m_Game.FindAction("Sneak", throwIfNotFound: true);
+        // Dialogue
+        m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
+        m_Dialogue_Skip = m_Dialogue.FindAction("Skip", throwIfNotFound: true);
+        m_Dialogue_SkipHologram = m_Dialogue.FindAction("SkipHologram", throwIfNotFound: true);
+        m_Dialogue_RightHolograms = m_Dialogue.FindAction("Right Holograms", throwIfNotFound: true);
+        m_Dialogue_LeftHologram = m_Dialogue.FindAction("Left Hologram", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -507,6 +645,76 @@ public partial class @PlayerInputsMobile: IInputActionCollection2, IDisposable
         }
     }
     public GameActions @Game => new GameActions(this);
+
+    // Dialogue
+    private readonly InputActionMap m_Dialogue;
+    private List<IDialogueActions> m_DialogueActionsCallbackInterfaces = new List<IDialogueActions>();
+    private readonly InputAction m_Dialogue_Skip;
+    private readonly InputAction m_Dialogue_SkipHologram;
+    private readonly InputAction m_Dialogue_RightHolograms;
+    private readonly InputAction m_Dialogue_LeftHologram;
+    public struct DialogueActions
+    {
+        private @PlayerInputsMobile m_Wrapper;
+        public DialogueActions(@PlayerInputsMobile wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Skip => m_Wrapper.m_Dialogue_Skip;
+        public InputAction @SkipHologram => m_Wrapper.m_Dialogue_SkipHologram;
+        public InputAction @RightHolograms => m_Wrapper.m_Dialogue_RightHolograms;
+        public InputAction @LeftHologram => m_Wrapper.m_Dialogue_LeftHologram;
+        public InputActionMap Get() { return m_Wrapper.m_Dialogue; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DialogueActions set) { return set.Get(); }
+        public void AddCallbacks(IDialogueActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DialogueActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DialogueActionsCallbackInterfaces.Add(instance);
+            @Skip.started += instance.OnSkip;
+            @Skip.performed += instance.OnSkip;
+            @Skip.canceled += instance.OnSkip;
+            @SkipHologram.started += instance.OnSkipHologram;
+            @SkipHologram.performed += instance.OnSkipHologram;
+            @SkipHologram.canceled += instance.OnSkipHologram;
+            @RightHolograms.started += instance.OnRightHolograms;
+            @RightHolograms.performed += instance.OnRightHolograms;
+            @RightHolograms.canceled += instance.OnRightHolograms;
+            @LeftHologram.started += instance.OnLeftHologram;
+            @LeftHologram.performed += instance.OnLeftHologram;
+            @LeftHologram.canceled += instance.OnLeftHologram;
+        }
+
+        private void UnregisterCallbacks(IDialogueActions instance)
+        {
+            @Skip.started -= instance.OnSkip;
+            @Skip.performed -= instance.OnSkip;
+            @Skip.canceled -= instance.OnSkip;
+            @SkipHologram.started -= instance.OnSkipHologram;
+            @SkipHologram.performed -= instance.OnSkipHologram;
+            @SkipHologram.canceled -= instance.OnSkipHologram;
+            @RightHolograms.started -= instance.OnRightHolograms;
+            @RightHolograms.performed -= instance.OnRightHolograms;
+            @RightHolograms.canceled -= instance.OnRightHolograms;
+            @LeftHologram.started -= instance.OnLeftHologram;
+            @LeftHologram.performed -= instance.OnLeftHologram;
+            @LeftHologram.canceled -= instance.OnLeftHologram;
+        }
+
+        public void RemoveCallbacks(IDialogueActions instance)
+        {
+            if (m_Wrapper.m_DialogueActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IDialogueActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DialogueActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DialogueActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public DialogueActions @Dialogue => new DialogueActions(this);
     private int m_GamePadSchemeIndex = -1;
     public InputControlScheme GamePadScheme
     {
@@ -526,5 +734,12 @@ public partial class @PlayerInputsMobile: IInputActionCollection2, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnHookLength(InputAction.CallbackContext context);
         void OnSneak(InputAction.CallbackContext context);
+    }
+    public interface IDialogueActions
+    {
+        void OnSkip(InputAction.CallbackContext context);
+        void OnSkipHologram(InputAction.CallbackContext context);
+        void OnRightHolograms(InputAction.CallbackContext context);
+        void OnLeftHologram(InputAction.CallbackContext context);
     }
 }

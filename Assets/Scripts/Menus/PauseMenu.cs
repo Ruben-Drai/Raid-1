@@ -117,7 +117,8 @@ public class PauseMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
 
         Settings.SetActive(false);
-        Controls.SetActive(false);
+        if(Controls != null)
+            Controls.SetActive(false);
         TextSettings.SetActive(false);
     }
 }

@@ -527,7 +527,6 @@ MonoBehaviour:
   walkSFXWaitTime: 0.2
   StandingColl: {fileID: 6553580001067263295}
   SneakingColl: {fileID: 8018268210188467063}
-  InteractionTrigger: {fileID: 424979045011827906}
   Walk: {fileID: 8300000, guid: 322db6e3066642f4a822894549e6938a, type: 3}
   DoubleJump: {fileID: 8300000, guid: 689f520705179784599b3bc44b9b6496, type: 3}
   CineBrain: {fileID: 0}
@@ -547,7 +546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: d73f8fd36c4f04447aeefe804116d4e3, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 291981287ef53fd409186452410ebb5a, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -688,24 +687,8 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ca356d87-392a-4ece-9f6a-ace3acc8e120
     m_ActionName: Game/Sneak[/Keyboard/ctrl]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5f79adba-bfcb-4be5-8b79-43f73e27a579
-    m_ActionName: Dialogue/Skip[/Keyboard/space,/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8dacda38-1801-4a32-8832-5d8ae74178cf
-    m_ActionName: Dialogue/SkipHologram[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 9c7c2419-9321-447d-9358-12e5f76d1fe3
-    m_ActionName: Dialogue/Right Holograms
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 1b28f7ed-c97f-4179-9cb7-6de1541638d4
-    m_ActionName: Dialogue/Left Hologram
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: K&M
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Game
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -1039,6 +1022,7 @@ MonoBehaviour:
   grappleDistanceVector: {x: 0, y: 0}
   Direction: {x: 0, y: 0}
   FistOnly: 0
+  IsAiming: 0
   HasShot: 0
 --- !u!1 &8611835902219531293
 GameObject:
