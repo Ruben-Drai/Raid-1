@@ -17,6 +17,15 @@ public class Generator : Interactible
     public GameObject dialogue;
 
     // Start is called before the first frame update
+
+    private void Update()
+    {
+        if (BossHP <= 0 && dialogueManager.finishedAnimationDown)
+        {
+            PlayLogo.HasWon = true;
+            SceneManager.LoadScene("Credits");
+        }
+    }
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
@@ -46,12 +55,6 @@ public class Generator : Interactible
         {
             platform.Interact();
         }
-        if (BossHP <= 0 && dialogueManager.finishedAnimationDown) 
-        {
-            PlayLogo.HasWon = true;
-            SceneManager.LoadScene("Credits");
-        }
         GetComponent<SpriteRenderer>().enabled = false;
-        animator.SetBool("Exploding", false);
     }
 }

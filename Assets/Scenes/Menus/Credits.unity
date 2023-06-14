@@ -453,8 +453,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0005188, y: -1462}
-  m_SizeDelta: {x: 916.43, y: 1851.865}
+  m_AnchoredPosition: {x: -0.0005188, y: -1939.5692}
+  m_SizeDelta: {x: 916.43, y: 2807.01}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &631524688
 MonoBehaviour:
@@ -536,14 +536,16 @@ MonoBehaviour:
     C\xE9dric Roux\r\n\r\n\r\n    <b>Programmers</b>\r\n    Ruben Drai\r\n    Enzo
     Dessain\r\n    C\xE9dric Roux\r\n    Axel Clivet\r\n    Th\xE9o Basile\r\n   
     Alexandre Garcia\r\n    Ana\xEFs Jourdannaud\r\n\r\n\r\n    <b>Design</b>\r\n   
-    \"Eder\"\r\n    \"2D Game Assets\" (on Dribble)\r\n    Deborah Clivet\r\n\r\n\r\n   
-    <b>Player Animation Design</b>\r\n    Deborah Clivet\r\n\r\n\r\n    <b>Music</b>\r\n   
-    Slow Lights by Lee Rosevere is licensed under a Attribution 4.0 International
-    License.\r\n    God Body Disconnect - We all turn to stars\r\n    Nortumbria
-    - Still Valley II\r\n    Relax in the Forest background music for video by Lesfm\r\n   
-    Litae\r\n    Styx\r\n\r\n\r\n    Morpheus\r\n    Epic Dramatic Action Trailer
-    by QubeSounds\r\n    Consigned To Limbo by Keosz\r\n\r\n\r\n    <b>Sound Effect</b>\r\n   
-    Universal-Soundbank\r\n\r\n\r\n    <b>Producer</b>\r\n    Hugo Denise"
+    \"Eder\"\r\n    \"2D Game Assets\" (on Dribble)\r\n    Freepik\r\n    Deborah
+    Clivet\r\n\r\n\r\n    <b>Player Animation Design</b>\r\n    Deborah Clivet\r\n\r\n\r\n   
+    <b>Music</b>\r\n    Slow Lights by Lee Rosevere is licensed under a Attribution
+    4.0 International License.\r\n    God Body Disconnect - We all turn to stars\r\n   
+    Nortumbria - Still Valley II\r\n    Relax in the Forest background music for
+    video by Lesfm\r\n    Litae\r\n    Styx\r\n    When the nightmares started [While
+    You Were Sleeping OST]\r\n    Morpheus\r\n    Epic Dramatic Action Trailer by
+    QubeSounds\r\n    Consigned To Limbo by Keosz\r\n\r\n\r\n    <b>Sound Effect</b>\r\n   
+    Universal-Soundbank\r\n\r\n\r\n    <b>Producer</b>\r\n    Hugo Denise\r\n\r\n\r\n<b>
+    thank you for playing our game </b>"
 --- !u!222 &631524691
 CanvasRenderer:
   m_ObjectHideFlags: 0
