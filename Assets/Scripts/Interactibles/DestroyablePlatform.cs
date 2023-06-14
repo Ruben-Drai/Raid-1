@@ -10,6 +10,9 @@ public class DestroyablePlatform : Interactible
 
     [SerializeField] private CinemachineVirtualCamera[] vms;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip destroyedSound;
+
     private Coroutine cutscene;
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -20,9 +23,12 @@ public class DestroyablePlatform : Interactible
     }
     public override void Interact()
     {
-        IsActivated = true;
-        transform.GetChild(0).gameObject.SetActive(false);
-        transform.GetChild(1).gameObject.SetActive(true);
+        IsActivated = !IsActivated;
+        transform.GetChild(0).gameObject.SetActive(!IsActivated);
+        transform.GetChild(1).gameObject.SetActive(IsActivated);
+
+        GetComponent<AudioSource>().volume = SoundManager.instance == null ? 0.7f : SoundManager.instance.volumeSoundSlider.value;
+        GetComponent<AudioSource>().PlayOneShot(destroyedSound);
 
         if (LaunchesCutscene) cutscene ??= StartCoroutine(LaunchCutscene());
     }
