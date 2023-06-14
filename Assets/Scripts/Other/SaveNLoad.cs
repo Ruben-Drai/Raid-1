@@ -96,14 +96,17 @@ public class SaveNLoad : MonoBehaviour
     {
         Interactibles = GameObject.Find("Props");
         PlayerPrefs.DeleteKey("SceneName");
-        var c = Interactibles.GetComponentsInChildren<Interactible>();
-        for (int i = 0; i < c.Length; i++) 
-        { 
-            PlayerPrefs.DeleteKey("Child" + i);
-            if (c[i].GetComponent<BigBox>() != null)
+        if(Interactibles != null) 
+        {
+            var c = Interactibles.GetComponentsInChildren<Interactible>();
+            for (int i = 0; i < c.Length; i++)
             {
-                PlayerPrefs.DeleteKey("ChildPosX" + i);
-                PlayerPrefs.DeleteKey("ChildPosY" + i);
+                PlayerPrefs.DeleteKey("Child" + i);
+                if (c[i].GetComponent<BigBox>() != null)
+                {
+                    PlayerPrefs.DeleteKey("ChildPosX" + i);
+                    PlayerPrefs.DeleteKey("ChildPosY" + i);
+                }
             }
         }
         PlayerPrefs.DeleteKey("PlayerPosX");

@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayLogo : MonoBehaviour
 {
@@ -26,6 +25,14 @@ public class PlayLogo : MonoBehaviour
     {
         imglogo.SetActive(true);
         logo.SetBool("isPlaying", true);
+        StartCoroutine(ReturnToMainMenu());
+    }
+
+    IEnumerator ReturnToMainMenu()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("MainMenu");
+        SaveNLoad.instance.ResetSave();
     }
 
 }
