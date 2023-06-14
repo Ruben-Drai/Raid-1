@@ -66,7 +66,7 @@ public class GrapplingGun : MonoBehaviour
     {
         gameObject.SetActive(true);
         grappleRope.m_Fist.gameObject.SetActive(true);
-        //grappleRope.m_Fist.localRotation = Quaternion.identity;
+        grappleRope.m_Fist.localRotation = Quaternion.identity;
         IsAiming = true;
     }
     public void ReturnHook()
