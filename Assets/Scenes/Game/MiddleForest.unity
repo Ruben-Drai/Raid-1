@@ -1912,7 +1912,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311026243985, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.08801198
+      value: 0.583338
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311026243985, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1936,7 +1936,7 @@ PrefabInstance:
       objectReference: {fileID: 397048911}
     - target: {fileID: 1607095311481806078, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.16224
+      value: -10.162239
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311481806078, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1965,14 +1965,6 @@ PrefabInstance:
     - target: {fileID: 2294035363817119773, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567778285375982680, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 25.510597
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567778285375982680, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 16.356344
       objectReference: {fileID: 0}
     - target: {fileID: 4567778285375982680, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2356,6 +2348,7 @@ MonoBehaviour:
   CutsceneFreezeDuration: 2
   vms:
   - {fileID: 1060281325}
+  destroyedSound: {fileID: 0}
 --- !u!1001 &858359900
 PrefabInstance:
   m_ObjectHideFlags: 0
