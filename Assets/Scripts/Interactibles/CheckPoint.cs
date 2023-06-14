@@ -1,20 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Build;
 using UnityEngine;
 
-public class CheckPoint : MonoBehaviour
+public class CheckPoint : Interactible
 {
-    private bool used = false;
-    private int drain = 5;
+    public int drain = 5;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!used && collision.GetComponent<PlayerController>() != null)
+        if(!IsActivated && collision.GetComponent<PlayerController>() != null)
         {
-            Debug.Log("checkpoint");
-            used = true;
-            GameUI.instance.BatterytDrain(drain);
+            Interact();
+            SaveNLoad.instance.StartCoroutine(SaveNLoad.instance.SaveRoutine());
+            GameUI.instance.BatteryDrain(drain);
         }
+    }
+    public override void Interact()
+    {
+        IsActivated = true;
+        GetComponent<BoxCollider2D>().enabled = false;
     }
 }

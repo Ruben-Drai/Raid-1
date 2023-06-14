@@ -7,19 +7,12 @@ public class BigBox : Interactible
 
     public override void Interact()
     {
-        if (PlayerController.instance.UnlockedUpgrades["Arm"])
+        if (PlayerController.UnlockedUpgrades["Strength"])
         {
-            IsBeingLifted = true;
-            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            PlayerController.instance.IsPushingBox = true;
+            IsBeingLifted = !IsBeingLifted;
+            rb.constraints = IsBeingLifted ? RigidbodyConstraints2D.FreezeRotation: RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            PlayerController.instance.IsPushingBox = IsBeingLifted;
         }
-    }
-    public void StopInteraction()
-    {
-        IsBeingLifted = false;
-        rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-        PlayerController.instance.IsPushingBox = false;
-
     }
     void Start()
     {
@@ -29,11 +22,8 @@ public class BigBox : Interactible
     {
         if (IsBeingLifted)
         {
-            //effectively follows player, I would love for it to be better but I don't have an easier method,
-            //so I'll have to stick with the impossiblity of pushing the box if the player can't move an inch
             rb.velocity = new(PlayerController.instance.rb.velocity.x, rb.velocity.y);
-
-            //releases box if the player somehow loses the box from the trigger box around the player
+            transform.Find("Highlight")?.gameObject.SetActive(false); // Deactivates highlighting when the box is moved.
             if (PlayerController.instance.AvailableInteraction == null)
             {
                 rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;

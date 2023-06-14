@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,9 +10,13 @@ public class Sound : MonoBehaviour
     void Start()
     {
         soundSlider.onValueChanged.AddListener(delegate { SoundManager.instance.ChangeVolume(); });
-        SoundManager.instance.volumeSoundSlider = soundSlider;
-        SoundManager.instance.SoundImage = soundImage;
-        SoundManager.instance.Load();
+        if(SoundManager.instance != null)
+        {
+            SoundManager.instance.volumeSoundSlider = soundSlider;
+            SoundManager.instance.SoundImage = soundImage;
+            SoundManager.instance.Load();
+        }
+        
     }
 
 

@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
+using UnityEngine.UI;
 
 public class PlatformChoser : MonoBehaviour
 {
@@ -23,12 +25,12 @@ public class PlatformChoser : MonoBehaviour
             KMtree.SetActive(true);
         }
 
-        else if (controlScheme.currentControlScheme == "GamePad" && !GamePadtree.activeSelf)
+        else if (controlScheme.currentControlScheme == "Gamepad" && !GamePadtree.activeSelf)
         {
             GamePadtree.SetActive(true);
             KMtree.SetActive(false);
-            EventSystem.current.SetSelectedGameObject(GameObject.Find("Back"));
+            EventSystem.current.SetSelectedGameObject(FindObjectOfType<Button>().gameObject);
         }
     }
-
+    
 }

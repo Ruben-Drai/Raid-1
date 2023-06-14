@@ -26,7 +26,6 @@ public class GroundCheck : MonoBehaviour
         {
             //raycasts under player towards the ground from the feet pos and gets layer from it and sets it as the current state that has the same name in the Enum
             Hit = Physics2D.Raycast(transform.position, Vector2.down, 2.5f * (controller.transform.lossyScale.x / 3), LayerMask.GetMask(v));
-            Debug.DrawRay(transform.position, Vector2.down * 2.5f * (controller.transform.lossyScale.x / 3), Color.red);
             if (Hit == true)
             {
                 controller.SlopeAdjustment = Vector2.Perpendicular(Hit.normal).normalized;
@@ -48,7 +47,7 @@ public class GroundCheck : MonoBehaviour
 
 
         //"Sticks" the player to the platform if the player is on a platform
-        if (groundState == GroundState.Platform && !controller.IsInJump && transform.parent.parent == null)
+        if (groundState == GroundState.Platform && !controller.hook.HasShot && !controller.IsInJump && transform.parent.parent == null)
         {
             transform.parent.SetParent(Hit.collider.transform);
             controller.rb.interpolation = RigidbodyInterpolation2D.None;
@@ -67,6 +66,12 @@ public class GroundCheck : MonoBehaviour
         {
             controller.IsInJump = false;
             controller.CanDoubleJump = true;
+            if(controller.IsInJump)
+            {
+                GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioSource>().clip);
+                Debug.Log("SoundPlaying");
+            }
+            
         }
 
     }

@@ -13,7 +13,7 @@ public class Animals_Controller : MonoBehaviour
     public int toDo = 0; //What the animals need to do (percentage(0-99) of chance to do an action)
     public Vector2 startEndPos = new Vector2(0, 0); // startEndPos [0] Start position, startEndPos [1] distance in x axis,
     private int direction = 0; // 0 = right and 1 =  left
-
+    public LayerMask collisionMask;
 
     [Header("Flee")]
     public bool isBird = true;
@@ -82,7 +82,7 @@ public class Animals_Controller : MonoBehaviour
                     rb.velocity = new Vector2(speed, rb.velocity.y);
                 }
 
-                obstacle = Physics2D.Raycast(eye.transform.position, gameObject.transform.right, 0.5f, LayerMask.GetMask("Player"));
+                obstacle = Physics2D.Raycast(eye.transform.position, gameObject.transform.right, 0.5f, collisionMask);
 
                 if (Mathf.Abs(transform.position.x - startEndPos.x) > startEndPos.y || obstacle.collider != null)
                 {
@@ -92,6 +92,7 @@ public class Animals_Controller : MonoBehaviour
             }
             else
             {
+                rb.gravityScale = 1;
                 if (Time.time - timer > waitTime) { toDo = Movement(); }
 
             }
@@ -125,7 +126,7 @@ public class Animals_Controller : MonoBehaviour
             startEndPos.x = transform.position.x;
             startEndPos.y = UnityEngine.Random.Range(distanceMm.x, distanceMm.y);
             animator.SetBool("Move", true);
-
+            
         }
         else
         {
@@ -133,6 +134,8 @@ public class Animals_Controller : MonoBehaviour
             timer = Time.time;
             animator.SetBool("Move", false);
         }
+        rb.gravityScale = isBird?0:1;
+
         return a;
     }
 
@@ -160,7 +163,6 @@ public class Animals_Controller : MonoBehaviour
             transform.rotation = new Quaternion(0, 180, 0, 0);
             rb.velocity = new Vector2(-5, 5);
         }
-
     }
 
     private void RatFlee()
