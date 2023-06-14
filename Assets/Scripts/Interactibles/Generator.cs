@@ -52,5 +52,6 @@ public class Generator : Interactible
             SceneManager.LoadScene("Credits");
         }
         GetComponent<SpriteRenderer>().enabled = false;
+        animator.SetBool("Exploding", false);
     }
 }
