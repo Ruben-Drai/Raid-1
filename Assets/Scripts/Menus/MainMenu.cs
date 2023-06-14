@@ -23,6 +23,7 @@ public class MainMenu : MonoBehaviour
         SaveNLoad.instance.StartCoroutine(SaveNLoad.instance.ResetRoutine());
         Time.timeScale = 1;
         SoundManager.instance.Click.PlayOneShot(SoundManager.instance.Click.clip);
+        PlayerController.UnlockedUpgrades = null;
     }
 
     public void ContinueGame()
