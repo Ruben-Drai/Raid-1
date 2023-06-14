@@ -25,7 +25,7 @@ public class SparePart : Interactible
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            highlight.intensity = 1.39f;
+            highlight.intensity = 3;
         }
     }
     private void OnTriggerExit2D(UnityEngine.Collider2D collision)
