@@ -36,7 +36,7 @@ public class Platform : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, wayPoints[currentWaypointIndex].position, PlatformSpeed * Time.deltaTime);
 
             yield return null;
-            if (Vector2.Distance(transform.position, wayPoints[currentWaypointIndex].position) < 0.01f)
+            if (Vector2.Distance(transform.position, wayPoints[currentWaypointIndex].position) < 0.005f)
             {
                 isNear = true;
                 if(!returnToStart)

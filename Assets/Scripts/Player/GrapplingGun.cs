@@ -48,7 +48,7 @@ public class GrapplingGun : MonoBehaviour
     [HideInInspector] public Vector2 Direction;
     [HideInInspector] public bool FistOnly;
 
-    private bool IsAiming = false;
+    public bool IsAiming = false;
     [HideInInspector] public bool HasShot;
     private Vector2 AimPoint;
     private void Start()
@@ -62,7 +62,7 @@ public class GrapplingGun : MonoBehaviour
     {
         gameObject.SetActive(true);
         grappleRope.m_Fist.gameObject.SetActive(true);
-        grappleRope.m_Fist.localRotation = Quaternion.identity;
+        //grappleRope.m_Fist.localRotation = Quaternion.identity;
         IsAiming = true;
     }
     public void ReturnHook()

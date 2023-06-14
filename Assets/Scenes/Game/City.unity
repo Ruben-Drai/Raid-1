@@ -2094,7 +2094,7 @@ GameObject:
   - component: {fileID: 297326561}
   - component: {fileID: 297326562}
   - component: {fileID: 297326563}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BossRoom
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
@@ -2113,7 +2113,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 766907722}
+  m_Father: {fileID: 859133465}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &297326562
@@ -4274,38 +4274,6 @@ MonoBehaviour:
   speed: -0.2
   PontoDeDestino: -68
   PontoOriginal: 34.548
---- !u!1 &766907721
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 766907722}
-  m_Layer: 0
-  m_Name: Start/Exit
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &766907722
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 766907721}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 297326561}
-  m_Father: {fileID: 859133465}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &781143650
 GameObject:
   m_ObjectHideFlags: 0
@@ -4643,7 +4611,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 766907722}
+  - {fileID: 297326561}
   - {fileID: 259448586}
   - {fileID: 1575373718}
   - {fileID: 1633232500}
@@ -5060,7 +5028,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1607095311026243985, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.7716196
+      value: -2.4091127
       objectReference: {fileID: 0}
     - target: {fileID: 1607095311026243985, guid: d60d66d1925c4fa4982a8dcc97cef7e0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -53586,7 +53554,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Fall: {fileID: 8300000, guid: 147a52a329a4ec84ea9986206f316f7c, type: 3}
-  checkpoint: {fileID: 637513483}
 --- !u!1 &1587950444
 GameObject:
   m_ObjectHideFlags: 0

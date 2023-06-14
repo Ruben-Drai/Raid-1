@@ -315,9 +315,13 @@ public class PlayerController : MonoBehaviour
                 else
                     rb.AddForce(new(movement.normalized.x * speed, 0), ForceMode2D.Force);
             }
+            else
+            {
+                rb.velocity = new Vector2(0, 0);
+            }
         }
-        
-        if(IsMoving && !IsInJump && !GetComponent<AudioSource>().isPlaying)
+
+        if (IsMoving && !IsInJump && !GetComponent<AudioSource>().isPlaying)
         {
 
         }

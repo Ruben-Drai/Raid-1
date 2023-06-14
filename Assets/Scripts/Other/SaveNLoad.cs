@@ -60,11 +60,11 @@ public class SaveNLoad : MonoBehaviour
                          PlayerPrefs.GetFloat("ChildPosY" + i),
                          0);
                 }
-                else if (PlayerPrefs.GetInt("Child" + i) == 1)
+                else if (PlayerPrefs.GetInt("Child" + i) == 1 && !c[i].IsActivated)
                 {
                     c[i].Interact();
                 }
-                else if(!FirstScene && c[i].IsActivated)
+                else if(!FirstScene && c[i].IsActivated && PlayerPrefs.GetInt("Child" + i) == 0)
                 {
                     c[i].Interact();
                     var p = c[i].gameObject.GetComponent<HittableButton>();
