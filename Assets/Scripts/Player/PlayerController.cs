@@ -91,10 +91,10 @@ public class PlayerController : MonoBehaviour
             UnlockedUpgrades = new Dictionary<string, bool>()
         {
             {"Jump",true},
-            {"Strength",false},
-            {"ArmGun", false},
-            {"DoubleJump&Sneak",false},
-            {"Hook",false}
+            {"Strength",true},
+            {"ArmGun", true},
+            {"DoubleJump&Sneak",true},
+            {"Hook",true}
         };
         Controller = GetComponent<PlayerInput>();
     }

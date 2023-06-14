@@ -527,7 +527,6 @@ MonoBehaviour:
   walkSFXWaitTime: 0.2
   StandingColl: {fileID: 6553580001067263295}
   SneakingColl: {fileID: 8018268210188467063}
-  InteractionTrigger: {fileID: 424979045011827906}
   Walk: {fileID: 8300000, guid: 322db6e3066642f4a822894549e6938a, type: 3}
   DoubleJump: {fileID: 8300000, guid: 689f520705179784599b3bc44b9b6496, type: 3}
   CineBrain: {fileID: 0}
@@ -1039,6 +1038,7 @@ MonoBehaviour:
   grappleDistanceVector: {x: 0, y: 0}
   Direction: {x: 0, y: 0}
   FistOnly: 0
+  IsAiming: 0
   HasShot: 0
 --- !u!1 &8611835902219531293
 GameObject:
