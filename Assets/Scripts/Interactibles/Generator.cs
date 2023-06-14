@@ -27,6 +27,7 @@ public class Generator : Interactible
         if (!IsActivated)
         {
             IsActivated = true;
+
             BossHP--;
 
             GetComponent<AudioSource>().PlayOneShot(explode);
@@ -34,6 +35,7 @@ public class Generator : Interactible
             /* animation of exploson will play */
             animator.SetBool("Exploding", true);
 
+            /* Play the corresponding dialogue */
             dialogue.SetActive(true);
             dialogueTrigger.StartDialogue();
         }
@@ -46,11 +48,13 @@ public class Generator : Interactible
         {
             platform.Interact();
         }
+        /* Player wins if he destroy every generator and get sent into the credit after the dialogue ends */
         if (BossHP <= 0 && dialogueManager.finishedAnimationDown) 
         {
             PlayLogo.HasWon = true;
             SceneManager.LoadScene("Credits");
         }
+        /* Hide the generator's sprite after the explosion and stop the animation to prevent a loop */
         GetComponent<SpriteRenderer>().enabled = false;
         animator.SetBool("Exploding", false);
     }

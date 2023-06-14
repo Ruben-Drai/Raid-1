@@ -24,13 +24,13 @@ public class DestroyablePlatform : Interactible
     public override void Interact()
     {
         IsActivated = !IsActivated;
-        transform.GetChild(0).gameObject.SetActive(!IsActivated);
+        transform.GetChild(0).gameObject.SetActive(!IsActivated); //changes the platforms appearance
         transform.GetChild(1).gameObject.SetActive(IsActivated);
 
         GetComponent<AudioSource>().volume = SoundManager.instance == null ? 0.7f : SoundManager.instance.volumeSoundSlider.value;
-        GetComponent<AudioSource>().PlayOneShot(destroyedSound);
+        GetComponent<AudioSource>().PlayOneShot(destroyedSound); //play sound
 
-        if (LaunchesCutscene) cutscene ??= StartCoroutine(LaunchCutscene());
+        if (LaunchesCutscene) cutscene ??= StartCoroutine(LaunchCutscene()); //launch cutscene (if there is one)
     }
 
     public IEnumerator LaunchCutscene()

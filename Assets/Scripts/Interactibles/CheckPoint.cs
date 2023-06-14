@@ -6,6 +6,7 @@ public class CheckPoint : Interactible
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        /* When the player touches a collision it will save interactibles position and drain his battery a little */
         if(!IsActivated && collision.GetComponent<PlayerController>() != null)
         {
             Interact();
